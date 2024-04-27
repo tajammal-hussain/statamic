@@ -5,7 +5,7 @@
         <div class="widgets @container flex flex-wrap -mx-4 py-2" bis_skin_checked="1">
             <div class="widget w-full md:w-full mb-8 px-4" bis_skin_checked="1">
                 <div x-data="timer(when.getTime())" x-init="init()" class="card p-2 content timer" bis_skin_checked="1">
-                    👋 &nbsp; Welcome to the Statamic Demo site! Go bananas with it because it will reset in:
+                    👋 &nbsp; Welcome to the Cedar Demo site! Go bananas with it because it will reset in:
                     <div class="inline-block px-sm bg-yellow" bis_skin_checked="1"><span
                             x-text="time().minutes">01</span>:<span x-text="time().seconds">53</span></div>
                 </div>
@@ -13,8 +13,8 @@
             <div class="widget w-full md:w-full mb-8 px-4" bis_skin_checked="1">
                 <div class="card p-0 content" bis_skin_checked="1">
                     <div class="py-6 px-8 border-b" bis_skin_checked="1">
-                        <h1>Getting Started with Statamic</h1>
-                        <p>To begin building your new Statamic site, we recommend starting with these steps.</p>
+                        <h1>Getting Started with Cedar</h1>
+                        <p>To begin building your new Cedar site, we recommend starting with these steps.</p>
                     </div>
                     <div class="flex flex-wrap p-4" bis_skin_checked="1"><a href="https://statamic.dev/"
                             class="w-full lg:w-1/2 p-4 flex items-start hover:bg-gray-200 rounded-md group">
@@ -30,7 +30,7 @@
                                 </svg></div>
                             <div class="flex-1" bis_skin_checked="1">
                                 <h3 class="mb-2 text-blue">Read the Documentation</h3>
-                                <p>Get to know Statamic by understanding its capabilities the right way.</p>
+                                <p>Get to know Cedar by understanding its capabilities the right way.</p>
                             </div>
                         </a> <a href="https://demo.statamic.com/cp/collections/create"
                             class="w-full lg:w-1/2 p-4 flex items-start hover:bg-gray-200 rounded-md group">

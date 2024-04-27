@@ -317,7 +317,7 @@
         <div id="main" class="" bis_skin_checked="1">
             <nav class="nav-main">
                 <div class="nav-main-inner" bis_skin_checked="1">
-                    <x-sidebar-content :sidebar="$sidebar" />
+                    <x-sidebarContent :sidebar="$sidebar" />
                 </div>
             </nav>
         </div>
