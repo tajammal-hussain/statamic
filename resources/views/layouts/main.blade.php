@@ -1,14 +1,172 @@
 @php
-    $sideBar = [
+    $sidebar = [
         [
-            'parent' => 'Content',
+            'parent' => '',
             'name' => 'Dashboard',
             'url' => 'https://demo.statamic.com/cp/dashboard',
-            'svg' => '',
+            'svg' => '<svg
+                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <circle cx="7" cy="8.5" r="3.5" fill="none" stroke="currentColor" stroke-linecap="round"
+                      stroke-linejoin="round"></circle>
+                    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                      d="M7 5v3.5h3.5M9 22.5a6.979 6.979 0 0 0 1.5-4m4.5 4a6.979 6.979 0 0 1-1.5-4m-6.001 4h9M.5 15.5h23">
+                    </path>
+                    <rect width="23" height="17" x=".5" y="1.5" fill="none" stroke="currentColor" stroke-linecap="round"
+                      stroke-linejoin="round" rx="1" ry="1"></rect>
+                    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                      d="M13.5 7 15 5l3 2.5 2.5-3m-1 8V11m-2 1.5v-2m-2 2v-3m-2 3V11"></path>
+                  </svg>',
+        ],
+        [
+            'parent' => 'Content',
+            'name' => 'Collection',
+            'url' => 'https://demo.statamic.com/cp/dashboard',
+            'svg' => '<svg xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24">
+                    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                      d="M19.479 8V2.5a2 2 0 0 0-2-2h-12a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h8l3 3v-3h1a2 2 0 0 0 1.721-.982">
+                    </path>
+                    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                      d="M1.485 3.764A2 2 0 0 0 .479 5.5v16a2 2 0 0 0 2 2h8a2 2 0 0 0 1.712-.967M5.479 3.5h4m-2 4.5V3.5M15.7 7.221l-4.2-1.2 1.2 4.2 7.179 7.179a2.121 2.121 0 0 0 3-3zm3.279 9.279 3-3M12.7 10.221l3-3M12.479 3.5h4m-10 8h4m-4 3h6.5m-6.5 3h9">
+                    </path>
+                  </svg>',
+        ],
+        [
+            'parent' => 'Content',
+            'name' => 'Navigation',
+            'url' => 'https://demo.statamic.com/cp/dashboard',
+            'svg' => '<svg xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24">
+                    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                      d="M2.505 9.499v2.5m0 2.5v2.5m0-11.499v1a1 1 0 0 0 1 1h1m-2 12v1a1 1 0 0 0 1 1h1M7 7.499h3m-3 14h3m-7.495-21v2.5M20.5 9.5a1 1 0 0 1-1 1h-6a1 1 0 0 1-1-1v-8a1 1 0 0 1 1-1h3a2.782 2.782 0 0 1 1.707.707l1.586 1.586A2.782 2.782 0 0 1 20.5 4.5z">
+                    </path>
+                    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                      d="M17 .569V3a1 1 0 0 0 1 1h2.429m.071 18.5a1 1 0 0 1-1 1h-6a1 1 0 0 1-1-1v-8a1 1 0 0 1 1-1h3.114a2.139 2.139 0 0 1 1.513.627l1.666 1.666A2.782 2.782 0 0 1 20.5 17.5z">
+                    </path>
+                    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                      d="M17 13.536V16a1 1 0 0 0 1 1h2.43"></path>
+                  </svg>',
+        ],
+        [
+            'parent' => 'Content',
+            'name' => 'Taxonomies',
+            'url' => 'https://demo.statamic.com/cp/dashboard',
+            'svg' => '<svg xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24">
+                    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                      d="M23.03 14.545a.552.552 0 0 1-.249 1l-5.544 1.692-1.693 5.543a.551.551 0 0 1-1 .249L1.452 9.938a2.789 2.789 0 0 1-.708-1.707L.738 1.737a1 1 0 0 1 1-1h6.491a2.782 2.782 0 0 1 1.707.707z">
+                    </path>
+                    <circle cx="5.737" cy="5.737" r="2" fill="none" stroke="currentColor" stroke-linecap="round"
+                      stroke-linejoin="round"></circle>
+                  </svg>',
+        ],
+        [
+            'parent' => 'Content',
+            'name' => 'Assets',
+            'url' => 'https://demo.statamic.com/cp/dashboard',
+            'svg' => '<svg xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24">
+                    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                      d="m15.543 15.543-2.628-6.571c-.2-.511-.558-.519-.785-.018l-2.087 4.589-1.859-2.231a.667.667 0 0 0-1.155.089l-2.486 4.142">
+                    </path>
+                    <rect width="17" height="17" x="1.543" y="1.543" fill="none" stroke="currentColor"
+                      stroke-linecap="round" stroke-linejoin="round" rx="1" ry="1"></rect>
+                    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                      d="m20.551 7.424 1 .091a1 1 0 0 1 .901 1.085l-1.181 12.948a1 1 0 0 1-1.087.9L6.243 21.18m-4.7-5.637h17">
+                    </path>
+                    <circle cx="6.043" cy="6.043" r="1.5" fill="none" stroke="currentColor" stroke-linecap="round"
+                      stroke-linejoin="round"></circle>
+                  </svg>',
+        ],
+        [
+            'parent' => 'Content',
+            'name' => 'Glabals',
+            'url' => 'https://demo.statamic.com/cp/dashboard',
+            'svg' => '<svg xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24">
+                    <circle cx="12" cy="11.985" r="11.5" fill="none" stroke="currentColor" stroke-linecap="round"
+                      stroke-linejoin="round"></circle>
+                    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                      d="M.673 9.985h6.084a3 3 0 0 1 2.122.878L10 11.984a3 3 0 0 1 .121 4.115l-1.363 1.533A3 3 0 0 0 8 19.625v3.145M20.261 3.985h-5.8a2.25 2.25 0 0 0 0 4.5h.432a3 3 0 0 1 2.5 1.335l2.218 3.329a3 3 0 0 0 2.5 1.336h1.121">
+                    </path>
+                  </svg>',
+        ],
+        [
+            'parent' => 'Fields',
+            'name' => 'Fieldsets',
+            'url' => 'https://demo.statamic.com/cp/dashboard',
+            'svg' => '<svg
+                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23.48 23.68">
+                    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                      d="M11.63 19.58H1.56A1.05 1.05 0 0 1 .5 18.52v-17A1.05 1.05 0 0 1 1.56.5h15.9a1.05 1.05 0 0 1 1.06 1.06v10.57">
+                    </path>
+                    <rect width="13.78" height="5.3" x="2.62" y="2.62" fill="none" stroke="currentColor"
+                      stroke-linecap="round" stroke-linejoin="round" rx=".53"></rect>
+                    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                      d="M2.62 10.57v6.36a.53.53 0 0 0 .53.53h6.72a.53.53 0 0 0 .53-.53.68.68 0 0 0 0-.14l-1.84-6.36a.53.53 0 0 0-.51-.43h-4.9a.53.53 0 0 0-.53.57Zm13.78 6.89v-6.89a.53.53 0 0 0-.53-.53h-4.06a.53.53 0 0 0-.53.53.39.39 0 0 0 0 .15l1.92 6.74h3.2m4.6-.28v3a3 3 0 0 1-3 3h-3m4-4 2-2 2 2">
+                    </path>
+                  </svg>',
+        ],
+        [
+            'parent' => 'Tools',
+            'name' => 'Forms',
+            'url' => 'https://demo.statamic.com/cp/dashboard',
+            'svg' => '<svg xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24">
+                    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                      d="M19.5 14.5v-13a1 1 0 0 0-1-1h-13a1 1 0 0 0-1 1v13m19 8a1 1 0 0 1-1 1h-21a1 1 0 0 1-1-1v-6h7v1a2.006 2.006 0 0 0 2 2h5a2.006 2.006 0 0 0 2-2v-1h7zm-23-6 4-6m15 0 4 6m-15-13h1.997m.003 3h5m-7 3h7m-7 3h7">
+                    </path>
+                  </svg>',
+        ],
+        [
+            'parent' => 'Tools',
+            'name' => 'Updates',
+            'url' => 'https://demo.statamic.com/cp/dashboard',
+            'svg' => '<svg xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24">
+                    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                      d="M23.5 19.5a2 2 0 0 1-2 2h-19a2 2 0 0 1-2-2v-14a2 2 0 0 1 2-2h19a2 2 0 0 1 2 2zM.5 8.498h23">
+                    </path>
+                    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                      d="M3.5 15A2.5 2.5 0 0 1 6 12.5h12a2.5 2.5 0 0 1 0 5H6A2.5 2.5 0 0 1 3.5 15zm2.041 2.455 4.957-4.957m-.5 5 5-5m-10.5-9v5m4-5v5">
+                    </path>
+                  </svg>',
+        ],
+        [
+            'parent' => 'Tools',
+            'name' => 'Utilities',
+            'url' => 'https://demo.statamic.com/cp/dashboard',
+            'svg' => '<svg xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24">
+                    <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M1.5 23.501a1 1 0 0 1-1-1v-21a1 1 0 0 1 1-1h21a1 1 0 0 1 1 1v21a1 1 0 0 1-1 1z"></path>
+                      <path
+                        d="M11.121 4.38A3 3 0 1 1 6.88 8.622a3 3 0 0 1 4.24-4.242m6.501 11a3 3 0 1 1-4.242 4.242 3 3 0 0 1 4.242-4.242M12.5 17.5h-9m17 0h-2M12 6.5h8.5m-17 0H6">
+                      </path>
+                      <path
+                        d="M9 6.251a.25.25 0 1 1-.25.25.25.25 0 0 1 .25-.25m6.5 11a.25.25 0 1 1-.25.25.25.25 0 0 1 .25-.25">
+                      </path>
+                    </g>
+                  </svg>',
+        ],
+        [
+            'parent' => 'Users',
+            'name' => 'Users',
+            'url' => 'https://demo.statamic.com/cp/dashboard',
+            'svg' => '<svg xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24">
+                    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                      d="M20.5 13.5v-8h-9.442A1.67 1.67 0 0 1 9.5 4.56 1.738 1.738 0 0 0 7.9 3.5H4a.5.5 0 0 0-.5.5v9.5m15-10h-6.456a1.739 1.739 0 0 1-1.574-1 1.741 1.741 0 0 0-1.57-1H5.5m-5 14 .839-4.2a1 1 0 0 1 .981-.8H3.5m20 5-.839-4.2a1 1 0 0 0-.981-.8H20.5">
+                    </path>
+                    <circle cx="12" cy="9.25" r="1.75" fill="none" stroke="currentColor" stroke-linecap="round"
+                      stroke-linejoin="round"></circle>
+                    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                      d="M15.5 14.5a3.612 3.612 0 0 0-7 0zm3 1a1.5 1.5 0 0 0-1.5 1.54 1.512 1.512 0 0 1-1.559 1.46H8.558A1.512 1.512 0 0 1 7 17.04a1.5 1.5 0 0 0-1.5-1.54h-5v6a1 1 0 0 0 1 1h21a1 1 0 0 0 1-1v-6z">
+                    </path>
+                  </svg>',
         ],
     ];
 @endphp
-
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr" class=" ">
@@ -24,8 +182,6 @@
     <meta name="viewport" content="width=device-width">
     <meta name="robots" content="noindex,nofollow">
 
-    <title>Dashboard :: Statamic</title>
-
     <link rel="icon" type="image/png"
         href="https://demo.statamic.com/vendor/statamic/cp/build/assets/favicon-32x32-c29eba9f.png" sizes="32x32">
     <link rel="icon" type="image/png"
@@ -33,17 +189,14 @@
     <link rel="shortcut icon" type="image/x-icon"
         href="https://demo.statamic.com/vendor/statamic/cp/build/assets/favicon-bbfe21cf.ico" sizes="16x16 32x32">
 
-    <link rel="preload" as="style" href="{{ url('css/app-e0fc4bb9.css') }}">
-    <link rel="preload" as="style" href="{{ url('css/tailwind-dbc9382a.css') }}">
     <link rel="modulepreload" href="{{ url('js/app-77beb8be.js') }}">
     <link rel="stylesheet" href="{{ url('css/app-e0fc4bb9.css') }}">
     <link rel="stylesheet" href="{{ url('css/tailwind-dbc9382a.css') }}">
     <link rel="stylesheet" href="{{ url('css/dashboardMain.css') }}">
-    <script type="module" src="{{ url('js/app-77beb8be.js') }}"></script>
+    <link rel="modulepreload" href="{{ url('js/cp-c6df7fbd.js') }}">
+    <link rel="stylesheet" href="{{ url('css/cp-56146771.css') }}">
+    <link rel="stylesheet" href="{{ url('css/cp-7025c2cd.css') }}">
 
-    {{-- <script bis_use="true" type="text/javascript" charset="utf-8"
-        data-bis-config="[&quot;facebook.com/&quot;,&quot;twitter.com/&quot;,&quot;youtube-nocookie.com/embed/&quot;,&quot;//vk.com/&quot;,&quot;//www.vk.com/&quot;,&quot;//linkedin.com/&quot;,&quot;//www.linkedin.com/&quot;,&quot;//instagram.com/&quot;,&quot;//www.instagram.com/&quot;,&quot;//www.google.com/recaptcha/api2/&quot;,&quot;//hangouts.google.com/webchat/&quot;,&quot;//www.google.com/calendar/&quot;,&quot;//www.google.com/maps/embed&quot;,&quot;spotify.com/&quot;,&quot;soundcloud.com/&quot;,&quot;//player.vimeo.com/&quot;,&quot;//disqus.com/&quot;,&quot;//tgwidget.com/&quot;,&quot;//js.driftt.com/&quot;,&quot;friends2follow.com&quot;,&quot;/widget&quot;,&quot;login&quot;,&quot;//video.bigmir.net/&quot;,&quot;blogger.com&quot;,&quot;//smartlock.google.com/&quot;,&quot;//keep.google.com/&quot;,&quot;/web.tolstoycomments.com/&quot;,&quot;moz-extension://&quot;,&quot;chrome-extension://&quot;,&quot;/auth/&quot;,&quot;//analytics.google.com/&quot;,&quot;adclarity.com&quot;,&quot;paddle.com/checkout&quot;,&quot;hcaptcha.com&quot;,&quot;recaptcha.net&quot;,&quot;2captcha.com&quot;,&quot;accounts.google.com&quot;,&quot;www.google.com/shopping/customerreviews&quot;,&quot;buy.tinypass.com&quot;,&quot;gstatic.com&quot;,&quot;secureir.ebaystatic.com&quot;,&quot;docs.google.com&quot;,&quot;contacts.google.com&quot;,&quot;github.com&quot;,&quot;mail.google.com&quot;,&quot;chat.google.com&quot;,&quot;audio.xpleer.com&quot;,&quot;keepa.com&quot;,&quot;static.xx.fbcdn.net&quot;,&quot;sas.selleramp.com&quot;,&quot;1plus1.video&quot;,&quot;console.googletagservices.com&quot;]"
-        src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/executers/vi-tr.js"></script> --}}
 </head>
 
 <body
@@ -161,56 +314,31 @@
         </div>
 
         {{-- Include the sidebar component --}}
-        <x-sidebar-content :sidebar="$sidebar" />
+        <div id="main" class="" bis_skin_checked="1">
+            <nav class="nav-main">
+                <div class="nav-main-inner" bis_skin_checked="1">
+                    <x-sidebar-content :sidebar="$sidebar" />
+                </div>
+            </nav>
+        </div>
 
-        <div class="portal-targets" bis_skin_checked="1">
-            <div class="vue-portal-target popover-container " bis_skin_checked="1">
-                <div class="" bis_skin_checked="1">
-                    <div class="popover" bis_skin_checked="1">
-                        <div class="popover-content bg-white shadow-popover rounded-md" bis_skin_checked="1">
-                            <div class="p-4 pb-2" bis_skin_checked="1">
-                                <h6 class="mb-2">Pin to Favorites</h6>
-                                <div class="flex items-center" bis_skin_checked="1"><input type="text"
-                                        class="input-text w-auto"><button
-                                        class="btn-primary rtl:mr-2 ltr:ml-2">Save</button></div><button
-                                    class="mt-2 text-xs text-blue outline-none hover:text-blue-800">Set as start page
-                                    <span>→</span></button>
-                            </div>
-                        </div>
-                    </div>
+        {{-- dynamic pages goes here  --}}
+        <div class="workspace" bis_skin_checked="1">
+            @yield('content')
+            <div class="flex justify-center text-center mt-16" bis_skin_checked="1">
+                <div class="bg-white rounded-full px-6 py-2 shadow-sm text-sm text-gray-700" bis_skin_checked="1">
+                    © 2024 Cedar Technologies. All Rights Reserved | Design and Developed by Cedar Technologies
                 </div>
             </div>
+        </div>
+
+        <div class="portal-targets" bis_skin_checked="1">
             <div class="vue-portal-target popover-container dropdown-list" bis_skin_checked="1">
                 <div class="" bis_skin_checked="1">
                     <div class="popover" bis_skin_checked="1">
                         <div class="popover-content bg-white shadow-popover rounded-md" bis_skin_checked="1"> <a
                                 href="https://demo.statamic.com/cp/preferences">Preferences</a> <a
                                 href="https://demo.statamic.com/cp/preferences/nav">CP Nav</a></div>
-                    </div>
-                </div>
-            </div>
-            <div class="vue-portal-target popover-container dropdown-list" bis_skin_checked="1">
-                <div class="" bis_skin_checked="1">
-                    <div class="popover" bis_skin_checked="1">
-                        <div class="popover-content bg-white shadow-popover rounded-md" bis_skin_checked="1"> <a
-                                href="https://statamic.dev/" target="_blank"
-                                class="flex items-center"><!----><span>Documentation</span>
-                                <i class="w-3 block rtl:mr-2 ltr:ml-2"><svg xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 24 24">
-                                        <path fill="none" stroke="currentColor" stroke-linecap="round"
-                                            stroke-linejoin="round" stroke-width="1.5"
-                                            d="M23.251 7.498V.748h-6.75m6.75 0-15 15m3-10.5h-9a1.5 1.5 0 0 0-1.5 1.5v15a1.5 1.5 0 0 0 1.5 1.5h15a1.5 1.5 0 0 0 1.5-1.5v-9">
-                                        </path>
-                                    </svg></i></a> <a href="https://statamic.com/support" target="_blank"
-                                class="flex items-center"><!----><span>Support</span> <i
-                                    class="w-3 block rtl:mr-2 ltr:ml-2"><svg xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 24 24">
-                                        <path fill="none" stroke="currentColor" stroke-linecap="round"
-                                            stroke-linejoin="round" stroke-width="1.5"
-                                            d="M23.251 7.498V.748h-6.75m6.75 0-15 15m3-10.5h-9a1.5 1.5 0 0 0-1.5 1.5v15a1.5 1.5 0 0 0 1.5 1.5h15a1.5 1.5 0 0 0 1.5-1.5v-9">
-                                        </path>
-                                    </svg></i></a> <a class="flex items-center"><!----><span>Keyboard
-                                    Shortcuts</span></a></div>
                     </div>
                 </div>
             </div>
@@ -230,130 +358,16 @@
                 </div>
             </div>
             <div class="vue-portal-target popover-container dropdown-list" bis_skin_checked="1">
-                <div class="" bis_skin_checked="1"><!----></div>
             </div>
         </div>
     </div>
 
-    <script src="{{ url('js/cp.js') }}" defer=""></script>
-
-    <link rel="preload" as="style" href="{{ url('css/cp-56146771.css') }}">
-    <link rel="preload" as="style" href="{{ url('css/cp-7025c2cd.css') }}">
-    <link rel="modulepreload" href="{{ url('js/cp-c6df7fbd.js') }}">
-    <link rel="stylesheet" href="{{ url('css/cp-56146771.css') }}">
-    <link rel="stylesheet" href="{{ url('css/cp-7025c2cd.css') }}">
-    <script type="module" src="{{ url('js/cp-c6df7fbd.js') }}"></script>
-
-
-
-
     <script src="data:text/javascript;base64,U3RhdGFtaWMuY29uZmlnKFN0YXRhbWljQ29uZmlnKTsgU3RhdGFtaWMuc3RhcnQoKQ==" defer="">
     </script>
+    <script type="module" src="{{ url('js/app-77beb8be.js') }}"></script>
+    <script type="module" src="{{ url('js/cp-c6df7fbd.js') }}"></script>
+    <script src="{{ url('js/cp.js') }}" defer=""></script>
 
-
-
-    <div id="b5fNhGDkM" role="status" aria-live="polite" aria-atomic="false" class="toasted-container bottom-left"
-        bis_skin_checked="1"></div>
-    <div id="draggable-live-region" aria-relevant="additions" aria-atomic="true" aria-live="assertive"
-        role="log" style="position: fixed; width: 1px; height: 1px; top: -1px; overflow: hidden;"
-        bis_skin_checked="1"></div>
-    <webchatgpt-custom-element-e6b064d5-8c24-473c-9a22-41fac41094ad id="webchatgpt-snackbar"
-        style="color: rgb(255, 255, 255);"><template shadowrootmode="open">
-            <style id="webchatgpt-snackbar-container-emotion-style"></style>
-            <div id="webchatgpt-snackbar-container" style="z-index: 2147483647;"></div>
-        </template></webchatgpt-custom-element-e6b064d5-8c24-473c-9a22-41fac41094ad>
-    <div id="monica-content-root" class="monica-widget" data-darkreader-mode="dynamic" data-darkreader-scheme="dark"
-        bis_skin_checked="1"><template shadowrootmode="open">
-
-
-            <style data-rc-order="prependQueue" data-css-hash="1mlrqvk" data-token-hash="1svjfp6">
-
-            </style>
-            <style class="darkreader darkreader--sync" media="screen"></style>
-            <style class="darkreader darkreader--inline" media="screen">
-                [data-darkreader-inline-bgcolor] {
-                    background-color: var(--darkreader-inline-bgcolor) !important;
-                }
-
-                [data-darkreader-inline-bgimage] {
-                    background-image: var(--darkreader-inline-bgimage) !important;
-                }
-
-                [data-darkreader-inline-border] {
-                    border-color: var(--darkreader-inline-border) !important;
-                }
-
-                [data-darkreader-inline-border-bottom] {
-                    border-bottom-color: var(--darkreader-inline-border-bottom) !important;
-                }
-
-                [data-darkreader-inline-border-left] {
-                    border-left-color: var(--darkreader-inline-border-left) !important;
-                }
-
-                [data-darkreader-inline-border-right] {
-                    border-right-color: var(--darkreader-inline-border-right) !important;
-                }
-
-                [data-darkreader-inline-border-top] {
-                    border-top-color: var(--darkreader-inline-border-top) !important;
-                }
-
-                [data-darkreader-inline-boxshadow] {
-                    box-shadow: var(--darkreader-inline-boxshadow) !important;
-                }
-
-                [data-darkreader-inline-color] {
-                    color: var(--darkreader-inline-color) !important;
-                }
-
-                [data-darkreader-inline-fill] {
-                    fill: var(--darkreader-inline-fill) !important;
-                }
-
-                [data-darkreader-inline-stroke] {
-                    stroke: var(--darkreader-inline-stroke) !important;
-                }
-
-                [data-darkreader-inline-outline] {
-                    outline-color: var(--darkreader-inline-outline) !important;
-                }
-
-                [data-darkreader-inline-stopcolor] {
-                    stop-color: var(--darkreader-inline-stopcolor) !important;
-                }
-            </style>
-            <style class="darkreader darkreader--override" media="screen"></style>
-            <style class="darkreader darkreader--invert" media="screen"></style>
-            <style class="darkreader darkreader--sync" media="screen"></style>
-            <div>
-                <div class="_monica-dark root-container-UmvGjM" lang="en">
-                    <div class="content-root-rb-FdpxmT"></div>
-                    <div class="content-root-WCIiJJ">
-                        <div class="sidebar-entry-btn-hvXPZj sidebar-entry-btn-right-doBuCO"
-                            style="visibility: visible; bottom: 109.95px;">
-                            <div class="float-btn-box-yen8CN">
-                                <div class="float-btn-dmQyFz"><img
-                                        src="chrome-extension://ofpnmcalabcbjgholdjcjblkibolbppb/static/global/src/static/monicaLogo.png"
-                                        class="logo-img-drxdFH" alt=""
-                                        style="width: 24px; height: 24px; border-radius: 4px;"><span
-                                        class="shortcut--0OZjH" style="opacity: 0;">⌘M</span></div>
-                            </div>
-                            <div class="extra-tools-box-Q-raLQ toolbar-AlHpmQ" style="bottom: -12px;">
-                                <div class="trigger-area-rZm0LF"></div>
-                                <div class="top-t5av-O"></div>
-                                <div class="bot-bqr602"></div>
-                            </div>
-                        </div>
-                        <div class="dialog-root-ZbJNQk"></div>
-                        <div class="reading-summary-status-bar-yFqhHz"></div>
-                        <div class="contextual-toolbar-BjPOM3"></div>
-                    </div>
-                </div>
-            </div>
-        </template>
-        <meta name="darkreader" content="ffd8fb97072548af9e29949b79ecf07b">
-    </div>
 </body>
 
 </html>
