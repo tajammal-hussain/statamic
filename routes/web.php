@@ -10,6 +10,8 @@ use App\Http\Controllers\DashboardController;
 
 Route::get('/', [AuthController::class, 'index'])->name('login');
 
+Route::get('/forgotPassword', [AuthController::class, 'forgotPassword'])->name('forgot');
+
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 // Route::get('/', function () {
