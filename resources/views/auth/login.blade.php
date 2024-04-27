@@ -1,5 +1,7 @@
 @extends('layouts.auth')
 
+@section('title', 'Login  :: ')
+
 @section('auth-content')
 
   <div class="card auth-card mx-auto" bis_skin_checked="1">

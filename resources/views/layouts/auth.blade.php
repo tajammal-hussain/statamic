@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="robots" content="noindex,nofollow">
 
-    <title>Login :: Cedar</title>
+    <title>@yield('title')Cedar</title>
 
     <link rel="icon" type="image/png"
         href="https://demo.statamic.com/vendor/statamic/cp/build/assets/favicon-32x32-c29eba9f.png" sizes="32x32">
