@@ -10,4 +10,19 @@ class NavigationController extends Controller
     {
         return view('navigations.index');
     }
+
+    public function add()
+    {
+        return view('navigations.add');
+    }
+
+    public function edit()
+    {
+        return view('navigations.edit');
+    }
+
+    public function table()
+    {
+        return view('navigations.table');
+    }
 }

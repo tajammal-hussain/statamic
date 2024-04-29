@@ -321,17 +321,17 @@
                     <x-sidebarContent :sidebar="$sidebar" />
                 </div>
             </nav>
-        </div>
-
-        {{-- dynamic pages goes here  --}}
-        <div class="workspace" bis_skin_checked="1">
-            @yield('content')
-            <div class="flex justify-center text-center mt-16" bis_skin_checked="1">
-                <div class="bg-white rounded-full px-6 py-2 shadow-sm text-sm text-gray-700" bis_skin_checked="1">
-                    © 2024 Cedar Technologies. All Rights Reserved | Design and Developed by Cedar Technologies
+            {{-- dynamic pages goes here  --}}
+            <div class="workspace" bis_skin_checked="1">
+                @yield('content')
+                <div class="flex justify-center text-center mt-16" bis_skin_checked="1">
+                    <div class="bg-white rounded-full px-6 py-2 shadow-sm text-sm text-gray-700" bis_skin_checked="1">
+                        © 2024 Cedar Technologies. All Rights Reserved | Design and Developed by Cedar Technologies
+                    </div>
                 </div>
             </div>
-        </div>
+        </div>  
+
 
         <div class="portal-targets" bis_skin_checked="1">
             <div class="vue-portal-target popover-container dropdown-list" bis_skin_checked="1">

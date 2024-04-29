@@ -1,10 +1,13 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CollectionsController;
 use App\Http\Controllers\NavigationController;
+use App\Http\Controllers\TaxonomiesController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GlobalsController;
+use App\Http\Controllers\AssetsController;
+use App\Http\Controllers\AuthController;
+use Illuminate\Support\Facades\Route;
 
 // Route for the root URL
 Route::redirect('/', '/auth');
@@ -27,7 +30,6 @@ Route::controller(CollectionsController::class)
     ->as('collections.')
     ->group(function () {
         Route::get('', 'index')->name('collections');
-        Route::get('/news', 'news')->name('news');
         Route::get('/add', 'add')->name('add');
         Route::get('/edit', 'edit')->name('edit');
         Route::get('/table', 'table')->name('table');
@@ -39,4 +41,31 @@ Route::controller(NavigationController::class)
     ->as('navigations.')
     ->group(function () {
         Route::get('', 'index')->name('navigations');
+        Route::get('/add', 'add')->name('add');
+        Route::get('/edit', 'edit')->name('edit');
+        Route::get('/table', 'table')->name('table');
+    });
+
+// Taxonomies Routes
+Route::controller(TaxonomiesController::class)
+    ->prefix('taxonomies')
+    ->as('taxonomies.')
+    ->group(function () {
+        Route::get('', 'index')->name('taxonomies');
+    });
+
+// Assets Routes
+Route::controller(AssetsController::class)
+    ->prefix('assets')
+    ->as('assets.')
+    ->group(function () {
+        Route::get('', 'index')->name('assets');
+    });
+
+// Globals Routes
+Route::controller(GlobalsController::class)
+    ->prefix('globals')
+    ->as('globals.')
+    ->group(function () {
+        Route::get('', 'index')->name('globals');
     });
