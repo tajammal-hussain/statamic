@@ -38,6 +38,7 @@
                 </path>
             </svg>
         </div>
+        
         @yield('auth-content')
     </div>
     <script src="{{ asset('cp.js') }}" defer=""></script>
