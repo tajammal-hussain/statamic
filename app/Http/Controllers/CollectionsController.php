@@ -15,4 +15,19 @@ class CollectionsController extends Controller
     {
         return view('collections.news');
     }
+
+    public function add()
+    {
+        return view('collections.add');
+    }
+
+    public function edit()
+    {
+        return view('collections.edit');
+    }
+
+    public function table()
+    {
+        return view('collections.table');
+    }
 }

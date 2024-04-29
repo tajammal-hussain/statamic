@@ -28,6 +28,9 @@ Route::controller(CollectionsController::class)
     ->group(function () {
         Route::get('', 'index')->name('collections');
         Route::get('/news', 'news')->name('news');
+        Route::get('/add', 'add')->name('add');
+        Route::get('/edit', 'edit')->name('edit');
+        Route::get('/table', 'table')->name('table');
     });
 
 // Navigations Routes
