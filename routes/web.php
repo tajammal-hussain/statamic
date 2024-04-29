@@ -4,8 +4,11 @@ use App\Http\Controllers\CollectionsController;
 use App\Http\Controllers\NavigationController;
 use App\Http\Controllers\TaxonomiesController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FieldsetsController;
 use App\Http\Controllers\GlobalsController;
 use App\Http\Controllers\AssetsController;
+use App\Http\Controllers\FormsController;
+use App\Http\Controllers\UsersController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -52,6 +55,10 @@ Route::controller(TaxonomiesController::class)
     ->as('taxonomies.')
     ->group(function () {
         Route::get('', 'index')->name('taxonomies');
+        Route::get('/add', 'add')->name('add');
+        Route::get('/edit', 'edit')->name('edit');
+        Route::get('/table', 'table')->name('table');
+        Route::get('/createTeam', 'createTeam')->name('createTeam');
     });
 
 // Assets Routes
@@ -68,4 +75,28 @@ Route::controller(GlobalsController::class)
     ->as('globals.')
     ->group(function () {
         Route::get('', 'index')->name('globals');
+    });
+
+// Fieldsets Routes
+Route::controller(FieldsetsController::class)
+    ->prefix('fieldsets')
+    ->as('fieldsets.')
+    ->group(function () {
+        Route::get('', 'index')->name('fieldsets');
+    });
+
+// Forms Routes
+Route::controller(FormsController::class)
+    ->prefix('forms')
+    ->as('forms.')
+    ->group(function () {
+        Route::get('', 'index')->name('forms');
+    });
+
+// Users Routes
+Route::controller(UsersController::class)
+    ->prefix('users')
+    ->as('users.')
+    ->group(function () {
+        Route::get('', 'index')->name('users');
     });

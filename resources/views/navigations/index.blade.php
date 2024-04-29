@@ -28,10 +28,5 @@
                 </tbody>
             </table>
         </div>
-        <div class="flex justify-center text-center mt-16" bis_skin_checked="1">
-            <div class="bg-white rounded-full px-6 py-2 shadow-sm text-sm text-gray-700" bis_skin_checked="1">Learn more
-                about <a href="https://statamic.dev/navigation" target="_blank" rel="noopener noopener"
-                    class="text-blue hover:text-blue-700">Navigation</a></div>
-        </div>
     </div>
 @endsection
