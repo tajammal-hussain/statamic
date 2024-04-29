@@ -12,8 +12,9 @@
       <change beforePath="$PROJECT_DIR$/node_modules/.vite/deps_temp_6a82808a/axios.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/node_modules/.vite/deps_temp_6a82808a/axios.js.map" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/node_modules/.vite/deps_temp_6a82808a/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/collections/add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/collections/add.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/collections/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/collections/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/navigations/add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/navigations/add.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/navigations/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/navigations/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/navigations/table.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/navigations/table.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -198,7 +199,7 @@
       <workItem from="1714138462895" duration="2499000" />
       <workItem from="1714207149373" duration="2682000" />
       <workItem from="1714215078471" duration="1430000" />
-      <workItem from="1714389561961" duration="6104000" />
+      <workItem from="1714389561961" duration="7709000" />
     </task>
     <servers />
   </component>
