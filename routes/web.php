@@ -4,21 +4,36 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CollectionsController;
+use App\Http\Controllers\NavigationController;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+// Route for the root URL
+Route::redirect('/', '/auth');
 
-Route::get('/', [AuthController::class, 'index'])->name('login');
+// Authentication Routes
+Route::controller(AuthController::class)
+    ->prefix('auth')
+    ->as('auth.')
+    ->group(function () {
+        Route::get('/', 'index')->name('login');
+        Route::get('/forgotPassword', 'forgotPassword')->name('forgot');
+    });
 
-Route::get('/forgotPassword', [AuthController::class, 'forgotPassword'])->name('forgot');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::get('/collections', [CollectionsController::class, 'index'])->name('collections');
+// Collection Routes
+Route::controller(CollectionsController::class)
+    ->prefix('collections')
+    ->as('collections.')
+    ->group(function () {
+        Route::get('', 'index')->name('collections');
+        Route::get('/news', 'news')->name('news');
+    });
 
-Route::get('/news', [CollectionsController::class, 'news'])->name('news');
-
-// Route::get('/', function () {
-//     return view('login');
-// })->name("login");
+// Navigations Routes
+Route::controller(NavigationController::class)
+    ->prefix('navigations')
+    ->as('navigations.')
+    ->group(function () {
+        Route::get('', 'index')->name('navigations');
+    });

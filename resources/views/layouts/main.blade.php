@@ -4,7 +4,7 @@
         [
             'parent' => '',
             'name' => 'Dashboard',
-            'url' => 'https://demo.statamic.com/cp/dashboard',
+            'url' => $baseUrl . '/dashboard',
             'svg' => '<svg
                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <circle cx="7" cy="8.5" r="3.5" fill="none" stroke="currentColor" stroke-linecap="round"
@@ -35,7 +35,7 @@
         [
             'parent' => 'Content',
             'name' => 'Navigation',
-            'url' => 'https://demo.statamic.com/cp/dashboard',
+            'url' => $baseUrl . '/navigations',
             'svg' => '<svg xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24">
                     <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -51,7 +51,7 @@
         [
             'parent' => 'Content',
             'name' => 'Taxonomies',
-            'url' => 'https://demo.statamic.com/cp/dashboard',
+            'url' => $baseUrl . '/taxonomies',
             'svg' => '<svg xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24">
                     <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -64,7 +64,7 @@
         [
             'parent' => 'Content',
             'name' => 'Assets',
-            'url' => 'https://demo.statamic.com/cp/dashboard',
+            'url' => $baseUrl . '/assets',
             'svg' => '<svg xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24">
                     <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -82,7 +82,7 @@
         [
             'parent' => 'Content',
             'name' => 'Glabals',
-            'url' => 'https://demo.statamic.com/cp/dashboard',
+            'url' => $baseUrl . '/globals',
             'svg' => '<svg xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24">
                     <circle cx="12" cy="11.985" r="11.5" fill="none" stroke="currentColor" stroke-linecap="round"
@@ -95,7 +95,7 @@
         [
             'parent' => 'Fields',
             'name' => 'Fieldsets',
-            'url' => 'https://demo.statamic.com/cp/dashboard',
+            'url' => $baseUrl . '/fieldsets',
             'svg' => '<svg
                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23.48 23.68">
                     <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -111,7 +111,7 @@
         [
             'parent' => 'Tools',
             'name' => 'Forms',
-            'url' => 'https://demo.statamic.com/cp/dashboard',
+            'url' => $baseUrl . '/forms',
             'svg' => '<svg xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24">
                     <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -122,7 +122,7 @@
         [
             'parent' => 'Tools',
             'name' => 'Updates',
-            'url' => 'https://demo.statamic.com/cp/dashboard',
+            'url' => $baseUrl . '/updates',
             'svg' => '<svg xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24">
                     <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -136,7 +136,7 @@
         [
             'parent' => 'Tools',
             'name' => 'Utilities',
-            'url' => 'https://demo.statamic.com/cp/dashboard',
+            'url' => $baseUrl . '/utilities',
             'svg' => '<svg xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24">
                     <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
@@ -153,7 +153,7 @@
         [
             'parent' => 'Users',
             'name' => 'Users',
-            'url' => 'https://demo.statamic.com/cp/dashboard',
+            'url' => $baseUrl . '/users',
             'svg' => '<svg xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24">
                     <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"

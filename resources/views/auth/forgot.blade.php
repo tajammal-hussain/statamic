@@ -21,7 +21,7 @@
     </div>
     
     <div class="w-full text-center mt-4">
-        <a href="{{route('login')}}" class="forgot-password-link text-sm opacity-75 hover:opacity-100">
+        <a href="{{route('auth.login')}}" class="forgot-password-link text-sm opacity-75 hover:opacity-100">
             I remember my password
         </a>
     </div>

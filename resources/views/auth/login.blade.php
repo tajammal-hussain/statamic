@@ -34,7 +34,7 @@
   </div>
 
   <div class="w-full text-center mt-4" bis_skin_checked="1">
-    <a href="{{ route ('forgot') }}" class="forgot-password-link text-sm opacity-75 hover:opacity-100"> Forgot password? </a>
+    <a href="{{ route ('auth.forgot') }}" class="forgot-password-link text-sm opacity-75 hover:opacity-100"> Forgot password? </a>
   </div>
 
 @endsection
