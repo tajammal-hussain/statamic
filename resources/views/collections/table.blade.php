@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('content')
     <title>Collections->News :: Cedar</title>
-    <div class="page-wrapper max-w-full" bis_skin_checked="1">
+    <div class="page-wrapper" bis_skin_checked="1" style="margin-right:0px; max-width:70rem;">
         <div bis_skin_checked="1">
             <header class="mb-6">
                 <div class="breadcrumb flex" bis_skin_checked="1"><a href="https://demo.statamic.com/cp/collections"
@@ -13,17 +13,22 @@
                 <div class="flex items-center" bis_skin_checked="1">
                     <h1 class="flex-1">News Articles</h1>
                     <div class="dropdown-list rtl:ml-2 ltr:mr-2" bis_skin_checked="1">
-                        <div aria-haspopup="true" bis_skin_checked="1"><button aria-label="Open Dropdown"
-                                class="rotating-dots-button"><svg width="12" viewBox="0 0 24 24"
+                        <div aria-haspopup="true" bis_skin_checked="1">
+                            <button aria-label="Open Dropdown"
+                                class="rotating-dots-button">
+                                <svg width="12" viewBox="0 0 24 24"
                                     class="rotating-dots fill-current">
                                     <circle cx="3" cy="12" r="3"></circle>
                                     <circle cx="12" cy="12" r="3"></circle>
                                     <circle cx="21" cy="12" r="3"></circle>
-                                </svg></button></div>
+                                </svg>
+                            </button></div>
                         <div class="v-portal" style="display: none;" bis_skin_checked="1"></div>
-                    </div><!----><!----><!---->
+                    </div>
+                    <!----><!----><!---->
                     <div class="dropdown-list inline-block" bis_skin_checked="1">
-                        <div aria-haspopup="true" bis_skin_checked="1"><button class="btn-primary"> Create Entry
+                        <div aria-haspopup="true" bis_skin_checked="1">
+                            <button class="btn-primary"> Create Entry
                                 <!----></button></div>
                         <div class="v-portal" style="display: none;" bis_skin_checked="1"></div>
                     </div>
