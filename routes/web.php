@@ -11,9 +11,26 @@ use App\Http\Controllers\FormsController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
+
+Route::view('profile', 'profile')
+    ->middleware(['auth'])
+    ->name('profile');
+
+require __DIR__ . '/auth.php';
 
 // Route for the root URL
-Route::redirect('/', '/auth');
+Route::redirect('/', '/login');
+
+// Route To Logout user
+Route::get('/logout', function () {
+    Auth::logout();
+    return redirect('/');
+})->name('logout');
 
 // Authentication Routes
 Route::controller(AuthController::class)
@@ -25,7 +42,7 @@ Route::controller(AuthController::class)
     });
 
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+// Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 // Collection Routes
 Route::controller(CollectionsController::class)
