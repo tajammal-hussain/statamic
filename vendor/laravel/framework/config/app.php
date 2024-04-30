@@ -166,6 +166,7 @@ return [
     'providers' => ServiceProvider::defaultProviders()->merge([
         // Package Service Providers...
     ])->merge([
+        Spatie\Permission\PermissionServiceProvider::class,
         // Application Service Providers...
         // App\Providers\AppServiceProvider::class,
     ])->merge([
