@@ -48,7 +48,7 @@ Route::controller(CollectionsController::class)
     ->as('collections.')
     ->group(function () {
         Route::get('', 'index')->name('collections');
-        Route::get('/addCollection', 'addCollection')->name('addCollection');
+        Route::match(['get', 'post'], '/addCollection', 'addCollection')->name('addCollection');
         Route::get('/editCollection', 'editCollection')->name('editCollection');
         Route::get('/addEntry', 'addEntry')->name('addEntry');
         Route::get('/editEntry', 'editEntry')->name('editEntry');

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Collections;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
 
 class CollectionsController extends Controller
 {
@@ -15,9 +17,29 @@ class CollectionsController extends Controller
         return view('collections.index', compact('firstCol', 'secondCol', 'data'));
     }
 
-    public function addCollection()
+    public function addCollection(Request $request)
     {
-        return view('collections.addCollection');
+        if ($request->isMethod('post')) :
+            $rules = [
+                'title' => 'required|string|max:255',
+                'handle' => 'required|string|max:255',
+            ];
+            $validator = Validator::make($request->all(), $rules);
+
+            if ($validator->fails()) :
+                return redirect()->back()->withErrors($validator)->withInput();
+            endif;
+
+            $collection = new Collections();
+            $collection->title = $request->input('title');
+            $collection->handle = $request->input('handle');
+            $collection->save();
+
+            $request->session()->flash('success', 'Collection created successfully.');
+            return redirect()->route('collections.addCollection');
+        else :
+            return view('collections.addCollection');
+        endif;
     }
 
     public function addEntry()

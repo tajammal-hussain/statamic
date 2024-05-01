@@ -8,13 +8,8 @@ class TaxonomiesController extends Controller
 {
     public function index()
     {
-        $menuItems = [
-            ['label' => 'Edit', 'route' => route('navigations.edit')],
-            ['label' => 'Delete', 'route' => route('dashboard')],
-            // Add more menu items as needed
-        ];
-
-        return view('taxonomies.index')->with('menuItems', $menuItems);
+        
+        return view('taxonomies.index');
     }
 
     public function add()
