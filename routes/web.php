@@ -104,7 +104,6 @@ Route::controller(FieldsetsController::class)
     ->group(function () {
         Route::get('', 'index')->name('fieldsets');
         Route::get('/add', 'add')->name('add');
-
     });
 
 // Forms Routes
@@ -113,6 +112,10 @@ Route::controller(FormsController::class)
     ->as('forms.')
     ->group(function () {
         Route::get('', 'index')->name('forms');
+        Route::get('/add', 'add')->name('add');
+        Route::get('/edit', 'edit')->name('edit');
+        Route::get('/table', 'table')->name('table');
+        Route::get('/view', 'view')->name('view');
     });
 
 // Users Routes
