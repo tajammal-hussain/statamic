@@ -3,7 +3,8 @@
     <title>Collections :: Cedar</title>
     <div class="page-wrapper max-w-xl" bis_skin_checked="1">
         <div class="flex items-center justify-between mb-6" bis_skin_checked="1">
-            <h1>Collections</h1>
+            <h1>Collections</h1>   
+            <a href="{{ route('collections.addCollection') }}" class="btn-primary">Create Collection</a> 
         </div>
         <div class="card overflow-hidden p-0" endpoints="[object Object]" bis_skin_checked="1">
             <table data-size="sm" tabindex="0" class="data-table">
@@ -11,7 +12,7 @@
                     <tr>
                         <th class="group current-column sortable-column"><span>Title</span><svg height="8"
                                 width="8" viewBox="0 0 10 6.5"
-                                class="rtl:mr-1 ltr:ml-1 opacity-0 group-hover:opacity-100 asc opacity-100 pointer-events-none">
+                                class="rtl:mr-1 ltr:ml-1 group-hover:opacity-100 asc opacity-100 pointer-events-none">
                                 <path d="M9.9,1.4L5,6.4L0,1.4L1.4,0L5,3.5L8.5,0L9.9,1.4z" fill="currentColor"></path>
                             </svg></th>
                         <th class="group sortable-column rtl:text-left ltr:text-right rtl:pl-8 ltr:pr-8">

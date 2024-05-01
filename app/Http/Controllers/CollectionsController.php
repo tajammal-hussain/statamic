@@ -11,14 +11,24 @@ class CollectionsController extends Controller
         return view('collections.index');
     }
 
-    public function add()
+    public function addCollection()
     {
-        return view('collections.add');
+        return view('collections.addCollection');
     }
 
-    public function edit()
+    public function addEntry()
     {
-        return view('collections.edit');
+        return view('collections.addEntry');
+    }
+
+    public function editCollection()
+    {
+        return view('collections.editCollection');
+    }
+
+    public function editEntry()
+    {
+        return view('collections.editEntry');
     }
 
     public function table()
