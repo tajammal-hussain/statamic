@@ -211,6 +211,7 @@
 
     {{-- Calling script before body to access script in body --}}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 
 <body>
@@ -429,6 +430,7 @@
         </div>
     </div>
 
+{{--    flowbite js--}}
 </body>
 
 </html>

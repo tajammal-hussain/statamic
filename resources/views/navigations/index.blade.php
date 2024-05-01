@@ -1,3 +1,4 @@
+
 @extends('layouts.main')
 @section('content')
     <title>Navigation :: Cedar</title>
@@ -13,14 +14,10 @@
                         <td class=""><a href="https://demo.statamic.com/cp/navigation/footer"
                                 class="flex items-center">Footer</a></td><!---->
                         <th class="actions-column">
-                            <div class="dropdown-list" bis_skin_checked="1">
-                                <div aria-haspopup="true" bis_skin_checked="1"><button aria-label="Open Dropdown"
-                                        class="rotating-dots-button"><svg width="12" viewBox="0 0 24 24"
-                                            class="rotating-dots fill-current">
-                                            <circle cx="3" cy="12" r="3"></circle>
-                                            <circle cx="12" cy="12" r="3"></circle>
-                                            <circle cx="21" cy="12" r="3"></circle>
-                                        </svg></button></div>
+                            <div class="w-8 dropdown-list" bis_skin_checked="1">
+                                <div aria-haspopup="true" bis_skin_checked="1">
+                                            <x-customDropdown :menuItems="$menuItems"></x-customDropdown>
+                                        </div>
                                 <div class="v-portal" style="display: none;" bis_skin_checked="1"></div>
                             </div>
                         </th>
