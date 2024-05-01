@@ -10,4 +10,8 @@ class FieldsetsController extends Controller
     {
         return view('fieldsets.index');
     }
+    public function add()
+    {
+        return view('fieldsets.add');
+    }
 }
