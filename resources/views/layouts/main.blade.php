@@ -248,7 +248,6 @@
             display: block;
         }
     </style>
-
 </head>
 
 <body>
@@ -466,7 +465,40 @@
             </div>
         </div>
     </div>
+    <script>
+    // Get all tab buttons and tab panels
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabPanels = document.querySelectorAll('.tab-panel');
 
+    // Function to switch tabs
+    function switchTab(event) {
+        // Prevent default behavior
+        event.preventDefault();
+
+        // Hide all tab panels
+        tabPanels.forEach(panel => {
+            panel.classList.remove('active');
+        });
+
+        // Deactivate all tab buttons
+        tabButtons.forEach(button => {
+            button.setAttribute('aria-selected', 'false');
+        });
+
+        // Activate the clicked tab button
+        this.setAttribute('aria-selected', 'true');
+
+        // Show the corresponding tab panel
+        const tabPanelId = this.getAttribute('aria-controls');
+        const tabPanel = document.getElementById(tabPanelId);
+        tabPanel.classList.add('active');
+    }
+
+    // Add click event listener to each tab button
+    tabButtons.forEach(button => {
+        button.addEventListener('click', switchTab);
+    });
+</script>
 </body>
 
 </html>
