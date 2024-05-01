@@ -187,10 +187,6 @@
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr" class=" ">
-<script src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/content/location/location.js"
-    id="eppiocemhmnlbhjplcgkofciiegomcon"></script>
-<script src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/libs/extend-native-history-api.js"></script>
-<script src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/libs/requests.js"></script>
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -206,21 +202,19 @@
     <link rel="shortcut icon" type="image/x-icon"
         href="https://demo.statamic.com/vendor/statamic/cp/build/assets/favicon-bbfe21cf.ico" sizes="16x16 32x32">
 
-    <link rel="modulepreload" href="{{ url('js/app-77beb8be.js') }}">
-    <link rel="stylesheet" href="{{ url('css/app-e0fc4bb9.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url('css/tailwind-dbc9382a.css') }}">
     <link rel="stylesheet" href="{{ url('css/dashboardMain.css') }}">
-    <link rel="modulepreload" href="{{ url('js/cp-c6df7fbd.js') }}">
+    <link rel="stylesheet" href="{{ url('css/app-e0fc4bb9.css') }}">
     <link rel="stylesheet" href="{{ url('css/cp-56146771.css') }}">
     <link rel="stylesheet" href="{{ url('css/cp-7025c2cd.css') }}">
 
+    {{-- Calling script before body to access script in body --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
-<body
-    bis_register="W3sibWFzdGVyIjp0cnVlLCJleHRlbnNpb25JZCI6ImVwcGlvY2VtaG1ubGJoanBsY2drb2ZjaWllZ29tY29uIiwiYWRibG9ja2VyU3RhdHVzIjp7IkRJU1BMQVkiOiJkaXNhYmxlZCIsIkZBQ0VCT09LIjoiZGlzYWJsZWQiLCJUV0lUVEVSIjoiZGlzYWJsZWQiLCJSRURESVQiOiJkaXNhYmxlZCIsIlBJTlRFUkVTVCI6ImRpc2FibGVkIiwiSU5TVEFHUkFNIjoiZGlzYWJsZWQiLCJDT05GSUciOiJkaXNhYmxlZCJ9LCJ2ZXJzaW9uIjoiMi4wLjE0Iiwic2NvcmUiOjIwMDE0fV0="
-    monica-version="5.1.3" monica-id="ofpnmcalabcbjgholdjcjblkibolbppb" cz-shortcut-listen="true">
+<body>
     <div id="statamic" bis_skin_checked="1">
-
         {{-- Header --}}
         <div class="global-header" bis_skin_checked="1">
 
@@ -265,7 +259,7 @@
                 </div>
             </div>
 
-            {{-- Left Side Content --}}
+            {{-- Right upper Side icons --}}
             <div class="head-link h-full rtl:md:pl-6 ltr:md:pr-6 flex items-center justify-end" bis_skin_checked="1">
                 <div class="hidden md:block" bis_skin_checked="1">
                     <div class="" bis_skin_checked="1">
@@ -342,20 +336,68 @@
                 @yield('content')
                 <div class="flex justify-center text-center mt-16" bis_skin_checked="1">
                     <div class="bg-white rounded-full px-6 py-2 shadow-sm text-sm text-gray-700" bis_skin_checked="1">
-                        © 2024 Cedar Technologies. All Rights Reserved | Design and Developed by Cedar Technologies
+                        {{ '© 2024 Cedar Technologies. All Rights Reserved | Design and Developed by Cedar Technologies' }}
                     </div>
                 </div>
             </div>
         </div>
-
-
+        {{-- Right upper Side Content --}}
         <div class="portal-targets" bis_skin_checked="1">
+            <div class="vue-portal-target popover-container " bis_skin_checked="1">
+                <div class="" bis_skin_checked="1">
+                    <div class="popover" bis_skin_checked="1">
+                        <div class="popover-content bg-white shadow-popover rounded-md" bis_skin_checked="1">
+                            <div class="p-4 pb-2" bis_skin_checked="1">
+                                <h6 class="mb-2">Pin to Favorites</h6>
+                                <div class="flex items-center" bis_skin_checked="1">
+                                    <input type="text" class="input-text w-auto">
+                                    <button class="btn-primary rtl:mr-2 ltr:ml-2">Save</button>
+                                </div>
+                                <button class="mt-2 text-xs text-blue outline-none hover:text-blue-800">Set as start
+                                    page<span>→</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="vue-portal-target popover-container dropdown-list" bis_skin_checked="1">
                 <div class="" bis_skin_checked="1">
                     <div class="popover" bis_skin_checked="1">
-                        <div class="popover-content bg-white shadow-popover rounded-md" bis_skin_checked="1"> <a
-                                href="https://demo.statamic.com/cp/preferences">Preferences</a> <a
-                                href="https://demo.statamic.com/cp/preferences/nav">CP Nav</a></div>
+                        <div class="popover-content bg-white shadow-popover rounded-md" bis_skin_checked="1">
+                            <a href="https://demo.statamic.com/cp/preferences">Preferences</a>
+                            <a href="https://demo.statamic.com/cp/preferences/nav">CP Nav</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="vue-portal-target popover-container dropdown-list" bis_skin_checked="1">
+                <div class="" bis_skin_checked="1">
+                    <div class="popover" bis_skin_checked="1">
+                        <div class="popover-content bg-white shadow-popover rounded-md" bis_skin_checked="1">
+                            <a href="https://statamic.dev/" target="_blank"
+                                class="flex items-center"><!----><span>Documentation</span>
+                                <i class="w-3 block rtl:mr-2 ltr:ml-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path fill="none" stroke="currentColor" stroke-linecap="round"
+                                            stroke-linejoin="round" stroke-width="1.5"
+                                            d="M23.251 7.498V.748h-6.75m6.75 0-15 15m3-10.5h-9a1.5 1.5 0 0 0-1.5 1.5v15a1.5 1.5 0 0 0 1.5 1.5h15a1.5 1.5 0 0 0 1.5-1.5v-9">
+                                        </path>
+                                    </svg>
+                                </i>
+                            </a>
+                            <a href="https://statamic.com/support" target="_blank"
+                                class="flex items-center"><!----><span>Support</span>
+                                <i class="w-3 block rtl:mr-2 ltr:ml-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path fill="none" stroke="currentColor" stroke-linecap="round"
+                                            stroke-linejoin="round" stroke-width="1.5"
+                                            d="M23.251 7.498V.748h-6.75m6.75 0-15 15m3-10.5h-9a1.5 1.5 0 0 0-1.5 1.5v15a1.5 1.5 0 0 0 1.5 1.5h15a1.5 1.5 0 0 0 1.5-1.5v-9">
+                                        </path>
+                                    </svg>
+                                </i>
+                            </a>
+                            <a class="flex items-center"><!----><span>Keyboard Shortcuts</span></a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -366,24 +408,26 @@
                             <div class="px-2" bis_skin_checked="1">
                                 <div class="text-base mb-px" bis_skin_checked="1">david.hasselhoff@example.com</div>
                             </div>
-                            <div class="divider" bis_skin_checked="1"></div> <a
-                                href="https://demo.statamic.com/cp/account">Profile</a> <a
-                                href="https://demo.statamic.com/cp/auth/logout?redirect=https%3A%2F%2Fdemo.statamic.com%2Fcp">Log
-                                out</a>
+                            <div class="divider" bis_skin_checked="1"></div>
+                            <a href="https://demo.statamic.com/cp/account">Profile</a>
+                            <a
+                                href="https://demo.statamic.com/cp/auth/logout?redirect=https%3A%2F%2Fdemo.statamic.com%2Fcp">Logout</a>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="vue-portal-target popover-container dropdown-list" bis_skin_checked="1">
+                <div class="" bis_skin_checked="1">
+                    <div class="popover" bis_skin_checked="1" style="transform: translate(1042px, 225px);">
+                        <div class="popover-content bg-white shadow-popover rounded-md" bis_skin_checked="1">
+                            <a href="https://demo.statamic.com/cp/collections/pages">View</a><!----><!---->
+                            <a href="https://demo.statamic.com/cp/collections/pages/blueprints">EditBlueprints</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
-    <script src="data:text/javascript;base64,U3RhdGFtaWMuY29uZmlnKFN0YXRhbWljQ29uZmlnKTsgU3RhdGFtaWMuc3RhcnQoKQ==" defer="">
-    </script>
-    <script type="module" src="{{ url('js/app-77beb8be.js') }}"></script>
-    <script type="module" src="{{ url('js/cp-c6df7fbd.js') }}"></script>
-    <script src="{{ url('js/cp.js') }}" defer=""></script>
 
 </body>
 

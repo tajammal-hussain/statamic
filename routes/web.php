@@ -92,6 +92,9 @@ Route::controller(GlobalsController::class)
     ->as('globals.')
     ->group(function () {
         Route::get('', 'index')->name('globals');
+        Route::get('/add', 'add')->name('add');
+        Route::get('/edit', 'edit')->name('edit');
+        Route::get('/configure', 'configure')->name('configure');
     });
 
 // Fieldsets Routes
