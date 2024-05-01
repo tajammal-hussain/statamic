@@ -13,6 +13,7 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
+// Breeze authentication routes
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
@@ -40,9 +41,6 @@ Route::controller(AuthController::class)
         Route::get('/', 'index')->name('login');
         Route::get('/forgotPassword', 'forgotPassword')->name('forgot');
     });
-
-
-// Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 // Collection Routes
 Route::controller(CollectionsController::class)

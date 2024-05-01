@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Collections;
 use Illuminate\Http\Request;
 
 class CollectionsController extends Controller
 {
     public function index()
     {
-        return view('collections.index');
+        $firstCol = "Title";
+        $secondCol = "Entries";
+        $data = Collections::all();
+        return view('collections.index', compact('firstCol', 'secondCol', 'data'));
     }
 
     public function addCollection()
