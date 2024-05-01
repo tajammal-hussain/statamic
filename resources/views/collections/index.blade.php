@@ -28,4 +28,3 @@
         </div>
     </div>
 @endsection
-{"routes":[],"slugs":true,"title_formats":[],"mount":null,"dated":false,"sites":null,"template":null,"layout":null,"inject":[],"search_index":null,"revisions":false,"default_status":true,"structure":null,"sort_dir":null,"sort_field":null,"taxonomies":[],"propagate":false,"past_date_behavior":"public","future_date_behavior":"private","preview_targets":[{"label":"Entry","format":"{permalink}","refresh":true}],"origin_behavior":"select"}
