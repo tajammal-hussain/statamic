@@ -124,4 +124,5 @@ Route::controller(UsersController::class)
     ->as('users.')
     ->group(function () {
         Route::get('', 'index')->name('users');
+        Route::get('/edit', 'edit')->name('edit');
     });
