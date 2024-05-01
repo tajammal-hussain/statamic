@@ -16,7 +16,7 @@
                                     id="checkerOfAllBoxes" class="relative top-0"></label></th>
                         <th class="group current-column sortable-column"><span>Title</span><svg height="8"
                                 width="8" viewBox="0 0 10 6.5"
-                                class="rtl:mr-1 ltr:ml-1 opacity-0 group-hover:opacity-100 asc opacity-100 pointer-events-none">
+                                class="rtl:mr-1 ltr:ml-1 opacity-0 group-hover:opacity-100 asc-opacity-100 pointer-events-none">
                                 <path d="M9.9,1.4L5,6.4L0,1.4L1.4,0L5,3.5L8.5,0L9.9,1.4z" fill="currentColor"></path>
                             </svg></th>
                         <th class="group sortable-column"><span>Submissions</span><svg height="8" width="8"
