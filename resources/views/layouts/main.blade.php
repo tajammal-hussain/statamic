@@ -211,7 +211,43 @@
 
     {{-- Calling script before body to access script in body --}}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+    <style>
+        .publish-tabs {
+            display: flex;
+        }
+        .tab-button {
+            border: none;
+            font-size: 17px;
+            position: relative;
+        }
+        .tab-button:focus {
+            outline: none;
+        }
+        .tab-button::after {
+            content: "";
+            display: block;
+            width: 0;
+            height: 2px;
+            background-color: #2e9fff;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transition: width 0.3s ease;
+            transform: translateX(-50%);
+        }
+        .tab-button[aria-selected="true"]::after {
+            width: 100%;
+        }
+        .tab-button[aria-selected="true"] {
+            color: #2e9fff;
+        }
+        .tab-panel {
+            display: none;
+        }
+        .tab-panel.active {
+            display: block;
+        }
+    </style>
 </head>
 
 <body>
@@ -429,8 +465,40 @@
             </div>
         </div>
     </div>
+    <script>
+    // Get all tab buttons and tab panels
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabPanels = document.querySelectorAll('.tab-panel');
 
-{{--    flowbite js--}}
+    // Function to switch tabs
+    function switchTab(event) {
+        // Prevent default behavior
+        event.preventDefault();
+
+        // Hide all tab panels
+        tabPanels.forEach(panel => {
+            panel.classList.remove('active');
+        });
+
+        // Deactivate all tab buttons
+        tabButtons.forEach(button => {
+            button.setAttribute('aria-selected', 'false');
+        });
+
+        // Activate the clicked tab button
+        this.setAttribute('aria-selected', 'true');
+
+        // Show the corresponding tab panel
+        const tabPanelId = this.getAttribute('aria-controls');
+        const tabPanel = document.getElementById(tabPanelId);
+        tabPanel.classList.add('active');
+    }
+
+    // Add click event listener to each tab button
+    tabButtons.forEach(button => {
+        button.addEventListener('click', switchTab);
+    });
+</script>
 </body>
 
 </html>

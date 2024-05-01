@@ -3,7 +3,7 @@
     <title>Create Entry :: Cedar</title>
     <div class="page-wrapper max-w-3xl">
           <div>
-            <div class="breadcrumb flex"><a href="https://demo.statamic.com/cp/collections/pages"
+            <div class="breadcrumb flex"><a href="javascript:void(0);"
                 class="flex-initial flex p-2 -m-2 items-center text-xs text-gray-700 hover:text-gray-900"><svg
                   viewBox="0 0 24 24" class="align-middle h-6 w-4 rotate-180">
                   <path fill="currentColor" fill-rule="evenodd"
@@ -45,20 +45,15 @@
                 <div>
                   <div>
                     <div class="tabs-container flex items-center">
-                      <div role="tablist" aria-label="Edit Content" class="publish-tabs tabs">
-
-                        <button role="tab" id="MainTab" aria-controls="MainTabPanel" tabindex="0" class="tab-button active" aria-selected="true">Main</button>
-
-                        <button role="tab" id="MetaSeoTab" aria-controls="MetaSeoTabPanel" tabindex="-1" class="tab-button">Meta/SEO</button>
-
-                        <button role="tab" id="SEOTab" aria-controls="SEOTabPanel" tabindex="-1" class="tab-button">SEO</button>
-
-                      </div>
-
+                        <div role="tablist" aria-label="Edit Content" class="publish-tabs tabs">
+                            <button role="tab" id="MainTab" aria-controls="MainTabPanel" tabindex="0" class="tab-button" aria-selected="true">Main</button>
+                            <button role="tab" id="MetaSeoTab" aria-controls="MetaSeoTabPanel" tabindex="-1" class="tab-button">Meta/SEO</button>
+                            <button role="tab" id="SEOTab" aria-controls="SEOTabPanel" tabindex="-1" class="tab-button">SEO</button>
+                        </div>
                     </div>
                     <div class="publish-tab-outer">
                       <div class="publish-tab-wrapper w-full min-w-0">
-                        <div data-tab-handle="main" tabindex="0" class="publish-tab tab-panel w-full" role="tabpanel" id="MainTabPanel" aria-labelledby="MainTab">
+                        <div id="MainTabPanel" class="tab-panel active">
                           <div class="publish-sections">
                             <div class="publish-sections-section">
                               <div class="p-0 card">
@@ -393,17 +388,15 @@
                             </div>
                           </div>
                         </div>
-                        <div data-tab-handle="meta_seo" tabindex="0" class="publish-tab tab-panel w-full"
-                          style="display: none;" role="tabpanel" id="MetaSeoTabPanel" aria-labelledby="MetaSeoTab">
+                        <div id="MetaSeoTabPanel" class="tab-panel">
                           <div class="publish-sections">
                             <div class="publish-sections-section">
                               <div class="p-0 card"><!---->
                                 <div class="publish-fields @container">
                                   <div class="form-group publish-field publish-field__meta_title text-fieldtype w-full">
-                                    <div class="field-inner"><label for="field_meta_title"
-                                        class="publish-field-label"><span
-                                          class="rtl:ml-1 ltr:mr-1 v-popper--has-tooltip">Meta
-                                          Title</span>
+                                    <div class="field-inner">
+                                        <label for="field_meta_title" class="publish-field-label">
+                                        <span class="rtl:ml-1 ltr:mr-1 v-popper--has-tooltip">Meta Title</span>
                                         <button class="outline-none" style="display: none;"><svg
                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                                             class="h-4 w-4 rtl:ml-1.5 ltr:mr-1.5 mb-1 text-gray-600 v-popper--has-tooltip">
@@ -427,9 +420,8 @@
                                   <div
                                     class="form-group publish-field publish-field__meta_image assets-fieldtype w-full">
                                     <div class="field-inner"><label for="field_meta_image"
-                                        class="publish-field-label"><span
-                                          class="rtl:ml-1 ltr:mr-1 v-popper--has-tooltip">Meta
-                                          Image</span>
+                                        class="publish-field-label">
+                                        <span class="rtl:ml-1 ltr:mr-1 v-popper--has-tooltip">Meta Image</span>
                                         <button class="outline-none" style="display: none;"><svg
                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                                             class="h-4 w-4 rtl:ml-1.5 ltr:mr-1.5 mb-1 text-gray-600 v-popper--has-tooltip">
@@ -483,8 +475,7 @@
                             </div>
                           </div>
                         </div>
-                        <div data-tab-handle="SEO" tabindex="0" class="publish-tab tab-panel w-full"
-                          style="display: none;" role="tabpanel" id="SEOTabPanel" aria-labelledby="SEOTab">
+                        <div id="SEOTabPanel" class="tab-panel">
                           <div class="publish-sections">
                             <div class="publish-sections-section">
                               <div class="p-0 card"><!---->
@@ -529,8 +520,7 @@
                                                 </path>
                                               </svg></button></label>
                                           <div class="help-block -mt-2">
-                                            <p>Disabling
-                                              this item will exclude it from reports and the sitemap, and prevent
+                                            <p>Disabling this item will exclude it from reports and the sitemap, and prevent
                                               anything from being rendered through the template tag.</p>
                                           </div>
                                         </div><!---->
@@ -1272,30 +1262,34 @@
                                           </path>
                                           <path d="M10 11.991a2 2 0 1 0 4 0 2 2 0 1 0-4 0Z"></path>
                                         </g>
-                                      </svg><span>Live Preview</span></button><a
-                                      href="https://demo.statamic.com/contact" target="_blank"
-                                      class="flex items-center justify-center btn w-full"><svg
-                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                        class="w-4 h-4 rtl:ml-2 ltr:mr-2 shrink-0">
+                                      </svg>
+                                      <span>Live Preview</span>
+                                    </button>
+                                    <a href="javascript:void(0);" target="_blank" class="flex items-center justify-center btn w-full">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-4 h-4 rtl:ml-2 ltr:mr-2 shrink-0">
                                         <path fill="none" stroke="currentColor" stroke-linecap="round"
                                           stroke-linejoin="round" stroke-width="1.5"
                                           d="M23.251 7.498V.748h-6.75m6.75 0-15 15m3-10.5h-9a1.5 1.5 0 0 0-1.5 1.5v15a1.5 1.5 0 0 0 1.5 1.5h15a1.5 1.5 0 0 0 1.5-1.5v-9">
                                         </path>
-                                      </svg><span>Visit URL</span></a></div>
+                                      </svg>
+                                      <span>Visit URL</span>
+                                    </a>
+                                </div>
                                 </div>
                                 <div class="flex items-center justify-between px-4 py-2 border-t"><label
-                                    class="publish-field-label font-medium">Published</label><button type="button"
-                                    aria-pressed="true" aria-label="Toggle Button" class="toggle-container on">
-                                    <div class="toggle-slider">
-                                      <div tabindex="0" class="toggle-knob"></div>
-                                    </div>
-                                  </button></div><!----><!---->
+                                    class="publish-field-label font-medium">Published</label>
+                                    <button type="button" aria-pressed="true" aria-label="Toggle Button" class="toggle-container on">
+                                        <div class="toggle-slider">
+                                            <div tabindex="0" class="toggle-knob"></div>
+                                        </div>
+                                  </button>
+                                </div>
                               </div>
                             </div>
                           </div>
                           <div class="publish-sections">
                             <div class="publish-sections-section">
-                              <div class="p-0 card"><!---->
+                              <div class="p-0 card">
                                 <div class="publish-fields @container">
                                   <div class="form-group publish-field publish-field__slug slug-fieldtype w-full">
                                     <div class="field-inner"><label for="field_slug" class="publish-field-label"><span
@@ -1314,14 +1308,17 @@
                                               stroke-linejoin="round" stroke-width="1.5"
                                               d="M16.5 15.749h1.875A3.963 3.963 0 0 0 22.5 12h0a3.962 3.962 0 0 0-4.125-3.75H16.5m-9 7.499H5.625A3.963 3.963 0 0 1 1.5 12h0a3.963 3.963 0 0 1 4.125-3.75H7.5M12 5.249v-4.5m-3 4.5-1.5-1.5m7.5 1.5 1.5-1.5m-4.5 15v4.5m-3-4.5-1.5 1.5m7.5-1.5 1.5 1.5">
                                             </path>
-                                          </svg></button></label><!----></div><!---->
+                                          </svg>
+                                        </button>
+                                        </label>
+                                    </div>
                                     <div>
                                       <div class="flex items-center">
-                                        <div class="input-group"><!----><input id="field_slug" name="contact"
+                                        <div class="input-group"><input id="field_slug" name="contact"
                                             type="text" dir="ltr" class="input-text font-mono text-xs"
-                                            value="contact"><!----></div><!---->
+                                            value="contact"></div>
                                       </div>
-                                    </div><!----><!---->
+                                    </div>
                                   </div>
                                   <div
                                     class="form-group publish-field publish-field__parent relationship-fieldtype w-full">
@@ -1341,14 +1338,17 @@
                                               stroke-linejoin="round" stroke-width="1.5"
                                               d="M16.5 15.749h1.875A3.963 3.963 0 0 0 22.5 12h0a3.962 3.962 0 0 0-4.125-3.75H16.5m-9 7.499H5.625A3.963 3.963 0 0 1 1.5 12h0a3.963 3.963 0 0 1 4.125-3.75H7.5M12 5.249v-4.5m-3 4.5-1.5-1.5m7.5 1.5 1.5-1.5m-4.5 15v4.5m-3-4.5-1.5 1.5m7.5-1.5 1.5 1.5">
                                             </path>
-                                          </svg></button></label><!----></div><!---->
-                                    <div class="relationship-input"><!----><!---->
+                                          </svg>
+                                        </button>
+                                        </label>
+                                    </div>
+                                    <div class="relationship-input">
                                       <div class="relationship-input-items space-y-1 outline-none">
-                                        <div class="item select-none item outline-none"><!---->
+                                        <div class="item select-none item outline-none">
                                           <div class="item-inner">
                                             <div class="little-dot rtl:ml-2 ltr:mr-2 hidden@sm:block published"></div>
-                                            <!----><a href="https://demo.statamic.com/cp/collections/pages/entries/home"
-                                              class="truncate v-popper--has-tooltip">Home</a><!----><!---->
+                                            <a href="javascript:void(0);"
+                                              class="truncate v-popper--has-tooltip">Home</a>
                                             <div class="flex items-center flex-1 justify-end">
                                               <div
                                                 class="text-4xs text-gray-600 uppercase whitespace-nowrap rtl:ml-2 ltr:mr-2 hidden @sm:block">
@@ -1370,7 +1370,7 @@
                                         </div>
                                       </div>
                                       <input type="hidden" name="parent" value="[&quot;home&quot;]">
-                                    </div><!----><!---->
+                                    </div>
                                   </div>
                                 </div>
                               </div>
