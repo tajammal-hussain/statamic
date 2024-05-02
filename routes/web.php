@@ -72,7 +72,7 @@ Route::controller(TaxonomiesController::class)
     ->as('taxonomies.')
     ->group(function () {
         Route::get('', 'index')->name('taxonomies');
-        Route::get('/add', 'add')->name('add');
+        Route::match(['get', 'post'], '/add', 'add')->name('add');
         Route::get('/edit', 'edit')->name('edit');
         Route::get('/table', 'table')->name('table');
         Route::get('/createTeam', 'createTeam')->name('createTeam');
@@ -92,7 +92,7 @@ Route::controller(GlobalsController::class)
     ->as('globals.')
     ->group(function () {
         Route::get('', 'index')->name('globals');
-        Route::get('/add', 'add')->name('add');
+        Route::match(['get', 'post'], '/add', 'add')->name('add');
         Route::get('/edit', 'edit')->name('edit');
         Route::get('/configure', 'configure')->name('configure');
     });
