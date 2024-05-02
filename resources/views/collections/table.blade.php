@@ -6,7 +6,7 @@
             <header class="mb-6">
 
                 <div class="breadcrumb flex" bis_skin_checked="1">
-                    <a href="https://demo.statamic.com/cp/collections" class="flex-initial flex p-2 -m-2 items-center text-xs text-gray-700 hover:text-gray-900">
+                    <a href="#" class="flex-initial flex p-2 -m-2 items-center text-xs text-gray-700 hover:text-gray-900">
                         <svg viewBox="0 0 24 24" class="align-middle h-6 w-4 rotate-180">
                             <path fill="currentColor" fill-rule="evenodd" d="m10.414 7.05 4.95 4.95-4.95 4.95L9 15.534 12.536 12 9 8.464z"></path>
                         </svg>
@@ -96,10 +96,10 @@
                             </div>
                         </div>
 
-                        <div class="p-6 text-center text-gray-500" style="display: none;" bis_skin_checked="1">No results </div>
+                        <div class="no-Results p-6 text-center text-gray-500 text-lg italic" style="display: none;" bis_skin_checked="1">No Results </div>
 
                         <div class="overflow-x-auto overflow-y-hidden" bis_skin_checked="1">
-                            <table data-size="sm" tabindex="0" class="data-table">
+                            <table id="dataTable" data-size="sm" tabindex="0" class="data-table">
                                 <thead>
                                     <tr>
                                         <th class="checkbox-column">
@@ -134,7 +134,7 @@
                                             <input type="checkbox" class="checkbox" id="checkbox-8b56b437-c578-4d14-abe8-5c3c3906204f" value="8b56b437-c578-4d14-abe8-5c3c3906204f">
                                         </th>
                                         <td class="">
-                                            <a href="https://demo.statamic.com/cp/collections/news/entries/8b56b437-c578-4d14-abe8-5c3c3906204f" class="title-index-field inline-flex items-center">
+                                            <a href="#" class="title-index-field inline-flex items-center">
                                                 <span class="little-dot rtl:ml-2 ltr:mr-2 bg-green-600 v-popper--has-tooltip"></span>
                                                 <span>FluxTech™ On Boats?</span>
                                             </a>
@@ -146,7 +146,7 @@
                                                         <div class="relationship-index-field-item h-5"
                                                             bis_skin_checked="1">
                                                             <div class="flex items-center shrink" bis_skin_checked="1">
-                                                                <a href="https://demo.statamic.com/cp/users/d13559dd-c3bc-4f23-82d8-b55f4bc3bf18/edit" title="Kira Radly"> Kira Radly </a>
+                                                                <a href="#" title="Kira Radly"> Kira Radly </a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -178,7 +178,7 @@
                                             <input type="checkbox" id="checkbox-9ea4dfb5-e08f-4629-937b-2f35e30ea6a4" value="9ea4dfb5-e08f-4629-937b-2f35e30ea6a4">
                                         </th>
                                         <td class="">
-                                            <a href="https://demo.statamic.com/cp/collections/news/entries/9ea4dfb5-e08f-4629-937b-2f35e30ea6a4" class="title-index-field inline-flex items-center">
+                                            <a href="#" class="title-index-field inline-flex items-center">
                                                 <span class="little-dot rtl:ml-2 ltr:mr-2 bg-green-600 v-popper--has-tooltip"></span>
                                                 <span>1.21 Jigawatts</span>
                                             </a>
@@ -189,7 +189,7 @@
                                                     <div class="flex flex-wrap" bis_skin_checked="1">
                                                         <div class="relationship-index-field-item h-5" bis_skin_checked="1">
                                                             <div class="flex items-center shrink" bis_skin_checked="1">
-                                                                <a href="https://demo.statamic.com/cp/users/14f7ad69-9fb8-4444-8a7a-fb626fc2a194/edit" title="David Hasselhoff">David Hasselhoff</a>
+                                                                <a href="#" title="David Hasselhoff">David Hasselhoff</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -220,7 +220,7 @@
                                             <input type="checkbox" id="checkbox-a91ff523-7748-4883-841c-bd0e46a8a571" value="a91ff523-7748-4883-841c-bd0e46a8a571">
                                         </th>
                                         <td class="">
-                                            <a href="https://demo.statamic.com/cp/collections/news/entries/a91ff523-7748-4883-841c-bd0e46a8a571" class="title-index-field inline-flex items-center">
+                                            <a href="#" class="title-index-field inline-flex items-center">
                                                 <span class="little-dot rtl:ml-2 ltr:mr-2 bg-green-600 v-popper--has-tooltip"></span>
                                                 <span>FluxTech™ opens up FTL travel possibilities</span>
                                             </a>
@@ -232,7 +232,7 @@
                                                         <div class="relationship-index-field-item h-5"
                                                             bis_skin_checked="1">
                                                             <div class="flex items-center shrink" bis_skin_checked="1">
-                                                                <a href="https://demo.statamic.com/cp/users/d13559dd-c3bc-4f23-82d8-b55f4bc3bf18/edit" title="Kira Radly">Kira Radly</a>
+                                                                <a href="#" title="Kira Radly">Kira Radly</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -264,7 +264,7 @@
                                             <input type="checkbox" id="checkbox-a5fb1943-fa4b-4449-b5ab-ecaff2832c9f" value="a5fb1943-fa4b-4449-b5ab-ecaff2832c9f">
                                         </th>
                                         <td class="">
-                                            <a href="https://demo.statamic.com/cp/collections/news/entries/a5fb1943-fa4b-4449-b5ab-ecaff2832c9f" class="title-index-field inline-flex items-center">
+                                            <a href="#" class="title-index-field inline-flex items-center">
                                                 <span class="little-dot rtl:ml-2 ltr:mr-2 bg-green-600 v-popper--has-tooltip"></span>
                                                 <span>10 things we decided at our company retreat</span>
                                             </a>
@@ -276,7 +276,7 @@
                                                         <div class="relationship-index-field-item h-5"
                                                             bis_skin_checked="1">
                                                             <div class="flex items-center shrink" bis_skin_checked="1">
-                                                                <a href="https://demo.statamic.com/cp/users/d13559dd-c3bc-4f23-82d8-b55f4bc3bf18/edit" title="Kira Radly">Kira Radly</a>
+                                                                <a href="#" title="Kira Radly">Kira Radly</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -308,7 +308,7 @@
                                             <input type="checkbox" id="checkbox-02ec08a8-fe9c-4d9c-bc52-a4d116e2f3ac" value="02ec08a8-fe9c-4d9c-bc52-a4d116e2f3ac">
                                         </th>
                                         <td class="">
-                                            <a href="https://demo.statamic.com/cp/collections/news/entries/02ec08a8-fe9c-4d9c-bc52-a4d116e2f3ac" class="title-index-field inline-flex items-center">
+                                            <a href="#" class="title-index-field inline-flex items-center">
                                                 <span class="little-dot rtl:ml-2 ltr:mr-2 bg-green-600 v-popper--has-tooltip"></span>
                                                 <span>Cost-reducing advances in FluxTech™</span>
                                             </a>
@@ -319,7 +319,7 @@
                                                     <div class="flex flex-wrap" bis_skin_checked="1">
                                                         <div class="relationship-index-field-item h-5" bis_skin_checked="1">
                                                             <div class="flex items-center shrink" bis_skin_checked="1">
-                                                                <a href="https://demo.statamic.com/cp/users/d13559dd-c3bc-4f23-82d8-b55f4bc3bf18/edit" title="Kira Radly">Kira Radly</a>
+                                                                <a href="#" title="Kira Radly">Kira Radly</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -347,10 +347,11 @@
                                         </th>
                                     </tr>
                                     <tr class="sortable-row outline-none" tabindex="0">
-                                        <th class="checkbox-column"><input type="checkbox" id="checkbox-32cf403f-e82a-491b-a2a6-285e8290367e" value="32cf403f-e82a-491b-a2a6-285e8290367e">
-                                    </th>
+                                        <th class="checkbox-column">
+                                            <input type="checkbox" id="checkbox-32cf403f-e82a-491b-a2a6-285e8290367e" value="32cf403f-e82a-491b-a2a6-285e8290367e">
+                                        </th>
                                         <td class="">
-                                            <a href="https://demo.statamic.com/cp/collections/news/entries/32cf403f-e82a-491b-a2a6-285e8290367e" class="title-index-field inline-flex items-center">
+                                            <a href="#" class="title-index-field inline-flex items-center">
                                                 <span class="little-dot rtl:ml-2 ltr:mr-2 bg-green-600 v-popper--has-tooltip"></span>
                                                 <span>Kira Radly joins the team as CEO</span>
                                             </a>
@@ -361,7 +362,7 @@
                                                     <div class="flex flex-wrap" bis_skin_checked="1">
                                                         <div class="relationship-index-field-item h-5" bis_skin_checked="1">
                                                             <div class="flex items-center shrink" bis_skin_checked="1">
-                                                                <a href="https://demo.statamic.com/cp/users/14f7ad69-9fb8-4444-8a7a-fb626fc2a194/edit" title="David Hasselhoff">David Hasselhoff</a>
+                                                                <a href="#" title="David Hasselhoff">David Hasselhoff</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -404,4 +405,5 @@
             </div>
         </div>
     </div>
+
 @endsection

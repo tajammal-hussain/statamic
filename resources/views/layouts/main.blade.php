@@ -514,6 +514,26 @@
                     });
                 }
             });
+
+            // table search field
+            $(".input-text").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                var found = false;
+                $(".data-table tr").each(function() {
+                    var inputText = $(this).find("td:eq(0)").text().toLowerCase();
+                    if (inputText.indexOf(value) > -1) {
+                        $(this).show();
+                        found = true;
+                    } else {
+                        $(this).hide();
+                    }
+                });
+                if (!found) {
+                    $(".no-Results").show();
+                } else {
+                    $(".no-Results").hide();
+                }
+            });
         });
     </script>
 </body>

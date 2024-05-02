@@ -48,7 +48,7 @@
                         </g>
                       </svg></button><!----></div>
                 </div>
-                <div class="p-6 text-center text-gray-500" style="display: none;">No results</div><!---->
+                <div class="no-Results p-6 text-center text-gray-500 text-lg italic" style="display: none;">No Results</div><!---->
                 <table data-size="sm" tabindex="0" class="data-table" allow-column-picker="true"
                   column-preferences-key="forms.contact.columns">
                   <thead>

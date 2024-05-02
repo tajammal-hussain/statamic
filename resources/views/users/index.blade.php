@@ -73,7 +73,7 @@
                             </div><!---->
                         </div>
                     </div>
-                    <div class="p-6 text-center text-gray-500" style="display: none;" bis_skin_checked="1">No results</div>
+                    <div class="no-Results p-6 text-center text-gray-500 text-lg italic" style="display: none;" bis_skin_checked="1">No Results</div>
                     <!---->
                     <div class="overflow-x-auto overflow-y-hidden" bis_skin_checked="1">
                         <table data-size="sm" tabindex="0" class="data-table" allow-column-picker="true"
