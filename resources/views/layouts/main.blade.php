@@ -466,39 +466,55 @@
         </div>
     </div>
     <script>
-    // Get all tab buttons and tab panels
-    const tabButtons = document.querySelectorAll('.tab-button');
-    const tabPanels = document.querySelectorAll('.tab-panel');
+        // Get all tab buttons and tab panels
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabPanels = document.querySelectorAll('.tab-panel');
 
-    // Function to switch tabs
-    function switchTab(event) {
-        // Prevent default behavior
-        event.preventDefault();
+        // Function to switch tabs
+        function switchTab(event) {
+            // Prevent default behavior
+            event.preventDefault();
 
-        // Hide all tab panels
-        tabPanels.forEach(panel => {
-            panel.classList.remove('active');
-        });
+            // Hide all tab panels
+            tabPanels.forEach(panel => {
+                panel.classList.remove('active');
+            });
 
-        // Deactivate all tab buttons
+            // Deactivate all tab buttons
+            tabButtons.forEach(button => {
+                button.setAttribute('aria-selected', 'false');
+            });
+
+            // Activate the clicked tab button
+            this.setAttribute('aria-selected', 'true');
+
+            // Show the corresponding tab panel
+            const tabPanelId = this.getAttribute('aria-controls');
+            const tabPanel = document.getElementById(tabPanelId);
+            tabPanel.classList.add('active');
+        }
+
+        // Add click event listener to each tab button
         tabButtons.forEach(button => {
-            button.setAttribute('aria-selected', 'false');
+            button.addEventListener('click', switchTab);
         });
+    </script>
+    <script>
+        $(document).ready(function() {
 
-        // Activate the clicked tab button
-        this.setAttribute('aria-selected', 'true');
-
-        // Show the corresponding tab panel
-        const tabPanelId = this.getAttribute('aria-controls');
-        const tabPanel = document.getElementById(tabPanelId);
-        tabPanel.classList.add('active');
-    }
-
-    // Add click event listener to each tab button
-    tabButtons.forEach(button => {
-        button.addEventListener('click', switchTab);
-    });
-</script>
+            // Select/deselect all checkboxes when header checkbox is clicked
+            $('#checkerOfAllBoxes').on('click', function(){
+                if(this.checked){
+                    $('input[type="checkbox"]').each(function(){
+                        this.checked = true;
+                    });
+                } else {
+                    $('input[type="checkbox"]').each(function(){
+                        this.checked = false;
+                    });
+                }
+            });
+        });
+    </script>
 </body>
-
 </html>
