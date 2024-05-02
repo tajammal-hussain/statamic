@@ -61,7 +61,7 @@ Route::controller(NavigationController::class)
     ->as('navigations.')
     ->group(function () {
         Route::get('', 'index')->name('navigations');
-        Route::get('/add', 'add')->name('add');
+        Route::match(['get', 'post'], '/add', 'add')->name('add');
         Route::get('/edit', 'edit')->name('edit');
         Route::get('/table', 'table')->name('table');
     });
