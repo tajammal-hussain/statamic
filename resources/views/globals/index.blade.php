@@ -21,18 +21,12 @@
         <div class="card p-0" bis_skin_checked="1">
             <table data-size="sm" tabindex="0" class="data-table">
                 <x-table-head :firstcol="$firstCol" :secondcol="$secondCol" />
-                <thead>
-                    <tr><!---->
-                        <th class="group current-column"><span>Title</span><!----></th>
-                        <th class="group"><span>Handle</span><!----></th><!---->
-                        <th class="actions-column"></th>
-                    </tr>
-                </thead>
+
                 <tbody tabindex="0">
                 @foreach($data as $globals)
                     <tr class="sortable-row outline-none" tabindex="0"><!----><!---->
                         <td class=""><a href="https://demo.statamic.com/cp/globals/company">{{  $globals->handle }}</a></td>
-                        <td class=""><span class="font-mono text-2xs">company</span></td><!---->
+                        <td class=""><span class="font-mono text-2xs relative left-52">company</span></td><!---->
                         <th class="actions-column">
                             <div class="dropdown-list" bis_skin_checked="1">
                                 <x-customDropdown :menuItems="$menuItems"></x-customDropdown>
