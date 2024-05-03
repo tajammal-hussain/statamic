@@ -6,16 +6,24 @@ use App\Models\Collections;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use App\Models\Entries;
+use Illuminate\Support\Carbon;
 
 
 class CollectionsController extends Controller
 {
     public function index()
     {
-        $firstCol = "Title";
-        $secondCol = "Entries";
-        $data = Collections::all();
-        return view('collections.index', compact('firstCol', 'secondCol', 'data'));
+        $data['firstCol'] = "Title";
+        $data['secondCol'] = "Entries";
+        // $data = Collections::all();
+        $data['collectionsInfo'] = DB::table('collections')
+            ->leftJoin('entries', 'collections.handle', '=', 'entries.collection')
+            ->select('collections.id', 'collections.title', 'collections.handle', DB::raw('COUNT(entries.id) as entriesCount'))
+            ->groupBy('collections.id', 'collections.title', 'collections.handle')
+            ->get();
+            
+        return view('collections.index', $data);
     }
 
     public function addCollection(Request $request)
@@ -43,10 +51,46 @@ class CollectionsController extends Controller
         endif;
     }
 
-    public function addEntry()
+    public function addEntry(Request $request)
     {
-        
-        return view('collections.addEntry');
+        $handle = $request->segment(count($request->segments()));
+        if ($request->isMethod('post')) :
+            $rules = [
+                'title' => 'required|string|max:255',
+                'content' => 'required|string',
+                'slug' => 'required|string|unique:entries,slug',
+                'author' => 'required|string',
+            ];
+            // Validate the input
+            $validatedData = $request->validate($rules);
+
+            // Process the input data
+            $entryData = [
+                'title' => $validatedData['title'],
+                'content' => $validatedData['content'],
+                'author' => $validatedData['author'],
+            ];
+            $slug = $validatedData['slug'];
+            // Convert data to JSON format
+            $jsonData = json_encode($entryData);
+
+            // Save data to the database
+            $entry = new Entries();
+            $mytime = Carbon::now();
+            $entry->data = $jsonData;
+            $entry->slug = $slug;
+            $entry->site = $slug;
+            $entry->status = "published";
+            $entry->date = $mytime->toDateTimeString();
+            // print_r($handle);die;
+            $entry->collection = $handle;
+            $entry->save();
+            // Redirect back with success message
+            return redirect()->back()->with('success', 'Entry added successfully.');
+        else :
+            $data['collections'] = Collections::where(['handle' => $handle])->first();
+            return view('collections.addEntry', $data);
+        endif;
     }
 
     public function editCollection()

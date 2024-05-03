@@ -50,9 +50,9 @@ Route::controller(CollectionsController::class)
         Route::get('', 'index')->name('collections');
         Route::match(['get', 'post'], '/addCollection', 'addCollection')->name('addCollection');
         Route::get('/editCollection', 'editCollection')->name('editCollection');
-        Route::get('/addEntry', 'addEntry')->name('addEntry');
+        Route::match(['get', 'post'], '/addEntry/{slug?}', 'addEntry')->name('addEntry');
         Route::get('/editEntry', 'editEntry')->name('editEntry');
-        Route::get('/table/{handle?}', 'table')->name('table');
+        Route::get('/table/{slug?}', 'table')->name('table');
     });
 
 // Navigations Routes

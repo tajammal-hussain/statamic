@@ -33,8 +33,11 @@
 
                     <div class="dropdown-list inline-block" bis_skin_checked="1">
                         <div aria-haspopup="true" bis_skin_checked="1">
-                            <a href="{{ route('collections.addEntry') }}"><button class="btn-primary">{{ 'Create Entry' }}
-                                </button></a>
+                            <a href="{{ route('collections.addEntry', ['slug' => $handle]) }}">
+                                <button class="btn-primary">
+                                    {{ 'Create Entry' }}
+                                </button>
+                            </a>
                         </div>
                         <div class="v-portal" style="display: none;" bis_skin_checked="1"></div>
                     </div>
@@ -189,7 +192,7 @@
                                                                 <div class="flex items-center shrink"
                                                                     bis_skin_checked="1">
                                                                     <a href="#"
-                                                                        title="Kira Radly">{{ json_decode($entry->data)->auther }}</a>
+                                                                        title="Kira Radly">{{ json_decode($entry->data)->author }}</a>
                                                                 </div>
                                                             </div>
                                                         </div>

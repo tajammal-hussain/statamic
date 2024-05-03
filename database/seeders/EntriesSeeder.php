@@ -16,10 +16,10 @@ class EntriesSeeder extends Seeder
         Entries::create([
             'site' => 'default',
             'status' => 'published',
-            'date' => '12-12-2024',
+            'date' => '2024-05-03 12:14:28',
             'slug' => 'checking-slug',
             'collection' => 'posts',
-            'data' => '{"title":"entry checking","content":"this is just for checking","auther":"user1","updated_by":1}',
+            'data' => '{"title":"entry checking","content":"this is just for checking","author":"user1","updated_by":1}',
         ]);
     }
 }

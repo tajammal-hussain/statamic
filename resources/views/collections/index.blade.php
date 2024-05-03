@@ -1,11 +1,3 @@
-@php
-    $menuItems = [
-        ['label' => 'View', 'route' => route('collections.table')],
-        ['label' => 'Visit URL', 'route' => route('dashboard')],
-        ['label' => 'Edit Blueprints', 'route' => route('dashboard')],
-        // Add more menu items as needed
-    ];
-@endphp
 @extends('layouts.main')
 @section('content')
     <title>{{ 'Collections :: Cedar' }}</title>
@@ -20,19 +12,32 @@
             <table data-size="sm" tabindex="0" class="data-table">
                 <x-table-head :firstcol="$firstCol" :secondcol="$secondCol" />
                 <tbody tabindex="0">
-                    @foreach ($data as $collection)
+                    @foreach ($collectionsInfo as $collection)
                         <tr class="sortable-row outline-none" tabindex="0">
                             <td class=""><a
-                                    href="{{ route('collections.table', ['handle' => $collection->handle]) }}">{{ $collection->title }}</a>
+                                    href="{{ route('collections.table', ['slug' => $collection->handle]) }}">{{ $collection->title }}</a>
                             </td>
                             <td class="rtl:text-left ltr:text-right rtl:pl-8 ltr:pr-8">
                                 <div bis_skin_checked="1">
-                                    <div handle="entries" values="" class="" bis_skin_checked="1">6
+                                    <div handle="entries" values="" class="" bis_skin_checked="1">
+                                        {{ $collection->entriesCount }}
                                     </div>
                                 </div>
                             </td>
                             <td>
                                 <div>
+                                    @php
+                                        $menuItems = [
+                                            [
+                                                'label' => 'View',
+                                                'route' => route('collections.table', ['slug' => $collection->handle]),
+                                            ],
+                                            [
+                                                'label' => 'Visit URL',
+                                                'route' => route('dashboard'),
+                                            ],
+                                        ];
+                                    @endphp
                                     <x-customDropdown :menuItems="$menuItems" />
                                 </div>
                             </td>
