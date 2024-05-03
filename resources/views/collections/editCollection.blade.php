@@ -1,10 +1,18 @@
+@php 
+  $menuItems = [
+    ['label' => 'view', 'route' => route('dashboard')],
+    ['label' => 'delete', 'route' => route('dashboard')]
+    ];
+@endphp
+
 @extends('layouts.main')
+
 @section('content')
     <title>Collection Edit :: Cedar</title>
     <div class="page-wrapper max-w-xl">
           <div>
             <header class="mb-6">
-              <div class="breadcrumb flex"><a href="http://127.0.0.1:8080/cp/collections/123"
+              <div class="breadcrumb flex"><a href="#"
                   class="flex-initial flex p-2 -m-2 items-center text-xs text-gray-700 hover:text-gray-900"><svg
                     viewBox="0 0 24 24" class="align-middle h-6 w-4 rotate-180">
                     <path fill="currentColor" fill-rule="evenodd"
@@ -883,20 +891,12 @@
                                                 <div class="toggle-slider">
                                                   <div tabindex="0" class="toggle-knob"></div>
                                                 </div>
-                                              </button><!----></div>
+                                              </button><!---->
+                                            </div>
                                           </div><!---->
                                         </td>
-                                        <td data-v-7ddde4ab="" class="grid-row-controls row-controls">
-                                          <div data-v-7ddde4ab="" class="dropdown-list">
-                                            <div aria-haspopup="true"><button aria-label="Open Dropdown"
-                                                class="rotating-dots-button"><svg width="12" viewBox="0 0 24 24"
-                                                  class="rotating-dots fill-current">
-                                                  <circle cx="3" cy="12" r="3"></circle>
-                                                  <circle cx="12" cy="12" r="3"></circle>
-                                                  <circle cx="21" cy="12" r="3"></circle>
-                                                </svg></button></div>
-                                            <div class="v-portal" style="display: none;"></div>
-                                          </div>
+                                        <td style="padding-top: 1.25rem !important" >
+                                          <x-customDropdown :menuItems="$menuItems"/>
                                         </td>
                                       </tr>
                                     </tbody>

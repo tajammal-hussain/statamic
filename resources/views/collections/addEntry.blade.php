@@ -17,15 +17,6 @@
                             class="little-dot rtl:ml-2 ltr:mr-2 published v-popper--has-tooltip"></span><span>{{ 'Create Entry' }}</span>
                     </div>
                 </h1>
-                <div class="dropdown-list rtl:ml-4 ltr:mr-4">
-                    <div aria-haspopup="true"><button aria-label="Open Dropdown" class="rotating-dots-button"><svg
-                                width="12" viewBox="0 0 24 24" class="rotating-dots fill-current">
-                                <circle cx="3" cy="12" r="3"></circle>
-                                <circle cx="12" cy="12" r="3"></circle>
-                                <circle cx="21" cy="12" r="3"></circle>
-                            </svg></button></div>
-                    <div class="v-portal" style="display: none;"></div>
-                </div><!---->
                 <div class="hidden md:flex items-center">
                     <div class="btn-group"><button class="btn-primary">Save &amp; Publish</button>
                         <div class="dropdown-list rtl:text-right ltr:text-left">
