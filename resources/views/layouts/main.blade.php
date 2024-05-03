@@ -564,6 +564,15 @@
                 });
             });
         });
+
+        // 
+        document.addEventListener("DOMContentLoaded", function() {
+            const toggleButtons = document.querySellectorAll('.toggle-container');
+            toggleButtons
+
+        });
+
+
 </script>
 </body>
 </html>
