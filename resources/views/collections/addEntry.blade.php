@@ -7,21 +7,21 @@
             <form method="POST" action="{{ route('collections.addEntry', ['slug' => $collections->handle]) }}">
                 @csrf
                 <div class="breadcrumb flex"><a href="javascript:void(0);"
-                                                class="flex-initial flex p-2 -m-2 items-center text-xs text-gray-700 hover:text-gray-900"><svg
-                                viewBox="0 0 24 24" class="align-middle h-6 w-4 rotate-180">
+                        class="flex-initial flex p-2 -m-2 items-center text-xs text-gray-700 hover:text-gray-900"><svg
+                            viewBox="0 0 24 24" class="align-middle h-6 w-4 rotate-180">
                             <path fill="currentColor" fill-rule="evenodd"
-                                  d="m10.414 7.05 4.95 4.95-4.95 4.95L9 15.534 12.536 12 9 8.464z"></path>
+                                d="m10.414 7.05 4.95 4.95-4.95 4.95L9 15.534 12.536 12 9 8.464z"></path>
                         </svg><span>{{ $collections->title }}</span></a>
                 </div>
                 <div class="flex items-center mb-6">
                     <h1 class="flex-1">
                         <div class="flex items-center"><span
-                                    class="little-dot rtl:ml-2 ltr:mr-2 published v-popper--has-tooltip"></span><span>{{ 'Create Entry' }}</span>
+                                class="little-dot rtl:ml-2 ltr:mr-2 published v-popper--has-tooltip"></span><span>{{ 'Create Entry' }}</span>
                         </div>
                     </h1>
                     <div class="dropdown-list rtl:ml-4 ltr:mr-4">
                         <div aria-haspopup="true"><button aria-label="Open Dropdown" class="rotating-dots-button"><svg
-                                        width="12" viewBox="0 0 24 24" class="rotating-dots fill-current">
+                                    width="12" viewBox="0 0 24 24" class="rotating-dots fill-current">
                                     <circle cx="3" cy="12" r="3"></circle>
                                     <circle cx="12" cy="12" r="3"></circle>
                                     <circle cx="21" cy="12" r="3"></circle>
@@ -33,10 +33,10 @@
                                 Publish</button>
                             <div class="dropdown-list rtl:text-right ltr:text-left">
                                 <div aria-haspopup="true"><button
-                                            class="rtl:rounded-r-none ltr:rounded-l-none btn-primary"><svg
-                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="w-3">
+                                        class="rtl:rounded-r-none ltr:rounded-l-none btn-primary"><svg
+                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="w-3">
                                             <g fill="none" stroke="currentColor" stroke-linecap="round"
-                                               stroke-linejoin="round" stroke-width="1.143">
+                                                stroke-linejoin="round" stroke-width="1.143">
                                                 <path d="M4 13.143.571 9.714 4 6.286"></path>
                                                 <path d="M15.429 2.857v2.286a4.571 4.571 0 0 1-4.572 4.571H.571"></path>
                                             </g>
@@ -54,14 +54,14 @@
                                 <div class="tabs-container flex items-center">
                                     <div role="tablist" aria-label="Edit Content" class="publish-tabs tabs">
                                         <button role="tab" id="MainTab" aria-controls="MainTabPanel" tabindex="0"
-                                                class="tab-button" aria-selected="true">Main</button>
+                                            class="tab-button" aria-selected="true">Main</button>
                                         <button role="tab" id="SEOTab" aria-controls="SEOTabPanel" tabindex="-1"
-                                                class="tab-button">SEO</button>
+                                            class="tab-button">SEO</button>
                                     </div>
                                 </div>
                                 @if ($errors->any())
                                     <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
-                                         role="alert">
+                                        role="alert">
                                         <ul>
                                             @foreach ($errors->all() as $error)
                                                 <li>{{ $error }}</li>
@@ -71,7 +71,7 @@
                                 @endif
                                 @if (session('success'))
                                     <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative"
-                                         role="alert">
+                                        role="alert">
                                         {{ session('success') }}
                                     </div>
                                 @endif
@@ -83,33 +83,33 @@
                                                     <div class="p-0 card">
                                                         <div class="publish-fields @container">
                                                             <div
-                                                                    class="form-group publish-field publish-field__title text-fieldtype w-full">
+                                                                class="form-group publish-field publish-field__title text-fieldtype w-full">
                                                                 <div class="field-inner"><label for="field_title"
-                                                                                                class="publish-field-label"><span
-                                                                                class="rtl:ml-1 ltr:mr-1 v-popper--has-tooltip">Title</span><i
-                                                                                class="required rtl:ml-1 ltr:mr-1">*</i>
+                                                                        class="publish-field-label"><span
+                                                                            class="rtl:ml-1 ltr:mr-1 v-popper--has-tooltip">Title</span><i
+                                                                            class="required rtl:ml-1 ltr:mr-1">*</i>
                                                                         <button class="outline-none"
-                                                                                style="display: none;"><svg
-                                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                                    viewBox="0 0 24 24"
-                                                                                    class="h-4 w-4 rtl:ml-1.5 ltr:mr-1.5 mb-1 text-gray-600 v-popper--has-tooltip">
+                                                                            style="display: none;"><svg
+                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                viewBox="0 0 24 24"
+                                                                                class="h-4 w-4 rtl:ml-1.5 ltr:mr-1.5 mb-1 text-gray-600 v-popper--has-tooltip">
                                                                                 <path fill="none" stroke="currentColor"
-                                                                                      stroke-linecap="round"
-                                                                                      stroke-linejoin="round"
-                                                                                      stroke-width="1.5"
-                                                                                      d="M10.082 9.5A4.47 4.47 0 0 0 6.75 8h-1.5a4.5 4.5 0 0 0 0 9h1.5a4.474 4.474 0 0 0 3.332-1.5m3.836-6A4.469 4.469 0 0 1 17.25 8h1.5a4.5 4.5 0 1 1 0 9h-1.5a4.472 4.472 0 0 1-3.332-1.5M6.75 12.499h10.5">
+                                                                                    stroke-linecap="round"
+                                                                                    stroke-linejoin="round"
+                                                                                    stroke-width="1.5"
+                                                                                    d="M10.082 9.5A4.47 4.47 0 0 0 6.75 8h-1.5a4.5 4.5 0 0 0 0 9h1.5a4.474 4.474 0 0 0 3.332-1.5m3.836-6A4.469 4.469 0 0 1 17.25 8h1.5a4.5 4.5 0 1 1 0 9h-1.5a4.472 4.472 0 0 1-3.332-1.5M6.75 12.499h10.5">
                                                                                 </path>
                                                                             </svg>
                                                                         </button>
                                                                         <button class="outline-none" style="display: none;">
                                                                             <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                 viewBox="0 0 24 24"
-                                                                                 class="h-4 w-4 rtl:ml-1.5 ltr:mr-1.5 mb-1 text-gray-600 v-popper--has-tooltip">
+                                                                                viewBox="0 0 24 24"
+                                                                                class="h-4 w-4 rtl:ml-1.5 ltr:mr-1.5 mb-1 text-gray-600 v-popper--has-tooltip">
                                                                                 <path fill="none" stroke="currentColor"
-                                                                                      stroke-linecap="round"
-                                                                                      stroke-linejoin="round"
-                                                                                      stroke-width="1.5"
-                                                                                      d="M16.5 15.749h1.875A3.963 3.963 0 0 0 22.5 12h0a3.962 3.962 0 0 0-4.125-3.75H16.5m-9 7.499H5.625A3.963 3.963 0 0 1 1.5 12h0a3.963 3.963 0 0 1 4.125-3.75H7.5M12 5.249v-4.5m-3 4.5-1.5-1.5m7.5 1.5 1.5-1.5m-4.5 15v4.5m-3-4.5-1.5 1.5m7.5-1.5 1.5 1.5">
+                                                                                    stroke-linecap="round"
+                                                                                    stroke-linejoin="round"
+                                                                                    stroke-width="1.5"
+                                                                                    d="M16.5 15.749h1.875A3.963 3.963 0 0 0 22.5 12h0a3.962 3.962 0 0 0-4.125-3.75H16.5m-9 7.499H5.625A3.963 3.963 0 0 1 1.5 12h0a3.963 3.963 0 0 1 4.125-3.75H7.5M12 5.249v-4.5m-3 4.5-1.5-1.5m7.5 1.5 1.5-1.5m-4.5 15v4.5m-3-4.5-1.5 1.5m7.5-1.5 1.5 1.5">
                                                                                 </path>
                                                                             </svg>
                                                                         </button>
@@ -118,39 +118,39 @@
                                                                 <div class="flex items-center">
                                                                     <div class="input-group">
                                                                         <input id="field_title" name="title"
-                                                                               type="text" autofocus="autofocus"
-                                                                               class="input-text" value="">
+                                                                            type="text" autofocus="autofocus"
+                                                                            class="input-text" value="">
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div
-                                                                    class="form-group publish-field publish-field__content markdown-fieldtype w-full">
+                                                                class="form-group publish-field publish-field__content markdown-fieldtype w-full">
                                                                 <div class="field-inner"><label for="field_content"
-                                                                                                class="publish-field-label"><span
-                                                                                class="rtl:ml-1 ltr:mr-1 v-popper--has-tooltip">Content</span>
+                                                                        class="publish-field-label"><span
+                                                                            class="rtl:ml-1 ltr:mr-1 v-popper--has-tooltip">Content</span>
                                                                         <button class="outline-none"
-                                                                                style="display: none;"><svg
-                                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                                    viewBox="0 0 24 24"
-                                                                                    class="h-4 w-4 rtl:ml-1.5 ltr:mr-1.5 mb-1 text-gray-600 v-popper--has-tooltip">
+                                                                            style="display: none;"><svg
+                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                viewBox="0 0 24 24"
+                                                                                class="h-4 w-4 rtl:ml-1.5 ltr:mr-1.5 mb-1 text-gray-600 v-popper--has-tooltip">
                                                                                 <path fill="none" stroke="currentColor"
-                                                                                      stroke-linecap="round"
-                                                                                      stroke-linejoin="round"
-                                                                                      stroke-width="1.5"
-                                                                                      d="M10.082 9.5A4.47 4.47 0 0 0 6.75 8h-1.5a4.5 4.5 0 0 0 0 9h1.5a4.474 4.474 0 0 0 3.332-1.5m3.836-6A4.469 4.469 0 0 1 17.25 8h1.5a4.5 4.5 0 1 1 0 9h-1.5a4.472 4.472 0 0 1-3.332-1.5M6.75 12.499h10.5">
+                                                                                    stroke-linecap="round"
+                                                                                    stroke-linejoin="round"
+                                                                                    stroke-width="1.5"
+                                                                                    d="M10.082 9.5A4.47 4.47 0 0 0 6.75 8h-1.5a4.5 4.5 0 0 0 0 9h1.5a4.474 4.474 0 0 0 3.332-1.5m3.836-6A4.469 4.469 0 0 1 17.25 8h1.5a4.5 4.5 0 1 1 0 9h-1.5a4.472 4.472 0 0 1-3.332-1.5M6.75 12.499h10.5">
                                                                                 </path>
                                                                             </svg>
                                                                         </button>
                                                                         <button class="outline-none"
-                                                                                style="display: none;">
+                                                                            style="display: none;">
                                                                             <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                 viewBox="0 0 24 24"
-                                                                                 class="h-4 w-4 rtl:ml-1.5 ltr:mr-1.5 mb-1 text-gray-600 v-popper--has-tooltip">
+                                                                                viewBox="0 0 24 24"
+                                                                                class="h-4 w-4 rtl:ml-1.5 ltr:mr-1.5 mb-1 text-gray-600 v-popper--has-tooltip">
                                                                                 <path fill="none" stroke="currentColor"
-                                                                                      stroke-linecap="round"
-                                                                                      stroke-linejoin="round"
-                                                                                      stroke-width="1.5"
-                                                                                      d="M16.5 15.749h1.875A3.963 3.963 0 0 0 22.5 12h0a3.962 3.962 0 0 0-4.125-3.75H16.5m-9 7.499H5.625A3.963 3.963 0 0 1 1.5 12h0a3.963 3.963 0 0 1 4.125-3.75H7.5M12 5.249v-4.5m-3 4.5-1.5-1.5m7.5 1.5 1.5-1.5m-4.5 15v4.5m-3-4.5-1.5 1.5m7.5-1.5 1.5 1.5">
+                                                                                    stroke-linecap="round"
+                                                                                    stroke-linejoin="round"
+                                                                                    stroke-width="1.5"
+                                                                                    d="M16.5 15.749h1.875A3.963 3.963 0 0 0 22.5 12h0a3.962 3.962 0 0 0-4.125-3.75H16.5m-9 7.499H5.625A3.963 3.963 0 0 1 1.5 12h0a3.963 3.963 0 0 1 4.125-3.75H7.5M12 5.249v-4.5m-3 4.5-1.5-1.5m7.5 1.5 1.5-1.5m-4.5 15v4.5m-3-4.5-1.5 1.5m7.5-1.5 1.5 1.5">
                                                                                 </path>
                                                                             </svg>
                                                                         </button>
@@ -161,39 +161,39 @@
                                                                 </div><!----><!---->
                                                             </div>
                                                             <div
-                                                                    class="form-group publish-field publish-field__author relationship-fieldtype w-full">
+                                                                class="form-group publish-field publish-field__author relationship-fieldtype w-full">
                                                                 <div class="field-inner"><label for="field_author"
-                                                                                                class="publish-field-label"><span
-                                                                                class="rtl:ml-1 ltr:mr-1 v-popper--has-tooltip">Author</span>
+                                                                        class="publish-field-label"><span
+                                                                            class="rtl:ml-1 ltr:mr-1 v-popper--has-tooltip">Author</span>
                                                                         <button class="outline-none"
-                                                                                style="display: none;"><svg
-                                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                                    viewBox="0 0 24 24"
-                                                                                    class="h-4 w-4 rtl:ml-1.5 ltr:mr-1.5 mb-1 text-gray-600 v-popper--has-tooltip">
+                                                                            style="display: none;"><svg
+                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                viewBox="0 0 24 24"
+                                                                                class="h-4 w-4 rtl:ml-1.5 ltr:mr-1.5 mb-1 text-gray-600 v-popper--has-tooltip">
                                                                                 <path fill="none" stroke="currentColor"
-                                                                                      stroke-linecap="round"
-                                                                                      stroke-linejoin="round"
-                                                                                      stroke-width="1.5"
-                                                                                      d="M10.082 9.5A4.47 4.47 0 0 0 6.75 8h-1.5a4.5 4.5 0 0 0 0 9h1.5a4.474 4.474 0 0 0 3.332-1.5m3.836-6A4.469 4.469 0 0 1 17.25 8h1.5a4.5 4.5 0 1 1 0 9h-1.5a4.472 4.472 0 0 1-3.332-1.5M6.75 12.499h10.5">
+                                                                                    stroke-linecap="round"
+                                                                                    stroke-linejoin="round"
+                                                                                    stroke-width="1.5"
+                                                                                    d="M10.082 9.5A4.47 4.47 0 0 0 6.75 8h-1.5a4.5 4.5 0 0 0 0 9h1.5a4.474 4.474 0 0 0 3.332-1.5m3.836-6A4.469 4.469 0 0 1 17.25 8h1.5a4.5 4.5 0 1 1 0 9h-1.5a4.472 4.472 0 0 1-3.332-1.5M6.75 12.499h10.5">
                                                                                 </path>
                                                                             </svg></button><button class="outline-none"
-                                                                                                   style="display: none;"><svg
-                                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                                    viewBox="0 0 24 24"
-                                                                                    class="h-4 w-4 rtl:ml-1.5 ltr:mr-1.5 mb-1 text-gray-600 v-popper--has-tooltip">
+                                                                            style="display: none;"><svg
+                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                viewBox="0 0 24 24"
+                                                                                class="h-4 w-4 rtl:ml-1.5 ltr:mr-1.5 mb-1 text-gray-600 v-popper--has-tooltip">
                                                                                 <path fill="none" stroke="currentColor"
-                                                                                      stroke-linecap="round"
-                                                                                      stroke-linejoin="round"
-                                                                                      stroke-width="1.5"
-                                                                                      d="M16.5 15.749h1.875A3.963 3.963 0 0 0 22.5 12h0a3.962 3.962 0 0 0-4.125-3.75H16.5m-9 7.499H5.625A3.963 3.963 0 0 1 1.5 12h0a3.963 3.963 0 0 1 4.125-3.75H7.5M12 5.249v-4.5m-3 4.5-1.5-1.5m7.5 1.5 1.5-1.5m-4.5 15v4.5m-3-4.5-1.5 1.5m7.5-1.5 1.5 1.5">
+                                                                                    stroke-linecap="round"
+                                                                                    stroke-linejoin="round"
+                                                                                    stroke-width="1.5"
+                                                                                    d="M16.5 15.749h1.875A3.963 3.963 0 0 0 22.5 12h0a3.962 3.962 0 0 0-4.125-3.75H16.5m-9 7.499H5.625A3.963 3.963 0 0 1 1.5 12h0a3.963 3.963 0 0 1 4.125-3.75H7.5M12 5.249v-4.5m-3 4.5-1.5-1.5m7.5 1.5 1.5-1.5m-4.5 15v4.5m-3-4.5-1.5 1.5m7.5-1.5 1.5 1.5">
                                                                                 </path>
                                                                             </svg></button></label><!----></div><!---->
                                                                 <div class="relationship-input">
                                                                     <div data-v-c80a132c="">
                                                                         <div data-v-c80a132c="" dir="auto"
-                                                                             class="v-select vs--single vs--searchable">
+                                                                            class="v-select vs--single vs--searchable">
                                                                             <select name="author" id="author"
-                                                                                    class="form-control">
+                                                                                class="form-control">
                                                                                 <option value="Jack McDade">Jack McDade
                                                                                 </option>
                                                                                 <!-- Add other options as needed -->
@@ -216,64 +216,64 @@
                                                     <div class="p-0 card"><!---->
                                                         <div class="publish-fields @container">
                                                             <div
-                                                                    class="form-group publish-field publish-field__seo seo_pro-fieldtype w-full">
+                                                                class="form-group publish-field publish-field__seo seo_pro-fieldtype w-full">
                                                                 <div class="field-inner"><label for="field_seo"
-                                                                                                class="publish-field-label"><span
-                                                                                class="rtl:ml-1 ltr:mr-1 v-popper--has-tooltip">SEO</span>
+                                                                        class="publish-field-label"><span
+                                                                            class="rtl:ml-1 ltr:mr-1 v-popper--has-tooltip">SEO</span>
                                                                         <button class="outline-none"
-                                                                                style="display: none;"><svg
-                                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                                    viewBox="0 0 24 24"
-                                                                                    class="h-4 w-4 rtl:ml-1.5 ltr:mr-1.5 mb-1 text-gray-600 v-popper--has-tooltip">
+                                                                            style="display: none;"><svg
+                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                viewBox="0 0 24 24"
+                                                                                class="h-4 w-4 rtl:ml-1.5 ltr:mr-1.5 mb-1 text-gray-600 v-popper--has-tooltip">
                                                                                 <path fill="none" stroke="currentColor"
-                                                                                      stroke-linecap="round"
-                                                                                      stroke-linejoin="round"
-                                                                                      stroke-width="1.5"
-                                                                                      d="M10.082 9.5A4.47 4.47 0 0 0 6.75 8h-1.5a4.5 4.5 0 0 0 0 9h1.5a4.474 4.474 0 0 0 3.332-1.5m3.836-6A4.469 4.469 0 0 1 17.25 8h1.5a4.5 4.5 0 1 1 0 9h-1.5a4.472 4.472 0 0 1-3.332-1.5M6.75 12.499h10.5">
+                                                                                    stroke-linecap="round"
+                                                                                    stroke-linejoin="round"
+                                                                                    stroke-width="1.5"
+                                                                                    d="M10.082 9.5A4.47 4.47 0 0 0 6.75 8h-1.5a4.5 4.5 0 0 0 0 9h1.5a4.474 4.474 0 0 0 3.332-1.5m3.836-6A4.469 4.469 0 0 1 17.25 8h1.5a4.5 4.5 0 1 1 0 9h-1.5a4.472 4.472 0 0 1-3.332-1.5M6.75 12.499h10.5">
                                                                                 </path>
                                                                             </svg></button><button class="outline-none"
-                                                                                                   style="display: none;"><svg
-                                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                                    viewBox="0 0 24 24"
-                                                                                    class="h-4 w-4 rtl:ml-1.5 ltr:mr-1.5 mb-1 text-gray-600 v-popper--has-tooltip">
+                                                                            style="display: none;"><svg
+                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                viewBox="0 0 24 24"
+                                                                                class="h-4 w-4 rtl:ml-1.5 ltr:mr-1.5 mb-1 text-gray-600 v-popper--has-tooltip">
                                                                                 <path fill="none" stroke="currentColor"
-                                                                                      stroke-linecap="round"
-                                                                                      stroke-linejoin="round"
-                                                                                      stroke-width="1.5"
-                                                                                      d="M16.5 15.749h1.875A3.963 3.963 0 0 0 22.5 12h0a3.962 3.962 0 0 0-4.125-3.75H16.5m-9 7.499H5.625A3.963 3.963 0 0 1 1.5 12h0a3.963 3.963 0 0 1 4.125-3.75H7.5M12 5.249v-4.5m-3 4.5-1.5-1.5m7.5 1.5 1.5-1.5m-4.5 15v4.5m-3-4.5-1.5 1.5m7.5-1.5 1.5 1.5">
+                                                                                    stroke-linecap="round"
+                                                                                    stroke-linejoin="round"
+                                                                                    stroke-width="1.5"
+                                                                                    d="M16.5 15.749h1.875A3.963 3.963 0 0 0 22.5 12h0a3.962 3.962 0 0 0-4.125-3.75H16.5m-9 7.499H5.625A3.963 3.963 0 0 1 1.5 12h0a3.963 3.963 0 0 1 4.125-3.75H7.5M12 5.249v-4.5m-3 4.5-1.5-1.5m7.5 1.5 1.5-1.5m-4.5 15v4.5m-3-4.5-1.5 1.5m7.5-1.5 1.5 1.5">
                                                                                 </path>
                                                                             </svg></button></label><!----></div><!---->
                                                                 <div class="publish-fields">
                                                                     <div
-                                                                            class="form-group form-group publish-field publish-field__enabled toggle-fieldtype w-full">
+                                                                        class="form-group form-group publish-field publish-field__enabled toggle-fieldtype w-full">
                                                                         <div class="field-inner"><label
-                                                                                    for="field_enabled"
-                                                                                    class="publish-field-label"><span
-                                                                                        class="rtl:ml-1 ltr:mr-1 v-popper--has-tooltip">Enabled</span>
+                                                                                for="field_enabled"
+                                                                                class="publish-field-label"><span
+                                                                                    class="rtl:ml-1 ltr:mr-1 v-popper--has-tooltip">Enabled</span>
                                                                                 <button class="outline-none"
-                                                                                        style="display: none;"><svg
-                                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                                            viewBox="0 0 24 24"
-                                                                                            class="h-4 w-4 rtl:ml-1.5 ltr:mr-1.5 mb-1 text-gray-600 v-popper--has-tooltip">
+                                                                                    style="display: none;"><svg
+                                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                                        viewBox="0 0 24 24"
+                                                                                        class="h-4 w-4 rtl:ml-1.5 ltr:mr-1.5 mb-1 text-gray-600 v-popper--has-tooltip">
                                                                                         <path fill="none"
-                                                                                              stroke="currentColor"
-                                                                                              stroke-linecap="round"
-                                                                                              stroke-linejoin="round"
-                                                                                              stroke-width="1.5"
-                                                                                              d="M10.082 9.5A4.47 4.47 0 0 0 6.75 8h-1.5a4.5 4.5 0 0 0 0 9h1.5a4.474 4.474 0 0 0 3.332-1.5m3.836-6A4.469 4.469 0 0 1 17.25 8h1.5a4.5 4.5 0 1 1 0 9h-1.5a4.472 4.472 0 0 1-3.332-1.5M6.75 12.499h10.5">
+                                                                                            stroke="currentColor"
+                                                                                            stroke-linecap="round"
+                                                                                            stroke-linejoin="round"
+                                                                                            stroke-width="1.5"
+                                                                                            d="M10.082 9.5A4.47 4.47 0 0 0 6.75 8h-1.5a4.5 4.5 0 0 0 0 9h1.5a4.474 4.474 0 0 0 3.332-1.5m3.836-6A4.469 4.469 0 0 1 17.25 8h1.5a4.5 4.5 0 1 1 0 9h-1.5a4.472 4.472 0 0 1-3.332-1.5M6.75 12.499h10.5">
                                                                                         </path>
                                                                                     </svg></button><button
-                                                                                        class="outline-none"
-                                                                                        style="display: none;"><svg
-                                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                                            viewBox="0 0 24 24"
-                                                                                            class="h-4 w-4 rtl:ml-1.5 ltr:mr-1.5 mb-1 text-gray-600 v-popper--has-tooltip">
+                                                                                    class="outline-none"
+                                                                                    style="display: none;"><svg
+                                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                                        viewBox="0 0 24 24"
+                                                                                        class="h-4 w-4 rtl:ml-1.5 ltr:mr-1.5 mb-1 text-gray-600 v-popper--has-tooltip">
                                                                                         <path fill="none"
-                                                                                              stroke="currentColor"
-                                                                                              stroke-linecap="round"
-                                                                                              stroke-linejoin="round"
-                                                                                              stroke-width="1.5"
-                                                                                              d="M16.5 15.749h1.875A3.963 3.963 0 0 0 22.5 12h0a3.962 3.962 0 0 0-4.125-3.75H16.5m-9 7.499H5.625A3.963 3.963 0 0 1 1.5 12h0a3.963 3.963 0 0 1 4.125-3.75H7.5M12 5.249v-4.5m-3 4.5-1.5-1.5m7.5 1.5 1.5-1.5m-4.5 15v4.5m-3-4.5-1.5 1.5m7.5-1.5 1.5 1.5">
+                                                                                            stroke="currentColor"
+                                                                                            stroke-linecap="round"
+                                                                                            stroke-linejoin="round"
+                                                                                            stroke-width="1.5"
+                                                                                            d="M16.5 15.749h1.875A3.963 3.963 0 0 0 22.5 12h0a3.962 3.962 0 0 0-4.125-3.75H16.5m-9 7.499H5.625A3.963 3.963 0 0 1 1.5 12h0a3.963 3.963 0 0 1 4.125-3.75H7.5M12 5.249v-4.5m-3 4.5-1.5-1.5m7.5 1.5 1.5-1.5m-4.5 15v4.5m-3-4.5-1.5 1.5m7.5-1.5 1.5 1.5">
                                                                                         </path>
                                                                                     </svg></button></label>
                                                                             <div class="help-block -mt-2">
@@ -284,13 +284,13 @@
                                                                             </div>
                                                                         </div><!---->
                                                                         <div class="toggle-fieldtype-wrapper"><button
-                                                                                    type="button" aria-pressed="true"
-                                                                                    aria-label="Toggle Button"
-                                                                                    class="toggle-container on"
-                                                                                    id="field_enabled">
+                                                                                type="button" aria-pressed="true"
+                                                                                aria-label="Toggle Button"
+                                                                                class="toggle-container on"
+                                                                                id="field_enabled">
                                                                                 <div class="toggle-slider">
                                                                                     <div tabindex="0"
-                                                                                         class="toggle-knob">
+                                                                                        class="toggle-knob">
                                                                                     </div>
                                                                                 </div>
                                                                             </button><!----></div><!----><!---->
@@ -298,6 +298,13 @@
                                                                 </div><!----><!---->
                                                             </div>
                                                         </div>
+                                                        <div class="mt-4" id="inputContainer">
+                                                            <!-- Input sets will be dynamically added here -->
+                                                        </div>
+                                                        <button
+                                                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
+                                                            id="addMoreTags">Add</button>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -310,9 +317,9 @@
                                                     <div class="card p-0 mb-5">
                                                         <div class="flex items-center justify-between px-4 py-2 border-t">
                                                             <label
-                                                                    class="publish-field-label font-medium">Published</label>
+                                                                class="publish-field-label font-medium">Published</label>
                                                             <button type="button" aria-pressed="true"
-                                                                    aria-label="Toggle Button" class="toggle-container on">
+                                                                aria-label="Toggle Button" class="toggle-container on">
                                                                 <div class="toggle-slider">
                                                                     <div tabindex="0" class="toggle-knob"></div>
                                                                 </div>
@@ -326,31 +333,31 @@
                                                     <div class="p-0 card">
                                                         <div class="publish-fields @container">
                                                             <div
-                                                                    class="form-group publish-field publish-field__slug slug-fieldtype w-full">
+                                                                class="form-group publish-field publish-field__slug slug-fieldtype w-full">
                                                                 <div class="field-inner"><label for="field_slug"
-                                                                                                class="publish-field-label"><span
-                                                                                class="rtl:ml-1 ltr:mr-1 v-popper--has-tooltip">Slug</span>
+                                                                        class="publish-field-label"><span
+                                                                            class="rtl:ml-1 ltr:mr-1 v-popper--has-tooltip">Slug</span>
                                                                         <button class="outline-none"
-                                                                                style="display: none;"><svg
-                                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                                    viewBox="0 0 24 24"
-                                                                                    class="h-4 w-4 rtl:ml-1.5 ltr:mr-1.5 mb-1 text-gray-600 v-popper--has-tooltip">
+                                                                            style="display: none;"><svg
+                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                viewBox="0 0 24 24"
+                                                                                class="h-4 w-4 rtl:ml-1.5 ltr:mr-1.5 mb-1 text-gray-600 v-popper--has-tooltip">
                                                                                 <path fill="none" stroke="currentColor"
-                                                                                      stroke-linecap="round"
-                                                                                      stroke-linejoin="round"
-                                                                                      stroke-width="1.5"
-                                                                                      d="M10.082 9.5A4.47 4.47 0 0 0 6.75 8h-1.5a4.5 4.5 0 0 0 0 9h1.5a4.474 4.474 0 0 0 3.332-1.5m3.836-6A4.469 4.469 0 0 1 17.25 8h1.5a4.5 4.5 0 1 1 0 9h-1.5a4.472 4.472 0 0 1-3.332-1.5M6.75 12.499h10.5">
+                                                                                    stroke-linecap="round"
+                                                                                    stroke-linejoin="round"
+                                                                                    stroke-width="1.5"
+                                                                                    d="M10.082 9.5A4.47 4.47 0 0 0 6.75 8h-1.5a4.5 4.5 0 0 0 0 9h1.5a4.474 4.474 0 0 0 3.332-1.5m3.836-6A4.469 4.469 0 0 1 17.25 8h1.5a4.5 4.5 0 1 1 0 9h-1.5a4.472 4.472 0 0 1-3.332-1.5M6.75 12.499h10.5">
                                                                                 </path>
                                                                             </svg></button><button class="outline-none"
-                                                                                                   style="display: none;"><svg
-                                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                                    viewBox="0 0 24 24"
-                                                                                    class="h-4 w-4 rtl:ml-1.5 ltr:mr-1.5 mb-1 text-gray-600 v-popper--has-tooltip">
+                                                                            style="display: none;"><svg
+                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                viewBox="0 0 24 24"
+                                                                                class="h-4 w-4 rtl:ml-1.5 ltr:mr-1.5 mb-1 text-gray-600 v-popper--has-tooltip">
                                                                                 <path fill="none" stroke="currentColor"
-                                                                                      stroke-linecap="round"
-                                                                                      stroke-linejoin="round"
-                                                                                      stroke-width="1.5"
-                                                                                      d="M16.5 15.749h1.875A3.963 3.963 0 0 0 22.5 12h0a3.962 3.962 0 0 0-4.125-3.75H16.5m-9 7.499H5.625A3.963 3.963 0 0 1 1.5 12h0a3.963 3.963 0 0 1 4.125-3.75H7.5M12 5.249v-4.5m-3 4.5-1.5-1.5m7.5 1.5 1.5-1.5m-4.5 15v4.5m-3-4.5-1.5 1.5m7.5-1.5 1.5 1.5">
+                                                                                    stroke-linecap="round"
+                                                                                    stroke-linejoin="round"
+                                                                                    stroke-width="1.5"
+                                                                                    d="M16.5 15.749h1.875A3.963 3.963 0 0 0 22.5 12h0a3.962 3.962 0 0 0-4.125-3.75H16.5m-9 7.499H5.625A3.963 3.963 0 0 1 1.5 12h0a3.963 3.963 0 0 1 4.125-3.75H7.5M12 5.249v-4.5m-3 4.5-1.5-1.5m7.5 1.5 1.5-1.5m-4.5 15v4.5m-3-4.5-1.5 1.5m7.5-1.5 1.5 1.5">
                                                                                 </path>
                                                                             </svg>
                                                                         </button>
@@ -360,9 +367,9 @@
                                                                     <div class="flex items-center">
                                                                         <div class="input-group">
                                                                             <input id="field_slug" name="slug"
-                                                                                   type="text"dir="ltr"
-                                                                                   class="input-text font-mono text-xs"
-                                                                                   value="" readonly>
+                                                                                type="text"dir="ltr"
+                                                                                class="input-text font-mono text-xs"
+                                                                                value="" readonly>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -383,12 +390,75 @@
         </div>
     </div>
     <script>
+        function createInputSet() {
+            var inputSet = $('<div class="mb-4"></div>');
+
+            var tagType = $(
+                `
+                  <label class="block text-gray-700 text-sm font-bold mb-2">Tag Type</label>
+                  <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Select Option...">
+                  <option value="name">name</option>
+                  <option value="http-equiv">http-equiv</option>
+                  <option value="charset">charset</option>
+                  <option value="itemprop">itemprop</option>
+                  <option value="property">property</option>
+                  </select>
+                `
+            );
+            var nameVal = $(
+                `
+                  <label class="block text-gray-700 text-sm font-bold mb-2">Name Value</label>
+                  <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Name">
+                `
+            ).addClass('hidden');
+            var content = $(
+                `
+                  <label class="block text-gray-700 text-sm font-bold mb-2">Content Attribute</label>
+                  <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Content">
+                `
+            ).addClass('hidden');
+
+            inputSet.append(tagType);
+            inputSet.append(nameVal);
+            inputSet.append(content);
+
+            tagType.change(function() {
+                if ($(this).val() !== '') {
+                    nameVal.removeClass('hidden');
+                } else {
+                    nameVal.addClass('hidden');
+                    nameVal.val('');
+                }
+            });
+
+            nameVal.on('keyup', function() {
+                if ($(this).val() !== '') {
+                    content.removeClass('hidden');
+                } else {
+                    content.addClass('hidden');
+                    content.val('');
+                }
+            });
+
+            return inputSet;
+        }
+
         $(document).ready(function() {
             $('#field_title').on('input', function() {
                 var titleValue = $(this).val();
                 var handleValue = titleValue.toLowerCase().replace(/[^a-z0-9]+/g, '-');
                 $('#field_slug').val(handleValue);
             });
+
+            $('#addMoreTags').click(function() {
+                event.preventDefault();
+                var newInputSet = createInputSet();
+                $('#inputContainer').append(newInputSet);
+            });
+
+            // Initial input set
+            var initialInputSet = createInputSet();
+            $('#inputContainer').append(initialInputSet);
         });
     </script>
 @endsection

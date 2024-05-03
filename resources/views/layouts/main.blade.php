@@ -254,7 +254,7 @@
         }
         /* This selector targets the editable element (excluding comments). */
         .ck-editor__editable_inline:not(.ck-comment__input *) {
-            height: 300px;
+            height: 200px;
             overflow-y: auto;
         }
 
