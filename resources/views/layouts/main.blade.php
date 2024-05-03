@@ -552,6 +552,18 @@
             }
         });
     });
+
+    // Toggle Button JS
+    document.addEventListener("DOMContentLoaded", function() {
+            const toggleButtons = document.querySelectorAll(".toggle-container");
+            toggleButtons.forEach(function(toggleButton) {
+                toggleButton.addEventListener("click", function() {
+                    toggleButton.classList.toggle("on");
+                    const ariaPressed = toggleButton.getAttribute("aria-pressed");
+                    toggleButton.setAttribute("aria-pressed", ariaPressed === "true" ? "false" : "true");
+                });
+            });
+        });
 </script>
 </body>
 </html>
