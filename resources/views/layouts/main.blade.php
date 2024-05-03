@@ -211,6 +211,8 @@
 
     {{-- Calling script before body to access script in body --}}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{{--    ck-5 editor link--}}
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.3.1/classic/ckeditor.js"></script>
     <style>
         .publish-tabs {
             display: flex;
@@ -466,6 +468,12 @@
         </div>
     </div>
     <script>
+        // ck-5 editor
+        ClassicEditor
+            .create( document.querySelector( '#editor' ) )
+            .catch( error => {
+                console.error( error );
+            } );
         // Get all tab buttons and tab panels
         const tabButtons = document.querySelectorAll('.tab-button');
         const tabPanels = document.querySelectorAll('.tab-panel');
