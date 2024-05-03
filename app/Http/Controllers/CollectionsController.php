@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Collections;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 
 class CollectionsController extends Controller
@@ -44,6 +45,7 @@ class CollectionsController extends Controller
 
     public function addEntry()
     {
+        
         return view('collections.addEntry');
     }
 
@@ -57,8 +59,19 @@ class CollectionsController extends Controller
         return view('collections.editEntry');
     }
 
-    public function table()
+    public function table(Request $request)
     {
-        return view('collections.table');
+        // Getting URI Segment
+        $data['handle'] = $request->segment(count($request->segments()));
+        $query = DB::table('entries')
+            ->join('collections', 'entries.collection', '=', 'collections.handle')
+            ->where('collections.handle', $data['handle'])
+            ->select('*')
+            ->get();
+
+        // check if the result is not empty
+        $data['entries'] = $query ?? false;
+
+        return view('collections.table', $data);
     }
 }

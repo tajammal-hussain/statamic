@@ -52,7 +52,7 @@ Route::controller(CollectionsController::class)
         Route::get('/editCollection', 'editCollection')->name('editCollection');
         Route::get('/addEntry', 'addEntry')->name('addEntry');
         Route::get('/editEntry', 'editEntry')->name('editEntry');
-        Route::get('/table', 'table')->name('table');
+        Route::get('/table/{handle?}', 'table')->name('table');
     });
 
 // Navigations Routes
