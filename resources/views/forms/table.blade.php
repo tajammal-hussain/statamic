@@ -1,4 +1,12 @@
+@php 
+  $menuItems = [
+    ['label' => 'view', 'route' => route('dashboard')],
+    ['label' => 'delete', 'route' => route('dashboard')]
+    ];
+@endphp
+
 @extends('layouts.main')
+
 @section('content')
     <title>Forms table :: Cedar</title>
     <div class="page-wrapper max-w-full">
@@ -89,15 +97,7 @@
                         </div>
                       </td><!---->
                       <th class="actions-column">
-                        <div class="dropdown-list">
-                          <div aria-haspopup="true"><button aria-label="Open Dropdown" class="rotating-dots-button"><svg
-                                width="12" viewBox="0 0 24 24" class="rotating-dots fill-current">
-                                <circle cx="3" cy="12" r="3"></circle>
-                                <circle cx="12" cy="12" r="3"></circle>
-                                <circle cx="21" cy="12" r="3"></circle>
-                              </svg></button></div>
-                          <div class="v-portal" style="display: none;"></div>
-                        </div>
+                        <x-customDropdown :menuItems="$menuItems"/>
                       </th>
                     </tr>
                     <tr class="sortable-row outline-none" tabindex="0"><!---->
@@ -118,15 +118,7 @@
                         </div>
                       </td><!---->
                       <th class="actions-column">
-                        <div class="dropdown-list">
-                          <div aria-haspopup="true"><button aria-label="Open Dropdown" class="rotating-dots-button"><svg
-                                width="12" viewBox="0 0 24 24" class="rotating-dots fill-current">
-                                <circle cx="3" cy="12" r="3"></circle>
-                                <circle cx="12" cy="12" r="3"></circle>
-                                <circle cx="21" cy="12" r="3"></circle>
-                              </svg></button></div>
-                          <div class="v-portal" style="display: none;"></div>
-                        </div>
+                        <x-customDropdown :menuItems="$menuItems"/>
                       </th>
                     </tr>
                     <tr class="sortable-row outline-none" tabindex="0"><!---->
@@ -146,15 +138,7 @@
                         </div>
                       </td><!---->
                       <th class="actions-column">
-                        <div class="dropdown-list">
-                          <div aria-haspopup="true"><button aria-label="Open Dropdown" class="rotating-dots-button"><svg
-                                width="12" viewBox="0 0 24 24" class="rotating-dots fill-current">
-                                <circle cx="3" cy="12" r="3"></circle>
-                                <circle cx="12" cy="12" r="3"></circle>
-                                <circle cx="21" cy="12" r="3"></circle>
-                              </svg></button></div>
-                          <div class="v-portal" style="display: none;"></div>
-                        </div>
+                        <x-customDropdown :menuItems="$menuItems"/>
                       </th>
                     </tr>
                     <tr class="sortable-row outline-none" tabindex="0"><!---->
@@ -174,15 +158,7 @@
                         </div>
                       </td><!---->
                       <th class="actions-column">
-                        <div class="dropdown-list">
-                          <div aria-haspopup="true"><button aria-label="Open Dropdown" class="rotating-dots-button"><svg
-                                width="12" viewBox="0 0 24 24" class="rotating-dots fill-current">
-                                <circle cx="3" cy="12" r="3"></circle>
-                                <circle cx="12" cy="12" r="3"></circle>
-                                <circle cx="21" cy="12" r="3"></circle>
-                              </svg></button></div>
-                          <div class="v-portal" style="display: none;"></div>
-                        </div>
+                        <x-customDropdown :menuItems="$menuItems"/>
                       </th>
                     </tr>
                     <tr class="sortable-row outline-none" tabindex="0"><!---->
@@ -201,15 +177,7 @@
                         </div>
                       </td><!---->
                       <th class="actions-column">
-                        <div class="dropdown-list">
-                          <div aria-haspopup="true"><button aria-label="Open Dropdown" class="rotating-dots-button"><svg
-                                width="12" viewBox="0 0 24 24" class="rotating-dots fill-current">
-                                <circle cx="3" cy="12" r="3"></circle>
-                                <circle cx="12" cy="12" r="3"></circle>
-                                <circle cx="21" cy="12" r="3"></circle>
-                              </svg></button></div>
-                          <div class="v-portal" style="display: none;"></div>
-                        </div>
+                        <x-customDropdown :menuItems="$menuItems"/>
                       </th>
                     </tr>
                   </tbody>
@@ -226,4 +194,8 @@
             </div>
           </div>
         </div>
+ 
+        <script>
+
+        </script>
 @endsection

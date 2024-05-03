@@ -16,7 +16,7 @@
                 <a href="{{ route('collections.addCollection') }}" class="btn-primary">Create Collection</a>
             @endrole
         </div>
-        <div class="card overflow-hidden p-0" endpoints="" bis_skin_checked="1">
+        <div class="card p-0" endpoints="" bis_skin_checked="1">
             <table data-size="sm" tabindex="0" class="data-table">
                 <x-table-head :firstcol="$firstCol" :secondcol="$secondCol" />
                 <tbody tabindex="0">
@@ -36,7 +36,6 @@
                                     <x-customDropdown :menuItems="$menuItems" />
                                 </div>
                             </td>
-                            <td></td>
                         </tr>
                     @endforeach
                 </tbody>

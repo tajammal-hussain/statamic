@@ -3581,7 +3581,6 @@ svg {
 }
 
 .data-table tbody th.actions-column {
-    position: sticky;
     padding: 0
 }
 
