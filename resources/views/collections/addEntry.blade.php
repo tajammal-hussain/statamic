@@ -1,6 +1,5 @@
 @extends('layouts.main')
 @section('content')
-    <script src="https://cdn.ckeditor.com/ckeditor5/41.3.1/classic/ckeditor.js"></script>
 
     <title>Create Entry :: Cedar</title>
     <div class="page-wrapper max-w-3xl">

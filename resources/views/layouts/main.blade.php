@@ -208,11 +208,11 @@
     <link rel="stylesheet" href="{{ url('css/app-e0fc4bb9.css') }}">
     <link rel="stylesheet" href="{{ url('css/cp-56146771.css') }}">
     <link rel="stylesheet" href="{{ url('css/cp-7025c2cd.css') }}">
+    @vite('public/js/app.js')
 
     {{-- Calling script before body to access script in body --}}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    {{--    ck-5 editor link--}}
-    <script src="https://cdn.ckeditor.com/ckeditor5/41.3.1/classic/ckeditor.js"></script>
+  
     <style>
         button.z-10 {
             float: right;
