@@ -4,7 +4,7 @@
     <title>Create Entry :: Cedar</title>
     <div class="page-wrapper max-w-3xl">
         <div>
-            <form method="POST" action="{{ route('collections.addEntry', ['slug' => $collections->handle]) }}">
+            <form id="myForm" method="POST" action="{{ route('collections.addEntry', ['slug' => $collections->handle]) }}">
                 @csrf
                 <div class="breadcrumb flex"><a href="javascript:void(0);"
                         class="flex-initial flex p-2 -m-2 items-center text-xs text-gray-700 hover:text-gray-900"><svg
@@ -246,8 +246,10 @@
                                                                 <div class="publish-fields">
                                                                     <div
                                                                         class="form-group form-group publish-field publish-field__enabled toggle-fieldtype w-full">
-                                                                        <div class="field-inner"><label
-                                                                                for="field_enabled"
+                                                                        <div class="field-inner">
+                                                                            <input type="hidden" name="enableState"
+                                                                                id="enableState">
+                                                                            <label for="field_enabled"
                                                                                 class="publish-field-label"><span
                                                                                     class="rtl:ml-1 ltr:mr-1 v-popper--has-tooltip">Enabled</span>
                                                                                 <button class="outline-none"
@@ -316,9 +318,11 @@
                                                 <div>
                                                     <div class="card p-0 mb-5">
                                                         <div class="flex items-center justify-between px-4 py-2 border-t">
+                                                            <input type="hidden" name="publishState" id="publishState">
+
                                                             <label
                                                                 class="publish-field-label font-medium">Published</label>
-                                                            <button type="button" aria-pressed="true"
+                                                            <button id="field_publish" type="button" aria-pressed="true"
                                                                 aria-label="Toggle Button" class="toggle-container on">
                                                                 <div class="toggle-slider">
                                                                     <div tabindex="0" class="toggle-knob"></div>
@@ -389,9 +393,13 @@
             </form>
         </div>
     </div>
+    <!-- Add SweetAlert CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         function createInputSet() {
             var inputSet = $('<div class="mb-4"></div>');
+            var nameInput = $('<div class="mb-4"></div>');
+            var contentInput = $('<div class="mb-4"></div>');
 
             var tagType = $(
                 `
@@ -419,8 +427,8 @@
             ).addClass('hidden');
 
             inputSet.append(tagType);
-            inputSet.append(nameVal);
-            inputSet.append(content);
+            nameInput.append(nameVal);
+            contentInput.append(content);
 
             tagType.change(function() {
                 if ($(this).val() !== '') {
@@ -440,25 +448,73 @@
                 }
             });
 
-            return inputSet;
+            //  inputSet;
+             return [inputSet,nameInput,contentInput]
         }
 
         $(document).ready(function() {
+            // Initial input set
+            var initialInputSet = createInputSet();
+            $('#inputContainer').append(initialInputSet);
+
             $('#field_title').on('input', function() {
-                var titleValue = $(this).val();
-                var handleValue = titleValue.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+                let titleValue = $(this).val();
+                let handleValue = titleValue.toLowerCase().replace(/[^a-z0-9]+/g, '-');
                 $('#field_slug').val(handleValue);
             });
 
             $('#addMoreTags').click(function() {
                 event.preventDefault();
-                var newInputSet = createInputSet();
+                let newInputSet = createInputSet();
                 $('#inputContainer').append(newInputSet);
             });
 
-            // Initial input set
-            var initialInputSet = createInputSet();
-            $('#inputContainer').append(initialInputSet);
+            $('#myForm').submit(function() {
+                event.preventDefault()
+                let ispublished = $('#field_publish').attr('aria-pressed') === 'true'
+                let isenabled = $('#field_enabled').attr('aria-pressed') === 'true'
+
+                $('#enableState').val(isenabled ? '1' : '0')
+
+                if (!isenabled) {
+                    let swalWithBootstrapButtons = Swal.mixin({
+                        customClass: {
+                            confirmButton: `bg-green-500 text-white font-bold py-2 px-4 rounded`,
+                            cancelButton: `bg-red-500 text-white font-bold py-2 px-4 rounded`
+                        },
+                        buttonsStyling: false
+                    });
+                    swalWithBootstrapButtons.fire({
+                        title: "Are you sure?",
+                        text: `Disabling this item will exclude it from reports and the sitemap`,
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonText: "Yes, I'm sure!",
+                        cancelButtonText: "No, cancel!",
+                        reverseButtons: true
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            swalWithBootstrapButtons.fire({
+                                title: "Deleted!",
+                                text: "Command Accepted",
+                                icon: "success"
+                            });
+                            $('#publishState').val(ispublished ? '1' : '0')
+                            $(this).unbind('submit').submit()
+                        } else if (result.dismiss === Swal.DismissReason.cancel) {
+                            swalWithBootstrapButtons.fire({
+                                title: "Cancelled",
+                                text: `Command Cancelled`,
+                                icon: "error"
+                            });
+                            return;
+                        }
+                    });
+                } else {
+                    $('#publishState').val(ispublished ? '1' : '0')
+                    $(this).unbind('submit').submit()
+                }
+            });
         });
     </script>
 @endsection

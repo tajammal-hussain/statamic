@@ -22,7 +22,7 @@ class CollectionsController extends Controller
             ->select('collections.id', 'collections.title', 'collections.handle', DB::raw('COUNT(entries.id) as entriesCount'))
             ->groupBy('collections.id', 'collections.title', 'collections.handle')
             ->get();
-            
+
         return view('collections.index', $data);
     }
 
@@ -55,6 +55,8 @@ class CollectionsController extends Controller
     {
         $handle = $request->segment(count($request->segments()));
         if ($request->isMethod('post')) :
+            $isEnabled = $request->input('enableState');
+            $isPublished = $request->input('publishState');
             $rules = [
                 'title' => 'required|string|max:255',
                 'content' => 'required|string',
@@ -77,14 +79,16 @@ class CollectionsController extends Controller
             // Save data to the database
             $entry = new Entries();
             $mytime = Carbon::now();
-            $entry->data = $jsonData;
-            $entry->slug = $slug;
-            $entry->site = $slug;
-            $entry->status = "published";
-            $entry->date = $mytime->toDateTimeString();
-            // print_r($handle);die;
-            $entry->collection = $handle;
-            $entry->save();
+            $entry = [
+                'data' => $jsonData,
+                'slug' => $slug,
+                'site' => $slug,
+                'published' => $isPublished ? "1" : "0",
+                'status' => $isPublished ? "1" : "0",
+                'date' => $mytime->toDateTimeString(),
+                'collection' => $handle,
+            ];
+            Entries::insert($entry);
             // Redirect back with success message
             return redirect()->back()->with('success', 'Entry added successfully.');
         else :

@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('content')
     <title>{{ 'Table :: Cedar' }}</title>
-    <div class="page-wrapper max-w-full" bis_skin_checked="1">`
+    <div class="page-wrapper max-w-full" bis_skin_checked="1">
         <div bis_skin_checked="1">
             <header class="mb-6">
 
@@ -219,7 +219,7 @@
             </div>
             <div class="w-full flex mt-6" bis_skin_checked="1">
                 <div class="flex flex-1 items-center" bis_skin_checked="1">
-                    <div class="text-xs text-gray-700" bis_skin_checked="1"> 1-6 of 6 </div>
+                    <div class="text-xs text-gray-700" bis_skin_checked="1"></div>
                 </div>
                 <div class="flex flex-1" bis_skin_checked="1">
                     <div class="flex-1" bis_skin_checked="1"></div>
