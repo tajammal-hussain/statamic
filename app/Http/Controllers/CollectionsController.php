@@ -16,7 +16,6 @@ class CollectionsController extends Controller
     {
         $data['firstCol'] = "Title";
         $data['secondCol'] = "Entries";
-        // $data = Collections::all();
         $data['collectionsInfo'] = DB::table('collections')
             ->leftJoin('entries', 'collections.handle', '=', 'entries.collection')
             ->select('collections.id', 'collections.title', 'collections.handle', DB::raw('COUNT(entries.id) as entriesCount'))
@@ -57,22 +56,52 @@ class CollectionsController extends Controller
         if ($request->isMethod('post')) :
             $isEnabled = $request->input('enableState');
             $isPublished = $request->input('publishState');
+
             $rules = [
                 'title' => 'required|string|max:255',
                 'content' => 'required|string',
                 'slug' => 'required|string|unique:entries,slug',
                 'author' => 'required|string',
             ];
-            // Validate the input
+
             $validatedData = $request->validate($rules);
 
-            // Process the input data
             $entryData = [
                 'title' => $validatedData['title'],
                 'content' => $validatedData['content'],
                 'author' => $validatedData['author'],
             ];
-            $slug = $validatedData['slug'];
+
+            if ($isEnabled) :
+                $metadataRules = [];
+                $tagTypes = $request->input('tagType');
+                $nameValues = $request->input('nameValue');
+                $contentAttributes = $request->input('contentAttribute');
+
+                for ($i = 0; $i < count($tagTypes); $i++) :
+                    $metadataRules['tagType.' . $i] = 'required|string';
+                    $metadataRules['nameValue.' . $i] = 'required|string';
+                    $metadataRules['contentAttribute.' . $i] = 'required|string';
+                endfor;
+
+                $rules = array_merge($rules, $metadataRules);
+
+                $validatedData = $request->validate($rules);
+
+                $metadata = [];
+                for ($i = 0; $i < count($tagTypes); $i++) :
+                    $entry = [
+                        'tagType' => $tagTypes[$i],
+                        'nameValue' => $nameValues[$i],
+                        'contentAttribute' => $contentAttributes[$i]
+                    ];
+
+                    $metadata[$i] = $entry;
+                endfor;
+                
+                $entryData['metaData'] = $metadata;
+            endif;
+
             // Convert data to JSON format
             $jsonData = json_encode($entryData);
 
@@ -81,10 +110,10 @@ class CollectionsController extends Controller
             $mytime = Carbon::now();
             $entry = [
                 'data' => $jsonData,
-                'slug' => $slug,
-                'site' => $slug,
+                'slug' => $validatedData['slug'],
+                'site' => $validatedData['slug'],
                 'published' => $isPublished ? "1" : "0",
-                'status' => $isPublished ? "1" : "0",
+                'status' => $isPublished ? "published" : "pending",
                 'date' => $mytime->toDateTimeString(),
                 'collection' => $handle,
             ];

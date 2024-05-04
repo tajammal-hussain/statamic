@@ -1,8 +1,8 @@
-@php 
-  $menuItems = [
-    ['label' => 'view', 'route' => route('dashboard')],
-    ['label' => 'edit', 'route' => route('dashboard')],
-    ['label' => 'publish', 'route' => route('dashboard')]
+@php
+    $menuItems = [
+        ['label' => 'view', 'route' => route('dashboard')],
+        ['label' => 'edit', 'route' => route('dashboard')],
+        ['label' => 'publish', 'route' => route('dashboard')],
     ];
 @endphp
 
@@ -205,7 +205,7 @@
                                                 </div>
                                             </td>
                                             <th class="actions-column">
-                                                <x-customDropdown :menuItems="$menuItems"/>
+                                                <x-customDropdown :menuItems="$menuItems" />
                                             </th>
                                     @endforeach
                                     </tr>

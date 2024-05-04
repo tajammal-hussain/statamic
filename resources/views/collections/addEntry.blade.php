@@ -1,7 +1,5 @@
 @extends('layouts.main')
-
 @section('content')
-
     <title>Create Entry :: Cedar</title>
     <div class="page-wrapper max-w-3xl">
         <div>
@@ -121,8 +119,7 @@
                                                                                 </path>
                                                                             </svg>
                                                                         </button>
-                                                                        <button class="outline-none"
-                                                                            style="display: none;">
+                                                                        <button class="outline-none" style="display: none;">
                                                                             <svg xmlns="http://www.w3.org/2000/svg"
                                                                                 viewBox="0 0 24 24"
                                                                                 class="h-4 w-4 rtl:ml-1.5 ltr:mr-1.5 mb-1 text-gray-600 v-popper--has-tooltip">
@@ -286,7 +283,9 @@
                                                         <button
                                                             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-4"
                                                             id="addMoreTags">Add</button>
-
+                                                        <button
+                                                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-4"
+                                                            id="addMoreTags">Remove</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -373,135 +372,10 @@
             </form>
         </div>
     </div>
-    <!-- Add SweetAlert CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script>
-        function createInputSet() {
-            var outerDiv = $('<div class="border-2 border-gray-500 p-4 m-2 rounded-md "></div>');
-            var innerDiv = $('<div class="flex gap-4"></div>');
-            var inputSet = $('<div class="mb-4 w-1/4"></div>');
-            var nameInput = $('<div class="mb-4 w-3/4"></div>');
-            var contentInput = $('<div class="mb-4"></div>');
-
-            var tagType = $(
-                `
-                  <label class="block text-gray-700 text-sm font-bold mb-2">Tag Type</label>
-                  <select class="shadow appearance-none border rounded bg-white w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Select Option...">
-                  <option value="name">name</option>
-                  <option value="http-equiv">http-equiv</option>
-                  <option value="charset">charset</option>
-                  <option value="itemprop">itemprop</option>
-                  <option value="property">property</option>
-                  </select>
-                `
-            );
-            var nameVal = $(
-                `
-                  <label class="block text-gray-700 text-sm font-bold mb-2">Name Value</label>
-                  <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Name">
-                `
-            ).addClass('hidden');
-            var content = $(
-                `
-                  <label class="block text-gray-700 text-sm font-bold mb-2">Content Attribute</label>
-                  <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Content">
-                `
-            ).addClass('hidden');
-
-            inputSet.append(tagType);
-            nameInput.append(nameVal);
-            contentInput.append(content);
-
-            tagType.change(function() {
-                if ($(this).val() !== '') {
-                    nameVal.removeClass('hidden');
-                } else {
-                    nameVal.addClass('hidden');
-                    nameVal.val('');
-                }
-            });
-
-            nameVal.on('keyup', function() {
-                if ($(this).val() !== '') {
-                    content.removeClass('hidden');
-                } else {
-                    content.addClass('hidden');
-                    content.val('');
-                }
-            });
-
-            innerDiv.append(inputSet);
-            innerDiv.append(nameInput);
-
-            outerDiv.append(innerDiv);
-            outerDiv.append(contentInput);
-
-            return outerDiv;
-        }
-
-        $(document).ready(function() {
-            // Initial input set
-            var initialInputSet = createInputSet();
-            $('#inputContainer').append(initialInputSet);
-
-            $('#field_title').on('input', function() {
-                let titleValue = $(this).val();
-                let handleValue = titleValue.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-                $('#field_slug').val(handleValue);
-            });
-
-            $('#addMoreTags').click(function() {
-                event.preventDefault();
-                let newInputSet = createInputSet();
-                $('#inputContainer').append(newInputSet);
-            });
-
-            $('#myForm').submit(function() {
-                event.preventDefault()
-                let ispublished = $('#field_publish').attr('aria-pressed') === 'true'
-                let isenabled = $('#field_enabled').attr('aria-pressed') === 'true'
-
-                $('#enableState').val(isenabled ? '1' : '0')
-
-                if (!isenabled) {
-                    let swalWithBootstrapButtons = Swal.mixin({
-                        customClass: {
-                            confirmButton: `bg-green-500 text-white font-bold py-2 px-4 rounded`,
-                            cancelButton: `bg-red-500 text-white font-bold py-2 px-4 rounded`
-                        },
-                        buttonsStyling: false
-                    });
-                    swalWithBootstrapButtons.fire({
-                        title: "Are you sure?",
-                        text: `Disabling this item will exclude it from reports and the sitemap`,
-                        icon: "warning",
-                        showCancelButton: true,
-                        confirmButtonText: "Yes, I'm sure!",
-                        cancelButtonText: "No, cancel!",
-                        reverseButtons: true
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            swalWithBootstrapButtons.fire({
-                                title: "Deleted!",
-                                text: "Command Accepted",
-                                icon: "success"
-                            });
-                            $('#publishState').val(ispublished ? '1' : '0')
-                            $(this).unbind('submit').submit()
-                        } else if (result.dismiss === Swal.DismissReason.cancel) {
-                            swalWithBootstrapButtons.fire({
-                                title: "Cancelled",
-                                text: `Command Cancelled`,
-                                icon: "error"
-                            });
-                            return;
-                        }
-                    });
-                } else {
-                    $('#publishState').val(ispublished ? '1' : '0')
-                    $(this).unbind('submit').submit()
-                }
-            });
-        });
+        const submitFormUrl = "{{ route('collections.addEntry', ['slug' => $collections->handle]) }}";
     </script>
+    <script src="{{ url('js/entries.js') }}"></script>
+
 @endsection
