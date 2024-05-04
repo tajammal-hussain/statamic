@@ -77,7 +77,7 @@
                                 @endif
                                 <div class="publish-tab-outer">
                                     <div class="publish-tab-wrapper w-full min-w-0">
-                                        <div id="MainTabPanel" class="tab-panel active">
+                                        <div id="MainTabPanel" class="tab-panel">
                                             <div class="publish-sections">
                                                 <div class="publish-sections-section">
                                                     <div class="p-0 card">
@@ -193,7 +193,7 @@
                                                                         <div data-v-c80a132c="" dir="auto"
                                                                             class="v-select vs--single vs--searchable">
                                                                             <select name="author" id="author"
-                                                                                class="form-control">
+                                                                                class="w-full p-2 border-2 border-gray-500 rounded-md text-md hover:border-sky-500">
                                                                                 <option value="Jack McDade">Jack McDade
                                                                                 </option>
                                                                                 <!-- Add other options as needed -->
@@ -210,7 +210,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div id="SEOTabPanel" class="tab-panel">
+                                        <div id="SEOTabPanel" class="tab-panel active">
                                             <div class="publish-sections">
                                                 <div class="publish-sections-section">
                                                     <div class="p-0 card"><!---->
@@ -304,7 +304,7 @@
                                                             <!-- Input sets will be dynamically added here -->
                                                         </div>
                                                         <button
-                                                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
+                                                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-4"
                                                             id="addMoreTags">Add</button>
 
                                                     </div>
@@ -397,14 +397,16 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         function createInputSet() {
-            var inputSet = $('<div class="mb-4"></div>');
-            var nameInput = $('<div class="mb-4"></div>');
+            var outerDiv = $('<div class="border-2 border-gray-500 p-4 m-2 rounded-md "></div>');
+            var innerDiv = $('<div class="flex gap-4"></div>');
+            var inputSet = $('<div class="mb-4 w-1/4"></div>');
+            var nameInput = $('<div class="mb-4 w-3/4"></div>');
             var contentInput = $('<div class="mb-4"></div>');
 
             var tagType = $(
                 `
                   <label class="block text-gray-700 text-sm font-bold mb-2">Tag Type</label>
-                  <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Select Option...">
+                  <select class="shadow appearance-none border rounded bg-white w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Select Option...">
                   <option value="name">name</option>
                   <option value="http-equiv">http-equiv</option>
                   <option value="charset">charset</option>
@@ -448,8 +450,13 @@
                 }
             });
 
-            //  inputSet;
-             return [inputSet,nameInput,contentInput]
+            innerDiv.append(inputSet);
+            innerDiv.append(nameInput);
+
+            outerDiv.append(innerDiv);
+            outerDiv.append(contentInput);
+
+            return outerDiv;
         }
 
         $(document).ready(function() {
