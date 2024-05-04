@@ -21,8 +21,17 @@
                 <tbody tabindex="0">
                     @foreach ($data as $navigation)
                         <tr class="sortable-row outline-none" tabindex="0">
-                            <td><a href="https://demo.statamic.com/cp/navigation/footer"
-                                    class="flex items-center">{{ $navigation->handle }}</a></td>
+                            <td><a href="javascript:void(0);"
+                                    class="flex items-center">{{ $navigation->handle }}</a>
+                            </td>
+                            <td class="rtl:text-left ltr:text-right rtl:pl-8 ltr:pr-8">
+                                <div bis_skin_checked="1">
+                                    <div handle="entries" values="" class="" bis_skin_checked="1">
+                                        {{-- {{ $collection->entriesCount }} --}}
+                                                        0 
+                                    </div>
+                                </div>
+                            </td>
                             <th class="actions-column">
                                 <div class="w-8 dropdown-list">
                                     <div aria-haspopup="true">
