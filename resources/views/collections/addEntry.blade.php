@@ -1,4 +1,5 @@
 @extends('layouts.main')
+
 @section('content')
 
     <title>Create Entry :: Cedar</title>
@@ -19,30 +20,9 @@
                                 class="little-dot rtl:ml-2 ltr:mr-2 published v-popper--has-tooltip"></span><span>{{ 'Create Entry' }}</span>
                         </div>
                     </h1>
-                    <div class="dropdown-list rtl:ml-4 ltr:mr-4">
-                        <div aria-haspopup="true"><button aria-label="Open Dropdown" class="rotating-dots-button"><svg
-                                    width="12" viewBox="0 0 24 24" class="rotating-dots fill-current">
-                                    <circle cx="3" cy="12" r="3"></circle>
-                                    <circle cx="12" cy="12" r="3"></circle>
-                                    <circle cx="21" cy="12" r="3"></circle>
-                                </svg></button></div>
-                        <div class="v-portal" style="display: none;"></div>
-                    </div><!---->
                     <div class="hidden md:flex items-center">
-                        <div class="btn-group"><button type="submit" id="saveEntry" class="btn-primary">Save &amp;
-                                Publish</button>
-                            <div class="dropdown-list rtl:text-right ltr:text-left">
-                                <div aria-haspopup="true"><button
-                                        class="rtl:rounded-r-none ltr:rounded-l-none btn-primary"><svg
-                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="w-3">
-                                            <g fill="none" stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="1.143">
-                                                <path d="M4 13.143.571 9.714 4 6.286"></path>
-                                                <path d="M15.429 2.857v2.286a4.571 4.571 0 0 1-4.572 4.571H.571"></path>
-                                            </g>
-                                        </svg></button></div>
-                                <div class="v-portal" style="display: none;"></div>
-                            </div>
+                        <div class="btn-group">
+                            <button type="submit" id="saveEntry" class="btn-primary">Save &amp; Publish</button>
                         </div>
                     </div>
                 </div>
@@ -77,7 +57,7 @@
                                 @endif
                                 <div class="publish-tab-outer">
                                     <div class="publish-tab-wrapper w-full min-w-0">
-                                        <div id="MainTabPanel" class="tab-panel">
+                                        <div id="MainTabPanel" class="tab-panel active">
                                             <div class="publish-sections">
                                                 <div class="publish-sections-section">
                                                     <div class="p-0 card">
@@ -210,7 +190,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div id="SEOTabPanel" class="tab-panel active">
+                                        <div id="SEOTabPanel" class="tab-panel">
                                             <div class="publish-sections">
                                                 <div class="publish-sections-section">
                                                     <div class="p-0 card"><!---->

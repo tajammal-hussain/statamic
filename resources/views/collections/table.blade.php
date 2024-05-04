@@ -1,4 +1,13 @@
+@php 
+  $menuItems = [
+    ['label' => 'view', 'route' => route('dashboard')],
+    ['label' => 'edit', 'route' => route('dashboard')],
+    ['label' => 'publish', 'route' => route('dashboard')]
+    ];
+@endphp
+
 @extends('layouts.main')
+
 @section('content')
     <title>{{ 'Table :: Cedar' }}</title>
     <div class="page-wrapper max-w-full" bis_skin_checked="1">
@@ -18,18 +27,6 @@
 
                 <div class="flex items-center" bis_skin_checked="1">
                     <h1 class="flex-1">{{ sizeof($entries) ? $entries[0]->title : $handle }}</h1>
-                    <div class="dropdown-list rtl:ml-2 ltr:mr-2" bis_skin_checked="1">
-                        <div aria-haspopup="true" bis_skin_checked="1">
-                            <button aria-label="Open Dropdown" class="rotating-dots-button">
-                                <svg width="12" viewBox="0 0 24 24" class="rotating-dots fill-current">
-                                    <circle cx="3" cy="12" r="3"></circle>
-                                    <circle cx="12" cy="12" r="3"></circle>
-                                    <circle cx="21" cy="12" r="3"></circle>
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="v-portal" style="display: none;" bis_skin_checked="1"></div>
-                    </div>
 
                     <div class="dropdown-list inline-block" bis_skin_checked="1">
                         <div aria-haspopup="true" bis_skin_checked="1">
@@ -46,7 +43,7 @@
 
             <div bis_skin_checked="1">
                 <div bis_skin_checked="1">
-                    <div class="card overflow-hidden p-0 relative" bis_skin_checked="1">
+                    <div class="card p-0 relative" bis_skin_checked="1">
                         <div class="flex flex-wrap items-center justify-between px-2 pb-2 text-sm border-b"
                             bis_skin_checked="1">
                             <div class="pt-2 rtl:pl-2 ltr:pr-2" bis_skin_checked="1">
@@ -119,7 +116,7 @@
                             bis_skin_checked="1">No Results
                         </div>
 
-                        <div class="overflow-x-auto overflow-y-hidden" bis_skin_checked="1">
+                        <div class="" bis_skin_checked="1">
                             <table data-size="sm" tabindex="0" class="data-table">
                                 <thead>
                                     <tr>
@@ -207,6 +204,9 @@
                                                     </div>
                                                 </div>
                                             </td>
+                                            <th class="actions-column">
+                                                <x-customDropdown :menuItems="$menuItems"/>
+                                            </th>
                                     @endforeach
                                     </tr>
                                 </tbody>
