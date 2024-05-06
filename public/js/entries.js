@@ -78,7 +78,6 @@ function createInputSet() {
     return outerDiv;
 }
 
-
 $(document).ready(function () {
     // Initial input set
     var initialInputSet = createInputSet();
@@ -143,3 +142,84 @@ $(document).ready(function () {
         }
     });
 });
+
+// Script for editing Entry ------- editEntry
+
+// Function to generate input fields based on tagType count
+function generateInputFields(tagTypeCount) {
+    console.log(`Count ${tagTypeCount}`);
+    $('#inputContainer').empty(); // Clear existing input fields
+    for (var i = 0; i < tagTypeCount; i++) {
+        $('#inputContainer').append(createEditInputSet(i));
+    }
+}
+// Function to create input set
+function createEditInputSet(index) {
+    var outerDiv = $('<div class="border-2 border-gray-500 p-4 m-2 rounded-md "></div>');
+    var innerDiv = $('<div class="flex gap-4"></div>');
+    var inputSet = $('<div class="mb-4 w-1/4"></div>');
+    var nameInput = $('<div class="mb-4 w-3/4"></div>');
+    var contentInput = $('<div class="mb-4"></div>');
+
+    var tagType = $(
+        `
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Tag Type</label>
+                    <select class="tag-type shadow appearance-none border rounded bg-white w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Select Option..." name="tagType[]">
+                        <option value="name">name</option>
+                        <option value="http-equiv">http-equiv</option>
+                        <option value="charset">charset</option>
+                        <option value="itemprop">itemprop</option>
+                        <option value="property">property</option>
+                    </select>
+                    `
+    );
+
+    var nameVal = $(
+        `
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Name Value</label>
+                    <input class="name-value shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Name" name="nameValue[]">
+                    `
+    );
+
+    var content = $(
+        `
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Content Attribute</label>
+                    <input class="content-attribute shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Content" name="contentAttribute[]">
+                    `
+    );
+
+    inputSet.append(tagType);
+    nameInput.append(nameVal);
+    contentInput.append(content);
+
+    // Assign unique identifiers to each input
+    tagType.addClass('metadata-tag-type-' + metadataCount);
+    nameVal.addClass('metadata-name-value-' + metadataCount);
+    content.addClass('metadata-content-' + metadataCount);
+
+    metadataCount++; // Increment metadata counter for the next input
+
+    innerDiv.append(inputSet);
+    innerDiv.append(nameInput);
+
+    outerDiv.append(innerDiv);
+    outerDiv.append(contentInput);
+
+    // Populate existing data if available
+    var metaData = existingMetaData[index] || {};
+    if (metaData.tagType) {
+        tagType.val(metaData.tagType);
+        nameVal.val(metaData.nameValue);
+        content.val(metaData.contentAttribute);
+    }
+
+    return outerDiv;
+}
+
+// Initial generation of input fields based on existing data
+$(document).ready(function () {
+    console.log(`Count ${existingMetaData}`);
+    var tagTypeCount = Object.keys(existingMetaData).length;
+    generateInputFields(tagTypeCount);
+});
+

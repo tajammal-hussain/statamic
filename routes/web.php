@@ -51,7 +51,7 @@ Route::controller(CollectionsController::class)
         Route::match(['get', 'post'], '/addCollection', 'addCollection')->name('addCollection');
         Route::get('/editCollection', 'editCollection')->name('editCollection');
         Route::match(['get', 'post'], '/addEntry/{slug?}', 'addEntry')->name('addEntry');
-        Route::get('/editEntry', 'editEntry')->name('editEntry');
+        Route::match(['get', 'post'], '/editEntry/{id?}', 'editEntry')->whereNumber('id')->name('editEntry');
         Route::get('/table/{slug?}', 'table')->name('table');
     });
 
