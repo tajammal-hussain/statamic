@@ -1,11 +1,3 @@
-@php
-    $menuItems = [
-        ['label' => 'view', 'route' => route('dashboard')],
-        ['label' => 'edit', 'route' => route('dashboard')],
-        ['label' => 'publish', 'route' => route('dashboard')],
-    ];
-@endphp
-
 @extends('layouts.main')
 
 @section('content')
@@ -174,7 +166,8 @@
                                                 <input type="checkbox" class="checkbox"id="" value="">
                                             </th>
                                             <td class="">
-                                                <a href="#" class="title-index-field inline-flex items-center">
+                                                <a href="{{ route('collections.editEntry', ['id' => $entry->entry_id]) }}"
+                                                    class="title-index-field inline-flex items-center">
                                                     <span
                                                         class="little-dot rtl:ml-2 ltr:mr-2 bg-green-600 v-popper--has-tooltip"></span>
                                                     <span>{{ json_decode($entry->data)->title }}</span>
@@ -205,6 +198,22 @@
                                                 </div>
                                             </td>
                                             <th class="actions-column">
+                                                @php
+                                                    $menuItems = [
+                                                        [
+                                                            'label' => 'view', 
+                                                            'route' => route('collections.editEntry', ['id' => $entry->entry_id])
+                                                        ],
+                                                        [
+                                                            'label' => 'edit', 
+                                                            'route' => route('collections.editEntry', ['id' => $entry->entry_id])
+                                                        ],
+                                                        [
+                                                            'label' => 'publish', 
+                                                            'route' => route('dashboard')
+                                                        ],
+                                                    ];
+                                                @endphp
                                                 <x-customDropdown :menuItems="$menuItems" />
                                             </th>
                                     @endforeach
