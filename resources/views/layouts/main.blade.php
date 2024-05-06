@@ -399,6 +399,25 @@
     </div>
 
 </div>
+<style>
+    .nav-main {
+    transition: left 0.5s ease;
+}
+
+.hidden {
+    left: -28rem;
+}
+
+.workspace {
+    transition: margin-left 0.9s ease;
+    margin-left: 0;
+}
+
+.workspace.shifted {
+    transition-duration: 0.9s;
+    margin-left: -8rem;
+}
+</style>
 <script>
     document.addEventListener('click', function(event) {
         const dropdownButtons = document.querySelectorAll('.dropdown button');
@@ -413,6 +432,14 @@
             }
         });
     });
+
+    $(document).ready(function() {
+        $('.nav-toggle').click(function() {
+            $('.nav-main').toggleClass('hidden');
+            $('.workspace').toggleClass('shifted');
+        });
+    });
+
 </script>
 </body>
 </html>
