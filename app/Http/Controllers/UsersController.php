@@ -167,27 +167,4 @@ class UsersController extends Controller
     }
 
 
-
-    public function changePassword(Request $request)
-    {
-        $request->validate([
-            'current_password' => 'required',
-            'new_password' => 'required|min:8|confirmed',
-        ]);
-
-        // Get the authenticated user
-        $user = auth()->user();
-
-        // Verify the current password
-        if (!Hash::check($request->current_password, $user->password)) {
-            return back()->withErrors(['current_password' => 'The current password is incorrect.']);
-        }
-
-        // Update the user's password
-        $user->password = Hash::make($request->new_password);
-        $user->save();
-
-        return back()->with('success', 'Password updated successfully.');
-    }
-
 }

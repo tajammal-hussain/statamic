@@ -18,49 +18,34 @@
 
                 <div class="flex items-center">
                     <h1 class="flex-1">{{ $user->email }}</h1>
-                    <div class="dropdown-list rtl:ml-4 ltr:mr-4">
-                        <div aria-haspopup="true">
+
+                    <div class="dropdown-list rtl:ml-4 ltr:mr-4 relative" x-data="{ isOpen: false }">
+                        <div aria-haspopup="true" class="dropdown-toggle cursor-pointer" @click="isOpen = !isOpen">
                             <button aria-label="Open Dropdown" class="rotating-dots-button">
-                                <svg
-                                        width="12" viewBox="0 0 24 24" class="rotating-dots fill-current">
+                                <svg width="12" viewBox="0 0 24 24" class="rotating-dots fill-current transition-transform transform" :class="{ 'rotate-90': isOpen }">
                                     <circle cx="3" cy="12" r="3"></circle>
                                     <circle cx="12" cy="12" r="3"></circle>
                                     <circle cx="21" cy="12" r="3"></circle>
                                 </svg>
                             </button>
                         </div>
-                        <div class="v-portal" style="display: none;"></div>
+                        <div class="dropdown-content absolute top-full left-0 w-32 bg-white border border-gray-300 rounded-md shadow-md" x-show="isOpen" @click.away="isOpen = false">
+                            <ul>
+                                <li><a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Option 1</a></li>
+                                <li><a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Option 2</a></li>
+                            </ul>
+                        </div>
                     </div>
+
+
 
                     <div class="ml-4">
                         <div aria-haspopup="true">
                             <button class="btn" id="togglePasswordFields">Change Password</button>
                         </div>
-                        <div class="hidden absolute bg-white shadow-lg rounded-md" style="transform: translate(350px, 8px);" id="passwordFields">
-                            <form method="POST" action="{{ route('users.change') }}">
-                                @csrf
-                            <div class="p-4 pb-0 w-96">
-                                <!-- Password Fields -->
-                                <div class="form-group">
-                                    <label for="current_password">Current Password</label>
-                                    <input id="current_password" name="current_password" type="password" class="input-text relative">
-                                </div>
-                                <div class="form-group">
-                                    <label for="new_password">New Password</label>
-                                    <input id="new_password" name="new_password" type="password" class="input-text relative">
-                                </div>
-                                <div class="form-group">
-                                    <label for="password_confirmation">Password Confirmation</label>
-                                    <input id="password_confirmation" name="password_confirmation" type="password" class="input-text relative">
-                                </div>
-                                <div class="flex items-center bg-gray-200 border-t rounded-b px-4 py-2  relative">
-                                    <button class="btn-primary" type="submit">Change Password</button>
-                                    <label class="ml-4">
-                                        <input type="checkbox" id="revealPassword"> Reveal Password
-                                    </label>
-                                </div>
-                            </div>
-                            </form>
+                        <div class="hidden absolute bg-white shadow-lg rounded-md" style="transform: translate(5px, 8px);" id="passwordFields">
+
+                            <livewire:profile.update-password-form style="z-index: 99;"/>
 
                         </div>
                         <div class="hidden"></div>
@@ -84,7 +69,7 @@
                             <div class="flex items-center">
                                 <div class="input-group"><!----><input id="field_name" name="name"
                                                                        value="{{ $user->name }}" type="text"
-                                                                       class="input-text"><!----></div><!----></div>
+                                                                       class="input-text relative z-1"><!----></div><!----></div>
                             <!---->
                             <!----></div>
                         <div class="form-group publish-field publish-field__email text-fieldtype w-full">
@@ -97,19 +82,19 @@
                             <div class="flex items-center">
                                 <div class="input-group"><!----><input id="field_email" name="email"
                                                                        value="{{ $user->email }}" type="email"
-                                                                       class="input-text"><!----></div><!----></div>
+                                                                       class="input-text relative z-1"><!----></div><!----></div>
                             <!---->
                             <!----></div>
                         <div class="form-group publish-field publish-field__roles relationship-fieldtype w-full @lg:w-1/2">
                             <div class="field-inner"><label for="fieldRoles" name="role"
-                                                            class="publish-field-label"><span
+                                                            class="publish-field-label "><span
                                             class="rtl:ml-1 ltr:mr-1 v-popper--has-tooltip">Roles</span></label><!---->
                                 <!---->
 
                                 <div class="relationship-input">
                                     <div>
                                         <select id="fieldRoles" name="role"
-                                                class="form-control w-full h-10 rounded-md">
+                                                class="form-control w-full h-10 rounded-md relative z-1">
 {{--                                            <option value="user">User</option>--}}
 {{--                                            <option value="admin">Admin</option>--}}
 {{--                                            <option value="superadmin">Superadmin</option>--}}
@@ -141,6 +126,13 @@
         </div>
     </div>
     <script>
+        $(document).ready(function() {
+            $('.dropdown-toggle').click(function() {
+                $(this).toggleClass('rotated');
+                $('.dropdown-content').slideToggle();
+            });
+        });
+
         document.getElementById('saveButton').addEventListener('click', function () {
             // Trigger form submission when the button is clicked
             document.getElementById('userForm').submit();
