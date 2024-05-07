@@ -153,16 +153,19 @@ class UsersController extends Controller
 
         // Update user's role if provided
         if ($request->filled('role')) {
-
             $role = $request->input('role');
-            if($role !== "superadmin"){
-            $user->syncRoles([$role]); // This will replace all existing roles with the new role
+            if ($role !== "superadmin") {
+                $user->syncRoles([$role]); // This will replace all existing roles with the new role
             }
         }
 
-        // Return a view with success message
-        return $this->index()->with('success', 'Profile updated successfully.');
+        // Fetch the user's image URL
+        $imageUrl = asset('images/' . $user->image);
+
+        // Return a view with success message and image URL
+        return $this->index()->with('success', 'Profile updated successfully.')->with('imageUrl', $imageUrl);
     }
+
 
 
     public function changePassword(Request $request)
