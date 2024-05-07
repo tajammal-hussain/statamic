@@ -14,7 +14,8 @@ class NavigationController extends Controller
     {
         $firstCol = 'Title';
         $secondCol = 'Entries';
-        $data = Navigations::all();
+        $data = Navigations::where(['status' => "1"])
+            ->get();
 
         return view('navigations.index', compact('firstCol', 'secondCol', 'data'));
     }
@@ -69,7 +70,7 @@ class NavigationController extends Controller
                 'handle' => $handle,
                 'updated_at' => $mytime->toDateTimeString(),
             ];
-        
+
             // Assuming $navigationid holds the ID of the navigation you want to update
             Navigations::where('id', $navigationId)
                 ->update($navigation);
@@ -81,8 +82,22 @@ class NavigationController extends Controller
         endif;
     }
 
-    public function table()
+    public function delete(Request $request)
     {
-        return view('navigations.table');
+        $navigationId = $request->segment(count($request->segments()));
+        $query = Navigations::where(['id' => $navigationId])
+            ->update(['status' => "0"]);
+
+        return redirect()->back()->with(($query) ? 'success' : 'error', ($query) ? 'Navigation has been deleted successfully.' : "Something went wrong while deleting");
+    }
+
+    public function table(Request $request)
+    {
+        // Getting URI Segment
+        $data['handle'] = $request->segment(count($request->segments()));
+        $query = Navigations::where(['handle' => $data['handle']])
+            ->first();
+        $data['navigation'] = $query ?? false;
+        return view('navigations.table', $data);
     }
 }

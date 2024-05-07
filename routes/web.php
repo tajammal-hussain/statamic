@@ -63,7 +63,8 @@ Route::controller(NavigationController::class)
         Route::get('', 'index')->name('navigations');
         Route::match(['get', 'post'], '/add', 'add')->name('add');
         Route::match(['get', 'post'], '/edit/{id?}', 'edit')->name('edit');
-        Route::get('/table', 'table')->name('table');
+        Route::get('/delete/{id?}', 'delete')->name('delete');
+        Route::get('/table/{slug?}', 'table')->name('table');
     });
 
 // Taxonomies Routes

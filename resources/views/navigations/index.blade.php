@@ -8,6 +8,16 @@
                 <a href="{{ route('navigations.add') }}" class="btn-primary">Create Navigation</a>
             @endrole
         </header>
+        @if (session('success'))
+            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+                {{ session('success') }}
+            </div>
+        @endif
+        @if (session('error'))
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                {{ session('error') }}
+            </div>
+        @endif
         <div class="card p-0">
             <table data-size="sm" tabindex="0" class="data-table">
                 <x-table-head :firstcol="$firstCol" :secondcol="$secondCol" />
@@ -15,7 +25,8 @@
                     @foreach ($data as $navigation)
                         <tr class="sortable-row outline-none" tabindex="0">
                             <td>
-                                <a href="javascript:void(0);" class="flex items-center">{{ $navigation->handle }}</a>
+                                <a href="{{ route('navigations.table', ['slug' => $navigation->handle]) }}"
+                                    class="flex items-center">{{ $navigation->title }}</a>
                             </td>
                             <td class="rtl:text-left ltr:text-right rtl:pl-8 ltr:pr-8">
                                 <div bis_skin_checked="1">
@@ -31,7 +42,10 @@
                                                     'label' => 'Edit',
                                                     'route' => route('navigations.edit', ['id' => $navigation->id]),
                                                 ],
-                                                ['label' => 'Delete', 'route' => route('dashboard')],
+                                                [
+                                                    'label' => 'Delete',
+                                                    'route' => route('navigations.delete', ['id' => $navigation->id]),
+                                                ],
                                                 // Add more menu items as needed
                                             ];
                                         @endphp

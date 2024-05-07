@@ -227,4 +227,5 @@ class CollectionsController extends Controller
 
         return view('collections.table', $data);
     }
+    
 }
