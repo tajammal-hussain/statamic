@@ -1,10 +1,3 @@
-@php
-    $menuItems = [
-        ['label' => 'Edit', 'route' => route('navigations.edit')],
-        ['label' => 'Delete', 'route' => route('dashboard')],
-        // Add more menu items as needed
-    ];
-@endphp
 @extends('layouts.main')
 @section('content')
     <title>{{ 'Navigation :: Cedar' }}</title>
@@ -21,20 +14,27 @@
                 <tbody tabindex="0">
                     @foreach ($data as $navigation)
                         <tr class="sortable-row outline-none" tabindex="0">
-                            <td><a href="javascript:void(0);"
-                                    class="flex items-center">{{ $navigation->handle }}</a>
+                            <td>
+                                <a href="javascript:void(0);" class="flex items-center">{{ $navigation->handle }}</a>
                             </td>
                             <td class="rtl:text-left ltr:text-right rtl:pl-8 ltr:pr-8">
                                 <div bis_skin_checked="1">
-                                    <div handle="entries" values="" class="" bis_skin_checked="1">
-                                        {{-- {{ $collection->entriesCount }} --}}
-                                                        0 
-                                    </div>
+                                    <div handle="entries" values="" class="" bis_skin_checked="1">0</div>
                                 </div>
                             </td>
                             <th class="actions-column">
                                 <div class="w-8 dropdown-list">
                                     <div aria-haspopup="true">
+                                        @php
+                                            $menuItems = [
+                                                [
+                                                    'label' => 'Edit',
+                                                    'route' => route('navigations.edit', ['id' => $navigation->id]),
+                                                ],
+                                                ['label' => 'Delete', 'route' => route('dashboard')],
+                                                // Add more menu items as needed
+                                            ];
+                                        @endphp
                                         <x-customDropdown :menuItems="$menuItems" />
                                     </div>
                                     <div class="v-portal" style="display: none;"></div>
