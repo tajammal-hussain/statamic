@@ -74,9 +74,10 @@ Route::controller(TaxonomiesController::class)
     ->group(function () {
         Route::get('', 'index')->name('taxonomies');
         Route::match(['get', 'post'], '/add', 'add')->name('add');
-        Route::get('/edit', 'edit')->name('edit');
-        Route::get('/table', 'table')->name('table');
-        Route::get('/createTeam', 'createTeam')->name('createTeam');
+        Route::match(['get', 'post'], '/edit/{id?}', 'edit')->name('edit');
+        Route::match(['get', 'post'], 'table/{handle?}', 'table')->name('table');
+        Route::match(['get', 'post'], '/createTerm/{handle?}', 'createTerm')->name('createTerm');
+        Route::match(['get', 'post'], '/editTerm/{id?}', 'editTerm')->whereNumber('id')->name('editTerm');
     });
 
 // Assets Routes

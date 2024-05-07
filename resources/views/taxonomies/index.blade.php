@@ -20,7 +20,8 @@
                     @foreach ($data as $taxonomies)
                         <tr class="sortable-row outline-none" tabindex="0"><!----><!---->
                             <td class=""><a
-                                    href="https://demo.statamic.com/cp/taxonomies/tags">{{ $taxonomies->handle }}</a></td>
+                                    href="{{ route('taxonomies.table', ['handle' => $taxonomies->handle]) }}">{{ $taxonomies->title }}</a>
+                            </td>
                             <td class="rtl:text-left ltr:text-right rtl:pl-8 ltr:pr-8">
                                 <div bis_skin_checked="1">
                                     <div handle="terms" values="[object Object]" class="" bis_skin_checked="1">8</div>
@@ -32,7 +33,7 @@
                                         $menuItems = [
                                             [
                                                 'label' => 'Edit',
-                                                'route' => route('navigations.edit'),
+                                                'route' => route('taxonomies.edit', ['id' => $taxonomies->id]),
                                             ],
                                             [
                                                 'label' => 'Delete',
