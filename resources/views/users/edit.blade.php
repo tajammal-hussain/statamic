@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('content')
     @php
-        $roles = ["user", "admin", "superadmin"];
+            $roles = ["superadmin", "admin","user"];
     @endphp
     <title>{{"Users edit :: Cedar"}}</title>
     <div class="page-wrapper max-w-xl">
@@ -95,9 +95,7 @@
                                     <div>
                                         <select id="fieldRoles" name="role"
                                                 class="form-control w-full h-10 rounded-md relative z-1">
-{{--                                            <option value="user">User</option>--}}
-{{--                                            <option value="admin">Admin</option>--}}
-{{--                                            <option value="superadmin">Superadmin</option>--}}
+
                                             @foreach($roles as $role)
                                                 <option value="{{ strtolower($role) }}" @if(Auth::user()->role == $role) selected @endif>{{ $role }}</option>
                                             @endforeach
@@ -117,6 +115,7 @@
                         <div class="@container">
                             <div>
                                 <input type="file" name="image"  id="uploadButton">
+
                             </div><!----></div><!----><!----></div>
                     <div class="publish-tab publish-tab-actions-footer vue-portal-target "></div>
                     </form>
@@ -150,7 +149,7 @@
             });
         });
         // Assuming you have the user's role available in a variable named userRole
-        const userRole = "{{ Auth::user()->role }}"; // Retrieve the user's role from Laravel's Auth
+        {{--const userRole = "{{ Auth::user()->role }}"; // Retrieve the user's role from Laravel's Auth--}}
 
         // document.addEventListener('DOMContentLoaded', function() {
         //     const selectElement = document.getElementById('fieldRoles');

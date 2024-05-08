@@ -42,79 +42,30 @@ class UsersController extends Controller
         return $users;
     }
 
-    public function table(Request $request){
-//        $email = $request->segment(count($request->segments()));
+    public function table($id)
+    {
+       if(Auth::user()->hasRole('superadmin')){
+        // Query the 'users' table and join with 'roles'
+        $user = User::where('users.id', $id)
+            ->leftJoin('roles', 'users.id', '=', 'roles.id')
+            ->select('users.*', 'roles.name as role_name')
+            ->first();
 
-//// Query the 'users' table and join with 'roles'
-//        $user = User::where('email', $email)
-//            ->leftJoin('roles', 'users.id', '=', 'roles.id')
-//            ->select('users.*', 'roles.name as role_name')
-//            ->first();
-//
-//// Check if the user exists
-//        $data['user'] = $user ? $user : false;
-//
-//// Return the user data to the view
-//        return view('users.edit', $data);
-        // Get the authenticated user
-        $authenticatedUser = Auth::user();
 
-        // Get the email from the request URL segment
-        $email = $request->segment(count($request->segments()));
-
-        // If the authenticated user's email matches the requested email, proceed
-        if ($authenticatedUser && $authenticatedUser->email === $email) {
-            // Query the 'users' table and join with 'roles'
-            $user = User::where('email', $email)
-                ->leftJoin('roles', 'users.id', '=', 'roles.id')
-                ->select('users.*', 'roles.name as role_name')
-                ->first();
-
-            // Check if the user exists
-            $data['user'] = $user ? $user : false;
-
+        // Check if the user exists
+        if ($user) {
             // Return the user data to the view
-            return view('users.edit', $data);
+            return view('users.edit', ['user' => $user]);
         } else {
-            // If the authenticated user's email does not match the requested email, redirect to login
-            return $this->index()->with('error', 'Unauthorized access.');
+            // If the user does not exist, return an error message or handle accordingly
+            return redirect()->back()->with('error', 'User not found.');
         }
-
-
+       } else{
+           return redirect()->back()->with('error', 'Unauthorized access.');
+       }
     }
-//    public function changePassword(Request $request)
-//    {
-//        $request->validate([
-//            'current_password' => 'required',
-//            'password' => 'required|min:8|confirmed',
-//        ]);
-//
-//        $user = Auth::user();
-//
-//        // Check if the current password matches the user's actual current password
-//        if (!Hash::check($request->current_password, $user->password)) {
-//            return redirect()->back()->with('error', 'Current password is incorrect.');
-//        }
-//
-//        // Update the user's password with the new one
-//        $user->password = Hash::make($request->password);
-//        $user->save();
-//
-//        return redirect()->back()->with('success', 'Password changed successfully.');
-//    }
-//    public function update(Request $request, $email)
-//    {
-//        $user = User::where('email', $email)->first();
-//        Validator::make((array)$request, [
-//            'name' => 'required|max:255|unique:users,name,'.$user->id,
-//            'email' => 'required|email|max:255|unique:users,email,'.$user->id,
-//        ]);
-//
-//        $input = $request->only('name','email');
-//
-//        $user->update($input);
-//        return back()->with('success', 'Profile Updated successfully.');
-//    }
+
+
     public function update(Request $request)
     {
         $user = Auth::user();
@@ -124,7 +75,7 @@ class UsersController extends Controller
             'name' => ['sometimes', 'required', 'max:255', Rule::unique('users')->ignore($user->id)],
             'email' => ['sometimes', 'required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
             'image' => ['sometimes', 'image', 'mimes:jpeg,png,jpg', 'max:8192'],
-            'role' => ['sometimes', 'required', 'string', Rule::in(['admin', 'user'])], // Adjust this based on your roles
+            'role' => ['sometimes', 'required', 'string', Rule::in(['superadmin','admin', 'user'])], // Adjust this based on your roles
         ]);
 
         // If validation fails, redirect back with errors
@@ -149,7 +100,7 @@ class UsersController extends Controller
         if ($request->filled('email')) {
             $user->email = $request->email;
         }
-        $user->save();
+        $user->fill($request->except('last_login'))->save();
 
         // Update user's role if provided
         if ($request->filled('role')) {

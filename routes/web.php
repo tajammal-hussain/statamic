@@ -128,7 +128,7 @@ Route::controller(UsersController::class)
     ->group(function () {
         Route::get('', 'index')->name('users');
         Route::get('/edit', 'edit')->name('edit');
-        Route::get('/table/{email?}', 'table')->name('table');
+        Route::get('/table/{id?}', 'table')->name('table');
         Route::put('/users/{email?}', 'update')->name('update');
         Route::post('/password/change', 'changePassword')->name('change');
     });

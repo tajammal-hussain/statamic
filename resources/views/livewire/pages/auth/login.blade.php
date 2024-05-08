@@ -4,6 +4,8 @@ use App\Livewire\Forms\LoginForm;
 use Illuminate\Support\Facades\Session;
 use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
+use Carbon\Carbon;
+use \Illuminate\Support\Facades\Auth;
 
 new #[Layout('layouts.guest')] class extends Component {
     public LoginForm $form;
@@ -18,7 +20,9 @@ new #[Layout('layouts.guest')] class extends Component {
         $this->form->authenticate();
 
         Session::regenerate();
-
+        Auth::user()->update([
+            'last_login' => Carbon::now()->toDateTimeString(),
+        ]);
         // $this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
         redirect('/dashboard');
     }

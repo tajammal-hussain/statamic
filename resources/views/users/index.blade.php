@@ -170,7 +170,7 @@
                                                                        value="14f7ad69-9fb8-4444-8a7a-fb626fc2a194">
                                     </th>
                                     <td class=""><a
-                                                href="{{ route('users.table', ['email' => $user->email]) }}"
+                                                href="{{ route('users.table', ['id' => $user->id]) }}"
                                                 class="flex items-center">
                                             {{ $user->email }}
                                         </a></td>
