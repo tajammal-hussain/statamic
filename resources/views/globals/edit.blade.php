@@ -27,7 +27,7 @@
               <div><!---->
                 <div class="publish-tab-outer">
                   <div class="publish-tab-wrapper w-full min-w-0">
-                    <div data-tab-handle="main" tabindex="0" class="publish-tab tab-panel w-full">
+                    <div data-tab-handle="main" tabindex="0" class="publish-tab w-full">
                       <div class="publish-sections">
                         <div class="publish-sections-section">
                           <div class="p-0 card"><!---->
