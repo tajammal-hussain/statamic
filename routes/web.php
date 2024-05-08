@@ -96,7 +96,8 @@ Route::controller(GlobalsController::class)
     ->group(function () {
         Route::get('', 'index')->name('globals');
         Route::match(['get', 'post'], '/add', 'add')->name('add');
-        Route::get('/edit', 'edit')->name('edit');
+        Route::match(['get', 'post'], '/edit/{id?}', 'edit')->name('edit');
+        Route::match(['get', 'post'], '/delete/{id?}', 'delete')->name('delete');
         Route::get('/configure', 'configure')->name('configure');
     });
 

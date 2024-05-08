@@ -1,6 +1,8 @@
 @extends('layouts.main')
+
+@section('title', 'Add Global')
+
 @section('content')
-    <title>Globals add :: Cedar</title>
     <div class="page-wrapper max-w-xl">
         <div class="max-w-lg mt-4 mx-auto">
             <div class="rounded p-6 lg:px-20 lg:py-10 shadow bg-white">

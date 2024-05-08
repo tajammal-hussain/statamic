@@ -12,10 +12,12 @@ class TaxonomiesController extends Controller
 {
     public function index()
     {
-        $firstCol = "Title";
-        $secondCol = "Entries";
-        $data = Taxonomies::all();
-        return view('taxonomies.index', compact('firstCol', 'secondCol', 'data'));
+        $data['columns'] = [
+            ['name' => 'Title'],
+            ['name' => 'Terms'],
+        ];
+        $data['data'] = Taxonomies::all();
+        return view('taxonomies.index', $data);
     }
 
     public function add(Request $request)
@@ -32,12 +34,14 @@ class TaxonomiesController extends Controller
             endif;
 
             $taxonomies = new Taxonomies();
-            $taxonomies->title = $request->input('title');
-            $taxonomies->handle = $request->input('handle');
-            $taxonomies->save();
+            $taxonomies = [
+                'title' => $request->input('title'),
+                'handle' => $request->input('handle'),
+            ];
+            Taxonomies::insert($taxonomies);
 
-            $request->session()->flash('success', 'Taxonomy created successfully.');
-            return redirect()->route('taxonomies.add');
+            // Redirect back with success message
+            return redirect()->back()->with('success', 'Collection created successfully.');
         else :
             return view('taxonomies.add');
         endif;
@@ -189,13 +193,12 @@ class TaxonomiesController extends Controller
                 'site' => $validatedData['slug'],
                 'uri' => null,
             ];
-            // Assuming $termId holds the ID of the entry you want to update
-            TaxonomyTerms::where('id', $termId)
-                ->update($entry);
+            TaxonomyTerms::where('id', $termId)->update($entry);
             // Redirect back with success message
             return redirect()->back()->with('success', 'Term updated successfully.');
         else :
             $data['taxonomyTerms'] = TaxonomyTerms::where(['id' => $termId])->first();
+            $data['taxonomy'] = Taxonomies::where(['handle' => $data['taxonomyTerms']->taxonomy])->first();
             return view('taxonomies.editTerm', $data);
         endif;
     }

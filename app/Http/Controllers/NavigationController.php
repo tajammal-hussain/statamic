@@ -12,12 +12,12 @@ class NavigationController extends Controller
 
     public function index()
     {
-        $firstCol = 'Title';
-        $secondCol = 'Entries';
-        $data = Navigations::where(['status' => "1"])
-            ->get();
+        $data['columns'] = [
+            ['name' => 'Title'],
+        ];
+        $data['navigationsInfo'] = Navigations::where(['status' => "1"])->get();
 
-        return view('navigations.index', compact('firstCol', 'secondCol', 'data'));
+        return view('navigations.index', $data);
     }
 
     public function add(Request $request)
@@ -34,12 +34,14 @@ class NavigationController extends Controller
             endif;
 
             $navigation = new Navigations();
-            $navigation->title = $request->input('title');
-            $navigation->handle = $request->input('handle');
-            $navigation->save();
+            $navigation = [
+                'title' => $request->input('title'),
+                'handle' => $request->input('handle'),
+            ];
+            Navigations::insert($navigation);
 
-            $request->session()->flash('success', 'Navigation Collection created successfully.');
-            return redirect()->route('navigations.add');
+            // Redirect back with success message
+            return redirect()->back()->with('success', 'Collection created successfully.');
         else :
             return view('navigations.add');
         endif;
@@ -71,9 +73,7 @@ class NavigationController extends Controller
                 'updated_at' => $mytime->toDateTimeString(),
             ];
 
-            // Assuming $navigationid holds the ID of the navigation you want to update
-            Navigations::where('id', $navigationId)
-                ->update($navigation);
+            Navigations::where('id', $navigationId)->update($navigation);
             // Redirect back with success message
             return redirect()->back()->with('success', 'Navigation has been updated successfully.');
         else :

@@ -1,21 +1,27 @@
 @extends('layouts.main')
+
+@section('title', 'Collections')
+
 @section('content')
-    <title>{{ 'Collections :: Cedar' }}</title>
     <div class="page-wrapper max-w-xl" bis_skin_checked="1">
         <div class="flex items-center justify-between mb-6" bis_skin_checked="1">
             <h1>{{ 'Collections' }}</h1>
-            @role('superadmin')
+            {{-- @role('superadmin')
                 <a href="{{ route('collections.addCollection') }}" class="btn-primary">Create Collection</a>
-            @endrole
+            @endrole --}}
         </div>
         <div class="card p-0" endpoints="" bis_skin_checked="1">
             <table data-size="sm" tabindex="0" class="data-table">
-                <x-table-head :firstcol="$firstCol" :secondcol="$secondCol" />
+                {{-- Head content goes here --}}
+                <x-table-head :columns="$columns" />
+
                 <tbody tabindex="0">
                     @foreach ($collectionsInfo as $collection)
                         <tr class="sortable-row outline-none" tabindex="0">
-                            <td class=""><a
-                                    href="{{ route('collections.table', ['slug' => $collection->handle]) }}">{{ $collection->title }}</a>
+                            <td class="">
+                                <a href="{{ route('collections.table', ['slug' => $collection->handle]) }}">
+                                    {{ $collection->title }}
+                                </a>
                             </td>
                             <td class="rtl:text-left ltr:text-right rtl:pl-8 ltr:pr-8">
                                 <div bis_skin_checked="1">

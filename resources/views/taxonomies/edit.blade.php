@@ -1,6 +1,8 @@
 @extends('layouts.main')
+
+@section('title', 'Edit Taxonomy')
+
 @section('content')
-    <title>Taxonomies edit :: Cedar</title>
     <div class="page-wrapper max-w-xl">
         <div>
             <header class="mb-6">

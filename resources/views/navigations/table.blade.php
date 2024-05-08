@@ -1,6 +1,8 @@
 @extends('layouts.main')
+
+@section('title', $navigation->title)
+
 @section('content')
-    <title>Navigation Footer :: Cedar</title>
     <div class="page-wrapper max-w-xl">
         <div>
             <header class="mb-6">

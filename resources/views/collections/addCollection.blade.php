@@ -1,6 +1,8 @@
 @extends('layouts.main')
+
+@section('title', 'Create Collection')
+
 @section('content')
-    <title>Create Collection :: Cedar</title>
     <div class="page-wrapper max-w-xl">
         <div class="max-w-lg mt-4 mx-auto">
             <div class="rounded p-6 lg:px-20 lg:py-10 shadow bg-white">
