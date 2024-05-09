@@ -69,7 +69,7 @@
                             <div class="flex items-center">
                                 <div class="input-group"><!----><input id="field_name" name="name"
                                                                        value="{{ $user->name }}" type="text"
-                                                                       class="input-text relative z-1"><!----></div><!----></div>
+                                                                       class="input-text"><!----></div><!----></div>
                             <!---->
                             <!----></div>
                         <div class="form-group publish-field publish-field__email text-fieldtype w-full">
@@ -82,7 +82,7 @@
                             <div class="flex items-center">
                                 <div class="input-group"><!----><input id="field_email" name="email"
                                                                        value="{{ $user->email }}" type="email"
-                                                                       class="input-text relative z-1"><!----></div><!----></div>
+                                                                       class="input-text"><!----></div><!----></div>
                             <!---->
                             <!----></div>
                         <div class="form-group publish-field publish-field__roles relationship-fieldtype w-full @lg:w-1/2">

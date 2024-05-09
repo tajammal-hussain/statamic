@@ -6239,9 +6239,6 @@ code.parent-url {
     color: rgb(239 68 68 / var(--tw-text-opacity))
 }
 
-.publish-fields .field-inner {
-    position: relative
-}
 
 .publish-fields .read-only-overlay {
     position: absolute;
@@ -6252,10 +6249,6 @@ code.parent-url {
     cursor: not-allowed;
     background-color: #ffffff40;
     z-index: 100
-}
-
-.publish-field {
-    position: relative
 }
 
 .publish-field-label {
