@@ -50,7 +50,7 @@
                             </div><!---->
                             <div class="flex items-center">
                               <div class="input-group"><!----><input id="field_title" name="title" type="text"
-                                  autofocus="autofocus" class="input-text" value="Contact"><!----></div><!---->
+                                  autofocus="autofocus" class="input-text" value="{{session('title')}}"><!----></div><!---->
                             </div><!----><!---->
                           </div>
                         </div>

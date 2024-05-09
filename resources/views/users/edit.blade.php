@@ -29,7 +29,7 @@
                                 </svg>
                             </button>
                         </div>
-                        <div class="dropdown-content absolute top-full left-0 w-32 bg-white border border-gray-300 rounded-md shadow-md" x-show="isOpen" @click.away="isOpen = false">
+                        <div class="dropdown-content absolute top-8 left-0 w-32 bg-white border border-gray-300 rounded-md shadow-md" x-show="isOpen" @click.away="isOpen = false">
                             <ul>
                                 <li><a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Option 1</a></li>
                                 <li><a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Option 2</a></li>
@@ -39,14 +39,14 @@
 
 
 
-                    <div class="ml-4">
-                        <div aria-haspopup="true">
-                            <button class="btn" id="togglePasswordFields">Change Password</button>
+                    <div class="ml-2">
+                        <div aria-haspopup="true" >
+                            <button class="btn ml-2" id="togglePasswordFields">Change Password</button>
                         </div>
-                        <div class="hidden absolute bg-white shadow-lg rounded-md" style="transform: translate(5px, 8px);" id="passwordFields">
-
+                        <div class="hidden absolute bg-white shadow-lg rounded-md" style="transform: translate(0px, 8px);" id="passwordFields">
+                            <div class="p-2">
                             <livewire:profile.update-password-form style="z-index: 99;"/>
-
+                            </div>
                         </div>
                         <div class="hidden"></div>
                     </div>
@@ -94,7 +94,7 @@
                                 <div class="relationship-input">
                                     <div>
                                         <select id="fieldRoles" name="role"
-                                                class="form-control w-full h-10 rounded-md relative z-1">
+                                                class="form-control w-full h-10 rounded-md">
 
                                             @foreach($roles as $role)
                                                 <option value="{{ strtolower($role) }}" @if(Auth::user()->role == $role) selected @endif>{{ $role }}</option>
@@ -125,12 +125,6 @@
         </div>
     </div>
     <script>
-        $(document).ready(function() {
-            $('.dropdown-toggle').click(function() {
-                $(this).toggleClass('rotated');
-                $('.dropdown-content').slideToggle();
-            });
-        });
 
         document.getElementById('saveButton').addEventListener('click', function () {
             // Trigger form submission when the button is clicked

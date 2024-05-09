@@ -1,10 +1,14 @@
 @extends('layouts.main')
 @section('content')
-    <title>Forms :: Cedar</title>
+    <title>{{"Forms :: Cedar"}}</title>
     <div class="page-wrapper max-w-xl" bis_skin_checked="1">
         <div class="flex items-center mb-6" bis_skin_checked="1">
-            <h1 class="flex-1">Forms</h1> <a href="https://demo.statamic.com/cp/forms/create" class="btn-primary">Create
+            <h1 class="flex-1">{{"Forms"}}</h1>
+            @role('superadmin')
+            <a href="{{route('forms.add')}}" class="btn-primary">Create
                 Form</a>
+            @endrole
+
         </div>
         <div class="card overflow-hidden p-0 relative" visible-columns="[object Object],[object Object]" bis_skin_checked="1">
             <!---->
@@ -29,7 +33,7 @@
                 <tbody tabindex="0">
                     <tr class="sortable-row outline-none"><!---->
                         <th class="checkbox-column"><input type="checkbox" id="checkbox-contact" value="contact"></th>
-                        <td class=""><a href="https://demo.statamic.com/cp/forms/contact">Contact</a></td>
+                        <td class=""><a href="{{route('forms.table')}}">Contact</a></td>
                         <td class="">
                             <div bis_skin_checked="1">
                                 <div handle="submissions" values="[object Object]" class="" bis_skin_checked="1">5
@@ -38,14 +42,19 @@
                         </td><!---->
                         <th class="actions-column">
                             <div class="dropdown-list" bis_skin_checked="1">
-                                <div aria-haspopup="true" bis_skin_checked="1"><button aria-label="Open Dropdown"
-                                        class="rotating-dots-button"><svg width="12" viewBox="0 0 24 24"
-                                            class="rotating-dots fill-current">
-                                            <circle cx="3" cy="12" r="3"></circle>
-                                            <circle cx="12" cy="12" r="3"></circle>
-                                            <circle cx="21" cy="12" r="3"></circle>
-                                        </svg></button></div>
-                                <div class="v-portal" style="display: none;" bis_skin_checked="1"></div>
+                                @php
+                                    $menuItems = [
+                                        [
+                                            'label' => 'Edit',
+                                            'route' => route('forms.edit'),
+                                        ],
+                                        [
+                                            'label' => 'Delete',
+                                            'route' => route('dashboard'),
+                                        ],
+                                    ];
+                                @endphp
+                                <x-customDropdown :menuItems="$menuItems"></x-customDropdown>
                             </div>
                         </th>
                     </tr>

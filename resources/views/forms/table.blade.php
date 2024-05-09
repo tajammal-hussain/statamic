@@ -84,7 +84,7 @@
                     <tr class="sortable-row outline-none" tabindex="0"><!---->
                       <th class="checkbox-column"><input type="checkbox" id="checkbox-1668105792.0463"
                           value="1668105792.0463"></th>
-                      <td class=""><a href="https://demo.statamic.com/cp/forms/contact/submissions/1668105792.0463"
+                      <td class=""><a href="{{route('forms.view')}}"
                           class="text-blue">2022-11-10 18:43</a></td>
                       <td class="">
                         <div>

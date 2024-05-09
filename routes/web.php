@@ -116,8 +116,8 @@ Route::controller(FormsController::class)
     ->as('forms.')
     ->group(function () {
         Route::get('', 'index')->name('forms');
-        Route::get('/add', 'add')->name('add');
-        Route::get('/edit', 'edit')->name('edit');
+        Route::match(['get', 'post'], '/add', 'add')->name('add');
+        Route::match(['get', 'post'], '/edit/{title?}', 'edit')->name('edit');
         Route::get('/table', 'table')->name('table');
         Route::get('/view', 'view')->name('view');
     });
