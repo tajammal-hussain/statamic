@@ -13,9 +13,20 @@ class CollectionsSeeder extends Seeder
      */
     public function run(): void
     {
-        Collections::create([
-            'handle' => 'posts',
-            'title' => 'Posts',
-        ]);
+        $collections = [
+            [
+                'title' => 'Posts',
+                'handle' => 'posts',
+            ],
+            [
+                'title' => 'Pages',
+                'handle' => 'pages',
+            ],
+            [
+                'title' => 'News Articles',
+                'handle' => 'news-articles',
+            ],
+        ];
+        Collections::insert($collections);
     }
 }

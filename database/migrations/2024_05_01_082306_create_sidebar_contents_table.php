@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sidebar_content', function (Blueprint $table) {
+        Schema::create('sidebar_contents', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('url');

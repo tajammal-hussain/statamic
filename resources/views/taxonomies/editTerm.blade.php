@@ -1,6 +1,8 @@
 @extends('layouts.main')
+
+@section('title', 'Edit Term')
+
 @section('content')
-    <title>{{"Edit Term :: Cedar"}}</title>
     <div class="page-wrapper max-w-3xl">
         <div>
             <form id="myForm" method="POST" action="{{ route('taxonomies.editTerm', ['id' => $taxonomyTerms->id]) }}">
@@ -10,12 +12,12 @@
                             viewBox="0 0 24 24" class="align-middle h-6 w-4 rotate-180">
                             <path fill="currentColor" fill-rule="evenodd"
                                 d="m10.414 7.05 4.95 4.95-4.95 4.95L9 15.534 12.536 12 9 8.464z"></path>
-                        </svg><span>{{ json_decode($taxonomyTerms->data)->title }}</span></a>
+                        </svg><span>{{ $taxonomy->title }}</span></a>
                 </div>
                 <div class="flex items-center mb-6">
                     <h1 class="flex-1">
                         <div class="flex items-center"><span
-                                class="little-dot rtl:ml-2 ltr:mr-2 published v-popper--has-tooltip"></span><span>{{ 'Edit Term' }}</span>
+                                class="little-dot rtl:ml-2 ltr:mr-2 published v-popper--has-tooltip"></span><span>{{ json_decode($taxonomyTerms->data)->title }}</span>
                         </div>
                     </h1>
                     <div class="hidden md:flex items-center">
@@ -287,7 +289,8 @@
                                                                             <input id="field_slug" name="slug"
                                                                                 type="text"dir="ltr"
                                                                                 class="input-text font-mono text-xs"
-                                                                                value="{{ $taxonomyTerms->slug }}" readonly>
+                                                                                value="{{ $taxonomyTerms->slug }}"
+                                                                                readonly>
                                                                         </div>
                                                                     </div>
                                                                 </div>

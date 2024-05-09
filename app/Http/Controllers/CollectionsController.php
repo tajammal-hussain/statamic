@@ -14,8 +14,10 @@ class CollectionsController extends Controller
 {
     public function index()
     {
-        $data['firstCol'] = "Title";
-        $data['secondCol'] = "Entries";
+        $data['columns'] = [
+            ['name' => 'Title'],
+            ['name' => 'Entries'],
+        ];
         $data['collectionsInfo'] = DB::table('collections')
             ->leftJoin('entries', 'collections.handle', '=', 'entries.collection')
             ->select('collections.id', 'collections.title', 'collections.handle', DB::raw('COUNT(entries.id) as entriesCount'))
@@ -39,12 +41,14 @@ class CollectionsController extends Controller
             endif;
 
             $collection = new Collections();
-            $collection->title = $request->input('title');
-            $collection->handle = $request->input('handle');
-            $collection->save();
+            $collection = [
+                'title' => $request->input('title'),
+                'handle' => $request->input('handle'),
+            ];
+            Collections::insert($collection);
 
-            $request->session()->flash('success', 'Collection created successfully.');
-            return redirect()->route('collections.addCollection');
+            // Redirect back with success message
+            return redirect()->back()->with('success', 'Collection created successfully.');
         else :
             return view('collections.addCollection');
         endif;
@@ -121,7 +125,7 @@ class CollectionsController extends Controller
             // Redirect back with success message
             return redirect()->back()->with('success', 'Entry added successfully.');
         else :
-            $data['collections'] = Collections::where(['handle' => $handle])->first();
+            $data['collection'] = Collections::where(['handle' => $handle])->first();
             return view('collections.addEntry', $data);
         endif;
     }
@@ -200,7 +204,7 @@ class CollectionsController extends Controller
             return redirect()->back()->with('success', 'Entry added successfully.');
         else :
             $data['entries'] = Entries::where(['id' => $entryId])->first();
-            $data['collections'] = Collections::where(['handle' => $data['entries']->collection])->first();
+            $data['collection'] = Collections::where(['handle' => $data['entries']->collection])->first();
             return view('collections.editEntry', $data);
         endif;
     }
@@ -216,16 +220,10 @@ class CollectionsController extends Controller
     public function table(Request $request)
     {
         // Getting URI Segment
-        $data['handle'] = $request->segment(count($request->segments()));
-        $query = DB::table('entries')
-            ->join('collections', 'entries.collection', '=', 'collections.handle')
-            ->where('collections.handle', $data['handle'])
-            ->select('entries.id as entry_id', 'entries.site', 'collections.id as collectionId', 'entries.published', 'entries.status', 'entries.slug', 'entries.uri', 'entries.date', 'entries.order', 'entries.collection', 'entries.data', 'entries.created_at', 'entries.updated_at', 'collections.handle', 'collections.title as title', 'collections.settings')
-            ->get();
-        // check if the result is not empty
-        $data['entries'] = $query ?? false;
+        $handle = $request->segment(count($request->segments()));
+        $data['collection'] = Collections::where(['handle' => $handle])->first();
+        $data['entries'] = Entries::where(['collection' => $handle])->get();
 
         return view('collections.table', $data);
     }
-    
 }

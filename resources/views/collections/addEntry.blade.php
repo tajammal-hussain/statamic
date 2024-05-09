@@ -1,16 +1,18 @@
 @extends('layouts.main')
+
+@section('title', 'Create Entry')
+
 @section('content')
-    <title>Create Entry :: Cedar</title>
     <div class="page-wrapper max-w-3xl">
         <div>
-            <form id="myForm" method="POST" action="{{ route('collections.addEntry', ['slug' => $collections->handle]) }}">
+            <form id="myForm" method="POST" action="{{ route('collections.addEntry', ['slug' => $collection->handle]) }}">
                 @csrf
                 <div class="breadcrumb flex"><a href="javascript:void(0);"
                         class="flex-initial flex p-2 -m-2 items-center text-xs text-gray-700 hover:text-gray-900"><svg
                             viewBox="0 0 24 24" class="align-middle h-6 w-4 rotate-180">
                             <path fill="currentColor" fill-rule="evenodd"
                                 d="m10.414 7.05 4.95 4.95-4.95 4.95L9 15.534 12.536 12 9 8.464z"></path>
-                        </svg><span>{{ $collections->title }}</span></a>
+                        </svg><span>{{ $collection->title }}</span></a>
                 </div>
                 <div class="flex items-center mb-6">
                     <h1 class="flex-1">
@@ -371,7 +373,7 @@
     </div>
 
     <script>
-        const submitFormUrl = "{{ route('collections.addEntry', ['slug' => $collections->handle]) }}";
+        const submitFormUrl = "{{ route('collections.addEntry', ['slug' => $collection->handle]) }}";
     </script>
     <script src="{{ url('js/entries.js') }}"></script>
 

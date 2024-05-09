@@ -1,6 +1,6 @@
 @extends('layouts.main')
+@section('title', 'Create Term')
 @section('content')
-    <title>{{ 'Create Term :: Cedar' }}</title>
     <div class="page-wrapper max-w-3xl">
         <div>
             <form id="myForm" method="POST" action="{{ route('taxonomies.createTerm', ['handle' => $taxonomy->handle]) }}">

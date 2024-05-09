@@ -1,28 +1,28 @@
 @extends('layouts.main')
 
+@section('title', $collection->title)
+
 @section('content')
-    <title>{{ 'Table :: Cedar' }}</title>
     <div class="page-wrapper max-w-full" bis_skin_checked="1">
         <div bis_skin_checked="1">
-            <header class="mb-6">
 
+            <header class="mb-6">
                 <div class="breadcrumb flex" bis_skin_checked="1">
                     <a href="{{ route('collections.collections') }}"
                         class="flex-initial flex p-2 -m-2 items-center text-xs text-gray-700 hover:text-gray-900">
                         <svg viewBox="0 0 24 24" class="align-middle h-6 w-4 rotate-180">
                             <path fill="currentColor" fill-rule="evenodd"
-                                d="m10.414 7.05 4.95 4.95-4.95 4.95L9 15.534 12.536 12 9 8.464z"></path>
+                                d="m10.414 7.05 4.95 4.95-4.95 4.95L9 15.534 12.536 12 9 8.464z">
+                            </path>
                         </svg>
                         <span>{{ 'Collections' }}</span>
                     </a>
                 </div>
-
                 <div class="flex items-center" bis_skin_checked="1">
-                    <h1 class="flex-1">{{ sizeof($entries) ? $entries[0]->title : $handle }}</h1>
-
+                    <h1 class="flex-1">{{ $collection->title }}</h1>
                     <div class="dropdown-list inline-block" bis_skin_checked="1">
                         <div aria-haspopup="true" bis_skin_checked="1">
-                            <a href="{{ route('collections.addEntry', ['slug' => $handle]) }}">
+                            <a href="{{ route('collections.addEntry', ['slug' => $collection->handle]) }}">
                                 <button class="btn-primary">
                                     {{ 'Create Entry' }}
                                 </button>
@@ -166,7 +166,7 @@
                                                 <input type="checkbox" class="checkbox"id="" value="">
                                             </th>
                                             <td class="">
-                                                <a href="{{ route('collections.editEntry', ['id' => $entry->entry_id]) }}"
+                                                <a href="{{ route('collections.editEntry', ['id' => $entry->id]) }}"
                                                     class="title-index-field inline-flex items-center">
                                                     <span
                                                         class="little-dot rtl:ml-2 ltr:mr-2 bg-green-600 v-popper--has-tooltip"></span>
@@ -201,16 +201,20 @@
                                                 @php
                                                     $menuItems = [
                                                         [
-                                                            'label' => 'view', 
-                                                            'route' => route('collections.editEntry', ['id' => $entry->entry_id])
+                                                            'label' => 'view',
+                                                            'route' => route('collections.editEntry', [
+                                                                'id' => $entry->entry_id,
+                                                            ]),
                                                         ],
                                                         [
-                                                            'label' => 'edit', 
-                                                            'route' => route('collections.editEntry', ['id' => $entry->entry_id])
+                                                            'label' => 'edit',
+                                                            'route' => route('collections.editEntry', [
+                                                                'id' => $entry->entry_id,
+                                                            ]),
                                                         ],
                                                         [
-                                                            'label' => 'publish', 
-                                                            'route' => route('dashboard')
+                                                            'label' => 'publish',
+                                                            'route' => route('dashboard'),
                                                         ],
                                                     ];
                                                 @endphp
@@ -226,16 +230,6 @@
                     </table>
                 </div>
             </div>
-            <div class="w-full flex mt-6" bis_skin_checked="1">
-                <div class="flex flex-1 items-center" bis_skin_checked="1">
-                    <div class="text-xs text-gray-700" bis_skin_checked="1"></div>
-                </div>
-                <div class="flex flex-1" bis_skin_checked="1">
-                    <div class="flex-1" bis_skin_checked="1"></div>
-                </div>
-            </div>
         </div>
-    </div>
-    </div>
     </div>
 @endsection
