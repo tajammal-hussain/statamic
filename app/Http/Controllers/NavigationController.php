@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Navigations;
+use App\Models\Collections;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Carbon;
@@ -49,18 +50,19 @@ class NavigationController extends Controller
 
     public function edit(Request $request)
     {
+        // {"max_depth":"12","collections":["posts,pages,news_and_articles"]}
         $navigationId = $request->segment(count($request->segments()));
         if ($request->isMethod('post')) :
+            $selectedCollections[] = $request->input('collections');
             $rules = [
                 'title' => 'required|string|max:255',
                 'max_depth' => 'required|integer',
             ];
 
             $validatedData = $request->validate($rules);
-
             $navigationData = [
                 'max_depth' => $validatedData['max_depth'],
-                "collections" => null,
+                "collections" => $selectedCollections,
             ];
             $handle = preg_replace('/[^a-zA-Z0-9]/', '-', $validatedData['title']);
             // Convert data to JSON format
@@ -78,6 +80,7 @@ class NavigationController extends Controller
             return redirect()->back()->with('success', 'Navigation has been updated successfully.');
         else :
             $data['navigations'] = Navigations::where(['id' => $navigationId])->first();
+            $data['collections'] = Collections::all();
             return view('navigations.edit', $data);
         endif;
     }

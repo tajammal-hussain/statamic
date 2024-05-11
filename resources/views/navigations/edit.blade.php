@@ -43,60 +43,51 @@
                         @endif
                         <div class="mb-2 content">
                             <h2 class="text-base">Name</h2>
-                            <p></p>
                         </div>
                         <div>
                             <div class="publish-sections">
                                 <div class="publish-sections-section">
                                     <div class="p-0 card">
-                                        <!---->
                                         <div class="publish-fields @container">
                                             <div
                                                 class="form-group publish-field publish-field__title text-fieldtype w-full">
-                                                <div class="field-inner"><label for="field_title"
-                                                        class="publish-field-label"><span
-                                                            class="rtl:ml-1 ltr:mr-1 v-popper--has-tooltip">Title</span><i
-                                                            class="required rtl:ml-1 ltr:mr-1">*</i>
-                                                        <!---->
-                                                        <!---->
-                                                        <!----><button class="outline-none" style="display: none;"><svg
-                                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                <div class="field-inner">
+                                                    <label for="field_title" class="publish-field-label">
+                                                        <span class="rtl:ml-1 ltr:mr-1 v-popper--has-tooltip">Title</span>
+                                                        <i class="required rtl:ml-1 ltr:mr-1">*</i>
+                                                        <button class="outline-none" style="display: none;">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                                                                 class="h-4 w-4 rtl:ml-1.5 ltr:mr-1.5 mb-1 text-gray-600 v-popper--has-tooltip">
                                                                 <path fill="none" stroke="currentColor"
                                                                     stroke-linecap="round" stroke-linejoin="round"
                                                                     stroke-width="1.5"
                                                                     d="M10.082 9.5A4.47 4.47 0 0 0 6.75 8h-1.5a4.5 4.5 0 0 0 0 9h1.5a4.474 4.474 0 0 0 3.332-1.5m3.836-6A4.469 4.469 0 0 1 17.25 8h1.5a4.5 4.5 0 1 1 0 9h-1.5a4.472 4.472 0 0 1-3.332-1.5M6.75 12.499h10.5">
                                                                 </path>
-                                                            </svg></button><button class="outline-none"
-                                                            style="display: none;"><svg xmlns="http://www.w3.org/2000/svg"
-                                                                viewBox="0 0 24 24"
+                                                            </svg>
+                                                        </button>
+                                                        <button class="outline-none" style="display: none;">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                                                                 class="h-4 w-4 rtl:ml-1.5 ltr:mr-1.5 mb-1 text-gray-600 v-popper--has-tooltip">
                                                                 <path fill="none" stroke="currentColor"
                                                                     stroke-linecap="round" stroke-linejoin="round"
                                                                     stroke-width="1.5"
                                                                     d="M16.5 15.749h1.875A3.963 3.963 0 0 0 22.5 12h0a3.962 3.962 0 0 0-4.125-3.75H16.5m-9 7.499H5.625A3.963 3.963 0 0 1 1.5 12h0a3.963 3.963 0 0 1 4.125-3.75H7.5M12 5.249v-4.5m-3 4.5-1.5-1.5m7.5 1.5 1.5-1.5m-4.5 15v4.5m-3-4.5-1.5 1.5m7.5-1.5 1.5 1.5">
                                                                 </path>
-                                                            </svg></button>
+                                                            </svg>
+                                                        </button>
                                                     </label>
                                                     <div class="help-block -mt-2">
-                                                        <p>We recommend a name that matches where it will be used, like
-                                                            "Main
-                                                            Nav" or "Footer
-                                                            Nav".</p>
+                                                        <p>{{ 'We recommend a name that matches where it will be used, like "Main Nav" or "Footer Nav".' }}
+                                                        </p>
                                                     </div>
                                                 </div>
-                                                <!---->
                                                 <div class="flex items-center">
                                                     <div class="input-group">
-                                                        <!----><input id="field_title" name="title" type="text"
+                                                        <input id="field_title" name="title" type="text"
                                                             autofocus="autofocus" class="input-text"
                                                             value="{{ $navigations->title }}">
-                                                        <!---->
                                                     </div>
-                                                    <!---->
                                                 </div>
-                                                <!---->
-                                                <!---->
                                             </div>
                                         </div>
                                     </div>
@@ -107,18 +98,16 @@
                     <div>
                         <div class="mb-2 content">
                             <h2 class="text-base">Options</h2>
-                            <p></p>
                         </div>
                         <div>
                             <div class="publish-sections">
                                 <div class="publish-sections-section">
                                     <div class="p-0 card">
-                                        <!---->
                                         <div class="publish-fields @container">
                                             <div
                                                 class="form-group publish-field publish-field__collections relationship-fieldtype w-full">
-                                                <div class="field-inner"><label for="field_collections"
-                                                        class="publish-field-label">
+                                                <div class="field-inner">
+                                                    <label for="field_collections" class="publish-field-label">
                                                         <span
                                                             class="rtl:ml-1 ltr:mr-1 v-popper--has-tooltip">Collections</span>
                                                         <button class="outline-none" style="display: none;">
@@ -129,34 +118,36 @@
                                                                     stroke-width="1.5"
                                                                     d="M10.082 9.5A4.47 4.47 0 0 0 6.75 8h-1.5a4.5 4.5 0 0 0 0 9h1.5a4.474 4.474 0 0 0 3.332-1.5m3.836-6A4.469 4.469 0 0 1 17.25 8h1.5a4.5 4.5 0 1 1 0 9h-1.5a4.472 4.472 0 0 1-3.332-1.5M6.75 12.499h10.5">
                                                                 </path>
-                                                            </svg></button><button class="outline-none"
-                                                            style="display: none;"><svg xmlns="http://www.w3.org/2000/svg"
-                                                                viewBox="0 0 24 24"
+                                                            </svg>
+                                                        </button>
+                                                        <button class="outline-none" style="display: none;">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                                                                 class="h-4 w-4 rtl:ml-1.5 ltr:mr-1.5 mb-1 text-gray-600 v-popper--has-tooltip">
                                                                 <path fill="none" stroke="currentColor"
                                                                     stroke-linecap="round" stroke-linejoin="round"
                                                                     stroke-width="1.5"
                                                                     d="M16.5 15.749h1.875A3.963 3.963 0 0 0 22.5 12h0a3.962 3.962 0 0 0-4.125-3.75H16.5m-9 7.499H5.625A3.963 3.963 0 0 1 1.5 12h0a3.963 3.963 0 0 1 4.125-3.75H7.5M12 5.249v-4.5m-3 4.5-1.5-1.5m7.5 1.5 1.5-1.5m-4.5 15v4.5m-3-4.5-1.5 1.5m7.5-1.5 1.5 1.5">
                                                                 </path>
-                                                            </svg></button>
+                                                            </svg>
+                                                        </button>
                                                     </label>
                                                     <div class="help-block -mt-2">
-                                                        <p>Enable linking to entries in these collections.</p>
+                                                        <p>{{ 'Enable linking to entries in these collections.' }}</p>
                                                     </div>
                                                 </div>
-
                                                 <div>
                                                     <select x-cloak id="select">
-                                                        <option value="1">Option 2</option>
-                                                        <option value="2">Option 3</option>
-                                                        <option value="3">Option 4</option>
-                                                        <option value="4">Option 5</option>
+                                                        @foreach ($collections as $collection)
+                                                            <option value="{{ $collection->handle }}">
+                                                                {{ $collection->title }}
+                                                            </option>
+                                                        @endforeach
                                                     </select>
 
                                                     <div x-data="dropdown()" x-init="loadOptions()" class="w-full">
                                                         <form>
-                                                            <input name="values" type="hidden"
-                                                                x-bind:value="selectedValues()">
+                                                            <input name="collections" type="hidden"
+                                                                x-bind:value="selectedValues()" value="">
                                                             <div class="inline-block relative w-full">
                                                                 <div class="flex flex-col items-center relative">
                                                                     <div x-on:click="open" class="w-full  svelte-1l8159u">
@@ -180,10 +171,7 @@
                                                                                                     role="button"
                                                                                                     viewBox="0 0 20 20">
                                                                                                     <path
-                                                                                                        d="M14.348,14.849c-0.469,0.469-1.229,0.469-1.697,0L10,11.819l-2.651,3.029c-0.469,0.469-1.229,0.469-1.697,0
-                                                                                                                        c-0.469-0.469-0.469-1.229,0-1.697l2.758-3.15L5.651,6.849c-0.469-0.469-0.469-1.228,0-1.697s1.228-0.469,1.697,0L10,8.183
-                                                                                                                        l2.651-3.031c0.469-0.469,1.228-0.469,1.697,0s0.469,1.229,0,1.697l-2.758,3.152l2.758,3.15
-                                                                                                                        C14.817,13.62,14.817,14.38,14.348,14.849z" />
+                                                                                                        d="M14.348,14.849c-0.469,0.469-1.229,0.469-1.697,0L10,11.819l-2.651,3.029c-0.469,0.469-1.229,0.469-1.697,0 c-0.469-0.469-0.469-1.229,0-1.697l2.758-3.15L5.651,6.849c-0.469-0.469-0.469-1.228,0-1.697s1.228-0.469,1.697,0L10,8.183 l2.651-3.031c0.469-0.469,1.228-0.469,1.697,0s0.469,1.229,0,1.697l-2.758,3.152l2.758,3.15 C14.817,13.62,14.817,14.38,14.348,14.849z" />
                                                                                                 </svg>
                                                                                             </div>
                                                                                         </div>
@@ -283,17 +271,17 @@
                                                             </p>
                                                         </div>
                                                     </div>
-                                                    <!---->
+
                                                     <div class="flex items-center">
                                                         <div class="input-group">
-                                                            <!----><input id="field_max_depth" name="max_depth"
-                                                                type="number" value="" class="input-text">
-                                                            <!---->
+                                                            <input id="field_max_depth" name="max_depth" type="number"
+                                                                value="" class="input-text">
+
                                                         </div>
-                                                        <!---->
+
                                                     </div>
-                                                    <!---->
-                                                    <!---->
+
+
                                                 </div>
                                             </div>
                                         </div>

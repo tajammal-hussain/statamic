@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Collections;
+use App\Models\Taxonomies;
+use App\Models\User;
+use App\Models\TaxonomyTerms;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
@@ -56,7 +59,9 @@ class CollectionsController extends Controller
 
     public function addEntry(Request $request)
     {
+        // Using Publicly --------- for both if and else
         $handle = $request->segment(count($request->segments()));
+        $data['taxonomies'] = Taxonomies::whereRaw("JSON_EXTRACT(settings, '$.collections') LIKE '%$handle%'")->get();
         if ($request->isMethod('post')) :
             $isEnabled = $request->input('enableState');
             $isPublished = $request->input('publishState');
@@ -75,6 +80,12 @@ class CollectionsController extends Controller
                 'content' => $validatedData['content'],
                 'author' => $validatedData['author'],
             ];
+
+            foreach ($data['taxonomies'] as $taxonomy) :
+                $taxonomyHandle = $taxonomy->handle;
+                $selectedValues = $request->input($taxonomyHandle);
+                $entryData[$taxonomy->handle] = $selectedValues;
+            endforeach;
 
             if ($isEnabled) :
                 $metadataRules = [];
@@ -126,6 +137,11 @@ class CollectionsController extends Controller
             return redirect()->back()->with('success', 'Entry added successfully.');
         else :
             $data['collection'] = Collections::where(['handle' => $handle])->first();
+            $data['usersInfo'] = User::all();
+            if (!$data['taxonomies']->isEmpty()) : foreach ($data['taxonomies'] as $taxonomy) : $taxonomy->terms = TaxonomyTerms::where('taxonomy', $taxonomy->handle)->get();
+                endforeach;
+            endif;
+
             return view('collections.addEntry', $data);
         endif;
     }
@@ -133,6 +149,8 @@ class CollectionsController extends Controller
     public function editEntry(Request $request)
     {
         $entryId = $request->segment(count($request->segments()));
+
+
         if ($request->isMethod('post')) :
             $isEnabled = $request->input('enableState');
             $isPublished = $request->input('publishState');
@@ -205,6 +223,14 @@ class CollectionsController extends Controller
         else :
             $data['entries'] = Entries::where(['id' => $entryId])->first();
             $data['collection'] = Collections::where(['handle' => $data['entries']->collection])->first();
+
+            $taxonomyTerms = [];
+            foreach (json_decode($data['collection']->settings)->taxonomies as $taxonomy) {
+                $taxonomyTerms[$taxonomy] = TaxonomyTerms::where('taxonomy', $taxonomy)->get();
+            }
+            $data['taxonomyTerms'] = $taxonomyTerms;
+            // customPrint($data['taxonomyTerms'], 1);
+            $data['usersInfo'] = User::all();
             return view('collections.editEntry', $data);
         endif;
     }

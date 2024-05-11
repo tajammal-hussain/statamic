@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Taxonomies;
+use App\Models\Collections;
 use App\Models\TaxonomyTerms;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 
 
 class TaxonomiesController extends Controller
@@ -49,10 +51,46 @@ class TaxonomiesController extends Controller
 
     public function edit(Request $request)
     {
-        // {"revisions":false,"preview_targets":[{"label":"Term","format":"{permalink}","refresh":true}]}
         $taxonomyId = $request->segment(count($request->segments()));
         $data['taxonomies'] = Taxonomies::where(['id' => $taxonomyId])->first();
-        return view('taxonomies.edit', $data);
+        if ($request->isMethod('post')) :
+            // {"revisions":false,"preview_targets":[{"label":"Term","format":"{permalink}","refresh":true}]}
+            $selectedCollections[] = $request->input('collections');
+
+            $rules = ['title' => 'required|string|max:255'];
+
+            $validatedData = $request->validate($rules);
+            $taxonomyData = ["collections" => $selectedCollections];
+            $handle = preg_replace('/[^a-zA-Z0-9]/', '-', $validatedData['title']);
+            // Convert data to JSON format
+            $jsonData = json_encode($taxonomyData);
+            $mytime = Carbon::now();
+            $taxonomy = [
+                'settings' => $jsonData,
+                'title' => $validatedData['title'],
+                'handle' => $handle,
+                'updated_at' => $mytime->toDateTimeString(),
+            ];
+
+            $collectionsArray = explode(',', $selectedCollections[0]);
+
+            foreach ($collectionsArray as $collection) :
+                $existingSettings = Collections::where('handle', $collection)->value('settings');
+
+                $existingSettingsArray = json_decode($existingSettings, true);
+
+                $mergedSettings = array_merge_recursive($existingSettingsArray ?? [], ["taxonomies" => $data['taxonomies']->handle]);
+
+                Collections::where('handle', $collection)->update(['settings' => json_encode($mergedSettings)]);
+            endforeach;
+
+            Taxonomies::where('id', $taxonomyId)->update($taxonomy);
+            // Redirect back with success message
+            return redirect()->back()->with('success', 'taxonomy has been updated successfully.');
+        else :
+            $data['collections'] = Collections::all();
+            return view('taxonomies.edit', $data);
+        endif;
     }
 
     public function table(Request $request)

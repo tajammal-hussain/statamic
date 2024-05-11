@@ -1,4 +1,7 @@
 @extends('layouts.main')
+
+@section('title', 'Create Fieldsets')
+
 @section('content')
     <title>Fieldsets add :: Cedar</title>
     <div class="page-wrapper max-w-xl">

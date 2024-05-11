@@ -203,13 +203,13 @@
                                                         [
                                                             'label' => 'view',
                                                             'route' => route('collections.editEntry', [
-                                                                'id' => $entry->entry_id,
+                                                                'id' => $entry->id,
                                                             ]),
                                                         ],
                                                         [
                                                             'label' => 'edit',
                                                             'route' => route('collections.editEntry', [
-                                                                'id' => $entry->entry_id,
+                                                                'id' => $entry->id,
                                                             ]),
                                                         ],
                                                         [

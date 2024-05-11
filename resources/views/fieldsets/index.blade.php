@@ -1,12 +1,15 @@
 @extends('layouts.main')
+
+@section('title', 'Fieldsets')
+
 @section('content')
-    <title>Fieldsets :: Cedar</title>
     <div class="page-wrapper max-w-xl" bis_skin_checked="1">
         <div class="no-results md:mt-4 max-w-md mx-auto" bis_skin_checked="1">
             <div class="card rounded-xl text-center p-6 lg:py-10" bis_skin_checked="1">
-                <h1 class="mb-8">Fieldsets</h1>
-                <div class="hidden md:block" bis_skin_checked="1"><svg width="133" height="125" viewBox="0 0 133 125"
-                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                <h1 class="mb-8">{{ 'Fieldsets' }}</h1>
+                <div class="hidden md:block" bis_skin_checked="1">
+                    <svg width="133" height="125" viewBox="0 0 133 125" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M62.7309 125C97.2239 125 125.186 97.0178 125.186 62.5C125.186 27.9822 97.2239 0 62.7309 0C28.238 0 0.275879 27.9822 0.275879 62.5C0.275879 97.0178 28.238 125 62.7309 125Z"
                             fill="#EAEEF9"></path>
@@ -55,13 +58,16 @@
                         </g>
                         <path
                             d="M125.709 70.7846L103.232 59.42C102.127 58.8514 100.751 59.8778 100.918 61.1463L105.384 85.9485C105.569 87.1106 107.156 87.4123 107.827 86.3543L111.208 81.8816C111.656 81.1763 112.7 81.1405 113.144 81.7374L118.88 89.4362C119.236 89.9137 119.878 89.9918 120.378 89.6185L124.943 86.2125C125.444 85.8392 125.552 85.2012 125.196 84.7238L119.461 77.0249C118.972 76.3684 119.348 75.4374 120.152 75.2095L125.401 73.2434C126.543 72.9483 126.77 71.2935 125.709 70.7846Z"
-                            fill="#C2C8D6" stroke="#989FB0" stroke-width="2" stroke-miterlimit="10"></path>
-                    </svg></div>
+                            fill="#C2C8D6" stroke="#989FB0" stroke-width="2" stroke-miterlimit="10">
+                        </path>
+                    </svg>
+                </div>
                 <p class="text-gray-700 leading-normal my-8 text-lg antialiased">
-                    Fieldsets are an optional companion to blueprints, acting as reusable partials that can be used within
-                    blueprints.
-                </p> <a href="https://demo.statamic.com/cp/fields/fieldsets/create" class="btn-primary btn-lg">Create
-                    Fieldset</a>
+                    {{ 'Fieldsets are an optional companion to blueprints, acting as reusable partials that can be used within blueprints.' }}
+                </p>
+                <a href="{{ route('fieldsets.add') }}" class="btn-primary btn-lg">
+                    {{ 'Create Fieldset' }}
+                </a>
             </div>
         </div>
     </div>
