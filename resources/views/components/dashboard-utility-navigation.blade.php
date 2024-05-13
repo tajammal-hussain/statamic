@@ -111,13 +111,12 @@
         <div class="dropdown inline-block relative">
             <button id="dropdown4" class="md:block h-10 w-10 rtl:mr-4 ltr:ml-4 p-1 text-gray hover:text-gray-800 ">
                 <div class="rounded-full hover:shadow-md">
-                    @if (Auth::user()->image)
+                    @if (Auth::user()->image ?? false)
                         <img class="rounded-full hover:shadow-xl" src="{{ asset('/images/' . Auth::user()->image) }}">
                     @else
                         <img class="rounded-full hover:shadow-xl"
                             src="{{ asset('/imgs/cedar_technologiess_logo.jpg') }}">
                     @endif
-
 
                 </div>
             </button>
