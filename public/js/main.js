@@ -118,3 +118,30 @@ $(document).ready(function () {
         $('.workspace').toggleClass('shifted');
     });
 });
+
+// off-canvas js
+
+// Get all buttons and overlays
+const buttons = document.querySelectorAll('button[data-hs-overlay]');
+const overlays = document.querySelectorAll('.hs-overlay');
+const closeButtons = document.querySelectorAll('.btn-close');
+
+// Add event listeners to all buttons
+buttons.forEach((button, index) => {
+    const overlay = overlays[index];
+    const closeButton = closeButtons[index];
+
+    button.addEventListener('click', function() {
+        // Toggle the 'hidden' class on the overlay
+        overlay.classList.toggle('hidden');
+        // Toggle the '-translate-x-full' class on the overlay
+        overlay.classList.toggle('-translate-x-full');
+    });
+
+    closeButton.addEventListener('click', function() {
+        // Add the 'hidden' class on the overlay
+        overlay.classList.add('hidden');
+        // Add the '-translate-x-full' class on the overlay
+        overlay.classList.add('-translate-x-full');
+    });
+});

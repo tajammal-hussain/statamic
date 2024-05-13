@@ -94,7 +94,7 @@
                     </i>
                 </a>
                 <a class="flex hover:bg-gray-200 py-2 px-4 whitespace-no-wrap"><span>Keyboard
-                        Shortcuts</span></a>
+                        Shortcuts</span></a>    
             </div>
         </div>
     </div>
