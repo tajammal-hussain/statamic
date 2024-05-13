@@ -14,4 +14,12 @@ class FieldsetsController extends Controller
     {
         return view('fieldsets.add');
     }
+    public function edit()
+    {
+        return view('fieldsets.edit');
+    }
+    public function table()
+    {
+        return view('fieldsets.table');
+    }
 }

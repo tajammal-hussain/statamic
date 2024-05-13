@@ -108,6 +108,8 @@ Route::controller(FieldsetsController::class)
     ->group(function () {
         Route::get('', 'index')->name('fieldsets');
         Route::get('/add', 'add')->name('add');
+        Route::get('/edit', 'edit')->name('edit');
+        Route::get('/table', 'table')->name('table');        
     });
 
 // Forms Routes
