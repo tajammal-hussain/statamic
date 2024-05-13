@@ -19,14 +19,15 @@
                     @foreach ($collectionsInfo as $collection)
                         <tr class="sortable-row outline-none" tabindex="0">
                             <td class="">
-                                <a href="{{ route('collections.table', ['slug' => $collection->handle]) }}">
+                                <a href="{{ route('collections.entries.index', ['collection' => $collection->id]) }}">
+
                                     {{ $collection->title }}
                                 </a>
                             </td>
                             <td class="rtl:text-left ltr:text-right rtl:pl-8 ltr:pr-8">
                                 <div bis_skin_checked="1">
                                     <div handle="entries" values="" class="" bis_skin_checked="1">
-                                        {{ $collection->entriesCount }}
+                                        {{ $collection->entries_count }}
                                     </div>
                                 </div>
                             </td>
@@ -36,7 +37,9 @@
                                         $menuItems = [
                                             [
                                                 'label' => 'View',
-                                                'route' => route('collections.table', ['slug' => $collection->handle]),
+                                                'route' => route('collections.entries.index', [
+                                                    'collection' => $collection->id,
+                                                ]),
                                             ],
                                             [
                                                 'label' => 'Visit URL',

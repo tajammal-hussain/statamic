@@ -25,5 +25,7 @@ class DatabaseSeeder extends Seeder
         $this->call([CollectionsSeeder::class]);
         $this->call([EntriesSeeder::class]);
         $this->call([SidebarSeeder::class]);
+        $this->call([TaxonomySeeder::class]);
+        $this->call([TaxonomyTermsSeeder::class]);
     }
 }

@@ -7,7 +7,7 @@
         <div>
             <form id="myForm" method="POST" action="{{ route('collections.addEntry', ['slug' => $collection->handle]) }}">
                 @csrf
-                <div class="breadcrumb flex"><a href="javascript:void(0);"
+                <div class="breadcrumb flex"><a href="{{ route('collections.table', ['slug' => $collection->handle]) }}"
                         class="flex-initial flex p-2 -m-2 items-center text-xs text-gray-700 hover:text-gray-900"><svg
                             viewBox="0 0 24 24" class="align-middle h-6 w-4 rotate-180">
                             <path fill="currentColor" fill-rule="evenodd"

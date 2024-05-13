@@ -8,7 +8,7 @@
 
             <header class="mb-6">
                 <div class="breadcrumb flex" bis_skin_checked="1">
-                    <a href="{{ route('collections.collections') }}"
+                    <a href="{{ route('collections.index') }}"
                         class="flex-initial flex p-2 -m-2 items-center text-xs text-gray-700 hover:text-gray-900">
                         <svg viewBox="0 0 24 24" class="align-middle h-6 w-4 rotate-180">
                             <path fill="currentColor" fill-rule="evenodd"
@@ -22,7 +22,7 @@
                     <h1 class="flex-1">{{ $collection->title }}</h1>
                     <div class="dropdown-list inline-block" bis_skin_checked="1">
                         <div aria-haspopup="true" bis_skin_checked="1">
-                            <a href="{{ route('collections.addEntry', ['slug' => $collection->handle]) }}">
+                            <a href="{{ route('collections.entries.create', ['collection' => $collection->id]) }}">
                                 <button class="btn-primary">
                                     {{ 'Create Entry' }}
                                 </button>
@@ -160,13 +160,13 @@
                                     </tr>
                                 </thead>
                                 <tbody tabindex="0">
-                                    @foreach ($entries as $entry)
+                                    @foreach ($entriesInfo as $entry)
                                         <tr class="sortable-row outline-none" tabindex="0">
                                             <th class="checkbox-column">
                                                 <input type="checkbox" class="checkbox"id="" value="">
                                             </th>
                                             <td class="">
-                                                <a href="{{ route('collections.editEntry', ['id' => $entry->id]) }}"
+                                                <a href="{{ route('collections.entries.update', ['collection' => $collection->id, 'entry' => $entry->id]) }}"
                                                     class="title-index-field inline-flex items-center">
                                                     <span
                                                         class="little-dot rtl:ml-2 ltr:mr-2 bg-green-600 v-popper--has-tooltip"></span>
@@ -202,14 +202,16 @@
                                                     $menuItems = [
                                                         [
                                                             'label' => 'view',
-                                                            'route' => route('collections.editEntry', [
-                                                                'id' => $entry->id,
+                                                            'route' => route('collections.entries.update', [
+                                                                'collection' => $collection->id,
+                                                                'entry' => $entry->id,
                                                             ]),
                                                         ],
                                                         [
                                                             'label' => 'edit',
-                                                            'route' => route('collections.editEntry', [
-                                                                'id' => $entry->id,
+                                                            'route' => route('collections.entries.update', [
+                                                                'collection' => $collection->id,
+                                                                'entry' => $entry->id,
                                                             ]),
                                                         ],
                                                         [
@@ -226,8 +228,6 @@
                             </table>
                         </div>
                     </div>
-                    </tbody>
-                    </table>
                 </div>
             </div>
         </div>

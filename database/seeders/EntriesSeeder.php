@@ -15,6 +15,7 @@ class EntriesSeeder extends Seeder
     {
         Entries::create([
             'site' => 'default',
+            'collections_id' => '1',
             'status' => 'published',
             'date' => '2024-05-03 12:14:28',
             'slug' => 'checking-slug',

@@ -1,8 +1,8 @@
 <?php
 
-function customPrint($data, $die = null)
+function custPrint($data, $die = null)
 {
     echo "<pre>";
     print_r($data);
-    $die ? die : false;
+    $die ? false : die;
 }

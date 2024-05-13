@@ -2,12 +2,12 @@
 
 @section('title', 'Taxonomies')
 
-@section('content')    
+@section('content')
     <div class="page-wrapper max-w-xl" bis_skin_checked="1">
         <div class="flex mb-6" bis_skin_checked="1">
             <h1 class="flex-1">{{ 'Taxonomies' }}</h1>
             @role('superadmin')
-                <a href="{{ route('taxonomies.add') }}" class="btn-primary">Create Taxonomy</a>
+                <a href="{{ route('taxonomies.create') }}" class="btn-primary">Create Taxonomy</a>
             @endrole
         </div>
         <div class="card p-0" endpoints="" bis_skin_checked="1">
@@ -15,7 +15,7 @@
                 {{-- Head content goes here --}}
                 <x-table-head :columns="$columns" />
                 <tbody tabindex="0">
-                    @foreach ($data as $taxonomies)
+                    @foreach ($taxonomiesInfo as $taxonomies)
                         <tr class="sortable-row outline-none" tabindex="0">
                             <td class="">
                                 <a href="{{ route('taxonomies.table', ['handle' => $taxonomies->handle]) }}">
@@ -24,7 +24,8 @@
                             </td>
                             <td class="rtl:text-left ltr:text-right rtl:pl-8 ltr:pr-8">
                                 <div bis_skin_checked="1">
-                                    <div handle="terms" values="" class="" bis_skin_checked="1">8</div>
+                                    <div handle="terms" values="" class="" bis_skin_checked="1">
+                                        {{ $taxonomies->taxonomy_termsCount }}</div>
                                 </div>
                             </td>
                             <th class="actions-column">
@@ -51,4 +52,3 @@
         </div>
     </div>
 @endsection
-@section('title', 'Page Title :: Cedar')

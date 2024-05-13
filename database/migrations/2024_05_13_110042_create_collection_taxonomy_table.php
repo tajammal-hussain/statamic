@@ -11,17 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('taxonomy_terms', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('taxonomies_id')
+        Schema::create('collection_taxonomy', function (Blueprint $table) {
+            $table->foreignId('collection_id')
+                ->references('id')
+                ->on('collections')
+                ->cascadeOnDelete();
+            $table->foreignId('taxonomy_id')
                 ->references('id')
                 ->on('taxonomies')
                 ->cascadeOnDelete();
-            $table->string('site')->unique()->comment('');
-            $table->string('slug')->unique()->comment('');
-            $table->string('uri')->unique()->nullable()->comment('');
-            $table->string('taxonomy')->comment('');
-            $table->longText('data')->comment('');
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('taxonomy_terms');
+        Schema::dropIfExists('collection_taxonomy');
     }
 };

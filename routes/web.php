@@ -1,6 +1,8 @@
 <?php
 
-use App\Http\Controllers\CollectionsController;
+// use App\Http\Controllers\CollectionsController;
+use App\Http\Controllers\EntriesController;
+use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\NavigationController;
 use App\Http\Controllers\TaxonomiesController;
 use App\Http\Controllers\DashboardController;
@@ -10,6 +12,7 @@ use App\Http\Controllers\AssetsController;
 use App\Http\Controllers\FormsController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\AuthController;
+// use App\Http\Controllers\EntriesController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -43,18 +46,13 @@ Route::controller(AuthController::class)
         Route::get('/forgotPassword', 'forgotPassword')->name('forgot');
     });
 
-// Collection Routes
-Route::controller(CollectionsController::class)
-    ->prefix('collections')
-    ->as('collections.')
-    ->group(function () {
-        Route::get('', 'index')->name('collections');
-        Route::match(['get', 'post'], '/addCollection', 'addCollection')->name('addCollection');
-        Route::get('/editCollection', 'editCollection')->name('editCollection');
-        Route::match(['get', 'post'], '/addEntry/{slug?}', 'addEntry')->name('addEntry');
-        Route::match(['get', 'post'], '/editEntry/{id?}', 'editEntry')->whereNumber('id')->name('editEntry');
-        Route::get('/table/{slug?}', 'table')->name('table');
-    });
+// Resource Controllers
+
+Route::resources([
+    'collections' => CollectionController::class,
+    'collections.entries' => EntriesController::class,
+    'taxonomies' => TaxonomiesController::class,
+]);
 
 // Navigations Routes
 Route::controller(NavigationController::class)
@@ -69,17 +67,17 @@ Route::controller(NavigationController::class)
     });
 
 // Taxonomies Routes
-Route::controller(TaxonomiesController::class)
-    ->prefix('taxonomies')
-    ->as('taxonomies.')
-    ->group(function () {
-        Route::get('', 'index')->name('taxonomies');
-        Route::match(['get', 'post'], '/add', 'add')->name('add');
-        Route::match(['get', 'post'], '/edit/{id?}', 'edit')->name('edit');
-        Route::match(['get', 'post'], 'table/{handle?}', 'table')->name('table');
-        Route::match(['get', 'post'], '/createTerm/{handle?}', 'createTerm')->name('createTerm');
-        Route::match(['get', 'post'], '/editTerm/{id?}', 'editTerm')->whereNumber('id')->name('editTerm');
-    });
+// Route::controller(TaxonomiesController::class)
+//     ->prefix('taxonomies')
+//     ->as('taxonomies.')
+//     ->group(function () {
+//         Route::get('', 'index')->name('taxonomies');
+//         Route::match(['get', 'post'], '/add', 'add')->name('add');
+//         Route::match(['get', 'post'], '/edit/{id?}', 'edit')->name('edit');
+//         Route::match(['get', 'post'], 'table/{handle?}', 'table')->name('table');
+//         Route::match(['get', 'post'], '/createTerm/{handle?}', 'createTerm')->name('createTerm');
+//         Route::match(['get', 'post'], '/editTerm/{id?}', 'editTerm')->whereNumber('id')->name('editTerm');
+//     });
 
 // Assets Routes
 Route::controller(AssetsController::class)
@@ -109,7 +107,7 @@ Route::controller(FieldsetsController::class)
         Route::get('', 'index')->name('fieldsets');
         Route::get('/add', 'add')->name('add');
         Route::get('/edit', 'edit')->name('edit');
-        Route::get('/table', 'table')->name('table');        
+        Route::get('/table', 'table')->name('table');
     });
 
 // Forms Routes

@@ -5,12 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Entries extends Model
+class Collection_taxonomy extends Model
 {
     use HasFactory;
-
-    public function collections()
-    {
-        return $this->belongsTo(Collections::class);
-    }
 }

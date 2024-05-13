@@ -2,35 +2,34 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Collections;
 use App\Models\Taxonomies;
-use App\Models\User;
+use App\Models\Collections;
 use App\Models\TaxonomyTerms;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
-use App\Models\Entries;
-use Illuminate\Support\Carbon;
+use Carbon\Carbon;
 
 
-class CollectionsController extends Controller
+class TaxonomiesController extends Controller
 {
     public function index()
     {
         $data['columns'] = [
             ['name' => 'Title'],
-            ['name' => 'Entries'],
+            ['name' => 'Terms'],
         ];
-        $data['collectionsInfo'] = DB::table('collections')
-            ->leftJoin('entries', 'collections.handle', '=', 'entries.collection')
-            ->select('collections.id', 'collections.title', 'collections.handle', DB::raw('COUNT(entries.id) as entriesCount'))
-            ->groupBy('collections.id', 'collections.title', 'collections.handle')
+        // Fetch all taxonomies with their related entry counts
+        $data['data'] = DB::table('taxonomies')
+            ->leftJoin('taxonomy_terms', 'taxonomies.handle', '=', 'taxonomy_terms.taxonomy')
+            ->select('taxonomies.id', 'taxonomies.title', 'taxonomies.handle', DB::raw('COUNT(taxonomy_terms.id) as taxonomy_termsCount'))
+            ->groupBy('taxonomies.id', 'taxonomies.title', 'taxonomies.handle')
             ->get();
 
-        return view('collections.index', $data);
+        return view('taxonomies.index', $data);
     }
 
-    public function addCollection(Request $request)
+    public function add(Request $request)
     {
         if ($request->isMethod('post')) :
             $rules = [
@@ -43,34 +42,83 @@ class CollectionsController extends Controller
                 return redirect()->back()->withErrors($validator)->withInput();
             endif;
 
-            $collection = new Collections();
-            $collection = [
+            $taxonomies = new Taxonomies();
+            $taxonomies = [
                 'title' => $request->input('title'),
                 'handle' => $request->input('handle'),
             ];
-            Collections::insert($collection);
+            Taxonomies::insert($taxonomies);
 
             // Redirect back with success message
             return redirect()->back()->with('success', 'Collection created successfully.');
         else :
-            return view('collections.addCollection');
+            return view('taxonomies.add');
         endif;
     }
 
-    public function addEntry(Request $request)
+    public function edit(Request $request)
     {
-        // Using Publicly --------- for both if and else
+        $taxonomyId = $request->segment(count($request->segments()));
+        $data['taxonomies'] = Taxonomies::where(['id' => $taxonomyId])->first();
+        if ($request->isMethod('post')) :
+            // {"revisions":false,"preview_targets":[{"label":"Term","format":"{permalink}","refresh":true}]}
+            $selectedCollections[] = $request->input('collections');
+
+            $rules = ['title' => 'required|string|max:255'];
+
+            $validatedData = $request->validate($rules);
+            $taxonomyData = ["collections" => $selectedCollections];
+            $handle = preg_replace('/[^a-zA-Z0-9]/', '-', $validatedData['title']);
+            // Convert data to JSON format
+            $jsonData = json_encode($taxonomyData);
+            $mytime = Carbon::now();
+            $taxonomy = [
+                'settings' => $jsonData,
+                'title' => $validatedData['title'],
+                'handle' => $handle,
+                'updated_at' => $mytime->toDateTimeString(),
+            ];
+
+            $collectionsArray = explode(',', $selectedCollections[0]);
+
+            foreach ($collectionsArray as $collection) :
+                $existingSettings = Collections::where('handle', $collection)->value('settings');
+
+                $existingSettingsArray = json_decode($existingSettings, true);
+
+                $mergedSettings = array_merge_recursive($existingSettingsArray ?? [], ["taxonomies" => $handle]);
+
+                Collections::where('handle', $collection)->update(['settings' => json_encode($mergedSettings)]);
+            endforeach;
+
+            Taxonomies::where('id', $taxonomyId)->update($taxonomy);
+            // Redirect back with success message
+            return redirect()->back()->with('success', 'taxonomy has been updated successfully.');
+        else :
+            $data['collections'] = Collections::all();
+            return view('taxonomies.edit', $data);
+        endif;
+    }
+
+    public function table(Request $request)
+    {
+        // {"title":"testinf taxonomies","content":"this is for testing tzxonomies","updated_by":1,"updated_at":1715082553}
         $handle = $request->segment(count($request->segments()));
-        $data['taxonomies'] = Taxonomies::whereRaw("JSON_EXTRACT(settings, '$.collections') LIKE '%$handle%'")->get();
+        $data['taxonomy'] = Taxonomies::where(['handle' => $handle])->first();
+        $data['taxonomyTerms'] = TaxonomyTerms::where(['taxonomy' => $handle])->get();
+        return view('taxonomies.table', $data);
+    }
+
+    public function createTerm(Request $request)
+    {
+        $handle = $request->segment(count($request->segments()));
         if ($request->isMethod('post')) :
             $isEnabled = $request->input('enableState');
-            $isPublished = $request->input('publishState');
 
             $rules = [
                 'title' => 'required|string|max:255',
                 'content' => 'required|string',
                 'slug' => 'required|string|unique:entries,slug',
-                'author' => 'required|string',
             ];
 
             $validatedData = $request->validate($rules);
@@ -78,14 +126,7 @@ class CollectionsController extends Controller
             $entryData = [
                 'title' => $validatedData['title'],
                 'content' => $validatedData['content'],
-                'author' => $validatedData['author'],
             ];
-
-            foreach ($data['taxonomies'] as $taxonomy) :
-                $taxonomyHandle = $taxonomy->handle;
-                $selectedValues = $request->input($taxonomyHandle);
-                $entryData[$taxonomy->handle] = $selectedValues;
-            endforeach;
 
             if ($isEnabled) :
                 $metadataRules = [];
@@ -121,36 +162,26 @@ class CollectionsController extends Controller
             $jsonData = json_encode($entryData);
 
             // Save data to the database
-            $entry = new Entries();
-            $mytime = Carbon::now();
+            $entry = new TaxonomyTerms();
             $entry = [
                 'data' => $jsonData,
                 'slug' => $validatedData['slug'],
                 'site' => $validatedData['slug'],
-                'published' => $isPublished ? "1" : "0",
-                'isSEOEnabled' => $isEnabled ? "1" : "0",
-                'status' => $isPublished ? "published" : "pending",
-                'date' => $mytime->toDateTimeString(),
-                'collection' => $handle,
+                'uri' => null,
+                'taxonomy' => $handle,
             ];
-            Entries::insert($entry);
+            TaxonomyTerms::insert($entry);
             // Redirect back with success message
             return redirect()->back()->with('success', 'Entry added successfully.');
         else :
-            $data['collection'] = Collections::where(['handle' => $handle])->first();
-            $data['usersInfo'] = User::all();
-            if (!$data['taxonomies']->isEmpty()) : foreach ($data['taxonomies'] as $taxonomy) : $taxonomy->terms = TaxonomyTerms::where('taxonomy', $taxonomy->handle)->get();
-                endforeach;
-            endif;
-
-            return view('collections.addEntry', $data);
+            $data['taxonomy'] = Taxonomies::where(['handle' => $handle])->first();
+            return view('taxonomies.createTerm', $data);
         endif;
     }
 
-    public function editEntry(Request $request)
+    public function editTerm(Request $request)
     {
-        $entryId = $request->segment(count($request->segments()));
-
+        $termId = $request->segment(count($request->segments()));
         if ($request->isMethod('post')) :
             $isEnabled = $request->input('enableState');
             $isPublished = $request->input('publishState');
@@ -159,7 +190,6 @@ class CollectionsController extends Controller
                 'title' => 'required|string|max:255',
                 'content' => 'required|string',
                 'slug' => 'required|string',
-                'author' => 'required|string',
             ];
 
             $validatedData = $request->validate($rules);
@@ -167,7 +197,6 @@ class CollectionsController extends Controller
             $entryData = [
                 'title' => $validatedData['title'],
                 'content' => $validatedData['content'],
-                'author' => $validatedData['author'],
             ];
 
             if ($isEnabled) :
@@ -202,49 +231,20 @@ class CollectionsController extends Controller
 
             // Convert data to JSON format
             $jsonData = json_encode($entryData);
-            $mytime = Carbon::now();
 
             $entry = [
                 'data' => $jsonData,
                 'slug' => $validatedData['slug'],
                 'site' => $validatedData['slug'],
-                'published' => $isPublished ? "1" : "0",
-                'isSEOEnabled' => $isEnabled ? "1" : "0",
-                'status' => $isPublished ? "published" : "pending",
-                'date' => $mytime->toDateTimeString(),
+                'uri' => null,
             ];
-
-            Entries::where('id', $entryId)->update($entry);
-
-            return redirect()->back()->with('success', 'Entry added successfully.');
+            TaxonomyTerms::where('id', $termId)->update($entry);
+            // Redirect back with success message
+            return redirect()->back()->with('success', 'Term updated successfully.');
         else :
-            $data['entries'] = Entries::where(['id' => $entryId])->first();
-            $data['collection'] = Collections::where(['handle' => $data['entries']->collection])->first();
-
-            $taxonomyTerms = [];
-            foreach (json_decode($data['collection']->settings)->taxonomies as $taxonomy) : $taxonomyTerms[$taxonomy] = TaxonomyTerms::where('taxonomy', $taxonomy)->get();
-            endforeach;
-            $data['taxonomyTerms'] = $taxonomyTerms;
-            $data['usersInfo'] = User::all();
-            return view('collections.editEntry', $data);
+            $data['taxonomyTerms'] = TaxonomyTerms::where(['id' => $termId])->first();
+            $data['taxonomy'] = Taxonomies::where(['handle' => $data['taxonomyTerms']->taxonomy])->first();
+            return view('taxonomies.editTerm', $data);
         endif;
-    }
-
-    public function editCollection(Request $request)
-    {
-        if ($request->isMethod('post')) :
-        else :
-            return view('collections.editCollection');
-        endif;
-    }
-
-    public function table(Request $request)
-    {
-        // Getting URI Segment
-        $handle = $request->segment(count($request->segments()));
-        $data['collection'] = Collections::where(['handle' => $handle])->first();
-        $data['entries'] = Entries::where(['collection' => $handle])->get();
-
-        return view('collections.table', $data);
     }
 }

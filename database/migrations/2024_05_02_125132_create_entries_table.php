@@ -13,9 +13,14 @@ return new class extends Migration
     {
         Schema::create('entries', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('collections_id')
+                ->references('id')
+                ->on('collections')
+                ->cascadeOnDelete();
             $table->string('site')->comment('');
             $table->bigInteger('origin_id')->unique()->nullable()->comment('');
             $table->tinyInteger('published')->default('1')->comment('');
+            $table->tinyInteger('isSEOEnabled')->default('1')->comment('');
             $table->string('status')->comment('');
             $table->string('slug')->nullable()->comment('');
             $table->string('uri')->unique()->nullable()->comment('');

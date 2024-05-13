@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Taxonomies;
+use Illuminate\Support\Facades\DB;
+use App\Models\Collections;
+use App\Models\Entries;
 
-class TaxonomiesController extends Controller
+class CollectionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,12 +16,12 @@ class TaxonomiesController extends Controller
     {
         $data['columns'] = [
             ['name' => 'Title'],
-            ['name' => 'Terms'],
+            ['name' => 'Entries'],
         ];
 
-        $data['taxonomiesInfo'] = Taxonomies::withCount('terms')->get();
+        $data['collectionsInfo'] = Collections::withCount('entries')->get();
 
-        return view('taxonomies.index', $data);
+        return view('collections.index', $data);
     }
 
     /**
