@@ -19,7 +19,7 @@
                     @foreach ($collectionsInfo as $collection)
                         <tr class="sortable-row outline-none" tabindex="0">
                             <td class="">
-                                <a href="{{ route('collections.entries.index', ['collection' => $collection->id]) }}">
+                                <a href="{{ route('entries.index', ['collection' => $collection->handle]) }}">
 
                                     {{ $collection->title }}
                                 </a>
@@ -37,8 +37,8 @@
                                         $menuItems = [
                                             [
                                                 'label' => 'View',
-                                                'route' => route('collections.entries.index', [
-                                                    'collection' => $collection->id,
+                                                'route' => route('entries.index', [
+                                                    'collection' => $collection->handle,
                                                 ]),
                                             ],
                                             [

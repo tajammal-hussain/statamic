@@ -9,16 +9,20 @@ use Carbon\Carbon;
 
 class EntriesController extends Controller
 {
+    public function __invoke($handle){
+        $collection = Collections::with('entries')->where('handle', $handle)->firstOrFail();
+        return view('entries.index', compact('collection'));
+    }
     /**
      * Display a listing of the resource.
      */
-    public function index($collectionId)
-    {
-        $data['collection'] = Collections::findOrFail($collectionId);
-        $data['entriesInfo'] = Entries::whereBelongsTo($data['collection'])->get();
+    // public function index($collectionId)
+    // {
+    //     $data['collection'] = Collections::findOrFail($collectionId);
+    //     $data['entriesInfo'] = Entries::whereBelongsTo($data['collection'])->get();
 
-        return view('entries.index', $data);
-    }
+    //     return view('entries.index', $data);
+    // }
 
     /**
      * Show the form for creating a new resource.

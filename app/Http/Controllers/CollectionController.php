@@ -20,7 +20,6 @@ class CollectionController extends Controller
         ];
 
         $data['collectionsInfo'] = Collections::withCount('entries')->get();
-
         return view('collections.index', $data);
     }
 

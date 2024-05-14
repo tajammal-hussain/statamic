@@ -22,7 +22,7 @@
                     <h1 class="flex-1">{{ $collection->title }}</h1>
                     <div class="dropdown-list inline-block" bis_skin_checked="1">
                         <div aria-haspopup="true" bis_skin_checked="1">
-                            <a href="{{ route('collections.entries.create', ['collection' => $collection->id]) }}">
+                            <a href="{{ route('entries.create', ['collection' => $collection->id]) }}">
                                 <button class="btn-primary">
                                     {{ 'Create Entry' }}
                                 </button>
@@ -160,18 +160,13 @@
                                     </tr>
                                 </thead>
                                 <tbody tabindex="0">
-                                    @foreach ($entriesInfo as $entry)
+                                    @foreach ($collection->entries as $entry)
                                         <tr class="sortable-row outline-none" tabindex="0">
                                             <th class="checkbox-column">
                                                 <input type="checkbox" class="checkbox"id="" value="">
                                             </th>
                                             <td class="">
-                                                <a href="{{ route('collections.entries.update', ['collection' => $collection->id, 'entry' => $entry->id]) }}"
-                                                    class="title-index-field inline-flex items-center">
-                                                    <span
-                                                        class="little-dot rtl:ml-2 ltr:mr-2 bg-green-600 v-popper--has-tooltip"></span>
-                                                    <span>{{ json_decode($entry->data)->title }}</span>
-                                                </a>
+                                                {{json_decode($entry->data)->title}}
                                             </td>
                                             <td class="">
                                                 <div bis_skin_checked="1">
@@ -198,29 +193,7 @@
                                                 </div>
                                             </td>
                                             <th class="actions-column">
-                                                @php
-                                                    $menuItems = [
-                                                        [
-                                                            'label' => 'view',
-                                                            'route' => route('collections.entries.update', [
-                                                                'collection' => $collection->id,
-                                                                'entry' => $entry->id,
-                                                            ]),
-                                                        ],
-                                                        [
-                                                            'label' => 'edit',
-                                                            'route' => route('collections.entries.update', [
-                                                                'collection' => $collection->id,
-                                                                'entry' => $entry->id,
-                                                            ]),
-                                                        ],
-                                                        [
-                                                            'label' => 'publish',
-                                                            'route' => route('dashboard'),
-                                                        ],
-                                                    ];
-                                                @endphp
-                                                <x-customDropdown :menuItems="$menuItems" />
+                                                
                                             </th>
                                     @endforeach
                                     </tr>

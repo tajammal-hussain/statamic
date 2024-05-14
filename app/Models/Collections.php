@@ -8,11 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Collections extends Model
 {
     use HasFactory;
-
-
+    protected $fillable = [
+        'handle',
+        'title',
+        'settings'
+    ];
+    
+    
     public function entries()
     {
-        return $this->hasMany(Entries::class);
+        return $this->hasMany(Entries::class, 'collection', 'handle');
     }
 
     public function taxonomies()

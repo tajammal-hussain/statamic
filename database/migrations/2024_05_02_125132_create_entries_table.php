@@ -13,10 +13,7 @@ return new class extends Migration
     {
         Schema::create('entries', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('collections_id')
-                ->references('id')
-                ->on('collections')
-                ->cascadeOnDelete();
+            
             $table->string('site')->comment('');
             $table->bigInteger('origin_id')->unique()->nullable()->comment('');
             $table->tinyInteger('published')->default('1')->comment('');
@@ -26,7 +23,11 @@ return new class extends Migration
             $table->string('uri')->unique()->nullable()->comment('');
             $table->string('date')->nullable()->comment('');
             $table->integer('order')->unique()->nullable()->comment('');
-            $table->string('collection')->comment('');
+            $table->string('collection')->comment(''); 
+            $table->foreign('collection') 
+                ->references('handle') 
+                ->on('collections') 
+                ->cascadeOnDelete(); 
             $table->longText('data')->comment('');
             $table->timestamps();
         });
