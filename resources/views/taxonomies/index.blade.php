@@ -18,14 +18,14 @@
                     @foreach ($taxonomiesInfo as $taxonomies)
                         <tr class="sortable-row outline-none" tabindex="0">
                             <td class="">
-                                <a href="{{ route('taxonomies.table', ['handle' => $taxonomies->handle]) }}">
+                                <a href="{{ route('taxonomies.terms.index', ['taxonomy' => $taxonomies->id]) }}">
                                     {{ $taxonomies->title }}
                                 </a>
                             </td>
                             <td class="rtl:text-left ltr:text-right rtl:pl-8 ltr:pr-8">
                                 <div bis_skin_checked="1">
                                     <div handle="terms" values="" class="" bis_skin_checked="1">
-                                        {{ $taxonomies->taxonomy_termsCount }}</div>
+                                        {{ $taxonomies->terms_count }}</div>
                                 </div>
                             </td>
                             <th class="actions-column">
@@ -34,11 +34,15 @@
                                         $menuItems = [
                                             [
                                                 'label' => 'Edit',
-                                                'route' => route('taxonomies.edit', ['id' => $taxonomies->id]),
+                                                'route' => route('taxonomies.show', [
+                                                    'taxonomy' => $taxonomies->id,
+                                                ]),
                                             ],
                                             [
                                                 'label' => 'Delete',
-                                                'route' => route('dashboard'),
+                                                'route' => route('taxonomies.destroy', [
+                                                    'taxonomy' => $taxonomies->id,
+                                                ]),
                                             ],
                                         ];
                                     @endphp

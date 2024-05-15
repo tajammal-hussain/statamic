@@ -1,23 +1,27 @@
 @extends('layouts.main')
 
-@section('title', json_decode($entries->data)->title)
+@section('title', $entry->title)
 
 @section('content')
     <div class="page-wrapper max-w-3xl">
         <div>
-            <form id="myForm" method="POST" action="{{ route('collections.editEntry', ['id' => $entries->id]) }}">
+            <form id="myForm" method="POST"
+                action="{{ route('entries.update', ['collection' => $entry->collection, 'id' => $entry->id]) }}">
                 @csrf
-                <div class="breadcrumb flex"><a href="{{ route('collections.table', ['slug' => $collection->handle]) }}"
-                        class="flex-initial flex p-2 -m-2 items-center text-xs text-gray-700 hover:text-gray-900"><svg
-                            viewBox="0 0 24 24" class="align-middle h-6 w-4 rotate-180">
+                <div class="breadcrumb flex">
+                    <a href="{{ route('entries.index', ['collection' => $entry->collection]) }}"
+                        class="flex-initial flex p-2 -m-2 items-center text-xs text-gray-700 hover:text-gray-900">
+                        <svg viewBox="0 0 24 24" class="align-middle h-6 w-4 rotate-180">
                             <path fill="currentColor" fill-rule="evenodd"
                                 d="m10.414 7.05 4.95 4.95-4.95 4.95L9 15.534 12.536 12 9 8.464z"></path>
-                        </svg><span>{{ $collection->title }}</span></a>
+                        </svg>
+                        <span>{{ $collection->title }}</span>
+                    </a>
                 </div>
                 <div class="flex items-center mb-6">
                     <h1 class="flex-1">
                         <div class="flex items-center"><span
-                                class="little-dot rtl:ml-2 ltr:mr-2 published v-popper--has-tooltip"></span><span>{{ json_decode($entries->data)->title }}</span>
+                                class="little-dot rtl:ml-2 ltr:mr-2 published v-popper--has-tooltip"></span><span>{{ $entry->title }}</span>
                         </div>
                     </h1>
                     <div class="hidden md:flex items-center">
@@ -99,8 +103,7 @@
                                                                     <div class="input-group">
                                                                         <input id="field_title" name="title"
                                                                             type="text" autofocus="autofocus"
-                                                                            class="input-text"
-                                                                            value="{{ json_decode($entries->data)->title }}">
+                                                                            class="input-text" value="{{ $entry->title }}">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -137,7 +140,7 @@
                                                                     </label>
                                                                 </div>
                                                                 <div>
-                                                                    <textarea name="content" id="editor">{{ json_decode($entries->data)->content }}</textarea>
+                                                                    <textarea name="content" id="editor">{{ json_decode($entry->data)->content }}</textarea>
                                                                 </div><!----><!---->
                                                             </div>
                                                             <div
@@ -174,7 +177,7 @@
                                                                             class="v-select vs--single vs--searchable">
                                                                             <select name="author" id="author"
                                                                                 class="w-full p-2 border-2 border-gray-500 rounded-md text-md hover:border-sky-500">
-                                                                                @foreach ($usersInfo as $user)
+                                                                                @foreach ($users as $user)
                                                                                     <option value="{{ $user->name }}">
                                                                                         {{ $user->name }}
                                                                                     </option>
@@ -242,7 +245,7 @@
                                                                 <div class="toggle-fieldtype-wrapper"><button
                                                                         type="button" aria-pressed="true"
                                                                         aria-label="Toggle Button"
-                                                                        class="toggle-container {{ $entries->isSEOEnabled == 1 ? 'on' : 'off' }} "
+                                                                        class="toggle-container {{ $entry->isSEOEnabled == 1 ? 'on' : 'off' }} "
                                                                         id="field_enabled">
                                                                         <div class="toggle-slider">
                                                                             <div tabindex="0" class="toggle-knob">
@@ -274,7 +277,7 @@
                                                                 class="publish-field-label font-medium">Published</label>
                                                             <button id="field_publish" type="button" aria-pressed="true"
                                                                 aria-label="Toggle Button"
-                                                                class="toggle-container {{ $entries->published == 1 && $entries->status == 'published' ? 'on' : 'off' }}">
+                                                                class="toggle-container {{ $entry->published == 1 && $entry->status == 'published' ? 'on' : 'off' }}">
                                                                 <div class="toggle-slider">
                                                                     <div tabindex="0" class="toggle-knob"></div>
                                                                 </div>
@@ -324,12 +327,12 @@
                                                                             <input id="field_slug" name="slug"
                                                                                 type="text"dir="ltr"
                                                                                 class="input-text font-mono text-xs"
-                                                                                value="{{ $entries->slug }}" readonly>
+                                                                                value="{{ $entry->slug }}" readonly>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 {{-- @if (!$taxonomies->isEmpty()) --}}
-                                                                @foreach ($taxonomyTerms as $taxonomy => $collection)
+                                                                {{-- @foreach ($taxonomyTerms as $taxonomy => $collection)
                                                                     <div class="mt-4">
                                                                         <select x-cloak id="{{ $taxonomy }}">
                                                                             @foreach ($collection as $term)
@@ -373,9 +376,9 @@
                                                                                                                     viewBox="0 0 20 20">
                                                                                                                     <path
                                                                                                                         d="M14.348,14.849c-0.469,0.469-1.229,0.469-1.697,0L10,11.819l-2.651,3.029c-0.469,0.469-1.229,0.469-1.697,0
-                                                                                                                                                                                                                                                                                                    c-0.469-0.469-0.469-1.229,0-1.697l2.758-3.15L5.651,6.849c-0.469-0.469-0.469-1.228,0-1.697s1.228-0.469,1.697,0L10,8.183
-                                                                                                                                                                                                                                                                                                    l2.651-3.031c0.469-0.469,1.228-0.469,1.697,0s0.469,1.229,0,1.697l-2.758,3.152l2.758,3.15
-                                                                                                                                                                                                                                                                                                    C14.817,13.62,14.817,14.38,14.348,14.849z" />
+                                                                                                                                                                                                                                                                                                            c-0.469-0.469-0.469-1.229,0-1.697l2.758-3.15L5.651,6.849c-0.469-0.469-0.469-1.228,0-1.697s1.228-0.469,1.697,0L10,8.183
+                                                                                                                                                                                                                                                                                                            l2.651-3.031c0.469-0.469,1.228-0.469,1.697,0s0.469,1.229,0,1.697l-2.758,3.152l2.758,3.15
+                                                                                                                                                                                                                                                                                                            C14.817,13.62,14.817,14.38,14.348,14.849z" />
                                                                                                                 </svg>
                                                                                                             </div>
                                                                                                         </div>
@@ -452,7 +455,7 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                @endforeach
+                                                                @endforeach --}}
                                                                 {{-- @endif --}}
                                                             </div>
                                                         </div>
@@ -462,7 +465,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="publish-tab publish-tab-actions-footer vue-portal-target "></div>
                             </div>
                         </div>
                     </div>
@@ -471,22 +473,22 @@
         </div>
     </div>
     @php
-        $metaData = json_decode($entries->data)->metaData ?? false;
+        $metaData = json_decode($entry->data)->metaData ?? false;
     @endphp
     <script>
-        const submitFormUrl = "{{ route('collections.editEntry', ['id' => $entries->id]) }}";
+        const submitFormUrl = "{{ route('entries.update', ['collection' => $entry->collection, 'id' => $entry->id]) }}";
         const existingMetaData = {!! json_encode($metaData) !!};
     </script>
     <script src="{{ url('js/entries.js') }}"></script>
 
-    <style>
+    {{-- <style>
         [x-cloak] {
             display: none;
         }
-    </style>
+    </style> --}}
     <script type="module" src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
 
-    <script>
+    {{-- <script>
         function dropdown(taxonomy) {
             return {
                 options: [],
@@ -533,6 +535,6 @@
                 }
             }
         }
-    </script>
+    </script> --}}
 
 @endsection

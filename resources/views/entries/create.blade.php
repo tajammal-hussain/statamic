@@ -5,14 +5,16 @@
 @section('content')
     <div class="page-wrapper max-w-3xl">
         <div>
-            <form id="myForm" method="POST" action="{{ route('collections.addEntry', ['slug' => $collection->handle]) }}">
+            <form id="myForm" method="POST" action="{{ route('entries.store', ['collection' => $collection->handle]) }}">
                 @csrf
-                <div class="breadcrumb flex"><a href="{{ route('collections.table', ['slug' => $collection->handle]) }}"
-                        class="flex-initial flex p-2 -m-2 items-center text-xs text-gray-700 hover:text-gray-900"><svg
-                            viewBox="0 0 24 24" class="align-middle h-6 w-4 rotate-180">
-                            <path fill="currentColor" fill-rule="evenodd"
-                                d="m10.414 7.05 4.95 4.95-4.95 4.95L9 15.534 12.536 12 9 8.464z"></path>
-                        </svg><span>{{ $collection->title }}</span></a>
+                <div class="breadcrumb flex">
+                    <a href="{{ route('entries.index', ['collection' => $collection->handle]) }}"
+                        class="flex-initial flex p-2 -m-2 items-center text-xs text-gray-700 hover:text-gray-900">
+                        <svg viewBox="0 0 24 24" class="align-middle h-6 w-4 rotate-180">
+                            <path fill="currentColor" fill-rule="evenodd" d="m10.414 7.05 4.95 4.95-4.95 4.95L9 15.534 12.536 12 9 8.464z"></path>
+                        </svg>
+                        <span>{{ $collection->title }}</span>
+                    </a>
                 </div>
                 <div class="flex items-center mb-6">
                     <h1 class="flex-1">
@@ -166,7 +168,8 @@
                                                                                     stroke-linecap="round"
                                                                                     stroke-linejoin="round"
                                                                                     stroke-width="1.5"
-                                                                                    d="M16.5 15.749h1.875A3.963 3.963 0 0 0 22.5 12h0a3.962 3.962 0 0 0-4.125-3.75H16.5m-9 7.499H5.625A3.963 3.963 0 0 1 1.5 12h0a3.963 3.963 0 0 1 4.125-3.75H7.5M12 5.249v-4.5m-3 4.5-1.5-1.5m7.5 1.5 1.5-1.5m-4.5 15v4.5m-3-4.5-1.5 1.5m7.5-1.5 1.5 1.5">                      </path>
+                                                                                    d="M16.5 15.749h1.875A3.963 3.963 0 0 0 22.5 12h0a3.962 3.962 0 0 0-4.125-3.75H16.5m-9 7.499H5.625A3.963 3.963 0 0 1 1.5 12h0a3.963 3.963 0 0 1 4.125-3.75H7.5M12 5.249v-4.5m-3 4.5-1.5-1.5m7.5 1.5 1.5-1.5m-4.5 15v4.5m-3-4.5-1.5 1.5m7.5-1.5 1.5 1.5">
+                                                                                </path>
                                                                             </svg></button></label>
                                                                     <!---->
                                                                 </div>
@@ -177,10 +180,10 @@
                                                                             class="v-select vs--single vs--searchable">
                                                                             <select name="author" id="author"
                                                                                 class="w-full p-2 border-2 border-gray-500 rounded-md text-md hover:border-sky-500">
-                                                                                @foreach ($usersInfo as $user)
+                                                                                @foreach ($users as $user)
                                                                                     <option value="{{ $user->name }}">
                                                                                         {{ $user->name }}
-                                                                                        </option>
+                                                                                    </option>
                                                                                 @endforeach
                                                                                 <!-- Add other options as needed -->
                                                                             </select>
@@ -377,11 +380,11 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                @if (!$taxonomies->isEmpty())
+                                                                {{-- @if (!$taxonomies->isEmpty())
                                                                     @foreach ($taxonomies as $taxonomy)
                                                                         <div class="mt-4">
                                                                             <select x-cloak id="{{ $taxonomy->handle }}">
-                                                                                {{-- <span>{{ $taxonomy->handle }}</span> --}}
+                                                                                <span>{{ $taxonomy->handle }}</span>
                                                                                 @foreach ($taxonomy->terms as $term)
                                                                                     <option value="{{ $term->slug }}">
                                                                                         {{ json_decode($term->data)->title }}
@@ -503,7 +506,7 @@
                                                                             </div>
                                                                         </div>
                                                                     @endforeach
-                                                                @endif
+                                                                @endif --}}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -521,18 +524,18 @@
     </div>
 
     <script>
-        const submitFormUrl = "{{ route('collections.addEntry', ['slug' => $collection->handle]) }}";
+        const submitFormUrl = "{{ route('entries.store', ['collection' => $collection->handle]) }}";
     </script>
     <script src="{{ url('js/entries.js') }}"></script>
 
-    <style>
+    {{-- <style>
         [x-cloak] {
             display: none;
         }
-    </style>
+    </style> --}}
     <script type="module" src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
 
-    <script>
+    {{-- <script>
         function dropdown(taxonomy) {
             return {
                 options: [],
@@ -579,6 +582,6 @@
                 }
             }
         }
-    </script>
+    </script> --}}
 
 @endsection

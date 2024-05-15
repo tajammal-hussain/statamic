@@ -22,7 +22,7 @@
                     <h1 class="flex-1">{{ $collection->title }}</h1>
                     <div class="dropdown-list inline-block" bis_skin_checked="1">
                         <div aria-haspopup="true" bis_skin_checked="1">
-                            <a href="{{ route('entries.create', ['collection' => $collection->id]) }}">
+                            <a href="{{ route('entries.create', ['collection' => $collection->handle]) }}">
                                 <button class="btn-primary">
                                     {{ 'Create Entry' }}
                                 </button>
@@ -165,8 +165,13 @@
                                             <th class="checkbox-column">
                                                 <input type="checkbox" class="checkbox"id="" value="">
                                             </th>
-                                            <td class="">
-                                                {{json_decode($entry->data)->title}}
+                                            {{-- <a href="{{ route('collections.entries.update', ['collection' => $collection->id, 'entry' => $entry->id]) }}" --}}
+                                            {{-- class="title-index-field inline-flex items-center"> --}}
+                                            <td>
+                                                <span
+                                                    class="little-dot rtl:ml-2 ltr:mr-2 bg-green-600 v-popper--has-tooltip"></span>
+                                                <span>{{ $entry->title }}</span>
+                                                {{-- </a> --}}
                                             </td>
                                             <td class="">
                                                 <div bis_skin_checked="1">
@@ -193,7 +198,29 @@
                                                 </div>
                                             </td>
                                             <th class="actions-column">
-                                                
+                                                @php
+                                                    $menuItems = [
+                                                        [
+                                                            'label' => 'view',
+                                                            'route' => route('entries.show', [
+                                                                'collection' => $collection->handle,
+                                                                'id' => $entry->id,
+                                                            ]),
+                                                        ],
+                                                        [
+                                                            'label' => 'edit',
+                                                            'route' => route('entries.edit', [
+                                                                'collection' => $collection->handle,
+                                                                'id' => $entry->id,
+                                                            ]),
+                                                        ],
+                                                        [
+                                                            'label' => 'publish',
+                                                            'route' => route('dashboard'),
+                                                        ],
+                                                    ];
+                                                @endphp
+                                                <x-customDropdown :menuItems="$menuItems" />
                                             </th>
                                     @endforeach
                                     </tr>

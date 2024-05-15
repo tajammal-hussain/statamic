@@ -12,7 +12,6 @@ use App\Http\Controllers\AssetsController;
 use App\Http\Controllers\FormsController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\AuthController;
-// use App\Http\Controllers\EntriesController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -46,15 +45,21 @@ Route::controller(AuthController::class)
         Route::get('/forgotPassword', 'forgotPassword')->name('forgot');
     });
 
+
 // Collections Controller
 Route::resource('collections', CollectionController::class);
-//Entries Routes
-Route::get('/collections/{collection}/entries', EntriesController::class)->name('entries.index');
-Route::get('/collections/{collection}/create', [EntriesController::class,'create'])->name('entries.create');
-// Route::resources([
-//     'collections.entries' => EntriesController::class,
-//     'taxonomies' => TaxonomiesController::class,
-// ]);
+
+// Entries Routes
+Route::middleware('auth')->group(function () {
+    Route::get('/collections/{collection}/entries', EntriesController::class)->name('entries.index');
+    Route::get('/collections/{collection}/create', [EntriesController::class, 'create'])->name('entries.create');
+    Route::post('/collections/{collection}/store', [EntriesController::class, 'store'])->name('entries.store');
+    Route::get('/collections/{collection}/edit/{id}', [EntriesController::class, 'edit'])->name('entries.edit');
+    Route::put('/collections/{collection}/update/{id}', [EntriesController::class, 'update'])->name('entries.update');
+    Route::get('/collections/{collection}/show/{id}', [EntriesController::class, 'show'])->name('entries.show');
+});
+
+
 
 // // Navigations Routes
 // Route::controller(NavigationController::class)

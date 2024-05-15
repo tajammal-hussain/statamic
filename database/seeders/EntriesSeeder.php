@@ -17,9 +17,10 @@ class EntriesSeeder extends Seeder
             'site' => 'default',
             'status' => 'published',
             'date' => '2024-05-03 12:14:28',
+            'title' => 'Checking Slug',
             'slug' => 'checking-slug',
             'collection' => 'posts',
-            'data' => '{"title":"entry checking","content":"this is just for checking","author":"user1","updated_by":1}',
+            'data' => '{"content":"this is just for checking","author":"user1","updated_by":1}',
         ]);
     }
 }

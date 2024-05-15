@@ -37,9 +37,7 @@
                                         $menuItems = [
                                             [
                                                 'label' => 'View',
-                                                'route' => route('entries.index', [
-                                                    'collection' => $collection->handle,
-                                                ]),
+                                                'route' => route('entries.index', ['collection' => $collection->handle])
                                             ],
                                             [
                                                 'label' => 'Visit URL',
