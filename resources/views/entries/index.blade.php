@@ -201,13 +201,6 @@
                                                 @php
                                                     $menuItems = [
                                                         [
-                                                            'label' => 'view',
-                                                            'route' => route('entries.show', [
-                                                                'collection' => $collection->handle,
-                                                                'id' => $entry->id,
-                                                            ]),
-                                                        ],
-                                                        [
                                                             'label' => 'edit',
                                                             'route' => route('entries.edit', [
                                                                 'collection' => $collection->handle,
@@ -218,6 +211,13 @@
                                                             'label' => 'publish',
                                                             'route' => route('dashboard'),
                                                         ],
+                                                        // [
+                                                        //     'label' => 'Delete',
+                                                        //     'route' => route('entries.destroy', [
+                                                        //         'collection' => $collection->handle,
+                                                        //         'id' => $entry->id,
+                                                        //     ]),
+                                                        // ],
                                                     ];
                                                 @endphp
                                                 <x-customDropdown :menuItems="$menuItems" />

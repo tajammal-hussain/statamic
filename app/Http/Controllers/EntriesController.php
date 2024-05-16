@@ -10,21 +10,14 @@ use Carbon\Carbon;
 
 class EntriesController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function __invoke($handle)
     {
         $collection = Collections::with('entries')->where('handle', $handle)->firstOrFail();
         return view('entries.index', compact('collection'));
     }
-    /**
-     * Display a listing of the resource.
-     */
-    // public function index($collectionId)
-    // {
-    //     $data['collection'] = Collections::findOrFail($collectionId);
-    //     $data['entriesInfo'] = Entries::whereBelongsTo($data['collection'])->get();
-
-    //     return view('entries.index', $data);
-    // }
 
     /**
      * Show the form for creating a new resource.
@@ -117,17 +110,6 @@ class EntriesController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show($handle, string $id)
-    {
-        $collection = Collections::where(['handle' => $handle])->firstOrFail();
-        $entry = Entries::where(['id' => $id])->firstOrFail();
-        $users = User::all();
-        return view('entries.show', compact('entry', 'users', 'collection'));
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit($handle, string $id)
@@ -214,8 +196,13 @@ class EntriesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($handle, string $id)
     {
-        //
+        try {
+            Entries::where('id', $id)->first()->delete();
+            return redirect()->back()->with('success', 'Entry deleted successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Something went wrong');
+        }
     }
 }

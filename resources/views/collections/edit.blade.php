@@ -7,8 +7,11 @@
 
 @extends('layouts.main')
 
+@section('title', 'Edit Collection')
+
 @section('content')
-    <title>Collection Edit :: Cedar</title>
+
+@section('content')
     <div class="page-wrapper max-w-xl">
           <div>
             <header class="mb-6">

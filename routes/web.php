@@ -51,14 +51,14 @@ Route::controller(AuthController::class)
 
 Route::middleware('auth')->group(function () {
     
-    Route::resource('collections', CollectionController::class);
+    Route::resource('collections', CollectionController::class)->except('show');
     Route::prefix('collections')->group(function () {
         Route::get('/{collection}/entries', EntriesController::class)->name('entries.index');
         Route::get('/{collection}/create', [EntriesController::class, 'create'])->name('entries.create');
         Route::post('/{collection}/store', [EntriesController::class, 'store'])->name('entries.store');
         Route::get('/{collection}/edit/{id}', [EntriesController::class, 'edit'])->name('entries.edit');
         Route::put('/{collection}/update/{id}', [EntriesController::class, 'update'])->name('entries.update');
-        Route::get('/{collection}/show/{id}', [EntriesController::class, 'show'])->name('entries.show');
+        Route::get('/{collection}/destroy/{id}', [EntriesController::class, 'destroy'])->name('entries.destroy');
     });
 
     Route::resource('navigations', NavigationController::class);
@@ -71,7 +71,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/{taxonomy}/edit/{id}', [TermsController::class, 'edit'])->name('terms.edit');
         Route::put('/{taxonomy}/update/{id}', [TermsController::class, 'update'])->name('terms.update');
         Route::get('/{taxonomy}/show/{id}', [TermsController::class, 'show'])->name('terms.show');
-        Route::post('/{taxonomy}/destroy', [TermsController::class, 'destroy'])->name('terms.destroy');
+        // Route::delete('/{taxonomy}/destroy', [TermsController::class, 'destroy'])->name('terms.destroy');
     });
 });
 

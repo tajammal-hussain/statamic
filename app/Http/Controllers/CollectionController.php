@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Collections;
+use Illuminate\Support\Facades\Validator;
 use App\Models\Entries;
 
 class CollectionController extends Controller
@@ -14,13 +15,13 @@ class CollectionController extends Controller
      */
     public function index()
     {
-        $data['columns'] = [
+        $columns = [
             ['name' => 'Title'],
             ['name' => 'Entries'],
         ];
 
-        $data['collectionsInfo'] = Collections::withCount('entries')->get();
-        return view('collections.index', $data);
+        $collectionsInfo = Collections::withCount('entries')->get();
+        return view('collections.index', compact('columns', 'collectionsInfo'));
     }
 
     /**
@@ -28,7 +29,7 @@ class CollectionController extends Controller
      */
     public function create()
     {
-        //
+        return view('collections.create');
     }
 
     /**
@@ -36,15 +37,24 @@ class CollectionController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $rules = [
+            'title' => 'required|string|max:255',
+            'handle' => 'required|string|max:255',
+        ];
+        $validator = Validator::make($request->all(), $rules);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        if ($validator->fails()) : return redirect()->back()->withErrors($validator)->withInput();
+        endif;
+
+        $collection = new Collections();
+        $collection = [
+            'title' => $request->input('title'),
+            'handle' => $request->input('handle'),
+        ];
+        Collections::insert($collection);
+
+        // Redirect back with success message
+        return redirect()->back()->with('success', 'Collection created successfully.');
     }
 
     /**
@@ -52,7 +62,7 @@ class CollectionController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('collections.edit');
     }
 
     /**
@@ -66,8 +76,13 @@ class CollectionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $handle)
     {
-        //
+        try {
+            Collections::where('handle', $handle)->first()->delete();
+            return redirect()->back()->with('success', 'Collection deleted successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Something went wrong');
+        }
     }
 }

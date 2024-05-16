@@ -30,7 +30,7 @@
                         <span class="block sm:inline">{{ session('success') }}</span>
                     </div>
                 @endif
-                <form action="{{ route('collections.addCollection') }}" method="POST">
+                <form action="{{ route('collections.store') }}" method="POST">
                     @csrf
                     <div class="mb-10">
                         <label for="title" class="font-bold text-base mb-1">Title</label>
