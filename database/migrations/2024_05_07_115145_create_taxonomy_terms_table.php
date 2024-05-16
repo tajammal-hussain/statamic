@@ -13,14 +13,15 @@ return new class extends Migration
     {
         Schema::create('taxonomy_terms', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('taxonomies_id')
-                ->references('id')
-                ->on('taxonomies')
-                ->cascadeOnDelete();
             $table->string('site')->unique()->comment('');
+            $table->string('title')->comment('');
             $table->string('slug')->unique()->comment('');
             $table->string('uri')->unique()->nullable()->comment('');
-            $table->string('taxonomy')->comment('');
+            $table->string('taxonomy')->comment();
+            $table->foreign('taxonomy')
+                ->references('handle')
+                ->on('taxonomies')
+                ->cascadeOnDelete();
             $table->longText('data')->comment('');
             $table->timestamps();
         });

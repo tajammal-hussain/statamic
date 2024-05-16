@@ -5,15 +5,19 @@
 @section('content')
     <div class="page-wrapper max-w-xl">
         <div>
-            <form method="POST" action="{{ route('taxonomies.edit', ['id' => $taxonomies->id]) }}">
+            <form method="POST" action="{{ route('taxonomies.update', ['taxonomy' => $taxonomy->handle]) }}">
                 @csrf
+                @method('put')
                 <header class="mb-6">
-                    <div class="breadcrumb flex"><a href="{{ route('taxonomies.taxonomies') }}"
-                            class="flex-initial flex p-2 -m-2 items-center text-xs text-gray-700 hover:text-gray-900"><svg
-                                viewBox="0 0 24 24" class="align-middle h-6 w-4 rotate-180">
-                                <path fill="currentColor" fill-rule="evenodd"
-                                    d="m10.414 7.05 4.95 4.95-4.95 4.95L9 15.534 12.536 12 9 8.464z"></path>
-                            </svg><span>{{ $taxonomies->title }}</span></a></div>
+                    <div class="breadcrumb flex">
+                        <a href="{{ route('taxonomies.index') }}" class="flex-initial flex p-2 -m-2 items-center text-xs text-gray-700 hover:text-gray-900">
+                            <svg viewBox="0 0 24 24" class="align-middle h-6 w-4 rotate-180">
+                                <path fill="currentColor" fill-rule="evenodd" d="m10.414 7.05 4.95 4.95-4.95 4.95L9 15.534 12.536 12 9 8.464z">
+                                </path>
+                            </svg>
+                            <span>{{ $taxonomy->title }}</span>
+                        </a>
+                    </div>
                     <div class="flex items-center">
                         <h1 class="flex-1">Configure Taxonomy</h1><button type="submit" class="btn-primary">Save</button>
                     </div>
@@ -74,7 +78,7 @@
                                                     <div class="input-group"><!---->
                                                         <input id="field_title" name="title" type="text"
                                                             autofocus="autofocus" class="input-text"
-                                                            value="{{ $taxonomies->title }}"><!---->
+                                                            value="{{ $taxonomy->title }}"><!---->
                                                     </div><!---->
                                                 </div><!----><!---->
                                             </div>
@@ -327,8 +331,8 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody tabindex="0">
-                                                                @if (json_decode($taxonomies->settings))
-                                                                    @foreach (json_decode($taxonomies->settings)->preview_targets as $data)
+                                                                @if (json_decode($taxonomy->settings))
+                                                                    @foreach (json_decode($taxonomy->settings)->preview_targets as $data)
                                                                         <tr data-v-b63d425a=""
                                                                             class="preview_targets-sortable-item"
                                                                             tabindex="0">

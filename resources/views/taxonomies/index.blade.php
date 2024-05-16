@@ -18,7 +18,7 @@
                     @foreach ($taxonomiesInfo as $taxonomies)
                         <tr class="sortable-row outline-none" tabindex="0">
                             <td class="">
-                                <a href="{{ route('taxonomies.terms.index', ['taxonomy' => $taxonomies->id]) }}">
+                                <a href="{{ route('terms.index', ['taxonomy' => $taxonomies->handle]) }}">
                                     {{ $taxonomies->title }}
                                 </a>
                             </td>
@@ -34,14 +34,14 @@
                                         $menuItems = [
                                             [
                                                 'label' => 'Edit',
-                                                'route' => route('taxonomies.show', [
-                                                    'taxonomy' => $taxonomies->id,
+                                                'route' => route('taxonomies.edit', [
+                                                    'taxonomy' => $taxonomies->handle,
                                                 ]),
                                             ],
                                             [
                                                 'label' => 'Delete',
                                                 'route' => route('taxonomies.destroy', [
-                                                    'taxonomy' => $taxonomies->id,
+                                                    'taxonomy' => $taxonomies->handle,
                                                 ]),
                                             ],
                                         ];

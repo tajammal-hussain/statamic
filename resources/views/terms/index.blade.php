@@ -6,7 +6,7 @@
     <div class="page-wrapper max-w-full">
         <header class="mb-6">
             <div class="flex">
-                <a href="{{ route('taxonomies') }}"
+                <a href="{{ route('taxonomies.index', ['taxonomy' => $taxonomy->handle]) }}"
                     class="flex-initial flex p-2 -m-2 items-center text-xs text-gray-700 hover:text-gray-900">
                     <div class="h-6 rotate-180 svg-icon using-svg">
                         <svg viewBox="0 0 24 24" class="align-middle">
@@ -21,7 +21,7 @@
                 <h1 class="flex-1">{{ $taxonomy->title }}</h1>
                 <div class="dropdown-list inline-block">
                     <div aria-haspopup="true">
-                        <a href="{{ route('taxonomies.createTerm', ['handle' => $taxonomy->handle]) }}">
+                        <a href="{{ route('terms.create', ['taxonomy' => $taxonomy->handle]) }}">
                             <button class="btn-primary flex items-center">
                                 <span>{{ 'Create Term' }}</span>
                             </button>
@@ -115,7 +115,7 @@
                             </tr>
                         </thead>
                         <tbody tabindex="0">
-                            @foreach ($taxonomyTerms as $data)
+                            @foreach ($taxonomy->terms as $data)
                                 <tr class="sortable-row outline-none" tabindex="0">
                                     <th class="checkbox-column">
                                         <input type="checkbox" id="checkbox-tags::boat" value="tags::boat">
@@ -123,13 +123,31 @@
                                     <td class="">
                                         <div class="flex items-center">
                                             <a
-                                                href="{{ route('taxonomies.editTerm', ['id' => $data->id]) }}">{{ json_decode($data->data)->title }}</a>
+                                                href="{{ route('terms.edit', ['taxonomy' => $data->taxonomy, 'id' => $data->id]) }}">{{ $data->title }}</a>
                                         </div>
                                     </td>
                                     <td class="">
                                         <span class="font-mono text-2xs">{{ $data->slug }}</span>
                                     </td>
                                     <th class="actions-column">
+                                        @php
+                                            $menuItems = [
+                                                [
+                                                    'label' => 'Edit',
+                                                    'route' => route('terms.edit', [
+                                                        'taxonomy' => $data->taxonomy,
+                                                        'id' => $data->id,
+                                                    ]),
+                                                ],
+                                                [
+                                                    'label' => 'Delete',
+                                                    'route' => route('terms.destroy', [
+                                                        'taxonomy' => $data->taxonomy,
+                                                    ]),
+                                                ],
+                                            ];
+                                        @endphp
+                                        <x-customDropdown :menuItems="$menuItems"></x-customDropdown>
                                     </th>
                                 </tr>
                             @endforeach

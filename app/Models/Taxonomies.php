@@ -16,6 +16,6 @@ class Taxonomies extends Model
 
     public function terms()
     {
-        return $this->hasMany(TaxonomyTerms::class);
+        return $this->hasMany(TaxonomyTerms::class, 'taxonomy', 'handle');
     }
 }

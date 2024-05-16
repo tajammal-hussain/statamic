@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Taxonomies;
+use App\Models\Collections;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 
 class TaxonomiesController extends Controller
@@ -13,14 +15,14 @@ class TaxonomiesController extends Controller
      */
     public function index()
     {
-        $data['columns'] = [
+        $columns = [
             ['name' => 'Title'],
             ['name' => 'Terms'],
         ];
 
-        $data['taxonomiesInfo'] = Taxonomies::withCount('terms')->get();
+        $taxonomiesInfo = Taxonomies::withCount('terms')->get();
 
-        return view('taxonomies.index', $data);
+        return view('taxonomies.index', compact('columns', 'taxonomiesInfo'));
     }
 
     /**
@@ -36,65 +38,90 @@ class TaxonomiesController extends Controller
      */
     public function store(Request $request)
     {
-        // Define validation rules
         $rules = [
             'title' => 'required|string|max:255',
             'handle' => 'required|string|max:255',
         ];
-
-        // Validate the incoming request
         $validator = Validator::make($request->all(), $rules);
 
-        // Check if validation fails
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
+        if ($validator->fails()) : return redirect()->back()->withErrors($validator)->withInput();
+        endif;
 
-        try {
-            $taxonomy = new Taxonomies();
+        $taxonomy = new Taxonomies();
+        $taxonomy = [
+            'title' => $request->input('title'),
+            'handle' => $request->input('handle'),
+        ];
+        Taxonomies::insert($taxonomy);
 
-            $taxonomy->title = $request->input('title');
-            $taxonomy->handle = $request->input('handle');
-
-            $taxonomy->save();
-
-            return redirect()->back()->with('success', 'Collection created successfully.');
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Failed to create collection. Please try again.');
-        }
+        // Redirect back with success message
+        return redirect()->back()->with('success', 'Collection created successfully.');
     }
 
     /**`
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $handle)
     {
-        $data['taxonomiesInfo'] = Taxonomies::where(['id' => $id])->get();
-
-        return view('taxonomies.edit', $data);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $handle)
     {
-        //
+        $taxonomy = Taxonomies::where(['handle' => $handle])->firstOrFail();
+        $collections = Collections::all();
+
+        return view('taxonomies.edit', compact('taxonomy', 'collections'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $handle)
     {
-        //
+        // custPrint($handle);
+        $selectedCollections[] = $request->input('collections');
+
+        $rules = ['title' => 'required|string|max:255'];
+
+        $validatedData = $request->validate($rules);
+        $taxonomyData = ["collections" => $selectedCollections];
+        // $newHandle = preg_replace('/[^a-zA-Z0-9]/', '-', $validatedData['title']);
+        // Convert data to JSON format
+        $jsonData = json_encode($taxonomyData);
+        $mytime = Carbon::now();
+        $taxonomy = [
+            'settings' => $jsonData,
+            'title' => $validatedData['title'],
+            // 'handle' => $newHandle,
+            'updated_at' => $mytime->toDateTimeString(),
+        ];
+
+        // return $handle;
+        $collectionsArray = explode(',', $selectedCollections[0]);
+
+        foreach ($collectionsArray as $collection) :
+            $existingSettings = Collections::where('handle', $collection)->value('settings');
+
+            $existingSettingsArray = json_decode($existingSettings, true);
+
+            $mergedSettings = array_merge_recursive($existingSettingsArray ?? [], ["taxonomies" => $handle]);
+
+            Collections::where('handle', $collection)->update(['settings' => json_encode($mergedSettings)]);
+        endforeach;
+
+        Taxonomies::where('handle', $handle)->update($taxonomy);
+        // Redirect back with success message
+        return redirect()->back()->with('success', 'taxonomy has been updated successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $handle)
     {
-        //
     }
 }

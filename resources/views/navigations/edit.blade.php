@@ -6,7 +6,7 @@
     <div class="page-wrapper max-w-xl">
         <header class="mb-6">
             <div class="flex">
-                <a href="{{ route('navigations.navigations') }}"
+                <a href="{{ route('navigations.index') }}"
                     class="flex-initial flex p-2 -m-2 items-center text-xs text-gray-700 hover:text-gray-900">
                     <div class="h-6 rotate-180 svg-icon using-svg">
                         <svg viewBox="0 0 24 24" class="align-middle">
@@ -15,14 +15,15 @@
                             </path>
                         </svg>
                     </div>
-                    <span>{{ $navigations->title }}</span>
+                    <span>{{ $navigation->title }}</span>
                 </a>
             </div>
             <h1>{{ 'Edit Navigation' }}</h1>
         </header>
-        <form method="POST" action="{{ route('navigations.edit', ['id' => $navigations->id]) }}">
+        <form action="{{ route('navigations.update', ['navigation' => $navigation->handle]) }}" method="post">
+            @csrf
+            @method('PUT')
             <div>
-                @csrf
                 <div>
                     <div>
                         @if ($errors->any())
@@ -85,7 +86,7 @@
                                                     <div class="input-group">
                                                         <input id="field_title" name="title" type="text"
                                                             autofocus="autofocus" class="input-text"
-                                                            value="{{ $navigations->title }}">
+                                                            value="{{ $navigation->title }}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -289,15 +290,13 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="publish-tab publish-tab-actions-footer vue-portal-target "></div>
                     </div>
-                    <div class="py-4 border-t flex justify-between"><a
-                            href="https://demo.statamic.com/cp/navigation/footer"
-                            class="btn">{{ 'Cancel' }}</a><button type="submit"
-                            class="btn-primary">{{ 'Save' }}</button>
+                    <div class="py-4 border-t flex justify-between">
+                        <a href="https://demo.statamic.com/cp/navigation/footer" class="btn">{{ 'Cancel' }}</a>
+                        <button type="submit" class="btn-primary">{{ 'Save' }}</button>
                     </div>
                 </div>
+            </div>
         </form>
     </div>
 

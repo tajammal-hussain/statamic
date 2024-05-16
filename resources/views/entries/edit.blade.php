@@ -8,6 +8,7 @@
             <form id="myForm" method="POST"
                 action="{{ route('entries.update', ['collection' => $entry->collection, 'id' => $entry->id]) }}">
                 @csrf
+                @method('put')
                 <div class="breadcrumb flex">
                     <a href="{{ route('entries.index', ['collection' => $entry->collection]) }}"
                         class="flex-initial flex p-2 -m-2 items-center text-xs text-gray-700 hover:text-gray-900">

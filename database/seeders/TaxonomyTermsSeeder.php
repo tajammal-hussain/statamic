@@ -14,12 +14,12 @@ class TaxonomyTermsSeeder extends Seeder
     public function run(): void
     {
         TaxonomyTerms::create([
-            'taxonomies_id' => '1',
             'site' => 'default',
+            'title' => "testinf taxonomies",
             'slug' => 'testinf-taxonomies',
             'uri' => '/taxonomy-checking/testinf-taxonomies',
-            'taxonomy' => 'taxonomies_checking',
-            'data' => '{"title":"testinf taxonomies","content":"this is for testing tzxonomies","updated_by":1,"updated_at":1715082553,"blueprint":"taxonomy_checking"}',
+            'taxonomy' => 'testinf-taxonomies',
+            'data' => '{"content":"this is for testing tzxonomies","updated_by":1,"updated_at":1715082553}',
         ]);
     }
 }

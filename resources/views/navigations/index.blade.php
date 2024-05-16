@@ -6,7 +6,7 @@
     <div class="page-wrapper max-w-xl">
         <div class="flex items-center justify-between mb-6" bis_skin_checked="1">
             <h1>{{ 'Navigation' }}</h1>
-            <a href="{{ route('navigations.add') }}" class="btn-primary">Create Navigation</a>
+            <a href="{{ route('navigations.create') }}" class="btn-primary">Create Navigation</a>
         </div>
         @if (session('success'))
             <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
@@ -26,8 +26,7 @@
                     @foreach ($navigationsInfo as $navigation)
                         <tr class="sortable-row outline-none" tabindex="0">
                             <td>
-                                <a href="{{ route('navigations.table', ['slug' => $navigation->handle]) }}"
-                                    class="flex items-center">
+                                <a href="{{ route('navigations.index') }}" class="flex items-center">
                                     {{ $navigation->title }}
                                 </a>
                             </td>
@@ -38,11 +37,11 @@
                                             $menuItems = [
                                                 [
                                                     'label' => 'Edit',
-                                                    'route' => route('navigations.edit', ['id' => $navigation->id]),
+                                                    'route' => route('navigations.edit', ['navigation' => $navigation->handle]),
                                                 ],
                                                 [
                                                     'label' => 'Delete',
-                                                    'route' => route('navigations.delete', ['id' => $navigation->id]),
+                                                    'route' => route('navigations.destroy', ['navigation' => $navigation->id]),
                                                 ],
                                                 // Add more menu items as needed
                                             ];
