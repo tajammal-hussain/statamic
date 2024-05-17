@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Collections;
-use App\Models\User;
+use App\Models\{
+    Collections,
+    Collection_taxonomy,
+    User,
+    Entries,
+};
 use Illuminate\Http\Request;
-use App\Models\Entries;
 use Carbon\Carbon;
 
 class EntriesController extends Controller
@@ -24,9 +27,18 @@ class EntriesController extends Controller
      */
     public function create($handle)
     {
+        $taxonomies = Collections::with('taxonomies')->where(['handle' => $handle])->firstOrFail();
         $collection = Collections::where(['handle' => $handle])->firstOrFail();
         $users = User::all();
-        return view('entries.create', compact('collection', 'users'));
+
+        $taxonomyTerms = $taxonomies->taxonomies->map(function ($taxonomy) {
+            return [
+                'handle' => $taxonomy->handle,
+                'terms' => $taxonomy->terms
+            ];
+        });
+
+        return view('entries.create', compact('collection', 'users', 'taxonomyTerms'));
     }
 
     /**
@@ -114,10 +126,18 @@ class EntriesController extends Controller
      */
     public function edit($handle, string $id)
     {
+        $taxonomies = Collections::with('taxonomies')->where(['handle' => $handle])->firstOrFail();
         $collection = Collections::where(['handle' => $handle])->firstOrFail();
         $entry = Entries::where(['id' => $id])->firstOrFail();
         $users = User::all();
-        return view('entries.edit', compact('entry', 'users', 'collection'));
+        $taxonomyTerms = $taxonomies->taxonomies->map(function ($taxonomy) {
+            return [
+                'handle' => $taxonomy->handle,
+                'terms' => $taxonomy->terms
+            ];
+        });
+
+        return view('entries.edit', compact('entry', 'users', 'collection', 'taxonomyTerms'));
     }
 
     /**

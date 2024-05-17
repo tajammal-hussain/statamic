@@ -141,8 +141,12 @@
                                                 ],
                                                 [
                                                     'label' => 'Delete',
-                                                    'route' => route('terms.destroy', [
+                                                    // 'route' => route('terms.destroy', [
+                                                    //     'taxonomy' => $data->taxonomy,
+                                                    // ]),
+                                                    'route' => route('terms.edit', [
                                                         'taxonomy' => $data->taxonomy,
+                                                        'id' => $data->id,
                                                     ]),
                                                 ],
                                             ];

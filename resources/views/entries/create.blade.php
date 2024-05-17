@@ -11,7 +11,8 @@
                     <a href="{{ route('entries.index', ['collection' => $collection->handle]) }}"
                         class="flex-initial flex p-2 -m-2 items-center text-xs text-gray-700 hover:text-gray-900">
                         <svg viewBox="0 0 24 24" class="align-middle h-6 w-4 rotate-180">
-                            <path fill="currentColor" fill-rule="evenodd" d="m10.414 7.05 4.95 4.95-4.95 4.95L9 15.534 12.536 12 9 8.464z"></path>
+                            <path fill="currentColor" fill-rule="evenodd"
+                                d="m10.414 7.05 4.95 4.95-4.95 4.95L9 15.534 12.536 12 9 8.464z"></path>
                         </svg>
                         <span>{{ $collection->title }}</span>
                     </a>
@@ -380,20 +381,20 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                {{-- @if (!$taxonomies->isEmpty())
-                                                                    @foreach ($taxonomies as $taxonomy)
+                                                                @if (!$taxonomyTerms->isEmpty())
+                                                                    @foreach ($taxonomyTerms as $taxonomy)
                                                                         <div class="mt-4">
-                                                                            <select x-cloak id="{{ $taxonomy->handle }}">
-                                                                                <span>{{ $taxonomy->handle }}</span>
-                                                                                @foreach ($taxonomy->terms as $term)
+                                                                            <select x-cloak id="{{ $taxonomy['handle'] }}">
+                                                                                {{-- <span>{{ $taxonomy->handle }}</span> --}}
+                                                                                @foreach ($taxonomy['terms'] as $term)
                                                                                     <option value="{{ $term->slug }}">
-                                                                                        {{ json_decode($term->data)->title }}
+                                                                                        {{ $term->title }}
                                                                                     </option>
                                                                                 @endforeach
                                                                             </select>
-                                                                            <div x-data="dropdown('{{ $taxonomy->handle }}')"
-                                                                                x-init="loadOptions('{{ $taxonomy->handle }}')" class="w-full">
-                                                                                <input name="{{ $taxonomy->handle }}"
+                                                                            <div x-data="dropdown('{{ $taxonomy['handle'] }}')"
+                                                                                x-init="loadOptions('{{ $taxonomy['handle'] }}')" class="w-full">
+                                                                                <input name="{{ $taxonomy['handle'] }}"
                                                                                     type="hidden"
                                                                                     x-bind:value="selectedValues()">
                                                                                 <div class="inline-block relative w-full">
@@ -426,9 +427,9 @@
                                                                                                                         viewBox="0 0 20 20">
                                                                                                                         <path
                                                                                                                             d="M14.348,14.849c-0.469,0.469-1.229,0.469-1.697,0L10,11.819l-2.651,3.029c-0.469,0.469-1.229,0.469-1.697,0
-                                                                                                                                                                                                            c-0.469-0.469-0.469-1.229,0-1.697l2.758-3.15L5.651,6.849c-0.469-0.469-0.469-1.228,0-1.697s1.228-0.469,1.697,0L10,8.183
-                                                                                                                                                                                                            l2.651-3.031c0.469-0.469,1.228-0.469,1.697,0s0.469,1.229,0,1.697l-2.758,3.152l2.758,3.15
-                                                                                                                                                                                                            C14.817,13.62,14.817,14.38,14.348,14.849z" />
+                                                                                                                                                                                                                        c-0.469-0.469-0.469-1.229,0-1.697l2.758-3.15L5.651,6.849c-0.469-0.469-0.469-1.228,0-1.697s1.228-0.469,1.697,0L10,8.183
+                                                                                                                                                                                                                        l2.651-3.031c0.469-0.469,1.228-0.469,1.697,0s0.469,1.229,0,1.697l-2.758,3.152l2.758,3.15
+                                                                                                                                                                                                                        C14.817,13.62,14.817,14.38,14.348,14.849z" />
                                                                                                                     </svg>
                                                                                                                 </div>
                                                                                                             </div>
@@ -506,7 +507,7 @@
                                                                             </div>
                                                                         </div>
                                                                     @endforeach
-                                                                @endif --}}
+                                                                @endif
                                                             </div>
                                                         </div>
                                                     </div>
@@ -528,14 +529,14 @@
     </script>
     <script src="{{ url('js/entries.js') }}"></script>
 
-    {{-- <style>
+    <style>
         [x-cloak] {
             display: none;
         }
-    </style> --}}
+    </style>
     <script type="module" src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
 
-    {{-- <script>
+    <script>
         function dropdown(taxonomy) {
             return {
                 options: [],
@@ -582,6 +583,6 @@
                 }
             }
         }
-    </script> --}}
+    </script>
 
 @endsection

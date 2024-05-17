@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Taxonomies;
-use App\Models\Collections;
+
+use App\Models\{
+    Taxonomies,
+    Collections,
+    Collection_taxonomy
+};
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 
@@ -58,14 +62,6 @@ class TaxonomiesController extends Controller
         return redirect()->back()->with('success', 'Collection created successfully.');
     }
 
-    /**`
-     * Display the specified resource.
-     */
-    public function show(string $handle)
-    {
-        //
-    }
-
     /**
      * Show the form for editing the specified resource.
      */
@@ -82,7 +78,6 @@ class TaxonomiesController extends Controller
      */
     public function update(Request $request, string $handle)
     {
-        // custPrint($handle);
         $selectedCollections[] = $request->input('collections');
 
         $rules = ['title' => 'required|string|max:255'];
@@ -100,17 +95,18 @@ class TaxonomiesController extends Controller
             'updated_at' => $mytime->toDateTimeString(),
         ];
 
-        // return $handle;
         $collectionsArray = explode(',', $selectedCollections[0]);
 
-        foreach ($collectionsArray as $collection) :
-            $existingSettings = Collections::where('handle', $collection)->value('settings');
+        foreach ($collectionsArray as $collectionHandle) :
+            // Retrieve the collection ID
+            $collection = Collections::where('handle', $collectionHandle)->first();
 
-            $existingSettingsArray = json_decode($existingSettings, true);
-
-            $mergedSettings = array_merge_recursive($existingSettingsArray ?? [], ["taxonomies" => $handle]);
-
-            Collections::where('handle', $collection)->update(['settings' => json_encode($mergedSettings)]);
+            if ($collection && $taxonomy) :
+                Collection_taxonomy::insert([
+                    'collection_handle' => $collection->handle,
+                    'taxonomy_handle' => $handle,
+                ]);
+            endif;
         endforeach;
 
         Taxonomies::where('handle', $handle)->update($taxonomy);

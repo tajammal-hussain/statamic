@@ -11,13 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('collection_taxonomy', function (Blueprint $table) {
-            $table->foreignId('collection_id')
-                ->references('id')
+        Schema::create('collection_taxonomies', function (Blueprint $table) {
+            $table->string('collection_handle')->comment('');
+            $table->foreign('collection_handle')
+                ->references('handle')
                 ->on('collections')
                 ->cascadeOnDelete();
-            $table->foreignId('taxonomy_id')
-                ->references('id')
+            $table->string('taxonomy_handle')->comment('');
+            $table->foreign('taxonomy_handle')
+                ->references('handle')
                 ->on('taxonomies')
                 ->cascadeOnDelete();
             $table->timestamps();
@@ -29,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('collection_taxonomy');
+        Schema::dropIfExists('collection_taxonomies');
     }
 };
