@@ -145,3 +145,46 @@ buttons.forEach((button, index) => {
         overlay.classList.add('-translate-x-full');
     });
 });
+
+/*
+    
+
+// Off-canvas js
+
+// Get all buttons and overlays
+const buttons = document.querySelectorAll('button[data-hs-overlay]');
+const overlays = document.querySelectorAll('.hs-overlay');
+const closeButtons = document.querySelectorAll('.btn-close');
+
+// Function to close all overlays
+function closeAllOverlays() {
+    overlays.forEach(overlay => {
+        overlay.classList.add('hidden');
+        overlay.classList.add('-translate-x-full');
+    });
+}
+
+// Add event listeners to all buttons
+buttons.forEach((button, index) => {
+    const overlay = overlays[index];
+    const closeButton = closeButtons[index];
+
+    button.addEventListener('click', function() {
+        // Close all overlays before opening the current one
+        closeAllOverlays();
+        
+        // Toggle the 'hidden' class on the overlay
+        overlay.classList.toggle('hidden');
+        // Toggle the '-translate-x-full' class on the overlay
+        overlay.classList.toggle('-translate-x-full');
+    });
+
+    closeButton.addEventListener('click', function() {
+        // Add the 'hidden' class on the overlay
+        overlay.classList.add('hidden');
+        // Add the '-translate-x-full' class on the overlay
+        overlay.classList.add('-translate-x-full');
+    });
+});
+
+*/
