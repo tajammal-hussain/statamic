@@ -4868,10 +4868,10 @@ table.control {
 :is([dir=rtl] .global-header) {
     padding-left: 1rem
 }
-
+/* 
 .global-header {
     z-index: 3
-}
+} */
 
 @media (min-width: 768px) {
     .global-header {
