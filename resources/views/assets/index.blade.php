@@ -1,6 +1,8 @@
 @extends('layouts.main')
+
+@section('title', 'Assets')
+
 @section('content')
-    <title>Assets :: Cedar</title>
     <div class="page-wrapper max-w-full" bis_skin_checked="1">
         <div class="asset-manager" bis_skin_checked="1">
             <div class="flex items-center mb-6" bis_skin_checked="1">
