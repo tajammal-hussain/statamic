@@ -2,7 +2,9 @@
 
 @section('title', 'Fieldsets')
 
+
 @section('content')
+@if ($fieldsetsInfo->count()==0)
     <div class="page-wrapper max-w-xl" bis_skin_checked="1">
         <div class="no-results md:mt-4 max-w-md mx-auto" bis_skin_checked="1">
             <div class="card rounded-xl text-center p-6 lg:py-10" bis_skin_checked="1">
@@ -65,10 +67,74 @@
                 <p class="text-gray-700 leading-normal my-8 text-lg antialiased">
                     {{ 'Fieldsets are an optional companion to blueprints, acting as reusable partials that can be used within blueprints.' }}
                 </p>
-                <a href="{{ route('fieldsets.add') }}" class="btn-primary btn-lg">
+                <a href="{{ route('fieldsets.create') }}" class="btn-primary btn-lg">
                     {{ 'Create Fieldset' }}
                 </a>
             </div>
         </div>
     </div>
+    @else 
+    <div class="page-wrapper max-w-xl">
+        <div class="flex items-center justify-between mb-6">
+            <h1>Fieldsets</h1>
+            {{-- Add any additional buttons or actions here --}}
+            <a href="{{ route('fieldsets.create') }}" class="btn-primary">Create Fieldset</a>
+        </div>
+        @if (session('success'))
+        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+            {{ session('success') }}
+        </div>
+    @endif
+    @if (session('error'))
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+            {{ session('error') }}
+        </div>
+    @endif
+        <div class="card p-0">
+            <table class="data-table" data-size="sm">
+                {{-- Table Head --}}
+                <x-table-head :columns="$columns" />
+
+                <tbody>
+                    @foreach ($fieldsetsInfo as $fieldset)
+                        <tr class="sortable-row outline-none">
+                            <td>
+                                <a href="{{ route('fieldsets.edit', $fieldset->id) }}">
+                                    {{ json_decode($fieldset->data)->title }}
+                                </a>
+                            </td>
+                            <td class="rtl:text-left ltr:text-right rtl:pl-8 ltr:pr-8">
+                                {{ $fieldset->handle }}
+                            </td>
+                            <td class="rtl:text-left ltr:text-right rtl:pl-8 ltr:pr-8">
+                                1
+                            </td>
+                            <td>
+                                <div>
+                                    @php
+                                        $menuItems = [
+                                            [
+                                                'label' => 'Edit',
+                                                'route' => route('fieldsets.edit', $fieldset->id),
+                                            ],
+                                            [
+                                                'label' => 'Delete',
+                                                'route' => route('fieldsets.destroy',$fieldset->id),
+                                            ],
+                                        ];
+                                    @endphp
+                                    <x-customDropdown :menuItems="$menuItems" />
+
+                                    
+                                </div>
+
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+    @endif
 @endsection
+
