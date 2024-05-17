@@ -1,20 +1,20 @@
 <?php
 
-// use App\Http\Controllers\CollectionsController;
-use App\Http\Controllers\EntriesController;
-use App\Http\Controllers\CollectionController;
-use App\Http\Controllers\NavigationController;
-use App\Http\Controllers\TaxonomiesController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\FieldsetsController;
-use App\Http\Controllers\GlobalsController;
-use App\Http\Controllers\AssetsController;
-use App\Http\Controllers\FormsController;
-use App\Http\Controllers\UsersController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\TermsController;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\{
+    AuthController,
+    DashboardController,
+    CollectionController,
+    EntriesController,
+    NavigationController,
+    TaxonomiesController,
+    TermsController,
+    AssetsController,
+    GlobalsController,
+    FieldsetsController,
+    UsersController,
+};
 
 // Breeze authentication routes
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -22,9 +22,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile', [DashboardController::class, 'profile'])->name('profile');
 });
 
-Route::view('profile', 'profile')
-    ->middleware(['auth'])
-    ->name('profile');
+Route::view('profile', 'profile')->middleware(['auth'])->name('profile');
 
 require __DIR__ . '/auth.php';
 
@@ -38,19 +36,13 @@ Route::get('/logout', function () {
 })->name('logout');
 
 // Authentication Routes
-Route::controller(AuthController::class)
-    ->prefix('auth')
-    ->as('auth.')
-    ->group(function () {
-        Route::get('/', 'index')->name('login');
-        Route::get('/forgotPassword', 'forgotPassword')->name('forgot');
-    });
-
-
-// Collections Controller
+Route::controller(AuthController::class)->prefix('auth')->as('auth.')->group(function () {
+    Route::get('/', 'index')->name('login');
+    Route::get('/forgotPassword', 'forgotPassword')->name('forgot');
+});
 
 Route::middleware('auth')->group(function () {
-    
+    // Collections--Entries Routes
     Route::resource('collections', CollectionController::class)->except('show');
     Route::prefix('collections')->group(function () {
         Route::get('/{collection}/entries', EntriesController::class)->name('entries.index');
@@ -61,9 +53,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/{collection}/destroy/{id}', [EntriesController::class, 'destroy'])->name('entries.destroy');
     });
 
+    // Navigations Routes
     Route::resource('navigations', NavigationController::class);
 
-    Route::resource('taxonomies', TaxonomiesController::class);
+    // Taxonomies--Terms Routes
+    Route::resource('taxonomies', TaxonomiesController::class)->except('show');
     Route::prefix('taxonomies')->group(function () {
         Route::get('/{taxonomy}/terms', TermsController::class)->name('terms.index');
         Route::get('/{taxonomy}/create', [TermsController::class, 'create'])->name('terms.create');
@@ -71,8 +65,13 @@ Route::middleware('auth')->group(function () {
         Route::get('/{taxonomy}/edit/{id}', [TermsController::class, 'edit'])->name('terms.edit');
         Route::put('/{taxonomy}/update/{id}', [TermsController::class, 'update'])->name('terms.update');
         Route::get('/{taxonomy}/show/{id}', [TermsController::class, 'show'])->name('terms.show');
-        // Route::delete('/{taxonomy}/destroy', [TermsController::class, 'destroy'])->name('terms.destroy');
     });
+
+    // Assets Routes
+    Route::resource('assets', AssetsController::class)->except('show', 'create');
+
+    // Fieldsets Routes
+    Route::resource('fieldsets', FieldsetsController::class)->except('show');
 });
 
 // // Assets Routes
@@ -93,17 +92,6 @@ Route::middleware('auth')->group(function () {
 //         Route::match(['get', 'post'], '/edit/{id?}', 'edit')->name('edit');
 //         Route::match(['get', 'post'], '/delete/{id?}', 'delete')->name('delete');
 //         Route::get('/configure', 'configure')->name('configure');
-//     });
-
-// // Fieldsets Routes
-// Route::controller(FieldsetsController::class)
-//     ->prefix('fieldsets')
-//     ->as('fieldsets.')
-//     ->group(function () {
-//         Route::get('', 'index')->name('fieldsets');
-//         Route::get('/add', 'add')->name('add');
-//         Route::get('/edit', 'edit')->name('edit');
-//         Route::get('/table', 'table')->name('table');
 //     });
 
 // // Forms Routes

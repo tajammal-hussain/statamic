@@ -12,9 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('fieldsets', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('handle', 255)->unique();
-            $table->longText('data')->charset('utf8mb4')->collation('utf8mb4_bin');
+            $table->id();
+            $table->string('title')->comment('');
+            $table->string('handle')->unique();
+            $table->longText('data')->comment('');
             $table->timestamps();
         });
     }

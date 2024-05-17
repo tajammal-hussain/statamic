@@ -12,25 +12,23 @@ class FieldsetsController extends Controller
      */
     public function index()
     {
-            $columns = [
-                ['name' => 'Title'],
-                ['name' => 'Handle'],
-                ['name' => 'Fields'],
-            ];
-    
-            $fieldsetsInfo = Fieldsets::all();
-    
-            return view('fieldsets.index', compact('columns', 'fieldsetsInfo'));
-        
+        $columns = [
+            ['name' => 'Title'],
+            ['name' => 'Handle'],
+            ['name' => 'Fields'],
+        ];
+
+        $fieldsetsInfo = Fieldsets::all();
+
+        return view('fieldsets.index', compact('columns', 'fieldsetsInfo'));
     }
-     
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        return view('fieldsets.add');
+        return view('fieldsets.create');
     }
 
     /**
@@ -43,69 +41,53 @@ class FieldsetsController extends Controller
             'handle' => 'required|string|max:255',
         ]);
 
-        $data = [
-            'title' => $request->title,
-            'fields'=>[]
-        ];
+        $data = ['fields' => []];
+
         $jsonData =  json_encode($data);
+
         // Create a new Fieldset instance
         $fieldset = new Fieldsets();
-        $fieldset->data = $jsonData;
-        $fieldset->handle = $request->handle;
-        // If you have more fields in the form, you can assign them here
+        $fieldset = [
+            'data' => $jsonData,
+            'title' => $request->title,
+            'handle' => $request->handle,
+        ];
 
-        // Save the Fieldset to the database
-        $fieldset->save();
+        Fieldsets::insert($fieldset);
 
         // Redirect back or to any other route after successful insertion
-        return redirect()->route('fieldsets.edit',$fieldset->id);
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        return redirect()->route('fieldsets.edit', ['fieldset' => $request->handle]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $handle)
     {
-        $fieldset = Fieldsets::findOrFail($id);
-    
-        // Return the edit view with the fieldset data
+        $fieldset = Fieldsets::where(['handle' => $handle])->firstOrFail();
+
         return view('fieldsets.edit', compact('fieldset'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    
 
-    public function update(Request $request,string $id)
-{
-    
-   
-    $request->validate([
-        'title' => 'required|string|max:255',
-    ]);
 
-    
+    public function update(Request $request, string $id)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+        ]);
 
-    $fieldset = Fieldsets::findOrFail($id);
+        $fieldset = Fieldsets::findOrFail($id);
 
-   
-    $fieldset->data = json_encode(['title' => $request->title, 'fields' => []]);
+        $fieldset->data = json_encode(['title' => $request->title, 'fields' => []]);
 
-    
-    $fieldset->save();
+        $fieldset->save();
 
-    
-    return redirect()->route('fieldsets.edit',compact('fieldset'))->with('success', 'Fieldset updated successfully');
-}
+        return redirect()->back()->with('success', 'Fieldset updated successfully');
+    }
 
 
     /**
@@ -113,12 +95,11 @@ class FieldsetsController extends Controller
      */
     public function destroy(string $id)
     {
-        
-        $fieldset = Fieldsets::findOrFail($id);
-
-        $fieldset->delete();
-    
-      
-        return redirect()->route('fieldsets.index')->with('success', 'Fieldset deleted successfully');
+        try {
+            Fieldsets::where('id', $id)->first()->delete();
+            return redirect()->back()->with('success', 'Fieldsets deleted successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Something went wrong');
+        }
     }
 }
