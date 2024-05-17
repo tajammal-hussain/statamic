@@ -12,7 +12,7 @@
             </path>
         </svg>{{ $buttonText }}</button>
     <div id="hs-overlay"
-        class="hs-overlay hs-overlay-open:translate-x-0 hidden  border-2 border-red-700 -translate-x-full fixed top-0 right-0 transition-all duration-300 transform h-full z-1 bg-white border-l shadow-xl"
+        class="hs-overlay hs-overlay-open:translate-x-0 hidden  border-2 border-red-700 -translate-x-full absolute top-0 right-0 transition-all duration-300 transform h-full z-1 bg-white border-l shadow-xl"
         tabindex="-1" style="width : 88.5%; heifht : 100% ">
         <div class="vue-portal-target stack">
             <div class="stack-container stack-is-current" style="left: 200px;">
@@ -88,19 +88,32 @@
                                                                                         </path>
                                                                                     </g>
                                                                                 </svg> Bard </small></h1>
-                                                                                <button type="button" class="btn-close mr-2 border">×</button>
-                                                                                <button class="btn-primary">Apply</button>
+                                                                        <button type="button"
+                                                                            class="btn-close mr-2 border">×</button>
+                                                                        <button class="btn-primary">Apply</button>
                                                                     </header>
                                                                     <section class="py-4 px-3 md:px-8">
                                                                         <div class="tabs-container flex items-center">
-                                                                            <div role="tablist" aria-label="Edit Content" class="publish-tabs tabs">
-                                                                                <button role="tab" id="SettingsTab" aria-controls="SettingsTabPanel" tabindex="0" class="tab-button" aria-selected="true">Settings</button>
-                                                                                <button role="tab" id="ConditionsTab" aria-controls="ConditionsTabPanel" tabindex="-1" class="tab-button">Conditions</button>
-                                                                                <button role="tab" id="ValidationTab" aria-controls="ValidationTabPanel" tabindex="-2" class="tab-button">Validation</button>
+                                                                            <div role="tablist"
+                                                                                aria-label="Edit Content"
+                                                                                class="publish-tabs tabs">
+                                                                                <button role="tab" id="SettingsTab"
+                                                                                    aria-controls="SettingsTabPanel"
+                                                                                    tabindex="0" class="tab-button"
+                                                                                    aria-selected="true">Settings</button>
+                                                                                <button role="tab" id="ConditionsTab"
+                                                                                    aria-controls="ConditionsTabPanel"
+                                                                                    tabindex="-1"
+                                                                                    class="tab-button">Conditions</button>
+                                                                                <button role="tab" id="ValidationTab"
+                                                                                    aria-controls="ValidationTabPanel"
+                                                                                    tabindex="-2"
+                                                                                    class="tab-button">Validation</button>
                                                                             </div>
                                                                         </div>
                                                                         <div class="field-setings">
-                                                                            <div id="SettingsTabPanel" class="tab-panel active">
+                                                                            <div id="SettingsTabPanel"
+                                                                                class="tab-panel active">
                                                                                 <div class="publish-sections">
                                                                                     <div
                                                                                         class="publish-sections-section">
@@ -337,7 +350,19 @@
                                                                                                         </label>
                                                                                                         <div
                                                                                                             class="help-block -mt-2">
-                                                                                                            <p>Provide additional field instructions like this very text. Markdown formatting is supported.</p>
+                                                                                                            <p>Provide
+                                                                                                                additional
+                                                                                                                field
+                                                                                                                instructions
+                                                                                                                like
+                                                                                                                this
+                                                                                                                very
+                                                                                                                text.
+                                                                                                                Markdown
+                                                                                                                formatting
+                                                                                                                is
+                                                                                                                supported.
+                                                                                                            </p>
                                                                                                         </div>
                                                                                                     </div>
                                                                                                     <!---->
@@ -359,7 +384,8 @@
                                                                                                         <label
                                                                                                             for="field_instructions_position"
                                                                                                             class="publish-field-label"><span
-                                                                                                                class="rtl:ml-1 ltr:mr-1 v-popper--has-tooltip">Instructions Position</span>
+                                                                                                                class="rtl:ml-1 ltr:mr-1 v-popper--has-tooltip">Instructions
+                                                                                                                Position</span>
                                                                                                             <!---->
                                                                                                             <!---->
                                                                                                             <!---->
@@ -395,7 +421,13 @@
                                                                                                         </label>
                                                                                                         <div
                                                                                                             class="help-block -mt-2">
-                                                                                                            <p>Show instructions above or below the field.</p>
+                                                                                                            <p>Show
+                                                                                                                instructions
+                                                                                                                above or
+                                                                                                                below
+                                                                                                                the
+                                                                                                                field.
+                                                                                                            </p>
                                                                                                         </div>
                                                                                                     </div>
                                                                                                     <!---->
@@ -506,73 +538,42 @@
                                                                                                         </label>
                                                                                                         <div
                                                                                                             class="help-block -mt-2">
-                                                                                                            <p>Control the listing column visibility.</p>
+                                                                                                            <p>Control
+                                                                                                                the
+                                                                                                                listing
+                                                                                                                column
+                                                                                                                visibility.
+                                                                                                            </p>
                                                                                                         </div>
                                                                                                     </div>
-                                                                                                    <!---->
-                                                                                                    <div data-v-288ded3d=""
-                                                                                                        class="flex">
-                                                                                                        <div data-v-288ded3d=""
-                                                                                                            dir="auto"
-                                                                                                            class="v-select flex-1 vs--single vs--searchable"
-                                                                                                            name="listable">
-                                                                                                            <div id="vs40__combobox"
-                                                                                                                role="combobox"
-                                                                                                                aria-expanded="false"
-                                                                                                                aria-owns="vs40__listbox"
-                                                                                                                aria-label="Search for option"
-                                                                                                                class="vs__dropdown-toggle">
-                                                                                                                <div
-                                                                                                                    class="vs__selected-options">
-                                                                                                                    <span
-                                                                                                                        class="vs__selected">
-                                                                                                                        Hidden by default
-                                                                                                                        <!---->
-                                                                                                                    </span>
-                                                                                                                    <input
-                                                                                                                        id="field_listable"
-                                                                                                                        aria-autocomplete="list"
-                                                                                                                        aria-labelledby="vs40__combobox"
-                                                                                                                        aria-controls="vs40__listbox"
-                                                                                                                        type="search"
-                                                                                                                        autocomplete="off"
-                                                                                                                        class="vs__search">
-                                                                                                                </div>
-                                                                                                                <div
-                                                                                                                    class="vs__actions">
-                                                                                                                    <button
-                                                                                                                        type="button"
-                                                                                                                        title="Clear Selected"
-                                                                                                                        aria-label="Clear Selected"
-                                                                                                                        class="vs__clear"
-                                                                                                                        style="display: none;"><span>×</span></button>
-                                                                                                                    <span
-                                                                                                                        class="toggle vs__open-indicator"
-                                                                                                                        role="presentation"><svg
-                                                                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                                                                            height="16"
-                                                                                                                            width="16"
-                                                                                                                            viewBox="0 0 20 20">
-                                                                                                                            <path
-                                                                                                                                fill="currentColor"
-                                                                                                                                d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z">
-                                                                                                                            </path>
-                                                                                                                        </svg></span>
-                                                                                                                    <div class="vs__spinner"
-                                                                                                                        style="display: none;">
-                                                                                                                        Loading...
-                                                                                                                    </div>
-                                                                                                                </div>
-                                                                                                            </div>
-                                                                                                            <ul id="vs40__listbox"
-                                                                                                                role="listbox"
-                                                                                                                style="display: none; visibility: hidden;">
-                                                                                                            </ul>
+                                                                                                    <div
+                                                                                                        class="select-input-container w-1/2">
+                                                                                                        <select
+                                                                                                            class="select-input bg-white">
+                                                                                                            <option
+                                                                                                                value="hidden"
+                                                                                                                selected="selected">
+                                                                                                                Hidden by default
+                                                                                                            </option>
+                                                                                                            <option
+                                                                                                                value="show">
+                                                                                                                Show by default
+                                                                                                            </option>
+                                                                                                            <option
+                                                                                                                value="listed">
+                                                                                                                Not listed
+                                                                                                            </option>
+                                                                                                        </select>
+                                                                                                        <div
+                                                                                                            class="select-input-toggle border-l border-gray-400">
+                                                                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                                                viewBox="0 0 20 20">
+                                                                                                                <path
+                                                                                                                    d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z">
+                                                                                                                </path>
+                                                                                                            </svg>
                                                                                                         </div>
-                                                                                                        <!---->
                                                                                                     </div>
-                                                                                                    <!---->
-                                                                                                    <!---->
                                                                                                 </div>
                                                                                                 <div
                                                                                                     class="form-group publish-field publish-field__visibility select-fieldtype config-field">
@@ -617,74 +618,47 @@
                                                                                                         </label>
                                                                                                         <div
                                                                                                             class="help-block -mt-2">
-                                                                                                            <p>Control field visibility on publish forms.
+                                                                                                            <p>Control
+                                                                                                                field
+                                                                                                                visibility
+                                                                                                                on
+                                                                                                                publish
+                                                                                                                forms.
                                                                                                             </p>
                                                                                                         </div>
                                                                                                     </div>
-                                                                                                    <!---->
-                                                                                                    <div data-v-288ded3d=""
-                                                                                                        class="flex">
-                                                                                                        <div data-v-288ded3d=""
-                                                                                                            dir="auto"
-                                                                                                            class="v-select flex-1 vs--single vs--searchable"
-                                                                                                            name="visibility">
-                                                                                                            <div id="vs41__combobox"
-                                                                                                                role="combobox"
-                                                                                                                aria-expanded="false"
-                                                                                                                aria-owns="vs41__listbox"
-                                                                                                                aria-label="Search for option"
-                                                                                                                class="vs__dropdown-toggle">
-                                                                                                                <div
-                                                                                                                    class="vs__selected-options">
-                                                                                                                    <span
-                                                                                                                        class="vs__selected">
-                                                                                                                        Visible
-                                                                                                                        <!---->
-                                                                                                                    </span>
-                                                                                                                    <input
-                                                                                                                        id="field_visibility"
-                                                                                                                        aria-autocomplete="list"
-                                                                                                                        aria-labelledby="vs41__combobox"
-                                                                                                                        aria-controls="vs41__listbox"
-                                                                                                                        type="search"
-                                                                                                                        autocomplete="off"
-                                                                                                                        class="vs__search">
-                                                                                                                </div>
-                                                                                                                <div
-                                                                                                                    class="vs__actions">
-                                                                                                                    <button
-                                                                                                                        type="button"
-                                                                                                                        title="Clear Selected"
-                                                                                                                        aria-label="Clear Selected"
-                                                                                                                        class="vs__clear"
-                                                                                                                        style="display: none;"><span>×</span></button>
-                                                                                                                    <span
-                                                                                                                        class="toggle vs__open-indicator"
-                                                                                                                        role="presentation"><svg
-                                                                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                                                                            height="16"
-                                                                                                                            width="16"
-                                                                                                                            viewBox="0 0 20 20">
-                                                                                                                            <path
-                                                                                                                                fill="currentColor"
-                                                                                                                                d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z">
-                                                                                                                            </path>
-                                                                                                                        </svg></span>
-                                                                                                                    <div class="vs__spinner"
-                                                                                                                        style="display: none;">
-                                                                                                                        Loading...
-                                                                                                                    </div>
-                                                                                                                </div>
-                                                                                                            </div>
-                                                                                                            <ul id="vs41__listbox"
-                                                                                                                role="listbox"
-                                                                                                                style="display: none; visibility: hidden;">
-                                                                                                            </ul>
+                                                                                                    <div
+                                                                                                        class="select-input-container w-1/2">
+                                                                                                        <select
+                                                                                                            class="select-input bg-white">
+                                                                                                            <option
+                                                                                                                value="visible"
+                                                                                                                selected="selected">
+                                                                                                                Visible
+                                                                                                            </option>
+                                                                                                            <option
+                                                                                                                value="read">
+                                                                                                                Read Only
+                                                                                                            </option>
+                                                                                                            <option
+                                                                                                                value="computed">
+                                                                                                                Computed
+                                                                                                            </option>
+                                                                                                            <option
+                                                                                                                value="Hidden">
+                                                                                                                Hidden
+                                                                                                            </option>
+                                                                                                        </select>
+                                                                                                        <div
+                                                                                                            class="select-input-toggle border-l border-gray-400">
+                                                                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                                                viewBox="0 0 20 20">
+                                                                                                                <path
+                                                                                                                    d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z">
+                                                                                                                </path>
+                                                                                                            </svg>
                                                                                                         </div>
-                                                                                                        <!---->
                                                                                                     </div>
-                                                                                                    <!---->
-                                                                                                    <!---->
                                                                                                 </div>
                                                                                                 <div
                                                                                                     class="form-group publish-field publish-field__replicator_preview toggle-fieldtype config-field">
@@ -729,7 +703,12 @@
                                                                                                         </label>
                                                                                                         <div
                                                                                                             class="help-block -mt-2">
-                                                                                                            <p>Control preview visibility in Replicator/Bard sets.
+                                                                                                            <p>Control
+                                                                                                                preview
+                                                                                                                visibility
+                                                                                                                in
+                                                                                                                Replicator/Bard
+                                                                                                                sets.
                                                                                                             </p>
                                                                                                         </div>
                                                                                                     </div>
@@ -797,7 +776,16 @@
                                                                                                         </label>
                                                                                                         <div
                                                                                                             class="help-block -mt-2">
-                                                                                                            <p>Whether this field should be included when duplicating the item.
+                                                                                                            <p>Whether
+                                                                                                                this
+                                                                                                                field
+                                                                                                                should
+                                                                                                                be
+                                                                                                                included
+                                                                                                                when
+                                                                                                                duplicating
+                                                                                                                the
+                                                                                                                item.
                                                                                                             </p>
                                                                                                         </div>
                                                                                                     </div>
@@ -1568,70 +1556,34 @@
                                                                                                             </p>
                                                                                                         </div>
                                                                                                     </div>
-                                                                                                    <!---->
-                                                                                                    <div data-v-288ded3d=""
-                                                                                                        class="flex">
-                                                                                                        <div data-v-288ded3d=""
-                                                                                                            dir="auto"
-                                                                                                            class="v-select flex-1 vs--single vs--searchable"
-                                                                                                            name="inline">
-                                                                                                            <div id="vs42__combobox"
-                                                                                                                role="combobox"
-                                                                                                                aria-expanded="false"
-                                                                                                                aria-owns="vs42__listbox"
-                                                                                                                aria-label="Search for option"
-                                                                                                                class="vs__dropdown-toggle">
-                                                                                                                <div
-                                                                                                                    class="vs__selected-options">
-                                                                                                                    <span
-                                                                                                                        class="vs__selected">
-                                                                                                                        Disabled
-                                                                                                                        <!---->
-                                                                                                                    </span>
-                                                                                                                    <input
-                                                                                                                        id="field_inline"
-                                                                                                                        aria-autocomplete="list"
-                                                                                                                        aria-labelledby="vs42__combobox"
-                                                                                                                        aria-controls="vs42__listbox"
-                                                                                                                        type="search"
-                                                                                                                        autocomplete="off"
-                                                                                                                        class="vs__search">
-                                                                                                                </div>
-                                                                                                                <div
-                                                                                                                    class="vs__actions">
-                                                                                                                    <button
-                                                                                                                        type="button"
-                                                                                                                        title="Clear Selected"
-                                                                                                                        aria-label="Clear Selected"
-                                                                                                                        class="vs__clear"
-                                                                                                                        style="display: none;"><span>×</span></button>
-                                                                                                                    <span
-                                                                                                                        class="toggle vs__open-indicator"
-                                                                                                                        role="presentation"><svg
-                                                                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                                                                            height="16"
-                                                                                                                            width="16"
-                                                                                                                            viewBox="0 0 20 20">
-                                                                                                                            <path
-                                                                                                                                fill="currentColor"
-                                                                                                                                d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z">
-                                                                                                                            </path>
-                                                                                                                        </svg></span>
-                                                                                                                    <div class="vs__spinner"
-                                                                                                                        style="display: none;">
-                                                                                                                        Loading...
-                                                                                                                    </div>
-                                                                                                                </div>
-                                                                                                            </div>
-                                                                                                            <ul id="vs42__listbox"
-                                                                                                                role="listbox"
-                                                                                                                style="display: none; visibility: hidden;">
-                                                                                                            </ul>
+                                                                                                    <div
+                                                                                                        class="select-input-container w-1/2">
+                                                                                                        <select
+                                                                                                            class="select-input bg-white">
+                                                                                                            <option
+                                                                                                                value="disable"
+                                                                                                                selected="selected">
+                                                                                                                Disabled
+                                                                                                            </option>
+                                                                                                            <option
+                                                                                                                value="enable1">
+                                                                                                                Enabled without line breaks
+                                                                                                            </option>
+                                                                                                            <option
+                                                                                                                value="enable2">
+                                                                                                                Enable with line breaks
+                                                                                                            </option>
+                                                                                                        </select>
+                                                                                                        <div
+                                                                                                            class="select-input-toggle border-l border-gray-400">
+                                                                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                                                viewBox="0 0 20 20">
+                                                                                                                <path
+                                                                                                                    d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z">
+                                                                                                                </path>
+                                                                                                            </svg>
                                                                                                         </div>
-                                                                                                        <!---->
                                                                                                     </div>
-                                                                                                    <!---->
-                                                                                                    <!---->
                                                                                                 </div>
                                                                                                 <div
                                                                                                     class="form-group publish-field publish-field__toolbar_mode select-fieldtype config-field">
@@ -1696,70 +1648,30 @@
                                                                                                             </p>
                                                                                                         </div>
                                                                                                     </div>
-                                                                                                    <!---->
-                                                                                                    <div data-v-288ded3d=""
-                                                                                                        class="flex">
-                                                                                                        <div data-v-288ded3d=""
-                                                                                                            dir="auto"
-                                                                                                            class="v-select flex-1 vs--single vs--searchable"
-                                                                                                            name="toolbar_mode">
-                                                                                                            <div id="vs43__combobox"
-                                                                                                                role="combobox"
-                                                                                                                aria-expanded="false"
-                                                                                                                aria-owns="vs43__listbox"
-                                                                                                                aria-label="Search for option"
-                                                                                                                class="vs__dropdown-toggle">
-                                                                                                                <div
-                                                                                                                    class="vs__selected-options">
-                                                                                                                    <span
-                                                                                                                        class="vs__selected">
-                                                                                                                        Fixed
-                                                                                                                        <!---->
-                                                                                                                    </span>
-                                                                                                                    <input
-                                                                                                                        id="field_toolbar_mode"
-                                                                                                                        aria-autocomplete="list"
-                                                                                                                        aria-labelledby="vs43__combobox"
-                                                                                                                        aria-controls="vs43__listbox"
-                                                                                                                        type="search"
-                                                                                                                        autocomplete="off"
-                                                                                                                        class="vs__search">
-                                                                                                                </div>
-                                                                                                                <div
-                                                                                                                    class="vs__actions">
-                                                                                                                    <button
-                                                                                                                        type="button"
-                                                                                                                        title="Clear Selected"
-                                                                                                                        aria-label="Clear Selected"
-                                                                                                                        class="vs__clear"
-                                                                                                                        style="display: none;"><span>×</span></button>
-                                                                                                                    <span
-                                                                                                                        class="toggle vs__open-indicator"
-                                                                                                                        role="presentation"><svg
-                                                                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                                                                            height="16"
-                                                                                                                            width="16"
-                                                                                                                            viewBox="0 0 20 20">
-                                                                                                                            <path
-                                                                                                                                fill="currentColor"
-                                                                                                                                d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z">
-                                                                                                                            </path>
-                                                                                                                        </svg></span>
-                                                                                                                    <div class="vs__spinner"
-                                                                                                                        style="display: none;">
-                                                                                                                        Loading...
-                                                                                                                    </div>
-                                                                                                                </div>
-                                                                                                            </div>
-                                                                                                            <ul id="vs43__listbox"
-                                                                                                                role="listbox"
-                                                                                                                style="display: none; visibility: hidden;">
-                                                                                                            </ul>
+                                                                                                    <div
+                                                                                                        class="select-input-container w-1/2">
+                                                                                                        <select
+                                                                                                            class="select-input bg-white">
+                                                                                                            <option
+                                                                                                                value="fixed"
+                                                                                                                selected="selected">
+                                                                                                                Fixed
+                                                                                                            </option>
+                                                                                                            <option
+                                                                                                                value="float">
+                                                                                                                Floating
+                                                                                                            </option>
+                                                                                                        </select>
+                                                                                                        <div
+                                                                                                            class="select-input-toggle border-l border-gray-400">
+                                                                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                                                viewBox="0 0 20 20">
+                                                                                                                <path
+                                                                                                                    d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z">
+                                                                                                                </path>
+                                                                                                            </svg>
                                                                                                         </div>
-                                                                                                        <!---->
                                                                                                     </div>
-                                                                                                    <!---->
-                                                                                                    <!---->
                                                                                                 </div>
                                                                                                 <div
                                                                                                     class="form-group publish-field publish-field__reading_time toggle-fieldtype config-field">
@@ -2269,73 +2181,34 @@
                                                                                                             </p>
                                                                                                         </div>
                                                                                                     </div>
-                                                                                                    <!---->
-                                                                                                    <div data-v-288ded3d=""
-                                                                                                        class="flex">
-                                                                                                        <div data-v-288ded3d=""
-                                                                                                            dir="auto"
-                                                                                                            class="v-select flex-1 vs--single vs--searchable"
-                                                                                                            name="remove_empty_nodes">
-                                                                                                            <div id="vs44__combobox"
-                                                                                                                role="combobox"
-                                                                                                                aria-expanded="false"
-                                                                                                                aria-owns="vs44__listbox"
-                                                                                                                aria-label="Search for option"
-                                                                                                                class="vs__dropdown-toggle">
-                                                                                                                <div
-                                                                                                                    class="vs__selected-options">
-                                                                                                                    <span
-                                                                                                                        class="vs__selected">
-                                                                                                                        Don't
-                                                                                                                        remove
-                                                                                                                        empty
-                                                                                                                        nodes
-                                                                                                                        <!---->
-                                                                                                                    </span>
-                                                                                                                    <input
-                                                                                                                        id="field_remove_empty_nodes"
-                                                                                                                        aria-autocomplete="list"
-                                                                                                                        aria-labelledby="vs44__combobox"
-                                                                                                                        aria-controls="vs44__listbox"
-                                                                                                                        type="search"
-                                                                                                                        autocomplete="off"
-                                                                                                                        class="vs__search">
-                                                                                                                </div>
-                                                                                                                <div
-                                                                                                                    class="vs__actions">
-                                                                                                                    <button
-                                                                                                                        type="button"
-                                                                                                                        title="Clear Selected"
-                                                                                                                        aria-label="Clear Selected"
-                                                                                                                        class="vs__clear"
-                                                                                                                        style="display: none;"><span>×</span></button>
-                                                                                                                    <span
-                                                                                                                        class="toggle vs__open-indicator"
-                                                                                                                        role="presentation"><svg
-                                                                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                                                                            height="16"
-                                                                                                                            width="16"
-                                                                                                                            viewBox="0 0 20 20">
-                                                                                                                            <path
-                                                                                                                                fill="currentColor"
-                                                                                                                                d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z">
-                                                                                                                            </path>
-                                                                                                                        </svg></span>
-                                                                                                                    <div class="vs__spinner"
-                                                                                                                        style="display: none;">
-                                                                                                                        Loading...
-                                                                                                                    </div>
-                                                                                                                </div>
-                                                                                                            </div>
-                                                                                                            <ul id="vs44__listbox"
-                                                                                                                role="listbox"
-                                                                                                                style="display: none; visibility: hidden;">
-                                                                                                            </ul>
+                                                                                                    <div
+                                                                                                        class="select-input-container w-1/2">
+                                                                                                        <select
+                                                                                                            class="select-input bg-white">
+                                                                                                            <option
+                                                                                                                value="remove1"
+                                                                                                                selected="selected">
+                                                                                                                Don't remove empty nodes
+                                                                                                            </option>
+                                                                                                            <option
+                                                                                                                value="remove2">
+                                                                                                                Remove all empty nods
+                                                                                                            </option>
+                                                                                                            <option
+                                                                                                                value="remove3">
+                                                                                                                Remove empty nodes at the start and end
+                                                                                                            </option>
+                                                                                                        </select>
+                                                                                                        <div
+                                                                                                            class="select-input-toggle border-l border-gray-400">
+                                                                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                                                viewBox="0 0 20 20">
+                                                                                                                <path
+                                                                                                                    d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z">
+                                                                                                                </path>
+                                                                                                            </svg>
                                                                                                         </div>
-                                                                                                        <!---->
                                                                                                     </div>
-                                                                                                    <!---->
-                                                                                                    <!---->
                                                                                                 </div>
                                                                                                 <div
                                                                                                     class="form-group publish-field publish-field__placeholder text-fieldtype config-field">
@@ -2979,61 +2852,25 @@
                                                                                                     <div
                                                                                                         class="relationship-input relationship-input-empty">
                                                                                                         <div
-                                                                                                            data-v-c80a132c="">
-                                                                                                            <div data-v-c80a132c=""
-                                                                                                                dir="auto"
-                                                                                                                class="v-select vs--single vs--searchable">
-                                                                                                                <div id="vs48__combobox"
-                                                                                                                    role="combobox"
-                                                                                                                    aria-expanded="false"
-                                                                                                                    aria-owns="vs48__listbox"
-                                                                                                                    aria-label="Search for option"
-                                                                                                                    class="vs__dropdown-toggle">
-                                                                                                                    <div
-                                                                                                                        class="vs__selected-options">
-                                                                                                                        <input
-                                                                                                                            placeholder="Choose..."
-                                                                                                                            aria-autocomplete="list"
-                                                                                                                            aria-labelledby="vs48__combobox"
-                                                                                                                            aria-controls="vs48__listbox"
-                                                                                                                            type="search"
-                                                                                                                            autocomplete="off"
-                                                                                                                            class="vs__search">
-                                                                                                                    </div>
-                                                                                                                    <div
-                                                                                                                        class="vs__actions">
-                                                                                                                        <button
-                                                                                                                            type="button"
-                                                                                                                            title="Clear Selected"
-                                                                                                                            aria-label="Clear Selected"
-                                                                                                                            class="vs__clear"
-                                                                                                                            style="display: none;"><span>×</span></button>
-                                                                                                                        <span
-                                                                                                                            class="toggle vs__open-indicator"
-                                                                                                                            role="presentation"><svg
-                                                                                                                                xmlns="http://www.w3.org/2000/svg"
-                                                                                                                                height="16"
-                                                                                                                                width="16"
-                                                                                                                                viewBox="0 0 20 20">
-                                                                                                                                <path
-                                                                                                                                    fill="currentColor"
-                                                                                                                                    d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z">
-                                                                                                                                </path>
-                                                                                                                            </svg></span>
-                                                                                                                        <div class="vs__spinner"
-                                                                                                                            style="display: none;">
-                                                                                                                            Loading...
-                                                                                                                        </div>
-                                                                                                                    </div>
-                                                                                                                </div>
-                                                                                                                <ul id="vs48__listbox"
-                                                                                                                    role="listbox"
-                                                                                                                    style="display: none; visibility: hidden;">
-                                                                                                                </ul>
-                                                                                                            </div>
+                                                                                                        class="select-input-container w-full">
+                                                                                                        <select
+                                                                                                            class="select-input bg-white">
+                                                                                                            <option
+                                                                                                                value="assets"
+                                                                                                                selected="selected">
+                                                                                                                Assets
+                                                                                                            </option>
+                                                                                                        </select>
+                                                                                                        <div
+                                                                                                            class="select-input-toggle border-l border-gray-400">
+                                                                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                                                viewBox="0 0 20 20">
+                                                                                                                <path
+                                                                                                                    d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z">
+                                                                                                                </path>
+                                                                                                            </svg>
                                                                                                         </div>
-                                                                                                        <!---->
-                                                                                                        <!---->
+                                                                                                    </div>
                                                                                                     </div>
                                                                                                     <!---->
                                                                                                     <!---->
@@ -3232,74 +3069,34 @@
                                                                                                             </p>
                                                                                                         </div>
                                                                                                     </div>
-                                                                                                    <!---->
-                                                                                                    <div data-v-288ded3d=""
-                                                                                                        class="flex">
-                                                                                                        <div data-v-288ded3d=""
-                                                                                                            dir="auto"
-                                                                                                            class="v-select flex-1 vs--single vs--searchable"
-                                                                                                            name="collapse">
-                                                                                                            <div id="vs45__combobox"
-                                                                                                                role="combobox"
-                                                                                                                aria-expanded="false"
-                                                                                                                aria-owns="vs45__listbox"
-                                                                                                                aria-label="Search for option"
-                                                                                                                class="vs__dropdown-toggle">
-                                                                                                                <div
-                                                                                                                    class="vs__selected-options">
-                                                                                                                    <span
-                                                                                                                        class="vs__selected">
-                                                                                                                        All
-                                                                                                                        sets
-                                                                                                                        expanded
-                                                                                                                        by
-                                                                                                                        default
-                                                                                                                        <!---->
-                                                                                                                    </span>
-                                                                                                                    <input
-                                                                                                                        id="field_collapse"
-                                                                                                                        aria-autocomplete="list"
-                                                                                                                        aria-labelledby="vs45__combobox"
-                                                                                                                        aria-controls="vs45__listbox"
-                                                                                                                        type="search"
-                                                                                                                        autocomplete="off"
-                                                                                                                        class="vs__search">
-                                                                                                                </div>
-                                                                                                                <div
-                                                                                                                    class="vs__actions">
-                                                                                                                    <button
-                                                                                                                        type="button"
-                                                                                                                        title="Clear Selected"
-                                                                                                                        aria-label="Clear Selected"
-                                                                                                                        class="vs__clear"
-                                                                                                                        style="display: none;"><span>×</span></button>
-                                                                                                                    <span
-                                                                                                                        class="toggle vs__open-indicator"
-                                                                                                                        role="presentation"><svg
-                                                                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                                                                            height="16"
-                                                                                                                            width="16"
-                                                                                                                            viewBox="0 0 20 20">
-                                                                                                                            <path
-                                                                                                                                fill="currentColor"
-                                                                                                                                d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z">
-                                                                                                                            </path>
-                                                                                                                        </svg></span>
-                                                                                                                    <div class="vs__spinner"
-                                                                                                                        style="display: none;">
-                                                                                                                        Loading...
-                                                                                                                    </div>
-                                                                                                                </div>
-                                                                                                            </div>
-                                                                                                            <ul id="vs45__listbox"
-                                                                                                                role="listbox"
-                                                                                                                style="display: none; visibility: hidden;">
-                                                                                                            </ul>
+                                                                                                    <div
+                                                                                                        class="select-input-container w-1/2">
+                                                                                                        <select
+                                                                                                            class="select-input bg-white">
+                                                                                                            <option
+                                                                                                                value="expand"
+                                                                                                                selected="selected">
+                                                                                                                All sets expanded by default
+                                                                                                            </option>
+                                                                                                            <option
+                                                                                                                value="collapse">
+                                                                                                                All sets collapsed by default
+                                                                                                            </option>
+                                                                                                            <option
+                                                                                                                value="allowed">
+                                                                                                                Only allow one set to be expanded at a time
+                                                                                                            </option>
+                                                                                                        </select>
+                                                                                                        <div
+                                                                                                            class="select-input-toggle border-l border-gray-400">
+                                                                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                                                viewBox="0 0 20 20">
+                                                                                                                <path
+                                                                                                                    d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z">
+                                                                                                                </path>
+                                                                                                            </svg>
                                                                                                         </div>
-                                                                                                        <!---->
                                                                                                     </div>
-                                                                                                    <!---->
-                                                                                                    <!---->
                                                                                                 </div>
                                                                                                 <div
                                                                                                     class="form-group publish-field publish-field__previews toggle-fieldtype config-field">
@@ -3438,12 +3235,13 @@
                                                                                                     <!---->
                                                                                                     <!---->
                                                                                                 </div>
-                                                                                            </div>          
+                                                                                            </div>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-                                                                            <div  id="ConditionsTabPanel" class="tab-panel card p-1">
+                                                                            <div id="ConditionsTabPanel"
+                                                                                class="tab-panel card p-1">
                                                                                 <div class="publish-fields @container">
                                                                                     <div class="w-full">
                                                                                         <div
@@ -3520,7 +3318,8 @@
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-                                                                            <div  id="ValidationTabPanel" class="tab-panel card p-1">
+                                                                            <div id="ValidationTabPanel"
+                                                                                class="tab-panel card p-1">
                                                                                 <div class="publish-fields @container">
                                                                                     <div data-v-7cc420c9=""
                                                                                         class="w-full">
