@@ -72,6 +72,7 @@ Route::middleware('auth')->group(function () {
 
     // Fieldsets Routes
     Route::resource('fieldsets', FieldsetsController::class)->except('show');
+
 });
 
 // // Assets Routes

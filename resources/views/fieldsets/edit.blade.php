@@ -6,7 +6,7 @@
     <div class="page-wrapper max-w-xl">
         <div>
             <header class="mb-6">
-                <div class="breadcrumb flex"><a href="https://demo.statamic.com/cp/fields/fieldsets"
+                <div class="breadcrumb flex"><a href="{{ route('fieldsets.index') }}"
                         class="flex-initial flex p-2 -m-2 items-center text-xs text-gray-700 hover:text-gray-900"><svg
                             viewBox="0 0 24 24" class="align-middle h-6 w-4 rotate-180">
                             <path fill="currentColor" fill-rule="evenodd"
@@ -33,10 +33,9 @@
                     <div class="form-group w-full">
                         <div class="field-inner"><label class="block">Title</label><small class="help-block -mt-2">Usually
                                 describes what fields will be inside, like Image Block or Meta Data</small>
-                            <!---->
                         </div>
                         <div>
-                            <form id="editFieldsetForm" action="{{ route('fieldsets.update', $fieldset->id) }}"
+                            <form id="editFieldsetForm" action="{{ route('fieldsets.update', $fieldset->handle) }}"
                                 method="POST">
                                 @csrf
                                 @method('PUT')

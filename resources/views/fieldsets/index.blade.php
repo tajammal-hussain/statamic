@@ -98,8 +98,8 @@
                         @foreach ($fieldsetsInfo as $fieldset)
                             <tr class="sortable-row outline-none">
                                 <td>
-                                    <a href="{{ route('fieldsets.edit', $fieldset->id) }}">
-                                        {{ json_decode($fieldset->data)->title }}
+                                    <a href="{{ route('fieldsets.edit', $fieldset->handle) }}">
+                                        {{ $fieldset->title }}
                                     </a>
                                 </td>
                                 <td class="rtl:text-left ltr:text-right rtl:pl-8 ltr:pr-8">
@@ -114,11 +114,11 @@
                                             $menuItems = [
                                                 [
                                                     'label' => 'Edit',
-                                                    'route' => route('fieldsets.edit', $fieldset->id),
+                                                    'route' => route('fieldsets.edit', $fieldset->handle),
                                                 ],
                                                 [
                                                     'label' => 'Delete',
-                                                    'route' => route('fieldsets.destroy', $fieldset->id),
+                                                    'route' => route('fieldsets.destroy', $fieldset->handle),
                                                 ],
                                             ];
                                         @endphp

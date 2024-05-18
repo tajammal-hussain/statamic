@@ -17,7 +17,6 @@ class FieldsetsController extends Controller
             ['name' => 'Handle'],
             ['name' => 'Fields'],
         ];
-
         $fieldsetsInfo = Fieldsets::all();
 
         return view('fieldsets.index', compact('columns', 'fieldsetsInfo'));
@@ -72,31 +71,25 @@ class FieldsetsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-
-
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $handle)
     {
         $request->validate([
             'title' => 'required|string|max:255',
         ]);
 
-        $fieldset = Fieldsets::findOrFail($id);
-
-        $fieldset->data = json_encode(['title' => $request->title, 'fields' => []]);
-
-        $fieldset->save();
+        $fieldset = ['title' => $request->title];
+        Fieldsets::where(['handle' => $handle])->update($fieldset);
 
         return redirect()->back()->with('success', 'Fieldset updated successfully');
     }
 
-
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $handle)
     {
         try {
-            Fieldsets::where('id', $id)->first()->delete();
+            Fieldsets::where('handle', $handle)->first()->delete();
             return redirect()->back()->with('success', 'Fieldsets deleted successfully.');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Something went wrong');
