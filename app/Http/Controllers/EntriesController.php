@@ -133,6 +133,7 @@ class EntriesController extends Controller
         $taxonomies = Collections::with('taxonomies')->where(['handle' => $handle])->firstOrFail();
         $collection = Collections::where(['handle' => $handle])->firstOrFail();
         $entry = Entries::where(['id' => $id])->firstOrFail();
+        // return json_decode($entry->data)->taxonomies;
         $users = User::all();
         $taxonomyTerms = $taxonomies->taxonomies->map(function ($taxonomy) {
             return [
@@ -166,34 +167,46 @@ class EntriesController extends Controller
             'author' => $validatedData['author'],
         ];
 
+        $taxonomies = Collections::with('taxonomies')->where(['handle' => $handle])->firstOrFail();
+        $taxonomiesData = [];
+
+        foreach ($taxonomies->taxonomies as $taxonomy) :
+            $taxonomyHandle = $taxonomy->handle;
+            $selectedValues = $request->input($taxonomyHandle, []);
+            $taxonomiesData[$taxonomyHandle] = $selectedValues;
+        endforeach;
+
+        $entryData['taxonomies'] = $taxonomiesData;
         if ($isEnabled) :
             $metadataRules = [];
             $tagTypes = $request->input('tagType');
-            if (count($tagTypes) > 0) :
-                $nameValues = $request->input('nameValue');
-                $contentAttributes = $request->input('contentAttribute');
-                for ($i = 0; $i < count($tagTypes); $i++) :
-                    $metadataRules['tagType.' . $i] = 'required|string';
-                    $metadataRules['nameValue.' . $i] = 'required|string';
-                    $metadataRules['contentAttribute.' . $i] = 'required|string';
-                endfor;
+            if ($tagTypes) :
+                if (count($tagTypes) > 0) :
+                    $nameValues = $request->input('nameValue');
+                    $contentAttributes = $request->input('contentAttribute');
+                    for ($i = 0; $i < count($tagTypes); $i++) :
+                        $metadataRules['tagType.' . $i] = 'required|string';
+                        $metadataRules['nameValue.' . $i] = 'required|string';
+                        $metadataRules['contentAttribute.' . $i] = 'required|string';
+                    endfor;
 
-                $rules = array_merge($rules, $metadataRules);
+                    $rules = array_merge($rules, $metadataRules);
 
-                $validatedData = $request->validate($rules);
+                    $validatedData = $request->validate($rules);
 
-                $metadata = [];
-                for ($i = 0; $i < count($tagTypes); $i++) :
-                    $entry = [
-                        'tagType' => $tagTypes[$i],
-                        'nameValue' => $nameValues[$i],
-                        'contentAttribute' => $contentAttributes[$i]
-                    ];
+                    $metadata = [];
+                    for ($i = 0; $i < count($tagTypes); $i++) :
+                        $entry = [
+                            'tagType' => $tagTypes[$i],
+                            'nameValue' => $nameValues[$i],
+                            'contentAttribute' => $contentAttributes[$i]
+                        ];
 
-                    $metadata[$i] = $entry;
-                endfor;
+                        $metadata[$i] = $entry;
+                    endfor;
 
-                $entryData['metaData'] = $metadata;
+                    $entryData['metaData'] = $metadata;
+                endif;
             endif;
         endif;
 

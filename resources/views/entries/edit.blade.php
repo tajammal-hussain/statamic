@@ -334,9 +334,12 @@
                                                                 </div>
                                                                 @if (!$taxonomyTerms->isEmpty())
                                                                     @foreach ($taxonomyTerms as $taxonomy)
+                                                                        @php
+                                                                            $taxonomyHandle = $taxonomy['handle'];
+                                                                            $defaultValues = json_decode($entry->data)->taxonomies->$taxonomyHandle;
+                                                                        @endphp
                                                                         <div class="mt-4">
-                                                                            <select x-cloak
-                                                                                id="{{ $taxonomy['handle'] }}">
+                                                                            <select x-cloak id="{{ $taxonomyHandle }}">
                                                                                 {{-- <span>{{ $taxonomy->handle }}</span> --}}
                                                                                 @foreach ($taxonomy['terms'] as $term)
                                                                                     <option value="{{ $term->slug }}">
@@ -344,9 +347,9 @@
                                                                                     </option>
                                                                                 @endforeach
                                                                             </select>
-                                                                            <div x-data="dropdown('{{ $taxonomy['handle'] }}')"
-                                                                                x-init="loadOptions('{{ $taxonomy['handle'] }}')" class="w-full">
-                                                                                <input name="{{ $taxonomy['handle'] }}"
+                                                                            <div x-data="dropdown('{{ $taxonomyHandle }}', '{{ $defaultValues }}')"
+                                                                                x-init="loadOptions('{{ $taxonomyHandle }}')" class="w-full">
+                                                                                <input name="{{ $taxonomyHandle }}"
                                                                                     type="hidden"
                                                                                     x-bind:value="selectedValues()">
                                                                                 <div class="inline-block relative w-full">
@@ -378,10 +381,8 @@
                                                                                                                         role="button"
                                                                                                                         viewBox="0 0 20 20">
                                                                                                                         <path
-                                                                                                                            d="M14.348,14.849c-0.469,0.469-1.229,0.469-1.697,0L10,11.819l-2.651,3.029c-0.469,0.469-1.229,0.469-1.697,0
-                                                                                                                                                                                                                                                                                                                c-0.469-0.469-0.469-1.229,0-1.697l2.758-3.15L5.651,6.849c-0.469-0.469-0.469-1.228,0-1.697s1.228-0.469,1.697,0L10,8.183
-                                                                                                                                                                                                                                                                                                                l2.651-3.031c0.469-0.469,1.228-0.469,1.697,0s0.469,1.229,0,1.697l-2.758,3.152l2.758,3.15
-                                                                                                                                                                                                                                                                                                                C14.817,13.62,14.817,14.38,14.348,14.849z" />
+                                                                                                                            d="M14.348,14.849c-0.469,0.469-1.229,0.469-1.697,0L10,11.819l-2.651,3.029c-0.469,0.469-1.229,0.469-1.697,0 c-0.469-0.469-0.469-1.229,0-1.697l2.758-3.15L5.651,6.849c-0.469-0.469-0.469-1.228,0-1.697s1.228-0.469,1.697,0L10,8.183 l2.651-3.031c0.469-0.469,1.228-0.469,1.697,0s0.469,1.229,0,1.697l-2.758,3.152l2.758,3.15 C14.817,13.62,14.817,14.38,14.348,14.849z" />
+                                                                                                                        z
                                                                                                                     </svg>
                                                                                                                 </div>
                                                                                                             </div>
@@ -445,6 +446,7 @@
                                                                                                                         <div class="mx-2 leading-6"
                                                                                                                             x-model="option"
                                                                                                                             x-text="option.text">
+                                                                                                                            {{ 'this is for checking' }}
                                                                                                                         </div>
                                                                                                                     </div>
                                                                                                                 </div>
@@ -492,19 +494,19 @@
     <script type="module" src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
 
     <script>
-        function dropdown(taxonomy) {
+        function dropdown(taxonomy, defaultValues = []) {
             return {
                 options: [],
                 selected: [],
                 show: false,
                 open() {
-                    this.show = true
+                    this.show = true;
                 },
                 close() {
-                    this.show = false
+                    this.show = false;
                 },
                 isOpen() {
-                    return this.show === true
+                    return this.show === true;
                 },
                 select(index, event) {
                     if (!this.options[index].selected) {
@@ -513,7 +515,7 @@
                         this.selected.push(index);
                     } else {
                         this.selected.splice(this.selected.lastIndexOf(index), 1);
-                        this.options[index].selected = false
+                        this.options[index].selected = false;
                     }
                 },
                 remove(index, option) {
@@ -530,11 +532,23 @@
                                 'selected') : false
                         });
                     }
+                    const defaultValuesArray = defaultValues.split(',');
+                    // Iterate over the array
+                    defaultValuesArray.forEach((value) => {
+                        // Find index of the option with the value
+                        const optionIndex = this.options.findIndex(option => option.value === value.trim());
+
+                        // If option found, mark it as selected
+                        if (optionIndex !== -1) {
+                            this.options[optionIndex].selected = true;
+                            this.selected.push(optionIndex);
+                        }
+                    });
                 },
                 selectedValues() {
                     return this.selected.map((option) => {
                         return this.options[option].value;
-                    })
+                    });
                 }
             }
         }
