@@ -131,14 +131,14 @@ buttons.forEach((button, index) => {
     const overlay = overlays[index];
     const closeButton = closeButtons[index];
 
-    button.addEventListener('click', function() {
+    button.addEventListener('click', function () {
         // Toggle the 'hidden' class on the overlay
         overlay.classList.toggle('hidden');
         // Toggle the '-translate-x-full' class on the overlay
         overlay.classList.toggle('-translate-x-full');
     });
 
-    closeButton.addEventListener('click', function() {
+    closeButton.addEventListener('click', function () {
         // Add the 'hidden' class on the overlay
         overlay.classList.add('hidden');
         // Add the '-translate-x-full' class on the overlay
@@ -188,3 +188,49 @@ buttons.forEach((button, index) => {
 });
 
 */
+
+// modal.js
+
+const openModalButtons = document.querySelectorAll('#open-modal');
+const closeModalButtons = document.querySelectorAll('#close-modal');
+const modal = document.getElementById('modal');
+const modalOverlay = document.getElementById('modal-overlay');
+
+openModalButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    modal.classList.remove('hidden');
+    modalOverlay.classList.add('bg-gray-900', 'bg-opacity-50');
+  });
+});
+
+closeModalButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    modal.classList.add('hidden');
+    modalOverlay.classList.remove('bg-gray-900', 'bg-opacity-50');
+  });
+});
+
+// nested popup modal.js
+const openModalButton = document.querySelectorAll('[id^="open-modal-"]');
+const closeModalButton = document.querySelectorAll('[id^="close-modal-"]');
+const modals = document.querySelectorAll('[id^="modal-"]');
+
+// Open the first modal by default
+modals[0].classList.remove('hidden');
+
+openModalButton.forEach((button, index) => {
+  button.addEventListener('click', () => {
+    // Close the current modal
+    modals.forEach((modal) => modal.classList.add('hidden'));
+    // Open the new modal
+    const newModal = document.getElementById(`modal-${index + 1}`);
+    newModal.classList.remove('hidden');
+  });
+});
+
+closeModalButton.forEach((button, index) => {
+  button.addEventListener('click', () => {
+    const modal = document.getElementById(`modal-${index + 1}`);
+    modal.classList.add('hidden');
+  });
+});
