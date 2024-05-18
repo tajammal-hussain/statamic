@@ -70,9 +70,11 @@ Route::middleware('auth')->group(function () {
     // Assets Routes
     Route::resource('assets', AssetsController::class)->except('show', 'create');
 
+    // Global Routes
+    Route::resource('globals', GlobalsController::class);
+
     // Fieldsets Routes
     Route::resource('fieldsets', FieldsetsController::class)->except('show');
-
 });
 
 // // Assets Routes

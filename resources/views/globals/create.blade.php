@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', 'Add Global')
+@section('title', 'Create Global')
 
 @section('content')
     <div class="page-wrapper max-w-xl">
@@ -28,7 +28,7 @@
                         <span class="block sm:inline">{{ session('success') }}</span>
                     </div>
                 @endif
-                <form action="{{ route('globals.add') }}" method="POST">
+                <form action="{{ route('globals.store') }}" method="POST">
                     @csrf
                     <div class="mb-10"><label for="name" class="font-bold text-base mb-1">Title</label><input
                                 type="text"
@@ -44,7 +44,7 @@
                                 type="text"
                                 tabindex="2" class="input-text" value="{{ old('handle') }}"
                                 placeholder="Enter handle"
-                                id="handle" name="handle">
+                                id="handle" name="handle" readonly>
                         <div class="text-2xs text-gray-600 mt-2 flex items-center"> Used to reference this global set on
                             the
                             frontend. It's non-trivial to change later.
