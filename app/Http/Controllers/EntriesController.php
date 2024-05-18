@@ -63,12 +63,16 @@ class EntriesController extends Controller
             'author' => $validatedData['author'],
         ];
 
-        // foreach ($data['taxonomies'] as $taxonomy) :
-        //     $taxonomyHandle = $taxonomy->handle;
-        //     $selectedValues = $request->input($taxonomyHandle);
-        //     $entryData[$taxonomy->handle] = $selectedValues;
-        // endforeach;
+        $taxonomies = Collections::with('taxonomies')->where(['handle' => $handle])->firstOrFail();
+        $taxonomiesData = [];
 
+        foreach ($taxonomies->taxonomies as $taxonomy) :
+            $taxonomyHandle = $taxonomy->handle;
+            $selectedValues = $request->input($taxonomyHandle, []);
+            $taxonomiesData[$taxonomyHandle] = $selectedValues;
+        endforeach;
+
+        $entryData['taxonomies'] = $taxonomiesData;
         if ($isEnabled) :
             $metadataRules = [];
             $tagTypes = $request->input('tagType');
