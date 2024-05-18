@@ -27,11 +27,10 @@ class EntriesController extends Controller
      */
     public function create($handle)
     {
-        $taxonomies = Collections::with('taxonomies')->where(['handle' => $handle])->firstOrFail();
-        $collection = Collections::where(['handle' => $handle])->firstOrFail();
+        $collection = Collections::with('taxonomies')->where(['handle' => $handle])->firstOrFail();
         $users = User::all();
 
-        $taxonomyTerms = $taxonomies->taxonomies->map(function ($taxonomy) {
+        $taxonomyTerms = $collection->taxonomies->map(function ($taxonomy) {
             return [
                 'handle' => $taxonomy->handle,
                 'terms' => $taxonomy->terms
@@ -130,19 +129,17 @@ class EntriesController extends Controller
      */
     public function edit($handle, string $id)
     {
-        $taxonomies = Collections::with('taxonomies')->where(['handle' => $handle])->firstOrFail();
-        $collection = Collections::where(['handle' => $handle])->firstOrFail();
+        $collection_taxonomy = Collections::with('taxonomies')->where(['handle' => $handle])->firstOrFail();
         $entry = Entries::where(['id' => $id])->firstOrFail();
-        // return json_decode($entry->data)->taxonomies;
         $users = User::all();
-        $taxonomyTerms = $taxonomies->taxonomies->map(function ($taxonomy) {
+        $taxonomyTerms = $collection_taxonomy->taxonomies->map(function ($taxonomy) {
             return [
                 'handle' => $taxonomy->handle,
                 'terms' => $taxonomy->terms
             ];
         });
 
-        return view('entries.edit', compact('entry', 'users', 'collection', 'taxonomyTerms'));
+        return view('entries.edit', compact('entry', 'users', 'taxonomyTerms', 'collection_taxonomy'));
     }
 
     /**
@@ -209,7 +206,6 @@ class EntriesController extends Controller
                 endif;
             endif;
         endif;
-
         // Convert data to JSON format
         $jsonData = json_encode($entryData);
         $mytime = Carbon::now();

@@ -16,7 +16,7 @@
                             <path fill="currentColor" fill-rule="evenodd"
                                 d="m10.414 7.05 4.95 4.95-4.95 4.95L9 15.534 12.536 12 9 8.464z"></path>
                         </svg>
-                        <span>{{ $collection->title }}</span>
+                        <span>{{ $collection_taxonomy->title }}</span>
                     </a>
                 </div>
                 <div class="flex items-center mb-6">
