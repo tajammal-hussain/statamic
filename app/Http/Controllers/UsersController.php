@@ -2,120 +2,83 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
+use App\Models\{
+    User,
+    Role
+};
+use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
-use Spatie\Permission\Models\Role;
-
+use Illuminate\Support\Facades\Validator;
 
 class UsersController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
+        $usersInfo = user::with('roles')->get();
+        $currentTime = Carbon::now();
 
-
-        $data['users'] = $this->getUsersAgainstRolls();
-        return view('users.index', $data);
-
+        return view('users.index', compact('usersInfo', 'currentTime'));
     }
 
-    public function edit()
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
     {
-        return view('users.edit');
+        $user = user::with('roles')->where(['id' => $id])->firstOrFail();
+        $userRole = $user->roles[0]->name;
+        $roles = Role::all();
+
+        return view('users.edit', compact('user', 'roles', 'userRole'));
     }
 
-    protected function getUsersAgainstRolls()
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
     {
-        $authorizedRoles = ['superadmin', 'admin', 'user'];
-        $users = User::whereHas('roles', function ($q) use ($authorizedRoles) {
-            $q->whereIn('name', $authorizedRoles);
-        })
-            ->with(['roles' => function ($query) {
-                $query->select('name as roleName'); // Select only the name column of roles
-            }])
-            ->get();
+        // return $request->all();
+        $imageName = "";
+        $rules = [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'role' => 'required|string|in:superadmin,admin,user',
+        ];
 
-
-        return $users;
-    }
-
-    public function table($id)
-    {
-       if(Auth::user()->hasRole('superadmin')){
-        // Query the 'users' table and join with 'roles'
-        $user = User::where('users.id', $id)
-            ->leftJoin('roles', 'users.id', '=', 'roles.id')
-            ->select('users.*', 'roles.name as role_name')
-            ->first();
-
-
-        // Check if the user exists
-        if ($user) {
-            // Return the user data to the view
-            return view('users.edit', ['user' => $user]);
-        } else {
-            // If the user does not exist, return an error message or handle accordingly
-            return redirect()->back()->with('error', 'User not found.');
-        }
-       } else{
-           return redirect()->back()->with('error', 'Unauthorized access.');
-       }
-    }
-
-
-    public function update(Request $request)
-    {
-        $user = Auth::user();
-
-        // Validate the request data
-        $validator = Validator::make($request->all(), [
-            'name' => ['sometimes', 'required', 'max:255', Rule::unique('users')->ignore($user->id)],
-            'email' => ['sometimes', 'required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
-            'image' => ['sometimes', 'image', 'mimes:jpeg,png,jpg', 'max:8192'],
-            'role' => ['sometimes', 'required', 'string', Rule::in(['superadmin','admin', 'user'])], // Adjust this based on your roles
-        ]);
-
-        // If validation fails, redirect back with errors
-        if ($validator->fails()) {
-            return back()
-                ->withErrors($validator)
-                ->withInput();
-        }
-
-        // Handle image upload
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
+        $validatedData = $request->validate($rules);
+        $image = $request->file('image');
+        if ($image) :
             $imageName = time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('images'), $imageName);
-            $user->image = $imageName;
-        }
+        endif;
 
-        // Update the user's profile if the fields are provided
-        if ($request->filled('name')) {
-            $user->name = $request->name;
-        }
-        if ($request->filled('email')) {
-            $user->email = $request->email;
-        }
-        $user->fill($request->except('last_login'))->save();
+        $role = $request->input('role');
+        if ($role) :
+            $user = User::where(['id' => $id])->firstOrFail();
+            $user->syncRoles([$role]);
+        endif;
+        $mytime = Carbon::now();
 
-        // Update user's role if provided
-        if ($request->filled('role')) {
-            $role = $request->input('role');
-            if ($role !== "superadmin") {
-                $user->syncRoles([$role]); // This will replace all existing roles with the new role
-            }
-        }
+        $user = [
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'image' => $imageName,
+            'updated_at' => $mytime->toDateTimeString(),
+        ];
+        User::where('id', $id)->update($user);
 
-        // Fetch the user's image URL
-        $imageUrl = asset('images/' . $user->image);
-
-        // Return a view with success message and image URL
-        return $this->index()->with('success', 'Profile updated successfully.')->with('imageUrl', $imageUrl);
+        return redirect()->back()->with('success', 'User updated successfully.');
     }
 
-
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        //
+    }
 }

@@ -75,48 +75,7 @@ Route::middleware('auth')->group(function () {
 
     // Fieldsets Routes
     Route::resource('fieldsets', FieldsetsController::class)->except('show');
+
+    // Users Routes
+    Route::resource('users', UsersController::class)->except('create', 'store', 'show');
 });
-
-// // Assets Routes
-// Route::controller(AssetsController::class)
-//     ->prefix('assets')
-//     ->as('assets.')
-//     ->group(function () {
-//         Route::get('', 'index')->name('assets');
-//     });
-
-// // Globals Routes
-// Route::controller(GlobalsController::class)
-//     ->prefix('globals')
-//     ->as('globals.')
-//     ->group(function () {
-//         Route::get('', 'index')->name('globals');
-//         Route::match(['get', 'post'], '/add', 'add')->name('add');
-//         Route::match(['get', 'post'], '/edit/{id?}', 'edit')->name('edit');
-//         Route::match(['get', 'post'], '/delete/{id?}', 'delete')->name('delete');
-//         Route::get('/configure', 'configure')->name('configure');
-//     });
-
-// // Forms Routes
-// Route::controller(FormsController::class)
-//     ->prefix('forms')
-//     ->as('forms.')
-//     ->group(function () {
-//         Route::get('', 'index')->name('forms');
-//         Route::match(['get', 'post'], '/add', 'add')->name('add');
-//         Route::match(['get', 'post'], '/edit/{title?}', 'edit')->name('edit');
-//         Route::get('/table', 'table')->name('table');
-//         Route::get('/view', 'view')->name('view');
-//     });
-
-// // Users Routes
-// Route::controller(UsersController::class)
-//     ->prefix('users')
-//     ->as('users.')
-//     ->group(function () {
-//         Route::get('', 'index')->name('users');
-//         Route::get('/edit', 'edit')->name('edit');
-//         Route::get('/table/{id?}', 'table')->name('table');
-//         Route::put('/users/{email?}', 'update')->name('update');
-//         Route::post('/password/change', 'changePassword')->name('change');
-//     });
