@@ -3,6 +3,12 @@
 @section('title', 'Assets')
 
 @section('content')
+<style>
+.dragover {
+    border-color: #3b82f6;
+    background-color: #e0f2fe;
+}
+</style>
 <title>Assets :: Cedar</title>
 <div class="page-wrapper max-w-full" bis_skin_checked="1">
     <div class="asset-manager" bis_skin_checked="1">
@@ -10,7 +16,8 @@
             <h1 class="flex-1">Assets</h1>
 
             <!-- Modal -->
-            <div class="modal hidden fixed right-0 top-0 z-2 bg-gray-700 " style="width: 100%; height: 100%;" id="modal">
+            <div class="modal hidden fixed right-0 top-0 z-2 bg-gray-700 " style="width: 100%; height: 100%;"
+                id="modal">
                 <div class="m-4" style="width: 98%; height: 98%;">
                     <div class="modal-overlay" id="modal-overlay"></div>
                     <div class="shadow-lg" style="left: 0px; height: 100%;">
@@ -70,7 +77,8 @@
                                                     clip-rule="evenodd">
                                                 </path>
                                             </svg>
-                                            <span class="rtl:mr-2 ltr:ml-2 hidden @3xl/toolbar:inline-block">Rename</span>
+                                            <span
+                                                class="rtl:mr-2 ltr:ml-2 hidden @3xl/toolbar:inline-block">Rename</span>
                                         </button>
                                         <button type="button" id="open-modal-2"
                                             class="flex bg-gray-750 hover:bg-gray-900 hover:text-yellow-light rounded items-center px-3 py-1.5">
@@ -92,7 +100,8 @@
                                                     clip-rule="evenodd">
                                                 </path>
                                             </svg>
-                                            <span class="rtl:mr-2 ltr:ml-2 hidden @3xl/toolbar:inline-block">Reupload</span>
+                                            <span
+                                                class="rtl:mr-2 ltr:ml-2 hidden @3xl/toolbar:inline-block">Reupload</span>
                                         </button>
                                         <button aria-label="Download file"
                                             class="flex bg-gray-750 hover:bg-gray-900 hover:text-yellow-light rounded items-center px-3 py-1.5">
@@ -103,7 +112,8 @@
                                                     clip-rule="evenodd">
                                                 </path>
                                             </svg>
-                                            <span class="rtl:mr-2 ltr:ml-2 hidden @3xl/toolbar:inline-block">Download</span>
+                                            <span
+                                                class="rtl:mr-2 ltr:ml-2 hidden @3xl/toolbar:inline-block">Download</span>
                                         </button>
                                     </div>
                                     <div>
@@ -116,7 +126,8 @@
                                                         class="text-lg font-semibold px-5 py-3 bg-gray-200 rounded-t-lg flex items-center justify-between border-b">
                                                         Rename </header>
                                                     <div class="flex-1 px-5 py-6 text-gray">
-                                                        <div class="mb-4">Are you sure you want to rename this asset?</div>
+                                                        <div class="mb-4">Are you sure you want to rename this asset?
+                                                        </div>
                                                         <!---->
                                                         <div class="publish-fields @container">
                                                             <div
@@ -156,8 +167,8 @@
                                                                 <!---->
                                                                 <div class="flex items-center">
                                                                     <div class="input-group">
-                                                                        <!----><input id="field_filename" name="filename"
-                                                                            type="text"
+                                                                        <!----><input id="field_filename"
+                                                                            name="filename" type="text"
                                                                             placeholder="alec-favale-mzjobxoxbt0-unsplash"
                                                                             autofocus="autofocus"
                                                                             class="input-text mousetrap">
@@ -206,18 +217,21 @@
                                                                                     xmlns="http://www.w3.org/2000/svg"
                                                                                     viewBox="0 0 24 24"
                                                                                     class="h-4 w-4 rtl:ml-1.5 ltr:mr-1.5 mb-1 text-gray-600 v-popper--has-tooltip">
-                                                                                    <path fill="none" stroke="currentColor"
+                                                                                    <path fill="none"
+                                                                                        stroke="currentColor"
                                                                                         stroke-linecap="round"
                                                                                         stroke-linejoin="round"
                                                                                         stroke-width="1.5"
                                                                                         d="M10.082 9.5A4.47 4.47 0 0 0 6.75 8h-1.5a4.5 4.5 0 0 0 0 9h1.5a4.474 4.474 0 0 0 3.332-1.5m3.836-6A4.469 4.469 0 0 1 17.25 8h1.5a4.5 4.5 0 1 1 0 9h-1.5a4.472 4.472 0 0 1-3.332-1.5M6.75 12.499h10.5">
                                                                                     </path>
-                                                                                </svg></button><button class="outline-none"
+                                                                                </svg></button><button
+                                                                                class="outline-none"
                                                                                 style="display: none;"><svg
                                                                                     xmlns="http://www.w3.org/2000/svg"
                                                                                     viewBox="0 0 24 24"
                                                                                     class="h-4 w-4 rtl:ml-1.5 ltr:mr-1.5 mb-1 text-gray-600 v-popper--has-tooltip">
-                                                                                    <path fill="none" stroke="currentColor"
+                                                                                    <path fill="none"
+                                                                                        stroke="currentColor"
                                                                                         stroke-linecap="round"
                                                                                         stroke-linejoin="round"
                                                                                         stroke-width="1.5"
@@ -237,19 +251,22 @@
                                                                                 aria-owns="vs1__listbox"
                                                                                 aria-label="Search for option"
                                                                                 class="vs__dropdown-toggle">
-                                                                                <div class="vs__selected-options"> <input
-                                                                                        id="field_folder"
+                                                                                <div class="vs__selected-options">
+                                                                                    <input id="field_folder"
                                                                                         aria-autocomplete="list"
                                                                                         aria-labelledby="vs1__combobox"
                                                                                         aria-controls="vs1__listbox"
                                                                                         type="search" autocomplete="off"
-                                                                                        class="vs__search"></div>
+                                                                                        class="vs__search">
+                                                                                </div>
                                                                                 <div class="vs__actions"><button
-                                                                                        type="button" title="Clear Selected"
+                                                                                        type="button"
+                                                                                        title="Clear Selected"
                                                                                         aria-label="Clear Selected"
                                                                                         class="vs__clear"
                                                                                         style="display: none;"><span>×</span></button>
-                                                                                    <span class="toggle vs__open-indicator"
+                                                                                    <span
+                                                                                        class="toggle vs__open-indicator"
                                                                                         role="presentation"><svg
                                                                                             xmlns="http://www.w3.org/2000/svg"
                                                                                             height="16" width="16"
@@ -259,7 +276,8 @@
                                                                                             </path>
                                                                                         </svg></span>
                                                                                     <div class="vs__spinner"
-                                                                                        style="display: none;">Loading...
+                                                                                        style="display: none;">
+                                                                                        Loading...
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -309,7 +327,8 @@
                                                                         <span
                                                                             class="rtl:ml-1 ltr:mr-1 v-popper--has-tooltip">File</span>
                                                                         <i class="required rtl:ml-1 ltr:mr-1">*</i>
-                                                                        <button class="outline-none" style="display: none;">
+                                                                        <button class="outline-none"
+                                                                            style="display: none;">
                                                                             <svg xmlns="http://www.w3.org/2000/svg"
                                                                                 viewBox="0 0 24 24"
                                                                                 class="h-4 w-4 rtl:ml-1.5 ltr:mr-1.5 mb-1 text-gray-600 v-popper--has-tooltip">
@@ -321,7 +340,8 @@
                                                                                 </path>
                                                                             </svg>
                                                                         </button>
-                                                                        <button class="outline-none" style="display: none;">
+                                                                        <button class="outline-none"
+                                                                            style="display: none;">
                                                                             <svg xmlns="http://www.w3.org/2000/svg"
                                                                                 viewBox="0 0 24 24"
                                                                                 class="h-4 w-4 rtl:ml-1.5 ltr:mr-1.5 mb-1 text-gray-600 v-popper--has-tooltip">
@@ -340,7 +360,8 @@
                                                                         <div>
                                                                             <input type="file" multiple="multiple"
                                                                                 class="hidden">
-                                                                            <div class="assets-fieldtype-drag-container">
+                                                                            <div
+                                                                                class="assets-fieldtype-drag-container">
                                                                                 <div class="drag-notification"
                                                                                     style="display: none;">
                                                                                     <svg xmlns="http://www.w3.org/2000/svg"
@@ -356,16 +377,32 @@
                                                                                     </svg>
                                                                                     <span>Drop File to Upload</span>
                                                                                 </div>
-                                                                                <div class="assets-fieldtype-picker py-4">
-                                                                                    <p
-                                                                                        class="asset-upload-control text-xs text-gray-600 rtl:mr-0 ltr:ml-0">
-                                                                                        <button type="button"
-                                                                                            class="upload-text-button">Upload
-                                                                                            file</button>
-                                                                                        <span class="drag-drop-text">or drag
-                                                                                            &
-                                                                                            drop here.</span>
-                                                                                    </p>
+                                                                                <div>
+                                                                                    <form>
+                                                                                        <div id="drop-area"
+                                                                                            class="p-4 border-2 border-dashed border-gray-700 rounded-sm text-center cursor-pointer text-gray-600 font-medium">
+                                                                                            <p class="text-gray-500">
+                                                                                                Drag & Drop your file
+                                                                                                here or click to select
+                                                                                                a file</p>
+                                                                                            <input type="file" id="file"
+                                                                                                name="file"
+                                                                                                class="hidden">
+                                                                                        </div>
+                                                                                    </form>
+                                                                                    <div id="file-info"
+                                                                                        class="hidden mt-4 p-1 border rounded-md bg-gray-50">
+                                                                                        <div class="flex items-center">
+                                                                                            <div id="file-icon"
+                                                                                                class="mr-4"></div>
+                                                                                            <div>
+                                                                                                <span id="file-name"
+                                                                                                    class="text-gray-700 text-xl mr-2"></span>
+                                                                                                <span id="file-size"
+                                                                                                    class="text-gray-500 text-md"></span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -418,8 +455,8 @@
                                                                         viewBox="0 0 24 24"
                                                                         class="h-4 w-4 rtl:ml-1.5 ltr:mr-1.5 mb-1 text-gray-600 v-popper--has-tooltip">
                                                                         <path fill="none" stroke="currentColor"
-                                                                            stroke-linecap="round" stroke-linejoin="round"
-                                                                            stroke-width="1.5"
+                                                                            stroke-linecap="round"
+                                                                            stroke-linejoin="round" stroke-width="1.5"
                                                                             d="M10.082 9.5A4.47 4.47 0 0 0 6.75 8h-1.5a4.5 4.5 0 0 0 0 9h1.5a4.474 4.474 0 0 0 3.332-1.5m3.836-6A4.469 4.469 0 0 1 17.25 8h1.5a4.5 4.5 0 1 1 0 9h-1.5a4.472 4.472 0 0 1-3.332-1.5M6.75 12.499h10.5">
                                                                         </path>
                                                                     </svg></button><button class="outline-none"
@@ -428,8 +465,8 @@
                                                                         viewBox="0 0 24 24"
                                                                         class="h-4 w-4 rtl:ml-1.5 ltr:mr-1.5 mb-1 text-gray-600 v-popper--has-tooltip">
                                                                         <path fill="none" stroke="currentColor"
-                                                                            stroke-linecap="round" stroke-linejoin="round"
-                                                                            stroke-width="1.5"
+                                                                            stroke-linecap="round"
+                                                                            stroke-linejoin="round" stroke-width="1.5"
                                                                             d="M16.5 15.749h1.875A3.963 3.963 0 0 0 22.5 12h0a3.962 3.962 0 0 0-4.125-3.75H16.5m-9 7.499H5.625A3.963 3.963 0 0 1 1.5 12h0a3.963 3.963 0 0 1 4.125-3.75H7.5M12 5.249v-4.5m-3 4.5-1.5-1.5m7.5 1.5 1.5-1.5m-4.5 15v4.5m-3-4.5-1.5 1.5m7.5-1.5 1.5 1.5">
                                                                         </path>
                                                                     </svg></button>
@@ -1348,4 +1385,106 @@
         </div>
     </div>
 </div>
+<script>
+const dropArea = document.getElementById('drop-area');
+const fileInput = document.getElementById('file');
+const fileInfo = document.getElementById('file-info');
+const fileName = document.getElementById('file-name');
+const fileSize = document.getElementById('file-size');
+const fileIcon = document.getElementById('file-icon');
+
+// Prevent default behavior for drag-and-drop
+['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+    dropArea.addEventListener(eventName, preventDefaults, false);
+});
+
+function preventDefaults(e) {
+    e.preventDefault();
+    e.stopPropagation();
+}
+
+// Highlight the drop area when a file is dragged over it
+['dragenter', 'dragover'].forEach(eventName => {
+    dropArea.addEventListener(eventName, () => dropArea.classList.add('dragover'), false);
+});
+
+['dragleave', 'drop'].forEach(eventName => {
+    dropArea.addEventListener(eventName, () => dropArea.classList.remove('dragover'), false);
+});
+
+// Handle dropped files
+dropArea.addEventListener('drop', handleDrop, false);
+
+function handleDrop(e) {
+    const dt = e.dataTransfer;
+    const files = dt.files;
+    handleFiles(files);
+}
+
+// Handle file selection via file input
+fileInput.addEventListener('change', (e) => {
+    const files = e.target.files;
+    handleFiles(files);
+});
+
+dropArea.addEventListener('click', () => fileInput.click());
+
+function handleFiles(files) {
+    const file = files[0];
+    if (file) {
+        fileName.textContent = file.name;
+        fileSize.textContent = `${(file.size / 1024).toFixed(2)} KB`;
+
+        // Determine the file type and change icon accordingly
+        const fileType = file.type;
+        if (fileType.startsWith('image/')) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                fileIcon.innerHTML =
+                    `<img src="${e.target.result}" alt="${file.name}" class="w-8 h-8 object-cover rounded">`;
+            };
+            reader.readAsDataURL(file);
+        } else {
+            let iconClass;
+            switch (fileType) {
+                case 'application/pdf':
+                    iconClass = 'fas fa-file-pdf text-red-600 text-3xl';
+                    break;
+                case 'application/msword':
+                case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+                    iconClass = 'fas fa-file-word text-blue-600 text-3xl';
+                    break;
+                case 'application/vnd.ms-excel':
+                case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
+                    iconClass = 'fas fa-file-excel text-green-600 text-3xl';
+                    break;
+                case 'application/vnd.ms-powerpoint':
+                case 'application/vnd.openxmlformats-officedocument.presentationml.presentation':
+                    iconClass = 'fas fa-file-powerpoint text-orange-600 text-3xl';
+                    break;
+                case 'audio/mpeg':
+                case 'audio/ogg':
+                case 'audio/wav':
+                    iconClass = 'fas fa-file-audio text-green-600 text-3xl';
+                    break;
+                case 'video/mp4':
+                case 'video/ogg':
+                case 'video/webm':
+                    iconClass = 'fas fa-file-video text-purple-600 text-3xl';
+                    break;
+                case 'text/plain':
+                case 'text/html':
+                    iconClass = 'fas fa-file-alt text-gray-600 text-3xl';
+                    break;
+                default:
+                    iconClass = 'fas fa-file text-gray-600 text-3xl';
+                    break;
+            }
+            fileIcon.innerHTML = `<i class="${iconClass}"></i>`;
+        }
+
+        fileInfo.classList.remove('hidden');
+    }
+}
+</script>
 @endsection
