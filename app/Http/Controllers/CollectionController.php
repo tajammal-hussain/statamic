@@ -41,15 +41,13 @@ class CollectionController extends Controller
             'title' => 'required|string|max:255',
             'handle' => 'required|string|max:255',
         ];
-        $validator = Validator::make($request->all(), $rules);
 
-        if ($validator->fails()) : return redirect()->back()->withErrors($validator)->withInput();
-        endif;
+        $validatedData = $request->validate($rules);
 
         $collection = new Collections();
         $collection = [
-            'title' => $request->input('title'),
-            'handle' => $request->input('handle'),
+            'title' => $validatedData['title'],
+            'handle' => $validatedData['handle'],
         ];
         Collections::insert($collection);
 

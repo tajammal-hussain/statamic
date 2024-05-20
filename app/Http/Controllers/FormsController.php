@@ -3,60 +3,107 @@
 namespace App\Http\Controllers;
 
 use App\Models\Forms;
-use App\Models\FormSubmission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 
 class FormsController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
-        $data['columns'] = [
-            ['name' => 'Title'],
-            ['name' => 'Terms'],
+        $formsInfo = Forms::all();
+
+        return view('forms.index', compact('formsInfo'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        return view('forms.create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        $rules = [
+            'title' => 'required|string|max:255',
+            'handle' => 'required|string|max:255',
         ];
-        $data['data'] = Forms::all();
-        return view('forms.index', $data);
-    }
-    public function add(Request $request)
-    {
-        if ($request->isMethod('post')) :
-            $rules = [
-                'title' => 'required|string|max:255',
-                'handle' => 'required|string|max:255',
-            ];
-            $validator = Validator::make($request->all(), $rules);
 
-            if ($validator->fails()) :
-                return redirect()->back()->withErrors($validator)->withInput();
-            endif;
+        $validatedData = $request->validate($rules);
 
-            $Forms = new Forms();
-            $Forms = [
-                'title' => $request->input('title'),
-                'handle' => $request->input('handle'),
-            ];
-            Forms::insert($Forms);
-//            return view('forms.edit',['title' => $request->input('title')]);
-//            return redirect()->route('forms.edit')->with('title', $request->input('title'));
-            return redirect()->route('forms.edit',$request->input('title'))->with('title', $request->input('title'));
+        $form = new Forms();
+        $form = [
+            'title' => $validatedData['title'],
+            'handle' => $validatedData['handle'],
+        ];
+        Forms::insert($form);
 
-        else :
-            return view('forms.add');
-        endif;
+        return redirect()->route('forms.edit', $validatedData['handle']);
     }
-    public function edit(Request $request)
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
     {
-        $formId = $request->segment(count($request->segments()));
-        $data['forms'] = Forms::where(['id' => $formId])->first();
-        return view('forms.edit', $data);
+        //
     }
-    public function table(Request $request)
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $handle)
     {
-        return view('forms.table');
+        $form = Forms::where(['handle' => $handle])->firstOrFail();
+        
+        return view('forms.edit', compact('form'));
     }
-    public function view()
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $handle)
     {
-        return view('forms.view');
+        $rules = [
+            'title' => 'required|string|max:255',
+            'honeypot' => 'required|string|max:255',
+        ];
+
+        $validatedData = $request->validate($rules);
+
+        $formData = [
+            'honeypot' => $validatedData['honeypot'],
+            'isStoreSubmission' => $request->input('storeSubmission'),
+        ];
+
+        // Convert data to JSON format
+        $jsonData = json_encode($formData);
+        $mytime = Carbon::now();
+        $form = [
+            'settings' => $jsonData,
+            'title' => $validatedData['title'],
+            'handle' => $handle,
+            'updated_at' => $mytime->toDateTimeString(),
+        ];
+
+        Forms::where('handle', $handle)->update($form);
+        // Redirect back with success message
+        return redirect()->back()->with('success', 'Form has been updated successfully.');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        //
     }
 }

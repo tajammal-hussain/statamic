@@ -13,6 +13,7 @@ use App\Http\Controllers\{
     AssetsController,
     GlobalsController,
     FieldsetsController,
+    FormsController,
     UsersController,
 };
 
@@ -75,6 +76,9 @@ Route::middleware('auth')->group(function () {
 
     // Fieldsets Routes
     Route::resource('fieldsets', FieldsetsController::class)->except('show');
+
+    // Forms Routes
+    Route::resource('forms', FormsController::class);
 
     // Users Routes
     Route::resource('users', UsersController::class)->except('create', 'store', 'show');

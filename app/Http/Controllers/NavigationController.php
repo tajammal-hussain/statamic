@@ -40,15 +40,13 @@ class NavigationController extends Controller
             'title' => 'required|string|max:255',
             'handle' => 'required|string|max:255',
         ];
-        $validator = Validator::make($request->all(), $rules);
 
-        if ($validator->fails()) : return redirect()->back()->withErrors($validator)->withInput();
-        endif;
+        $validatedData = $request->validate($rules);
 
         $navigation = new Navigations();
         $navigation = [
-            'title' => $request->input('title'),
-            'handle' => $request->input('handle'),
+            'title' => $validatedData['title'],
+            'handle' => $validatedData['handle'],
         ];
         Navigations::insert($navigation);
 
@@ -72,9 +70,7 @@ class NavigationController extends Controller
     public function update(Request $request, string $handle)
     {
         $selectedCollections[] = $request->input('collections');
-        $rules = [
-            'title' => 'required|string|max:255',
-        ];
+        $rules = ['title' => 'required|string|max:255'];
 
         $validatedData = $request->validate($rules);
         $navigationData = [

@@ -17,8 +17,8 @@ class GlobalsController extends Controller
             ['name' => 'Title'],
             ['name' => 'handle'],
         ];
-
-        $globalsInfo = Globals::where(['status' => 1])->firstOrFail();
+        $globalsInfo = Globals::where(['status' => 1])->get();
+        
         return view('globals.index', compact('columns', 'globalsInfo'));
     }
 
