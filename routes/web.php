@@ -54,7 +54,7 @@ Route::middleware('auth')->group(function () {
     });
 
     // Navigations Routes
-    Route::resource('navigations', NavigationController::class);
+    Route::resource('navigations', NavigationController::class)->except('show');
 
     // Taxonomies--Terms Routes
     Route::resource('taxonomies', TaxonomiesController::class)->except('show');

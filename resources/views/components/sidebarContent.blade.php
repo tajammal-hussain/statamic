@@ -18,17 +18,25 @@
     <div class="nav-main-inner">
         <ul class="nav-section-top-level">
             <li class="current">
-                <a href="{{ route('dashboard') }}"><i><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <a href="{{ route('dashboard') }}">
+                    <i>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                             <circle cx="7" cy="8.5" r="3.5" fill="none" stroke="currentColor"
-                                stroke-linecap="round" stroke-linejoin="round"></circle>
+                                stroke-linecap="round" stroke-linejoin="round">
+                            </circle>
                             <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                 d="M7 5v3.5h3.5M9 22.5a6.979 6.979 0 0 0 1.5-4m4.5 4a6.979 6.979 0 0 1-1.5-4m-6.001 4h9M.5 15.5h23">
                             </path>
                             <rect width="23" height="17" x=".5" y="1.5" fill="none" stroke="currentColor"
-                                stroke-linecap="round" stroke-linejoin="round" rx="1" ry="1"></rect>
+                                stroke-linecap="round" stroke-linejoin="round" rx="1" ry="1">
+                            </rect>
                             <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                d="M13.5 7 15 5l3 2.5 2.5-3m-1 8V11m-2 1.5v-2m-2 2v-3m-2 3V11"></path>
-                        </svg></i><span>Dashboard</span></a>
+                                d="M13.5 7 15 5l3 2.5 2.5-3m-1 8V11m-2 1.5v-2m-2 2v-3m-2 3V11">
+                            </path>
+                        </svg>
+                    </i>
+                    <span>Dashboard</span>
+                </a>
             </li>
         </ul>
         <h6>Content</h6>
@@ -129,21 +137,6 @@
         <h6>Fields</h6>
         <ul class="nav-section-fields">
             <li class="">
-                <a href="#"><i><svg viewBox="0 0 24 24">
-                            <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                                <path
-                                    d="M23.045 23.294A.3.3 0 0 0 23.5 23V4.177a.847.847 0 0 0-.455-.706L16.985.727a1.437 1.437 0 0 0-.927-.041L8.049 3.491a1.463 1.463 0 0 1-.929-.037L.957.723a.3.3 0 0 0-.457.3l.019 18.821a.843.843 0 0 0 .458.7l6.128 2.728c.297.114.623.127.929.039l8.024-2.8c.305-.089.631-.074.927.041l6.06 2.742z">
-                                </path>
-                                <path
-                                    d="M2.963 4.135a.315.315 0 0 0-.464.312v14.058a.8.8 0 0 0 .465.684L7.1 20.826a1.6 1.6 0 0 0 .939.025l8.494-2.846 4.5 1.775a.317.317 0 0 0 .465-.317V5.916a.874.874 0 0 0-.448-.716l-4.071-1.981a1.407 1.407 0 0 0-.923-.06l-8 2.682a1.572 1.572 0 0 1-.938-.028L2.963 4.135zm11.536 4.844V3.681">
-                                </path>
-                                <path
-                                    d="m2.5 14.349 5.157 1.887 3.371-1.157a.334.334 0 0 1 .472.337v4.275m3-1.005v-4.207a.871.871 0 0 1 .452-.716l1.014-.485c.292-.12.617-.132.918-.036l4.616 1.779M2.499 7.946l5 2.001 3.969-1m-6.969-.2V6.979m4 2.716V7.979m-2 1.568V7.979">
-                                </path>
-                            </g>
-                        </svg></i><span>Blueprints</span></a>
-            </li>
-            <li class="">
                 <a href="{{ route('fieldsets.index') }}"><i><svg xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 23.48 23.68">
                             <path fill="none" stroke="currentColor" stroke-linecap="round"
@@ -200,41 +193,13 @@
                             </g>
                         </svg></i><span>Utilities</span></a>
             </li>
-            <li class="">
-                <a href="#" target='"_blank"'><i><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
-                            <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                transform="scale(.66667)">
-                                <rect width="13" height="3" x=".5" y=".499" rx="1" ry="1">
-                                </rect>
-                                <rect width="13" height="3" x="10.5" y="12.499" rx="1"
-                                    ry="1"></rect>
-                                <rect width="13" height="3" x="10.5" y="20.499" rx="1"
-                                    ry="1"></rect>
-                                <path d="M17.5 15.499v5M7.5 3.5V8A1.5 1.5 0 0 0 9 9.5h7a1.5 1.5 0 0 1 1.5 1.5v1.5">
-                                </path>
-                            </g>
-                        </svg></i><span>GraphQL</span></a>
-            </li>
-            <li class="">
-                <a href="#"><i><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <path fill="none" stroke="currentColor" stroke-linecap="round"
-                                stroke-linejoin="round"
-                                d="M1.012 11.942a8.5 8.5 0 0 1 15.022-7.685M15.01 15.041l2.333 2.332M23 20.909a1.5 1.5 0 1 1-2.121 2.121l-3.889-3.889a1 1 0 0 1 0-1.414l.707-.707a1 1 0 0 1 1.414 0z">
-                            </path>
-                            <path fill="none" stroke="currentColor" stroke-linecap="round"
-                                stroke-linejoin="round"
-                                d="m.5 15.53 8.793-8.793a1 1 0 0 1 1.414 0l2.586 2.586a1 1 0 0 0 1.414 0L23.5.53">
-                            </path>
-                            <path fill="none" stroke="currentColor" stroke-linecap="round"
-                                stroke-linejoin="round" d="M20.5.53h3v3m-6.015 6.016a8.5 8.5 0 0 1-13.923 6.017">
-                            </path>
-                        </svg></i><span>SEO Pro</span></a>
-            </li>
         </ul>
         <h6>Users</h6>
         <ul class="nav-section-users">
             <li class="">
-                <a href="#"><i><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <a href="{{ route('users.index') }}">
+                    <i>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                             <path fill="none" stroke="currentColor" stroke-linecap="round"
                                 stroke-linejoin="round"
                                 d="M20.5 13.5v-8h-9.442A1.67 1.67 0 0 1 9.5 4.56 1.738 1.738 0 0 0 7.9 3.5H4a.5.5 0 0 0-.5.5v9.5m15-10h-6.456a1.739 1.739 0 0 1-1.574-1 1.741 1.741 0 0 0-1.57-1H5.5m-5 14 .839-4.2a1 1 0 0 1 .981-.8H3.5m20 5-.839-4.2a1 1 0 0 0-.981-.8H20.5">
@@ -245,7 +210,10 @@
                                 stroke-linejoin="round"
                                 d="M15.5 14.5a3.612 3.612 0 0 0-7 0zm3 1a1.5 1.5 0 0 0-1.5 1.54 1.512 1.512 0 0 1-1.559 1.46H8.558A1.512 1.512 0 0 1 7 17.04a1.5 1.5 0 0 0-1.5-1.54h-5v6a1 1 0 0 0 1 1h21a1 1 0 0 0 1-1v-6z">
                             </path>
-                        </svg></i><span>Users</span></a>
+                        </svg>
+                    </i>
+                    <span>Users</span>
+                </a>
             </li>
         </ul>
     </div>

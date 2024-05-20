@@ -57,14 +57,6 @@ class NavigationController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $handle)
@@ -82,15 +74,13 @@ class NavigationController extends Controller
         $selectedCollections[] = $request->input('collections');
         $rules = [
             'title' => 'required|string|max:255',
-            'max_depth' => 'required|integer',
         ];
 
         $validatedData = $request->validate($rules);
         $navigationData = [
-            'max_depth' => $validatedData['max_depth'],
+            'max_depth' => $request->input('max_depth'),
             "collections" => $selectedCollections,
         ];
-        $handle = preg_replace('/[^a-zA-Z0-9]/', '-', $validatedData['title']);
         // Convert data to JSON format
         $jsonData = json_encode($navigationData);
         $mytime = Carbon::now();
