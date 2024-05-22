@@ -25,6 +25,21 @@
                         <button type="submit" class="btn-primary">Save</button>
                     </div>
                 </header>
+                @if ($errors->any())
+                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                @if (session('success'))
+                    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative"
+                        role="alert">
+                        {{ session('success') }}
+                    </div>
+                @endif
                 <div>
                     <div>
                         <div class="mb-2 content">
@@ -181,8 +196,11 @@
                                                     </div>
                                                 </div>
                                                 <div class="toggle-fieldtype-wrapper">
-                                                    <button type="button" aria-pressed="{{ json_decode($form->settings)->isStoreSubmission === "1" ? 'true' : 'false' }}" aria-label="Toggle Button"
-                                                        class="toggle-container {{ json_decode($form->settings)->isStoreSubmission === "1" ? 'on' : 'off' }}" id="field_store">
+                                                    <button type="button"
+                                                        aria-pressed="{{ json_decode($form->settings)->isStoreSubmission === '1' ? 'true' : 'false' }}"
+                                                        aria-label="Toggle Button"
+                                                        class="toggle-container {{ json_decode($form->settings)->isStoreSubmission === '1' ? 'on' : 'off' }}"
+                                                        id="field_store">
                                                         <div class="toggle-slider">
                                                             <div tabindex="0" class="toggle-knob"></div>
                                                         </div>
