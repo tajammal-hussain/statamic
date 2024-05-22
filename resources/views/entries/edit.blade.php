@@ -179,7 +179,9 @@
                                                                             <select name="author" id="author"
                                                                                 class="w-full p-2 border-2 border-gray-500 rounded-md text-md hover:border-sky-500">
                                                                                 @foreach ($users as $user)
-                                                                                    <option value="{{ $user->name }}">
+                                                                                    <option
+                                                                                        {{ $user->name == json_decode($entry->data)->author ? 'selected' : '' }}
+                                                                                        value="{{ $user->name }}">
                                                                                         {{ $user->name }}
                                                                                     </option>
                                                                                 @endforeach
@@ -336,7 +338,8 @@
                                                                     @foreach ($taxonomyTerms as $taxonomy)
                                                                         @php
                                                                             $taxonomyHandle = $taxonomy['handle'];
-                                                                            $defaultValues = json_decode($entry->data)->taxonomies->$taxonomyHandle;
+                                                                            $defaultValues = json_decode($entry->data)
+                                                                                ->taxonomies->$taxonomyHandle;
                                                                         @endphp
                                                                         <div class="mt-4">
                                                                             <select x-cloak id="{{ $taxonomyHandle }}">

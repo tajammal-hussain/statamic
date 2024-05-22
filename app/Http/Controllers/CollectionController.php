@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Collections;
+use App\Models\Taxonomies;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Entries;
 
@@ -44,8 +45,22 @@ class CollectionController extends Controller
 
         $validatedData = $request->validate($rules);
 
+        $data = [
+            'route' => null,
+            'slug' => 1,
+            'title_formats' => null,
+            'publish' => 1,
+            'entry_link' => 0,
+            'sort_dir' => "Ascending",
+            'orderable' => 0,
+            'taxnomies' => null
+        ];
+
+        $jsonData = json_encode($data);
         $collection = new Collections();
+
         $collection = [
+            'settings' => $jsonData,
             'title' => $validatedData['title'],
             'handle' => $validatedData['handle'],
         ];
@@ -58,17 +73,47 @@ class CollectionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $handle)
     {
-        return view('collections.edit');
+
+        $collection = Collections::where(['handle' => $handle])->firstOrFail();
+        $taxonomies = Taxonomies::all();
+
+        return view('collections.edit', compact('collection', 'taxonomies'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $handle)
     {
-        //
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'title_format' => 'required|string|max:255',
+            'route_name' => 'required|string|max:255',
+        ]);
+        $selectedTaxonomies = $request->input('taxonomies');
+        
+        $data = [
+            'route' => $request->route_name,
+            'slug' => $request->slugState,
+            'title_formats' => $request->title_format,
+            'publish' => $request->publishState,
+            'entry_link' => $request->links,
+            'sort_dir' => $request->sort_direction,
+            'orderable' => $request->orderable,
+            'taxonomies' => $selectedTaxonomies
+        ];
+
+        $jsonData =  json_encode($data);
+
+        $collection = [
+            'settings' => $jsonData,
+            'title' => $request->title,
+        ];
+        Collections::where('handle', $handle)->update($collection);
+        // Redirect back with success message
+        return redirect()->back()->with('success', 'collection has been updated successfully.');
     }
 
     /**
