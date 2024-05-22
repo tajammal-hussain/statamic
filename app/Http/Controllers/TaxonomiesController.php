@@ -117,5 +117,7 @@ class TaxonomiesController extends Controller
      */
     public function destroy(string $handle)
     {
+        $res = deleteContent("Taxonomies", ['handle' => $handle]);
+        return redirect()->route('taxonomies.index')->with($res);
     }
 }

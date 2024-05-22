@@ -50,6 +50,7 @@ class FieldsetsController extends Controller
             'data' => $jsonData,
             'title' => $request->title,
             'handle' => $request->handle,
+            'created_at' => getCurrentTime(),
         ];
 
         Fieldsets::insert($fieldset);
@@ -88,11 +89,7 @@ class FieldsetsController extends Controller
      */
     public function destroy(string $handle)
     {
-        try {
-            Fieldsets::where('handle', $handle)->first()->delete();
-            return redirect()->back()->with('success', 'Fieldsets deleted successfully.');
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Something went wrong');
-        }
+        $res = deleteContent("Fieldsets", ['handle' => $handle]);
+        return redirect()->route('fieldsets.index')->with($res);
     }
 }

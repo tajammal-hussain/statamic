@@ -51,7 +51,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/{collection}/store', [EntriesController::class, 'store'])->name('entries.store');
         Route::get('/{collection}/edit/{id}', [EntriesController::class, 'edit'])->name('entries.edit');
         Route::put('/{collection}/update/{id}', [EntriesController::class, 'update'])->name('entries.update');
-        Route::get('/{collection}/destroy/{id}', [EntriesController::class, 'destroy'])->name('entries.destroy');
+        Route::delete('/{collection}/destroy/{id}', [EntriesController::class, 'destroy'])->name('entries.destroy');
     });
 
     // Navigations Routes
@@ -66,6 +66,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/{taxonomy}/edit/{id}', [TermsController::class, 'edit'])->name('terms.edit');
         Route::put('/{taxonomy}/update/{id}', [TermsController::class, 'update'])->name('terms.update');
         Route::get('/{taxonomy}/show/{id}', [TermsController::class, 'show'])->name('terms.show');
+        Route::delete('/{taxonomy}/destroy/{id}', [TermsController::class, 'destroy'])->name('terms.destroy');
     });
 
     // Assets Routes

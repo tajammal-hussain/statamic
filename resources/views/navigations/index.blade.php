@@ -41,7 +41,7 @@
                                                 ],
                                                 [
                                                     'label' => 'Delete',
-                                                    'route' => route('navigations.destroy', ['navigation' => $navigation->id]),
+                                                    'route' => route('navigations.destroy', ['navigation' => $navigation->handle]),
                                                 ],
                                                 // Add more menu items as needed
                                             ];

@@ -112,11 +112,7 @@ class FormsController extends Controller
      */
     public function destroy(string $handle)
     {
-        try {
-            Forms::where('handle', $handle)->first()->delete();
-            return redirect()->back()->with('success', 'Form deleted successfully.');
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Something went wrong');
-        }
+        $res = deleteContent("Forms", ['handle' => $handle]);
+        return redirect()->route('forms.index')->with($res);
     }
 }

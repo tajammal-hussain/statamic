@@ -10,19 +10,16 @@ use Illuminate\Http\Request;
 
 class TermsController extends Controller
 {
+
+    /**
+     * Display a listing of the resource.
+     */
     public function __invoke($handle)
     {
         $taxonomy = Taxonomies::with('terms')->where('handle', $handle)->firstOrFail();
 
         return view('terms.index', compact('taxonomy'));
     }
-    /**
-     * Display a listing of the resource.
-     */
-    // public function index()
-    // {
-    //     //
-    // }
 
     /**
      * Show the form for creating a new resource.
@@ -161,8 +158,9 @@ class TermsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($handle, string $id)
     {
-        //
+        $res = deleteContent("TaxonomyTerms", ['id' => $id]);
+        return redirect()->route('terms.index', ['taxonomy' => $handle])->with($res);
     }
 }

@@ -228,11 +228,7 @@ class EntriesController extends Controller
      */
     public function destroy($handle, string $id)
     {
-        try {
-            Entries::where('id', $id)->first()->delete();
-            return redirect()->back()->with('success', 'Entry deleted successfully.');
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Something went wrong');
-        }
+        $res = deleteContent("Entries", ['id' => $id]);
+        return redirect()->route('entries.index', ['collection' => $handle])->with($res);
     }
 }

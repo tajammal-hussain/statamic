@@ -93,7 +93,7 @@ class CollectionController extends Controller
             'route_name' => 'required|string|max:255',
         ]);
         $selectedTaxonomies = $request->input('taxonomies');
-        
+
         $data = [
             'route' => $request->route_name,
             'slug' => $request->slugState,
@@ -121,11 +121,7 @@ class CollectionController extends Controller
      */
     public function destroy(string $handle)
     {
-        try {
-            Collections::where('handle', $handle)->first()->delete();
-            return redirect()->back()->with('success', 'Collection deleted successfully.');
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Something went wrong');
-        }
+        $res = deleteContent("Collections", ['handle' => $handle]);
+        return redirect()->route('collections.index')->with($res);
     }
 }

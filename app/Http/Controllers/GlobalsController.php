@@ -18,7 +18,7 @@ class GlobalsController extends Controller
             ['name' => 'handle'],
         ];
         $globalsInfo = Globals::where(['status' => 1])->get();
-        
+
         return view('globals.index', compact('columns', 'globalsInfo'));
     }
 
@@ -97,11 +97,7 @@ class GlobalsController extends Controller
      */
     public function destroy(string $handle)
     {
-        try {
-            Globals::where('handle', $handle)->first()->delete();
-            return redirect()->back()->with('success', 'Globals deleted successfully.');
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Something went wrong');
-        }
+        $res = deleteContent("Globals", ['handle' => $handle]);
+        return redirect()->route('globals.index')->with($res);
     }
 }

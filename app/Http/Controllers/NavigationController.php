@@ -93,8 +93,9 @@ class NavigationController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $handle)
     {
-        //
+        $res = deleteContent("Navigations", ['handle' => $handle]);
+        return redirect()->route('navigations.index')->with($res);
     }
 }

@@ -10,6 +10,16 @@
             <a href="{{ route('forms.create') }}" class="btn-primary">Create Form</a>
         </div>
         <div class="card overflow-hidden p-0 relative" visible-columns="" bis_skin_checked="1">
+            @if (session('success'))
+                <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+                    {{ session('success') }}
+                </div>
+            @endif
+            @if (session('error'))
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                    {{ session('error') }}
+                </div>
+            @endif
             <table data-size="sm" tabindex="0" class="data-table">
                 <thead>
                     <tr>
@@ -57,11 +67,10 @@
                                             [
                                                 'label' => 'Edit',
                                                 'route' => route('forms.edit', ['form' => $forms->handle]),
-                                                // 'route' => route('dashboard'),
                                             ],
                                             [
                                                 'label' => 'Delete',
-                                                'route' => route('dashboard'),
+                                                'route' => route('forms.destroy', ['form' => $forms->handle]),
                                             ],
                                         ];
                                     @endphp
