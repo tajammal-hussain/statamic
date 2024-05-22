@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\TaxonomyTerms;
 use App\Models\Collections;
 use App\Models\Taxonomies;
-use Carbon\Carbon;
 
 use Illuminate\Http\Request;
 
@@ -135,12 +134,11 @@ class TermsController extends Controller
         $newHandle = preg_replace('/[^a-zA-Z0-9]/', '-', $validatedData['title']);
         // Convert data to JSON format
         $jsonData = json_encode($taxonomyData);
-        $mytime = Carbon::now();
         $taxonomy = [
             'settings' => $jsonData,
             'title' => $validatedData['title'],
             // 'handle' => $handle,
-            'updated_at' => $mytime->toDateTimeString(),
+            'updated_at' => getCurrentTime(),
         ];
 
         $collectionsArray = explode(',', $selectedCollections[0]);

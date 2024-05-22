@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Navigations;
 use App\Models\Collections;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 
 class NavigationController extends Controller
@@ -79,12 +78,11 @@ class NavigationController extends Controller
         ];
         // Convert data to JSON format
         $jsonData = json_encode($navigationData);
-        $mytime = Carbon::now();
         $navigation = [
             'settings' => $jsonData,
             'title' => $validatedData['title'],
             'handle' => $handle,
-            'updated_at' => $mytime->toDateTimeString(),
+            'updated_at' => getCurrentTime(),
         ];
 
         Navigations::where('handle', $handle)->update($navigation);

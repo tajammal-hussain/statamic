@@ -9,7 +9,6 @@ use App\Models\{
     Collections,
     Collection_taxonomy
 };
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 
 class TaxonomiesController extends Controller
@@ -87,12 +86,11 @@ class TaxonomiesController extends Controller
         // $newHandle = preg_replace('/[^a-zA-Z0-9]/', '-', $validatedData['title']);
         // Convert data to JSON format
         $jsonData = json_encode($taxonomyData);
-        $mytime = Carbon::now();
         $taxonomy = [
             'settings' => $jsonData,
             'title' => $validatedData['title'],
             // 'handle' => $newHandle,
-            'updated_at' => $mytime->toDateTimeString(),
+            'updated_at' => getCurrentTime(),
         ];
 
         $collectionsArray = explode(',', $selectedCollections[0]);

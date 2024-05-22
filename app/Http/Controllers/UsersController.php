@@ -61,13 +61,12 @@ class UsersController extends Controller
             $user = User::where(['id' => $id])->firstOrFail();
             $user->syncRoles([$role]);
         endif;
-        $mytime = Carbon::now();
 
         $user = [
             'name' => $validatedData['name'],
             'email' => $validatedData['email'],
             'image' => $imageName,
-            'updated_at' => $mytime->toDateTimeString(),
+            'updated_at' => getCurrentTime(),
         ];
         User::where('id', $id)->update($user);
 

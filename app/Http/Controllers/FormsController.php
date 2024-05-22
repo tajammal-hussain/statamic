@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Forms;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Carbon\Carbon;
 
 class FormsController extends Controller
 {
@@ -39,10 +38,20 @@ class FormsController extends Controller
 
         $validatedData = $request->validate($rules);
 
+        $formData = [
+            'honeypot' => null,
+            'isStoreSubmission' => null,
+        ];
+
+        // Convert data to JSON format
+        $jsonData = json_encode($formData);
+
         $form = new Forms();
         $form = [
+            'settings' => $jsonData,
             'title' => $validatedData['title'],
             'handle' => $validatedData['handle'],
+            'created_at' => getCurrentTime(),
         ];
         Forms::insert($form);
 
@@ -63,7 +72,7 @@ class FormsController extends Controller
     public function edit(string $handle)
     {
         $form = Forms::where(['handle' => $handle])->firstOrFail();
-        
+
         return view('forms.edit', compact('form'));
     }
 
@@ -86,12 +95,11 @@ class FormsController extends Controller
 
         // Convert data to JSON format
         $jsonData = json_encode($formData);
-        $mytime = Carbon::now();
         $form = [
             'settings' => $jsonData,
             'title' => $validatedData['title'],
             'handle' => $handle,
-            'updated_at' => $mytime->toDateTimeString(),
+            'updated_at' => getCurrentTime(),
         ];
 
         Forms::where('handle', $handle)->update($form);
@@ -102,8 +110,13 @@ class FormsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $handle)
     {
-        //
+        try {
+            Forms::where('handle', $handle)->first()->delete();
+            return redirect()->back()->with('success', 'Form deleted successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Something went wrong');
+        }
     }
 }

@@ -9,7 +9,6 @@ use App\Models\{
     Entries,
 };
 use Illuminate\Http\Request;
-use Carbon\Carbon;
 
 class EntriesController extends Controller
 {
@@ -107,7 +106,6 @@ class EntriesController extends Controller
 
         // Save data to the database
         $entry = new Entries();
-        $mytime = Carbon::now();
         $entry = [
             'data' => $jsonData,
             'title' => $validatedData['title'],
@@ -116,7 +114,7 @@ class EntriesController extends Controller
             'published' => $isPublished ? "1" : "0",
             'isSEOEnabled' => $isEnabled ? "1" : "0",
             'status' => $isPublished ? "published" : "pending",
-            'date' => $mytime->toDateTimeString(),
+            'date' => getCurrentTime(),
             'collection' => $handle,
         ];
         Entries::insert($entry);
@@ -208,7 +206,6 @@ class EntriesController extends Controller
         endif;
         // Convert data to JSON format
         $jsonData = json_encode($entryData);
-        $mytime = Carbon::now();
 
         $entry = [
             'data' => $jsonData,
@@ -218,7 +215,7 @@ class EntriesController extends Controller
             'published' => $isPublished ? "1" : "0",
             'isSEOEnabled' => $isEnabled ? "1" : "0",
             'status' => $isPublished ? "published" : "pending",
-            'date' => $mytime->toDateTimeString(),
+            'date' => getCurrentTime(),
         ];
 
         Entries::where('id', $id)->update($entry);
