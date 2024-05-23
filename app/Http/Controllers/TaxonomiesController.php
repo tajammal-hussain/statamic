@@ -50,10 +50,15 @@ class TaxonomiesController extends Controller
         if ($validator->fails()) : return redirect()->back()->withErrors($validator)->withInput();
         endif;
 
+        $data=[            
+            'collections' => [null] ,
+        ];
+        $jsonData =  json_encode($data);
         $taxonomy = new Taxonomies();
         $taxonomy = [
             'title' => $request->input('title'),
             'handle' => $request->input('handle'),
+            'settings' => $jsonData
         ];
         Taxonomies::insert($taxonomy);
 
