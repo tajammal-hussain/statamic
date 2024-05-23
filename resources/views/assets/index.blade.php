@@ -4,9 +4,230 @@
 
 @section('content')
 <style>
+/* Drag & Drop Css */
 .dragover {
     border-color: #3b82f6;
     background-color: #e0f2fe;
+}
+
+/* Focal Point Css   &&   !FOCUSED IMAGES */
+/*-----------------------------------------*/
+
+.focuspoint {
+    position: relative;
+    /*Any position but static should work*/
+    overflow: hidden;
+}
+
+.focuspoint img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin: 0;
+    display: block;
+    /* fill and maintain aspect ratio */
+    width: auto;
+    height: auto;
+    min-width: 100%;
+    min-height: 100%;
+    max-height: none;
+    max-width: none;
+}
+
+/* !TYPOGRAPHY */
+/*-----------------------------------------*/
+
+a {
+    color: #2697ff;
+    text-decoration: none;
+}
+
+a:hover,
+a:focus,
+a:active {
+    color: #0074de;
+}
+
+/* !INFO */
+/*-----------------------------------------*/
+#Info {
+    position: absolute;
+    left: 2%;
+    top: 2%;
+    width: 20%;
+    box-shadow: 0px 0px 13px rgba(0, 0, 0, 0.6);
+    background: #fff;
+    border: 1px solid #fff;
+}
+
+#Info p {
+    font-size: 12px;
+    padding: 10px;
+    margin: 0;
+}
+
+#Original {
+    position: relative;
+}
+
+#Original img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    display: block;
+    margin: 0;
+}
+
+#Original h4 {
+    position: absolute;
+    left: 0;
+    bottom: 15px;
+    width: 100%;
+    text-align: center;
+    margin: 0;
+}
+
+#Original h4 span {
+    font-size: 12px;
+    padding: 3px 10px;
+    border-radius: 100px;
+    background: rgba(0, 0, 0, 0.32);
+    color: #fff;
+}
+
+/* !CONTAINERS */
+/*-----------------------------------------*/
+
+#Frame1,
+#Frame2,
+#Frame3,
+#Frame4,
+#Frame5,
+#Frame6,
+#Frame7,
+#Frame8,
+#Frame9 {
+    position: absolute;
+    overflow: hidden;
+    border: 5px solid #fff;
+    margin: -5px 0 0 -5px;
+}
+
+#Frame1,
+#Frame4,
+#Frame7 {
+    width: 66.6666667%;
+    left: 0;
+}
+
+#Frame2,
+#Frame5,
+#Frame8 {
+    width: 22.2222222%;
+    left: 66.6666667%;
+}
+
+#Frame3,
+#Frame6,
+#Frame9 {
+    width: 11.1111111%;
+    left: 88.8888889%;
+}
+
+#Frame1,
+#Frame2,
+#Frame3 {
+    height: 66.6666667%;
+    top: 0;
+}
+
+#Frame4,
+#Frame5,
+#Frame6 {
+    height: 22.2222222%;
+    top: 66.6666667%;
+}
+
+#Frame7,
+#Frame8,
+#Frame9 {
+    height: 11.1111111%;
+    top: 88.8888889%;
+}
+
+/* !HELPER TOOL GUI */
+/*-----------------------------------------*/
+#Info {
+    width: 320px;
+}
+
+#Info .helper-tool h1 {
+    font-size: 14px;
+}
+
+#Info .helper-tool p {
+    font-size: 0.825rem;
+    padding: 0;
+    margin: 0 0 1em;
+}
+
+.helper-tool,
+.helper-tool * {
+    box-sizing: border-box;
+}
+
+.helper-tool {
+    padding: 12px;
+    border: 1px solid #fcfcfc;
+}
+
+.helper-tool input {
+    position: relative;
+    width: 100%;
+}
+
+/* !HELPER TOOL TARGETING SYSTEM */
+.focuspoint img {
+    transition: all 500ms ease-in-out;
+    -webkit-transition: all 500ms ease-in-out;
+    -moz-transition: all 500ms ease-in-out;
+}
+
+/* !HELPER TOOL TARGETING SYSTEM */
+.helper-tool-target {
+    position: relative;
+    width: 300px;
+    overflow: hidden;
+    margin-bottom: 1em;
+}
+
+.helper-tool-target img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+.helper-tool-target img.target-overlay,
+.helper-tool-target img.reticle {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.helper-tool-target img.target-overlay {
+    cursor: pointer;
+    opacity: 0.01;
+}
+
+.helper-tool-target img.reticle {
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    transition: all 500ms ease-in-out;
+    -webkit-transition: all 500ms ease-in-out;
+    -moz-transition: all 500ms ease-in-out;
 }
 </style>
 <title>Assets :: Cedar</title>
@@ -56,7 +277,7 @@
                                     class="editor-preview bg-gray-800 rtl:md:rounded-tl-md ltr:md:rounded-tr-md flex flex-col justify-between flex-1 min-h-[45vh] md:min-h-auto md:flex-auto md:grow w-full md:w-1/2 lg:w-2/3 shadow-[inset_0px_4px_3px_0px_black]">
                                     <div id="asset-editor-toolbar"
                                         class="@container/toolbar flex items-center justify-center py-4 px-2 text-2xs text-white text-center space-x-1 sm:space-x-3">
-                                        <button type="button"
+                                        <button type="button" id="open-modal-1"
                                             class="flex bg-gray-750 hover:bg-gray-900 hover:text-yellow-light rounded items-center justify-center px-3 py-1.5">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14"
                                                 class="h-4">
@@ -68,7 +289,7 @@
                                             <span class="rtl:mr-2 ltr:ml-2 hidden @3xl/toolbar:inline-block">Focal
                                                 Point</span>
                                         </button>
-                                        <button type="button" id="open-modal-1"
+                                        <button type="button" id="open-modal-2"
                                             class="flex bg-gray-750 hover:bg-gray-900 hover:text-yellow-light rounded items-center px-3 py-1.5">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14"
                                                 class="h-4">
@@ -80,7 +301,7 @@
                                             <span
                                                 class="rtl:mr-2 ltr:ml-2 hidden @3xl/toolbar:inline-block">Rename</span>
                                         </button>
-                                        <button type="button" id="open-modal-2"
+                                        <button type="button" id="open-modal-3"
                                             class="flex bg-gray-750 hover:bg-gray-900 hover:text-yellow-light rounded items-center px-3 py-1.5">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14"
                                                 class="h-4">
@@ -91,7 +312,7 @@
                                             </svg>
                                             <span class="rtl:mr-2 ltr:ml-2 hidden @3xl/toolbar:inline-block">Move</span>
                                         </button>
-                                        <button type="button" id="open-modal-3"
+                                        <button type="button" id="open-modal-4"
                                             class="flex bg-gray-750 hover:bg-gray-900 hover:text-yellow-light rounded items-center px-3 py-1.5">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14"
                                                 class="h-4">
@@ -113,12 +334,57 @@
                                                 </path>
                                             </svg>
                                             <span class="rtl:mr-2 ltr:ml-2 hidden @3xl/toolbar:inline-block">
-                                                <a href="{{ asset('/imgs/new.jpg') }}" download="cedar-image.jpg" class="download-button text-white">Download</a>
+                                                <a href="{{ asset('/imgs/new.jpg') }}" download="cedar-image.jpg"
+                                                    class="download-button text-white">Download</a>
                                             </span>
                                         </button>
                                     </div>
                                     <div>
                                         <div class="modal hidden absolute z-2" id="modal-1">
+                                            <div class="modal-overlays" id="modal-overlays"></div>
+                                            <div aria-expanded="true" role="dialog" aria-modal="true"
+                                                class="vm--modal -top-32 -left-2">
+                                                <div class="card" style="width: 118.5rem; height: 58rem;">
+
+                                                    <div id="Frames">
+                                                    </div>
+
+                                                    <div id="Info">
+                                                        <div class="helper-tool">
+                                                            <h1>Click the image to set the FocusPoint.</h1>
+                                                            <div class="helper-tool-target">
+                                                                <img class="helper-tool-img">
+                                                                <img class="reticle"
+                                                                    src="{{ asset('imgs/focuspoint-target.png') }}">
+                                                                <img class="target-overlay">
+                                                            </div>
+                                                            <p>
+                                                                <label for="data-attr">FocusPoint data-
+                                                                    attributes:</label>
+                                                                <input class='helper-tool-data-attr' id="data-attr"
+                                                                    name="data-attr" type='text'
+                                                                    placeholder='data-focus-x="0" data-focus-y="0" '>
+                                                            </p>
+                                                            <p>
+                                                                <label for="css3-val">CSS3 Background Position:</label>
+                                                                <input class='helper-tool-css3-val' id="css3-val"
+                                                                    name="css3-val" type='text'
+                                                                    placeholder='background-position:'>
+                                                            </p>
+                                                            <div
+                                                                class="px-5 py-3 bg-gray-200 rounded-b-lg border-t flex items-center justify-end text-sm">
+                                                                <button type="button" id="close-modal-1"
+                                                                    class="text-gray hover:text-gray-900">Cancel</button>
+                                                                <button class="rtl:mr-4 ltr:ml-4 btn-primary">Focal
+                                                                    Point</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="modal hidden absolute z-2" id="modal-2">
                                             <div class="modal-overlays" id="modal-overlays"></div>
                                             <div aria-expanded="true" role="dialog" aria-modal="true" class="vm--modal"
                                                 style="left: 50%; width: 600px; height: auto; top: 5px">
@@ -184,14 +450,15 @@
                                                     </div>
                                                     <div
                                                         class="px-5 py-3 bg-gray-200 rounded-b-lg border-t flex items-center justify-end text-sm">
-                                                        <button type="button" id="close-modal-1"
+                                                        <button type="button" id="close-modal-2"
                                                             class="text-gray hover:text-gray-900">Cancel</button><button
                                                             class="rtl:mr-4 ltr:ml-4 btn-primary">Rename Asset</button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="modal hidden absolute z-2" id="modal-2">
+
+                                        <div class="modal hidden absolute z-2" id="modal-3">
                                             <div class="modal-overlays" id="modal-overlays"></div>
                                             <div aria-expanded="true" role="dialog" aria-modal="true" class="vm--modal"
                                                 style="left: 50%; width: 600px; height: auto; top: 5px">
@@ -295,7 +562,7 @@
                                                         </div>
                                                         <div
                                                             class="px-5 py-3 bg-gray-200 rounded-b-lg border-t flex items-center justify-end text-sm">
-                                                            <button type="button" id="close-modal-2"
+                                                            <button type="button" id="close-modal-3"
                                                                 class="text-gray hover:text-gray-900">Cancel</button>
                                                             <button class="rtl:mr-4 ltr:ml-4 btn-primary">Move
                                                                 Asset</button>
@@ -304,7 +571,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="modal hidden absolute z-2" id="modal-3">
+
+                                        <div class="modal hidden absolute z-2" id="modal-4">
                                             <div class="modal-overlays" id="modal-overlays"></div>
                                             <div aria-expanded="true" role="dialog" aria-modal="true" class="vm--modal"
                                                 style="left: 50%; width: 600px; height: auto; top: 5px">
@@ -414,7 +682,7 @@
                                                     </div>
                                                     <div
                                                         class="px-5 py-3 bg-gray-200 rounded-b-lg border-t flex items-center justify-end text-sm">
-                                                        <button type="button" id="close-modal-3"
+                                                        <button type="button" id="close-modal-4"
                                                             class="text-gray hover:text-gray-900">Cancel</button>
                                                         <button class="rtl:mr-4 ltr:ml-4 btn-primary">Reupload</button>
                                                     </div>
@@ -428,963 +696,1316 @@
                                         </div>
                                         {{-- else this icon
                                             <div class="image-wrapper">
-                                                <img src="Photo%20edit%20Assets%20%E2%80%B9%20Assets%20%E2%80%B9%20Statamic_files/alec-favale-mzjobxoxbt0-unsplash.jpg" class="asset-thumb">
-                                            </div>
-                                        --}}
+                                                <img src="{{ asset('/imgs/new.jpg') }}" class="asset-thumb">
                                     </div>
+                                    --}}
                                 </div>
-                                <div class="w-full sm:p-4 md:pt-px md:w-1/3 md:grow overflow-scroll">
-                                    <!---->
-                                    <!---->
-                                    <div class="publish-sections">
-                                        <div class="publish-sections-section">
-                                            <div class="p-0 card">
-                                                <!---->
-                                                <div class="publish-fields @container">
-                                                    <div
-                                                        class="form-group publish-field publish-field__alt text-fieldtype w-full">
-                                                        <div class="field-inner"><label for="field_alt"
-                                                                class="publish-field-label"><span
-                                                                    class="rtl:ml-1 ltr:mr-1 v-popper--has-tooltip">Alt
-                                                                    Text</span>
-                                                                <!---->
-                                                                <!---->
-                                                                <!---->
-                                                                <!----><button class="outline-none"
-                                                                    style="display: none;"><svg
-                                                                        xmlns="http://www.w3.org/2000/svg"
-                                                                        viewBox="0 0 24 24"
-                                                                        class="h-4 w-4 rtl:ml-1.5 ltr:mr-1.5 mb-1 text-gray-600 v-popper--has-tooltip">
-                                                                        <path fill="none" stroke="currentColor"
-                                                                            stroke-linecap="round"
-                                                                            stroke-linejoin="round" stroke-width="1.5"
-                                                                            d="M10.082 9.5A4.47 4.47 0 0 0 6.75 8h-1.5a4.5 4.5 0 0 0 0 9h1.5a4.474 4.474 0 0 0 3.332-1.5m3.836-6A4.469 4.469 0 0 1 17.25 8h1.5a4.5 4.5 0 1 1 0 9h-1.5a4.472 4.472 0 0 1-3.332-1.5M6.75 12.499h10.5">
-                                                                        </path>
-                                                                    </svg></button><button class="outline-none"
-                                                                    style="display: none;"><svg
-                                                                        xmlns="http://www.w3.org/2000/svg"
-                                                                        viewBox="0 0 24 24"
-                                                                        class="h-4 w-4 rtl:ml-1.5 ltr:mr-1.5 mb-1 text-gray-600 v-popper--has-tooltip">
-                                                                        <path fill="none" stroke="currentColor"
-                                                                            stroke-linecap="round"
-                                                                            stroke-linejoin="round" stroke-width="1.5"
-                                                                            d="M16.5 15.749h1.875A3.963 3.963 0 0 0 22.5 12h0a3.962 3.962 0 0 0-4.125-3.75H16.5m-9 7.499H5.625A3.963 3.963 0 0 1 1.5 12h0a3.963 3.963 0 0 1 4.125-3.75H7.5M12 5.249v-4.5m-3 4.5-1.5-1.5m7.5 1.5 1.5-1.5m-4.5 15v4.5m-3-4.5-1.5 1.5m7.5-1.5 1.5 1.5">
-                                                                        </path>
-                                                                    </svg></button>
-                                                            </label>
-                                                            <div class="help-block -mt-2">
-                                                                <p>Description of the image</p>
-                                                            </div>
+                            </div>
+                            <div class="w-full sm:p-4 md:pt-px md:w-1/3 md:grow overflow-scroll">
+                                <!---->
+                                <!---->
+                                <div class="publish-sections">
+                                    <div class="publish-sections-section">
+                                        <div class="p-0 card">
+                                            <!---->
+                                            <div class="publish-fields @container">
+                                                <div
+                                                    class="form-group publish-field publish-field__alt text-fieldtype w-full">
+                                                    <div class="field-inner"><label for="field_alt"
+                                                            class="publish-field-label"><span
+                                                                class="rtl:ml-1 ltr:mr-1 v-popper--has-tooltip">Alt
+                                                                Text</span>
+                                                            <!---->
+                                                            <!---->
+                                                            <!---->
+                                                            <!----><button class="outline-none"
+                                                                style="display: none;"><svg
+                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                    viewBox="0 0 24 24"
+                                                                    class="h-4 w-4 rtl:ml-1.5 ltr:mr-1.5 mb-1 text-gray-600 v-popper--has-tooltip">
+                                                                    <path fill="none" stroke="currentColor"
+                                                                        stroke-linecap="round" stroke-linejoin="round"
+                                                                        stroke-width="1.5"
+                                                                        d="M10.082 9.5A4.47 4.47 0 0 0 6.75 8h-1.5a4.5 4.5 0 0 0 0 9h1.5a4.474 4.474 0 0 0 3.332-1.5m3.836-6A4.469 4.469 0 0 1 17.25 8h1.5a4.5 4.5 0 1 1 0 9h-1.5a4.472 4.472 0 0 1-3.332-1.5M6.75 12.499h10.5">
+                                                                    </path>
+                                                                </svg></button><button class="outline-none"
+                                                                style="display: none;"><svg
+                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                    viewBox="0 0 24 24"
+                                                                    class="h-4 w-4 rtl:ml-1.5 ltr:mr-1.5 mb-1 text-gray-600 v-popper--has-tooltip">
+                                                                    <path fill="none" stroke="currentColor"
+                                                                        stroke-linecap="round" stroke-linejoin="round"
+                                                                        stroke-width="1.5"
+                                                                        d="M16.5 15.749h1.875A3.963 3.963 0 0 0 22.5 12h0a3.962 3.962 0 0 0-4.125-3.75H16.5m-9 7.499H5.625A3.963 3.963 0 0 1 1.5 12h0a3.963 3.963 0 0 1 4.125-3.75H7.5M12 5.249v-4.5m-3 4.5-1.5-1.5m7.5 1.5 1.5-1.5m-4.5 15v4.5m-3-4.5-1.5 1.5m7.5-1.5 1.5 1.5">
+                                                                    </path>
+                                                                </svg></button>
+                                                        </label>
+                                                        <div class="help-block -mt-2">
+                                                            <p>Description of the image</p>
                                                         </div>
-                                                        <!---->
-                                                        <div class="flex items-center">
-                                                            <div class="input-group">
-                                                                <!----><input id="field_alt" name="alt" type="text"
-                                                                    autofocus="autofocus" class="input-text">
-                                                                <!---->
-                                                            </div>
+                                                    </div>
+                                                    <!---->
+                                                    <div class="flex items-center">
+                                                        <div class="input-group">
+                                                            <!----><input id="field_alt" name="alt" type="text"
+                                                                autofocus="autofocus" class="input-text">
                                                             <!---->
                                                         </div>
                                                         <!---->
-                                                        <!---->
                                                     </div>
+                                                    <!---->
+                                                    <!---->
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="bg-gray-200 w-full border-t flex items-center justify-end py-3 px-4 rounded-b">
-                                <div id="asset-meta-data"
-                                    class="flex-1 hidden sm:flex space-x-3 py-1 h-full text-xs text-gray-800">
-                                    <div
-                                        class="flex items-center bg-gray-400 rounded py-1 rtl:pr-2 ltr:pl-2 rtl:pl-3 ltr:pr-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14"
-                                            class="h-3 rtl:ml-2 ltr:mr-2">
-                                            <path fill="currentColor" fill-rule="evenodd"
-                                                d="M3.824.583C4.837.47 5.904.37 7 .37c1.097 0 2.163.1 3.176.213a3.696 3.696 0 0 1 3.252 3.262c.108 1.008.202 2.067.202 3.155 0 1.088-.094 2.147-.202 3.155a3.696 3.696 0 0 1-3.252 3.262c-1.013.113-2.08.213-3.176.213s-2.163-.1-3.176-.213a3.696 3.696 0 0 1-3.252-3.262C.464 9.147.37 8.088.37 7c0-1.088.094-2.147.202-3.155A3.696 3.696 0 0 1 3.824.583Zm6.724 3.669a1.446 1.446 0 1 1-2.893 0 1.446 1.446 0 0 1 2.893 0Zm-6.196 7.711c-1.159-.146-2.092-1.206-2.216-2.523a39.527 39.527 0 0 1-.147-2.015.464.464 0 0 1 .412-.489 5.59 5.59 0 0 1 .564-.027c1.405-.036 2.775.496 3.866 1.5.883.814 1.537 1.895 1.892 3.108a.465.465 0 0 1-.417.59 15.7 15.7 0 0 1-1.308.059c-.9 0-1.785-.094-2.646-.203Zm5.737-.103c-.136.046-.274-.05-.301-.19-.14-.726-.43-1.622-.957-2.405-.1-.147-.033-.353.14-.392a5.62 5.62 0 0 1 2.738.07c.113.031.184.14.174.257l-.022.24c-.108 1.144-.826 2.093-1.772 2.42Z"
-                                                clip-rule="evenodd"></path>
-                                        </svg>
-                                        <div>3376 x 6000</div>
-                                    </div>
-                                    <div
-                                        class="flex items-center bg-gray-400 rounded py-1 rtl:pr-2 ltr:pl-2 rtl:pl-3 ltr:pr-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14"
-                                            class="h-3 rtl:ml-2 ltr:mr-2">
-                                            <path fill="currentColor" fill-rule="evenodd"
-                                                d="M10.21.845C8.556.69 7.08.638 5.128.833a1.484 1.484 0 0 0-.917.446l-2.25 2.326a1.476 1.476 0 0 0-.413.902c-.183 2.185-.038 4.298.146 6.414a2.466 2.466 0 0 0 2.273 2.255 40.84 40.84 0 0 0 6.198 0 2.425 2.425 0 0 0 2.25-2.27 61.8 61.8 0 0 0-.003-7.79l-.5.031.5-.031A2.435 2.435 0 0 0 10.21.846Zm-3.526 1.98c.345 0 .625.28.625.625v1.687a.625.625 0 1 1-1.25 0V3.45c0-.345.28-.625.625-.625Zm3.176.625a.625.625 0 1 0-1.25 0v1.687a.625.625 0 0 0 1.25 0V3.45Z"
-                                                clip-rule="evenodd"></path>
-                                        </svg>
-                                        <div>2.14 MB</div>
-                                    </div>
-                                    <div
-                                        class="flex items-center bg-gray-400 rounded py-1 rtl:pr-2 ltr:pl-2 rtl:pl-3 ltr:pr-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14"
-                                            class="h-3 rtl:ml-2 ltr:mr-2">
-                                            <path fill="currentColor" fill-rule="evenodd"
-                                                d="M9.625.702a5.25 5.25 0 0 0-7.171 1.922.75.75 0 1 0 1.299.75A3.75 3.75 0 0 1 8.875 2a.75.75 0 1 0 .75-1.299Zm1.116 2.435a.75.75 0 0 1 1 .355c.332.7.509 1.47.509 2.257V8.75A5.251 5.251 0 0 1 7 14a.75.75 0 0 1 0-1.5 3.75 3.75 0 0 0 3.75-3.75V5.749a3.75 3.75 0 0 0-.364-1.612.75.75 0 0 1 .355-1ZM2.5 5.498a.75.75 0 0 1 .75.75v2.503a3.75 3.75 0 0 0 1.35 2.884.75.75 0 0 1-.959 1.152A5.247 5.247 0 0 1 1.75 8.751V6.248a.75.75 0 0 1 .75-.75Zm4.574-.847a.89.89 0 0 0-.394-.008.75.75 0 1 1-.305-1.469A2.39 2.39 0 0 1 9.25 5.54v1.048a.75.75 0 1 1-1.5 0V5.525a.89.89 0 0 0-.676-.874Zm-1.09 2.384a.75.75 0 0 0-1.5 0v1.8A2.383 2.383 0 0 0 8.64 10.46a.75.75 0 0 0-1.116-1.002.883.883 0 0 1-1.54-.604V7.035Z"
-                                                clip-rule="evenodd"></path>
-                                        </svg>
-                                        <div title="2022-11-10">1 year ago</div>
-                                    </div>
+                        </div>
+                        <div class="bg-gray-200 w-full border-t flex items-center justify-end py-3 px-4 rounded-b">
+                            <div id="asset-meta-data"
+                                class="flex-1 hidden sm:flex space-x-3 py-1 h-full text-xs text-gray-800">
+                                <div
+                                    class="flex items-center bg-gray-400 rounded py-1 rtl:pr-2 ltr:pl-2 rtl:pl-3 ltr:pr-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14"
+                                        class="h-3 rtl:ml-2 ltr:mr-2">
+                                        <path fill="currentColor" fill-rule="evenodd"
+                                            d="M3.824.583C4.837.47 5.904.37 7 .37c1.097 0 2.163.1 3.176.213a3.696 3.696 0 0 1 3.252 3.262c.108 1.008.202 2.067.202 3.155 0 1.088-.094 2.147-.202 3.155a3.696 3.696 0 0 1-3.252 3.262c-1.013.113-2.08.213-3.176.213s-2.163-.1-3.176-.213a3.696 3.696 0 0 1-3.252-3.262C.464 9.147.37 8.088.37 7c0-1.088.094-2.147.202-3.155A3.696 3.696 0 0 1 3.824.583Zm6.724 3.669a1.446 1.446 0 1 1-2.893 0 1.446 1.446 0 0 1 2.893 0Zm-6.196 7.711c-1.159-.146-2.092-1.206-2.216-2.523a39.527 39.527 0 0 1-.147-2.015.464.464 0 0 1 .412-.489 5.59 5.59 0 0 1 .564-.027c1.405-.036 2.775.496 3.866 1.5.883.814 1.537 1.895 1.892 3.108a.465.465 0 0 1-.417.59 15.7 15.7 0 0 1-1.308.059c-.9 0-1.785-.094-2.646-.203Zm5.737-.103c-.136.046-.274-.05-.301-.19-.14-.726-.43-1.622-.957-2.405-.1-.147-.033-.353.14-.392a5.62 5.62 0 0 1 2.738.07c.113.031.184.14.174.257l-.022.24c-.108 1.144-.826 2.093-1.772 2.42Z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
+                                    <div>3376 x 6000</div>
                                 </div>
-                                <div class="flex items-center space-x-3">
-                                    <button type="button"
-                                        class="btn text-gray-600 hover:text-gray-900 transition duration-300 ease-in-out"
-                                        id="close-modal">
-                                        Cancel
-                                    </button>
-                                    <button type="button" class="btn-primary"> Save </button>
+                                <div
+                                    class="flex items-center bg-gray-400 rounded py-1 rtl:pr-2 ltr:pl-2 rtl:pl-3 ltr:pr-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14"
+                                        class="h-3 rtl:ml-2 ltr:mr-2">
+                                        <path fill="currentColor" fill-rule="evenodd"
+                                            d="M10.21.845C8.556.69 7.08.638 5.128.833a1.484 1.484 0 0 0-.917.446l-2.25 2.326a1.476 1.476 0 0 0-.413.902c-.183 2.185-.038 4.298.146 6.414a2.466 2.466 0 0 0 2.273 2.255 40.84 40.84 0 0 0 6.198 0 2.425 2.425 0 0 0 2.25-2.27 61.8 61.8 0 0 0-.003-7.79l-.5.031.5-.031A2.435 2.435 0 0 0 10.21.846Zm-3.526 1.98c.345 0 .625.28.625.625v1.687a.625.625 0 1 1-1.25 0V3.45c0-.345.28-.625.625-.625Zm3.176.625a.625.625 0 1 0-1.25 0v1.687a.625.625 0 0 0 1.25 0V3.45Z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
+                                    <div>2.14 MB</div>
                                 </div>
+                                <div
+                                    class="flex items-center bg-gray-400 rounded py-1 rtl:pr-2 ltr:pl-2 rtl:pl-3 ltr:pr-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14"
+                                        class="h-3 rtl:ml-2 ltr:mr-2">
+                                        <path fill="currentColor" fill-rule="evenodd"
+                                            d="M9.625.702a5.25 5.25 0 0 0-7.171 1.922.75.75 0 1 0 1.299.75A3.75 3.75 0 0 1 8.875 2a.75.75 0 1 0 .75-1.299Zm1.116 2.435a.75.75 0 0 1 1 .355c.332.7.509 1.47.509 2.257V8.75A5.251 5.251 0 0 1 7 14a.75.75 0 0 1 0-1.5 3.75 3.75 0 0 0 3.75-3.75V5.749a3.75 3.75 0 0 0-.364-1.612.75.75 0 0 1 .355-1ZM2.5 5.498a.75.75 0 0 1 .75.75v2.503a3.75 3.75 0 0 0 1.35 2.884.75.75 0 0 1-.959 1.152A5.247 5.247 0 0 1 1.75 8.751V6.248a.75.75 0 0 1 .75-.75Zm4.574-.847a.89.89 0 0 0-.394-.008.75.75 0 1 1-.305-1.469A2.39 2.39 0 0 1 9.25 5.54v1.048a.75.75 0 1 1-1.5 0V5.525a.89.89 0 0 0-.676-.874Zm-1.09 2.384a.75.75 0 0 0-1.5 0v1.8A2.383 2.383 0 0 0 8.64 10.46a.75.75 0 0 0-1.116-1.002.883.883 0 0 1-1.54-.604V7.035Z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
+                                    <div title="2022-11-10">1 year ago</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <button type="button"
+                                    class="btn text-gray-600 hover:text-gray-900 transition duration-300 ease-in-out"
+                                    id="close-modal">
+                                    Cancel
+                                </button>
+                                <button type="button" class="btn-primary"> Save </button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="min-h-screen" bis_skin_checked="1">
-            <div bis_skin_checked="1">
-                <div class="" bis_skin_checked="1"><input type="file" multiple="multiple" class="hidden">
-                    <div class="min-h-screen" bis_skin_checked="1">
-                        <div class="drag-notification" style="display: none;" bis_skin_checked="1"><svg
-                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-12 w-12 m-4">
-                                <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="1.5"
-                                    d="M.752 2.251a1.5 1.5 0 0 1 1.5-1.5m0 22.5a1.5 1.5 0 0 1-1.5-1.5m22.5 0a1.5 1.5 0 0 1-1.5 1.5m0-22.5a1.5 1.5 0 0 1 1.5 1.5m0 15.75v-1.5m0-3.75v-1.5m0-3.75v-1.5m-22.5 12v-1.5m0-3.75v-1.5m0-3.75v-1.5m5.25-5.25h1.5m3.75 0h1.5m3.75 0h1.5m-12 22.5h1.5m3.75 0h1.5m3.75 0h1.5m-6-5.25v-12m4.5 4.5-4.5-4.5-4.5 4.5">
-                                </path>
-                            </svg><span>Drop File to Upload</span></div>
-                        <!---->
-                        <div class="mode-table" bis_skin_checked="1">
-                            <div class="card overflow-hidden p-0" bis_skin_checked="1">
-                                <div class="relative w-full" bis_skin_checked="1">
-                                    <div class="flex items-center justify-between p-2 text-sm" bis_skin_checked="1">
-                                        <input type="text" placeholder="Search..." autofocus="autofocus"
-                                            class="input-text flex-1 bg-white text-sm focus:border-blue-300 outline-0 h-8"
-                                            data-listener-added_d1ab792c="true"><button
-                                            class="btn btn-sm rtl:mr-3 ltr:ml-3"><svg xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 24 24" class="h-4 w-4 rtl:ml-2 ltr:mr-2">
-                                                <path fill="none" stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="1.5"
-                                                    d="M8.25 18.75H2.447M20.25 8.25v-3a1.5 1.5 0 0 0-1.5-1.5H8.25v-1.5a1.5 1.5 0 0 0-1.5-1.5h-4.5a1.5 1.5 0 0 0-1.5 1.5v14.8a1.7 1.7 0 0 0 3.336.438l2.351-8.154A1.5 1.5 0 0 1 7.879 8.25H21.75a1.5 1.5 0 0 1 1.45 1.886">
-                                                </path>
-                                                <circle cx="17.25" cy="17.25" r="6" fill="none" stroke="currentColor"
-                                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
-                                                </circle>
-                                                <path fill="none" stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="1.5"
-                                                    d="M17.25 14.25v6m-3-3h6"></path>
-                                            </svg><span>Create Folder</span></button><button
-                                            class="btn btn-sm rtl:mr-3 ltr:ml-3"><svg xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 24 24" class="h-4 w-4 rtl:ml-2 ltr:mr-2 text-current">
-                                                <path fill="none" stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="1.5"
-                                                    d="M.752 2.251a1.5 1.5 0 0 1 1.5-1.5m0 22.5a1.5 1.5 0 0 1-1.5-1.5m22.5 0a1.5 1.5 0 0 1-1.5 1.5m0-22.5a1.5 1.5 0 0 1 1.5 1.5m0 15.75v-1.5m0-3.75v-1.5m0-3.75v-1.5m-22.5 12v-1.5m0-3.75v-1.5m0-3.75v-1.5m5.25-5.25h1.5m3.75 0h1.5m3.75 0h1.5m-12 22.5h1.5m3.75 0h1.5m3.75 0h1.5m-6-5.25v-12m4.5 4.5-4.5-4.5-4.5 4.5">
-                                                </path>
-                                            </svg><span>Upload</span></button>
-                                        <div class="btn-group rtl:mr-3 ltr:ml-3" bis_skin_checked="1"><button
-                                                class="btn btn-sm"><svg xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 24 24" class="h-4 w-4">
-                                                    <g fill="none" stroke="currentColor" stroke-linecap="round"
-                                                        stroke-linejoin="round" stroke-width="1.5">
-                                                        <rect width="9.75" height="9.75" x=".75" y="13.5" rx="1" ry="1">
-                                                        </rect>
-                                                        <path d="M.75 19.5h9.75"></path>
-                                                        <rect width="9.75" height="9.75" x=".75" y=".75" rx="1" ry="1">
-                                                        </rect>
-                                                        <path d="M.75 6.75h9.75"></path>
-                                                        <rect width="9.75" height="9.75" x="13.5" y=".75" rx="1" ry="1">
-                                                        </rect>
-                                                        <path d="M13.5 6.75h9.75"></path>
-                                                        <rect width="9.75" height="9.75" x="13.5" y="13.5" rx="1"
-                                                            ry="1"></rect>
-                                                        <path d="M13.5 19.5h9.75"></path>
-                                                    </g>
-                                                </svg></button><button class="btn btn-sm active"><svg
-                                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                    class="h-4 w-4">
-                                                    <path fill="none" stroke="currentColor" stroke-linecap="round"
-                                                        stroke-linejoin="round" stroke-width="1.5"
-                                                        d="M8.25 3.748h15m-15 9h15m-15 9h15"></path>
-                                                    <rect width="4.5" height="4.5" x=".75" y=".748" fill="none"
-                                                        stroke="currentColor" stroke-linecap="round"
-                                                        stroke-linejoin="round" stroke-width="1.5" rx=".75" ry=".75">
-                                                    </rect>
-                                                    <rect width="4.5" height="4.5" x=".75" y="9.748" fill="none"
-                                                        stroke="currentColor" stroke-linecap="round"
-                                                        stroke-linejoin="round" stroke-width="1.5" rx=".75" ry=".75">
-                                                    </rect>
-                                                    <rect width="4.5" height="4.5" x=".75" y="18.748" fill="none"
-                                                        stroke="currentColor" stroke-linecap="round"
-                                                        stroke-linejoin="round" stroke-width="1.5" rx=".75" ry=".75">
-                                                    </rect>
-                                                </svg>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="px-4 py-2 flex flex-wrap text-sm bg-gray-200 border-t border-b shadow-inner"
-                                        bis_skin_checked="1"><a class="group flex items-center">
-                                            <!----><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                class="rtl:ml-2 ltr:mr-2 h-5 w-5 text-blue-400 group-hover:text-blue-600">
-                                                <path fill="currentColor"
-                                                    d="M24 6a1.5 1.5 0 0 0-1.5-1.5H11.74a.5.5 0 0 1-.45-.28l-.95-1.89A1.5 1.5 0 0 0 9 1.5H1.5A1.5 1.5 0 0 0 0 3v18a1.5 1.5 0 0 0 1.5 1.5h21A1.5 1.5 0 0 0 24 21Zm-7.52 7.28a.35.35 0 0 1-.32.22h-.91a.25.25 0 0 0-.25.25V17a.5.5 0 0 1-.5.5H9a.5.5 0 0 1-.5-.5v-3.25a.25.25 0 0 0-.25-.25h-.91a.35.35 0 0 1-.34-.22.33.33 0 0 1 .1-.37l4.41-3.83a.33.33 0 0 1 .44 0l4.41 3.83a.33.33 0 0 1 .12.37Z">
-                                                </path>
-                                            </svg>
-                                            <!---->
-                                        </a></div>
-                                    <!---->
-                                </div>
-                                <!---->
-                                <div class="overflow-x-auto overflow-y-hidden" bis_skin_checked="1">
-                                    <table data-size="sm" tabindex="0" class="data-table">
-                                        <thead>
-                                            <tr>
-                                                <th class="checkbox-column"><label for="checkerOfAllBoxes"
-                                                        class="flex items-center justify-center relative cursor-pointer"><input
-                                                            type="checkbox" id="checkerOfAllBoxes"
-                                                            class="relative top-0"></label></th>
-                                                <th class="group current-column sortable-column"><span>File</span><svg
-                                                        height="8" width="8" viewBox="0 0 10 6.5"
-                                                        class="rtl:mr-1 ltr:ml-1 opacity-0 group-hover:opacity-100 asc pointer-events-none">
-                                                        <path d="M9.9,1.4L5,6.4L0,1.4L1.4,0L5,3.5L8.5,0L9.9,1.4z"
-                                                            fill="currentColor">
-                                                        </path>
-                                                    </svg></th>
-                                                <th class="group sortable-column"><span>Size</span><svg height="8"
-                                                        width="8" viewBox="0 0 10 6.5"
-                                                        class="rtl:mr-1 ltr:ml-1 opacity-0 group-hover:opacity-100 asc">
-                                                        <path d="M9.9,1.4L5,6.4L0,1.4L1.4,0L5,3.5L8.5,0L9.9,1.4z"
-                                                            fill="currentColor">
-                                                        </path>
-                                                    </svg></th>
-                                                <th class="group sortable-column"><span>Last Modified</span><svg
-                                                        height="8" width="8" viewBox="0 0 10 6.5"
-                                                        class="rtl:mr-1 ltr:ml-1 opacity-0 group-hover:opacity-100 asc">
-                                                        <path d="M9.9,1.4L5,6.4L0,1.4L1.4,0L5,3.5L8.5,0L9.9,1.4z"
-                                                            fill="currentColor">
-                                                        </path>
-                                                    </svg></th>
-                                                <!---->
-                                                <th class="actions-column"></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody tabindex="0">
-                                            <tr class="sortable-row outline-none" tabindex="0">
-                                                <!---->
-                                                <th class="checkbox-column"><input type="checkbox"
-                                                        id="checkbox-assets::alec-favale-mzjobxoxbt0-unsplash.jpg"
-                                                        value="assets::alec-favale-mzjobxoxbt0-unsplash.jpg"></th>
-                                                <td class="">
-                                                    <div class="flex items-center w-fit-content group" id="open-modal"
-                                                        bis_skin_checked="1">
-                                                        <div class="w-8 h-8 rtl:ml-2 ltr:mr-2 cursor-pointer"
-                                                            bis_skin_checked="1"><img src="{{ asset('/imgs/new.jpg') }}"
-                                                                loading="lazy"
-                                                                class="asset-thumbnail max-h-8 max-w-full mx-auto rounded w-8 h-8 object-cover">
-                                                        </div>
-                                                        <label
-                                                            for="checkbox-assets::alec-favale-mzjobxoxbt0-unsplash.jpg"
-                                                            class="cursor-pointer select-none group-hover:text-blue normal-nums">
-                                                            alec-favale-mzjobxoxbt0-unsplash.jpg
-                                                        </label>
-                                                    </div>
-                                                </td>
-                                                <td class="">
-                                                    <div bis_skin_checked="1">
-                                                        <div handle="size" values="[object Object]" class=""
-                                                            bis_skin_checked="1">2 MB</div>
-                                                    </div>
-                                                </td>
-                                                <td class="">
-                                                    <div bis_skin_checked="1">
-                                                        <div handle="last_modified" values="[object Object]" class=""
-                                                            bis_skin_checked="1">1
-                                                            year ago</div>
-                                                    </div>
-                                                </td>
-                                                <!---->
-                                                <th class="actions-column">
-                                                    <div class="dropdown-list" bis_skin_checked="1">
-                                                        <div aria-haspopup="true" bis_skin_checked="1"><button
-                                                                aria-label="Open Dropdown"
-                                                                class="rotating-dots-button"><svg width="12"
-                                                                    viewBox="0 0 24 24"
-                                                                    class="rotating-dots fill-current">
-                                                                    <circle cx="3" cy="12" r="3">
-                                                                    </circle>
-                                                                    <circle cx="12" cy="12" r="3">
-                                                                    </circle>
-                                                                    <circle cx="21" cy="12" r="3">
-                                                                    </circle>
-                                                                </svg></button></div>
-                                                        <div class="v-portal" style="display: none;"
-                                                            bis_skin_checked="1"></div>
-                                                    </div>
-                                                </th>
-                                            </tr>
-                                            <tr class="sortable-row outline-none" tabindex="0">
-                                                <!---->
-                                                <th class="checkbox-column"><input type="checkbox"
-                                                        id="checkbox-assets::bill-jelen-nvwyn8gamck-unsplash.jpg"
-                                                        value="assets::bill-jelen-nvwyn8gamck-unsplash.jpg"></th>
-                                                <td class="">
-                                                    <div class="flex items-center w-fit-content group" id="open-modal"
-                                                        bis_skin_checked="1">
-                                                        <div class="w-8 h-8 rtl:ml-2 ltr:mr-2 cursor-pointer"
-                                                            bis_skin_checked="1"><img
-                                                                src="./Assets ‹ Assets ‹ Statamic_files/small(1)"
-                                                                loading="lazy"
-                                                                class="asset-thumbnail max-h-8 max-w-full mx-auto rounded w-8 h-8 object-cover">
-                                                        </div><label
-                                                            for="checkbox-assets::bill-jelen-nvwyn8gamck-unsplash.jpg"
-                                                            class="cursor-pointer select-none group-hover:text-blue normal-nums">
-                                                            bill-jelen-nvwyn8gamck-unsplash.jpg </label>
-                                                    </div>
-                                                </td>
-                                                <td class="">
-                                                    <div bis_skin_checked="1">
-                                                        <div handle="size" values="[object Object]" class=""
-                                                            bis_skin_checked="1">2 MB</div>
-                                                    </div>
-                                                </td>
-                                                <td class="">
-                                                    <div bis_skin_checked="1">
-                                                        <div handle="last_modified" values="[object Object]" class=""
-                                                            bis_skin_checked="1">1
-                                                            year ago</div>
-                                                    </div>
-                                                </td>
-                                                <!---->
-                                                <th class="actions-column">
-                                                    <div class="dropdown-list" bis_skin_checked="1">
-                                                        <div aria-haspopup="true" bis_skin_checked="1"><button
-                                                                aria-label="Open Dropdown"
-                                                                class="rotating-dots-button"><svg width="12"
-                                                                    viewBox="0 0 24 24"
-                                                                    class="rotating-dots fill-current">
-                                                                    <circle cx="3" cy="12" r="3">
-                                                                    </circle>
-                                                                    <circle cx="12" cy="12" r="3">
-                                                                    </circle>
-                                                                    <circle cx="21" cy="12" r="3">
-                                                                    </circle>
-                                                                </svg></button></div>
-                                                        <div class="v-portal" style="display: none;"
-                                                            bis_skin_checked="1"></div>
-                                                    </div>
-                                                </th>
-                                            </tr>
-                                            <tr class="sortable-row outline-none" tabindex="0">
-                                                <!---->
-                                                <th class="checkbox-column"><input type="checkbox"
-                                                        id="checkbox-assets::boat.jpg" value="assets::boat.jpg"></th>
-                                                <td class="">
-                                                    <div class="flex items-center w-fit-content group" id="open-modal"
-                                                        bis_skin_checked="1">
-                                                        <div class="w-8 h-8 rtl:ml-2 ltr:mr-2 cursor-pointer"
-                                                            bis_skin_checked="1"><img
-                                                                src="https://demo.statamic.com/cp/thumbnails/YXNzZXRzOjpib2F0LmpwZw==/small"
-                                                                loading="lazy"
-                                                                class="asset-thumbnail max-h-8 max-w-full mx-auto rounded w-8 h-8 object-cover">
-                                                        </div><label for="checkbox-assets::boat.jpg"
-                                                            class="cursor-pointer select-none group-hover:text-blue normal-nums">
-                                                            boat.jpg
-                                                        </label>
-                                                    </div>
-                                                </td>
-                                                <td class="">
-                                                    <div bis_skin_checked="1">
-                                                        <div handle="size" values="[object Object]" class=""
-                                                            bis_skin_checked="1">318 KB
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="">
-                                                    <div bis_skin_checked="1">
-                                                        <div handle="last_modified" values="[object Object]" class=""
-                                                            bis_skin_checked="1">1
-                                                            year ago</div>
-                                                    </div>
-                                                </td>
-                                                <!---->
-                                                <th class="actions-column">
-                                                    <div class="dropdown-list" bis_skin_checked="1">
-                                                        <div aria-haspopup="true" bis_skin_checked="1"><button
-                                                                aria-label="Open Dropdown"
-                                                                class="rotating-dots-button"><svg width="12"
-                                                                    viewBox="0 0 24 24"
-                                                                    class="rotating-dots fill-current">
-                                                                    <circle cx="3" cy="12" r="3">
-                                                                    </circle>
-                                                                    <circle cx="12" cy="12" r="3">
-                                                                    </circle>
-                                                                    <circle cx="21" cy="12" r="3">
-                                                                    </circle>
-                                                                </svg></button></div>
-                                                        <div class="v-portal" style="display: none;"
-                                                            bis_skin_checked="1"></div>
-                                                    </div>
-                                                </th>
-                                            </tr>
-                                            <tr class="sortable-row outline-none" tabindex="0">
-                                                <!---->
-                                                <th class="checkbox-column"><input type="checkbox"
-                                                        id="checkbox-assets::burning-tracks.jpg"
-                                                        value="assets::burning-tracks.jpg"></th>
-                                                <td class="">
-                                                    <div class="flex items-center w-fit-content group" id="open-modal"
-                                                        bis_skin_checked="1">
-                                                        <div class="w-8 h-8 rtl:ml-2 ltr:mr-2 cursor-pointer"
-                                                            bis_skin_checked="1"><img
-                                                                src="./Assets ‹ Assets ‹ Statamic_files/small(2)"
-                                                                loading="lazy"
-                                                                class="asset-thumbnail max-h-8 max-w-full mx-auto rounded w-8 h-8 object-cover">
-                                                        </div><label for="checkbox-assets::burning-tracks.jpg"
-                                                            class="cursor-pointer select-none group-hover:text-blue normal-nums">
-                                                            burning-tracks.jpg </label>
-                                                    </div>
-                                                </td>
-                                                <td class="">
-                                                    <div bis_skin_checked="1">
-                                                        <div handle="size" values="[object Object]" class=""
-                                                            bis_skin_checked="1">362 KB
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="">
-                                                    <div bis_skin_checked="1">
-                                                        <div handle="last_modified" values="[object Object]" class=""
-                                                            bis_skin_checked="1">1
-                                                            year ago</div>
-                                                    </div>
-                                                </td>
-                                                <!---->
-                                                <th class="actions-column">
-                                                    <div class="dropdown-list" bis_skin_checked="1">
-                                                        <div aria-haspopup="true" bis_skin_checked="1"><button
-                                                                aria-label="Open Dropdown"
-                                                                class="rotating-dots-button"><svg width="12"
-                                                                    viewBox="0 0 24 24"
-                                                                    class="rotating-dots fill-current">
-                                                                    <circle cx="3" cy="12" r="3">
-                                                                    </circle>
-                                                                    <circle cx="12" cy="12" r="3">
-                                                                    </circle>
-                                                                    <circle cx="21" cy="12" r="3">
-                                                                    </circle>
-                                                                </svg></button></div>
-                                                        <div class="v-portal" style="display: none;"
-                                                            bis_skin_checked="1"></div>
-                                                    </div>
-                                                </th>
-                                            </tr>
-                                            <tr class="sortable-row outline-none" tabindex="0">
-                                                <!---->
-                                                <th class="checkbox-column"><input type="checkbox"
-                                                        id="checkbox-assets::cleanshot-2022-09-13-at-15.49.18@2x.png"
-                                                        value="assets::cleanshot-2022-09-13-at-15.49.18@2x.png"></th>
-                                                <td class="">
-                                                    <div class="flex items-center w-fit-content group" id="open-modal"
-                                                        bis_skin_checked="1">
-                                                        <div class="w-8 h-8 rtl:ml-2 ltr:mr-2 cursor-pointer"
-                                                            bis_skin_checked="1"><img
-                                                                src="./Assets ‹ Assets ‹ Statamic_files/small(3)"
-                                                                loading="lazy"
-                                                                class="asset-thumbnail max-h-8 max-w-full mx-auto rounded w-8 h-8 object-cover">
-                                                        </div><label
-                                                            for="checkbox-assets::cleanshot-2022-09-13-at-15.49.18@2x.png"
-                                                            class="cursor-pointer select-none group-hover:text-blue normal-nums">
-                                                            cleanshot-2022-09-13-at-15.49.18@2x.png </label>
-                                                    </div>
-                                                </td>
-                                                <td class="">
-                                                    <div bis_skin_checked="1">
-                                                        <div handle="size" values="[object Object]" class=""
-                                                            bis_skin_checked="1">2 MB</div>
-                                                    </div>
-                                                </td>
-                                                <td class="">
-                                                    <div bis_skin_checked="1">
-                                                        <div handle="last_modified" values="[object Object]" class=""
-                                                            bis_skin_checked="1">1
-                                                            year ago</div>
-                                                    </div>
-                                                </td>
-                                                <!---->
-                                                <th class="actions-column">
-                                                    <div class="dropdown-list" bis_skin_checked="1">
-                                                        <div aria-haspopup="true" bis_skin_checked="1"><button
-                                                                aria-label="Open Dropdown"
-                                                                class="rotating-dots-button"><svg width="12"
-                                                                    viewBox="0 0 24 24"
-                                                                    class="rotating-dots fill-current">
-                                                                    <circle cx="3" cy="12" r="3">
-                                                                    </circle>
-                                                                    <circle cx="12" cy="12" r="3">
-                                                                    </circle>
-                                                                    <circle cx="21" cy="12" r="3">
-                                                                    </circle>
-                                                                </svg></button></div>
-                                                        <div class="v-portal" style="display: none;"
-                                                            bis_skin_checked="1"></div>
-                                                    </div>
-                                                </th>
-                                            </tr>
-                                            <tr class="sortable-row outline-none" tabindex="0">
-                                                <!---->
-                                                <th class="checkbox-column"><input type="checkbox"
-                                                        id="checkbox-assets::david.jpg" value="assets::david.jpg">
-                                                </th>
-                                                <td class="">
-                                                    <div class="flex items-center w-fit-content group" id="open-modal"
-                                                        bis_skin_checked="1">
-                                                        <div class="w-8 h-8 rtl:ml-2 ltr:mr-2 cursor-pointer"
-                                                            bis_skin_checked="1"><img
-                                                                src="./Assets ‹ Assets ‹ Statamic_files/small(4)"
-                                                                loading="lazy"
-                                                                class="asset-thumbnail max-h-8 max-w-full mx-auto rounded w-8 h-8 object-cover">
-                                                        </div><label for="checkbox-assets::david.jpg"
-                                                            class="cursor-pointer select-none group-hover:text-blue normal-nums">
-                                                            david.jpg
-                                                        </label>
-                                                    </div>
-                                                </td>
-                                                <td class="">
-                                                    <div bis_skin_checked="1">
-                                                        <div handle="size" values="[object Object]" class=""
-                                                            bis_skin_checked="1">41 KB
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="">
-                                                    <div bis_skin_checked="1">
-                                                        <div handle="last_modified" values="[object Object]" class=""
-                                                            bis_skin_checked="1">1
-                                                            year ago</div>
-                                                    </div>
-                                                </td>
-                                                <!---->
-                                                <th class="actions-column">
-                                                    <div class="dropdown-list" bis_skin_checked="1">
-                                                        <div aria-haspopup="true" bis_skin_checked="1"><button
-                                                                aria-label="Open Dropdown"
-                                                                class="rotating-dots-button"><svg width="12"
-                                                                    viewBox="0 0 24 24"
-                                                                    class="rotating-dots fill-current">
-                                                                    <circle cx="3" cy="12" r="3">
-                                                                    </circle>
-                                                                    <circle cx="12" cy="12" r="3">
-                                                                    </circle>
-                                                                    <circle cx="21" cy="12" r="3">
-                                                                    </circle>
-                                                                </svg></button></div>
-                                                        <div class="v-portal" style="display: none;"
-                                                            bis_skin_checked="1"></div>
-                                                    </div>
-                                                </th>
-                                            </tr>
-                                            <tr class="sortable-row outline-none" tabindex="0">
-                                                <!---->
-                                                <th class="checkbox-column"><input type="checkbox"
-                                                        id="checkbox-assets::hasnain-sikora-41nsemab1ps-unsplash.jpg"
-                                                        value="assets::hasnain-sikora-41nsemab1ps-unsplash.jpg"></th>
-                                                <td class="">
-                                                    <div class="flex items-center w-fit-content group" id="open-modal"
-                                                        bis_skin_checked="1">
-                                                        <div class="w-8 h-8 rtl:ml-2 ltr:mr-2 cursor-pointer"
-                                                            bis_skin_checked="1"><img
-                                                                src="https://demo.statamic.com/cp/thumbnails/YXNzZXRzOjpoYXNuYWluLXNpa29yYS00MW5zZW1hYjFwcy11bnNwbGFzaC5qcGc=/small"
-                                                                loading="lazy"
-                                                                class="asset-thumbnail max-h-8 max-w-full mx-auto rounded w-8 h-8 object-cover">
-                                                        </div><label
-                                                            for="checkbox-assets::hasnain-sikora-41nsemab1ps-unsplash.jpg"
-                                                            class="cursor-pointer select-none group-hover:text-blue normal-nums">
-                                                            hasnain-sikora-41nsemab1ps-unsplash.jpg </label>
-                                                    </div>
-                                                </td>
-                                                <td class="">
-                                                    <div bis_skin_checked="1">
-                                                        <div handle="size" values="[object Object]" class=""
-                                                            bis_skin_checked="1">1 MB</div>
-                                                    </div>
-                                                </td>
-                                                <td class="">
-                                                    <div bis_skin_checked="1">
-                                                        <div handle="last_modified" values="[object Object]" class=""
-                                                            bis_skin_checked="1">1
-                                                            year ago</div>
-                                                    </div>
-                                                </td>
-                                                <!---->
-                                                <th class="actions-column">
-                                                    <div class="dropdown-list" bis_skin_checked="1">
-                                                        <div aria-haspopup="true" bis_skin_checked="1"><button
-                                                                aria-label="Open Dropdown"
-                                                                class="rotating-dots-button"><svg width="12"
-                                                                    viewBox="0 0 24 24"
-                                                                    class="rotating-dots fill-current">
-                                                                    <circle cx="3" cy="12" r="3">
-                                                                    </circle>
-                                                                    <circle cx="12" cy="12" r="3">
-                                                                    </circle>
-                                                                    <circle cx="21" cy="12" r="3">
-                                                                    </circle>
-                                                                </svg></button></div>
-                                                        <div class="v-portal" style="display: none;"
-                                                            bis_skin_checked="1"></div>
-                                                    </div>
-                                                </th>
-                                            </tr>
-                                            <tr class="sortable-row outline-none" tabindex="0">
-                                                <!---->
-                                                <th class="checkbox-column"><input type="checkbox"
-                                                        id="checkbox-assets::jack-pimped-md.jpg"
-                                                        value="assets::jack-pimped-md.jpg"></th>
-                                                <td class="">
-                                                    <div class="flex items-center w-fit-content group" id="open-modal"
-                                                        bis_skin_checked="1">
-                                                        <div class="w-8 h-8 rtl:ml-2 ltr:mr-2 cursor-pointer"
-                                                            bis_skin_checked="1"><img
-                                                                src="https://demo.statamic.com/cp/thumbnails/YXNzZXRzOjpqYWNrLXBpbXBlZC1tZC5qcGc=/small"
-                                                                loading="lazy"
-                                                                class="asset-thumbnail max-h-8 max-w-full mx-auto rounded w-8 h-8 object-cover">
-                                                        </div><label for="checkbox-assets::jack-pimped-md.jpg"
-                                                            class="cursor-pointer select-none group-hover:text-blue normal-nums">
-                                                            jack-pimped-md.jpg </label>
-                                                    </div>
-                                                </td>
-                                                <td class="">
-                                                    <div bis_skin_checked="1">
-                                                        <div handle="size" values="[object Object]" class=""
-                                                            bis_skin_checked="1">310 KB
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="">
-                                                    <div bis_skin_checked="1">
-                                                        <div handle="last_modified" values="[object Object]" class=""
-                                                            bis_skin_checked="1">1
-                                                            year ago</div>
-                                                    </div>
-                                                </td>
-                                                <!---->
-                                                <th class="actions-column">
-                                                    <div class="dropdown-list" bis_skin_checked="1">
-                                                        <div aria-haspopup="true" bis_skin_checked="1"><button
-                                                                aria-label="Open Dropdown"
-                                                                class="rotating-dots-button"><svg width="12"
-                                                                    viewBox="0 0 24 24"
-                                                                    class="rotating-dots fill-current">
-                                                                    <circle cx="3" cy="12" r="3">
-                                                                    </circle>
-                                                                    <circle cx="12" cy="12" r="3">
-                                                                    </circle>
-                                                                    <circle cx="21" cy="12" r="3">
-                                                                    </circle>
-                                                                </svg></button></div>
-                                                        <div class="v-portal" style="display: none;"
-                                                            bis_skin_checked="1"></div>
-                                                    </div>
-                                                </th>
-                                            </tr>
-                                            <tr class="sortable-row outline-none" tabindex="0">
-                                                <!---->
-                                                <th class="checkbox-column"><input type="checkbox"
-                                                        id="checkbox-assets::jason-leung-pslig2e_gaw-unsplash.jpg"
-                                                        value="assets::jason-leung-pslig2e_gaw-unsplash.jpg"></th>
-                                                <td class="">
-                                                    <div class="flex items-center w-fit-content group" id="open-modal"
-                                                        bis_skin_checked="1">
-                                                        <div class="w-8 h-8 rtl:ml-2 ltr:mr-2 cursor-pointer"
-                                                            bis_skin_checked="1"><img
-                                                                src="./Assets ‹ Assets ‹ Statamic_files/small(5)"
-                                                                loading="lazy"
-                                                                class="asset-thumbnail max-h-8 max-w-full mx-auto rounded w-8 h-8 object-cover">
-                                                        </div><label
-                                                            for="checkbox-assets::jason-leung-pslig2e_gaw-unsplash.jpg"
-                                                            class="cursor-pointer select-none group-hover:text-blue normal-nums">
-                                                            jason-leung-pslig2e_gaw-unsplash.jpg </label>
-                                                    </div>
-                                                </td>
-                                                <td class="">
-                                                    <div bis_skin_checked="1">
-                                                        <div handle="size" values="[object Object]" class=""
-                                                            bis_skin_checked="1">2 MB</div>
-                                                    </div>
-                                                </td>
-                                                <td class="">
-                                                    <div bis_skin_checked="1">
-                                                        <div handle="last_modified" values="[object Object]" class=""
-                                                            bis_skin_checked="1">1
-                                                            year ago</div>
-                                                    </div>
-                                                </td>
-                                                <!---->
-                                                <th class="actions-column">
-                                                    <div class="dropdown-list" bis_skin_checked="1">
-                                                        <div aria-haspopup="true" bis_skin_checked="1"><button
-                                                                aria-label="Open Dropdown"
-                                                                class="rotating-dots-button"><svg width="12"
-                                                                    viewBox="0 0 24 24"
-                                                                    class="rotating-dots fill-current">
-                                                                    <circle cx="3" cy="12" r="3">
-                                                                    </circle>
-                                                                    <circle cx="12" cy="12" r="3">
-                                                                    </circle>
-                                                                    <circle cx="21" cy="12" r="3">
-                                                                    </circle>
-                                                                </svg></button></div>
-                                                        <div class="v-portal" style="display: none;"
-                                                            bis_skin_checked="1"></div>
-                                                    </div>
-                                                </th>
-                                            </tr>
-                                            <tr class="sortable-row outline-none" tabindex="0">
-                                                <!---->
-                                                <th class="checkbox-column"><input type="checkbox"
-                                                        id="checkbox-assets::joel-muniz-y6ct3a-rj68-unsplash.jpg"
-                                                        value="assets::joel-muniz-y6ct3a-rj68-unsplash.jpg"></th>
-                                                <td class="">
-                                                    <div class="flex items-center w-fit-content group" id="open-modal"
-                                                        bis_skin_checked="1">
-                                                        <div class="w-8 h-8 rtl:ml-2 ltr:mr-2 cursor-pointer"
-                                                            bis_skin_checked="1"><img
-                                                                src="./Assets ‹ Assets ‹ Statamic_files/small(6)"
-                                                                loading="lazy"
-                                                                class="asset-thumbnail max-h-8 max-w-full mx-auto rounded w-8 h-8 object-cover">
-                                                        </div><label
-                                                            for="checkbox-assets::joel-muniz-y6ct3a-rj68-unsplash.jpg"
-                                                            class="cursor-pointer select-none group-hover:text-blue normal-nums">
-                                                            joel-muniz-y6ct3a-rj68-unsplash.jpg </label>
-                                                    </div>
-                                                </td>
-                                                <td class="">
-                                                    <div bis_skin_checked="1">
-                                                        <div handle="size" values="[object Object]" class=""
-                                                            bis_skin_checked="1">2 MB</div>
-                                                    </div>
-                                                </td>
-                                                <td class="">
-                                                    <div bis_skin_checked="1">
-                                                        <div handle="last_modified" values="[object Object]" class=""
-                                                            bis_skin_checked="1">1
-                                                            year ago</div>
-                                                    </div>
-                                                </td>
-                                                <!---->
-                                                <th class="actions-column">
-                                                    <div class="dropdown-list" bis_skin_checked="1">
-                                                        <div aria-haspopup="true" bis_skin_checked="1"><button
-                                                                aria-label="Open Dropdown"
-                                                                class="rotating-dots-button"><svg width="12"
-                                                                    viewBox="0 0 24 24"
-                                                                    class="rotating-dots fill-current">
-                                                                    <circle cx="3" cy="12" r="3">
-                                                                    </circle>
-                                                                    <circle cx="12" cy="12" r="3">
-                                                                    </circle>
-                                                                    <circle cx="21" cy="12" r="3">
-                                                                    </circle>
-                                                                </svg></button></div>
-                                                        <div class="v-portal" style="display: none;"
-                                                            bis_skin_checked="1"></div>
-                                                    </div>
-                                                </th>
-                                            </tr>
-                                            <tr class="sortable-row outline-none" tabindex="0">
-                                                <!---->
-                                                <th class="checkbox-column"><input type="checkbox"
-                                                        id="checkbox-assets::kira.png" value="assets::kira.png"></th>
-                                                <td class="">
-                                                    <div class="flex items-center w-fit-content group" id="open-modal"
-                                                        bis_skin_checked="1">
-                                                        <div class="w-8 h-8 rtl:ml-2 ltr:mr-2 cursor-pointer"
-                                                            bis_skin_checked="1"><img
-                                                                src="https://demo.statamic.com/cp/thumbnails/YXNzZXRzOjpraXJhLnBuZw==/small"
-                                                                loading="lazy"
-                                                                class="asset-thumbnail max-h-8 max-w-full mx-auto rounded w-8 h-8 object-cover">
-                                                        </div><label for="checkbox-assets::kira.png"
-                                                            class="cursor-pointer select-none group-hover:text-blue normal-nums">
-                                                            kira.png
-                                                        </label>
-                                                    </div>
-                                                </td>
-                                                <td class="">
-                                                    <div bis_skin_checked="1">
-                                                        <div handle="size" values="[object Object]" class=""
-                                                            bis_skin_checked="1">1 MB</div>
-                                                    </div>
-                                                </td>
-                                                <td class="">
-                                                    <div bis_skin_checked="1">
-                                                        <div handle="last_modified" values="[object Object]" class=""
-                                                            bis_skin_checked="1">1
-                                                            year ago</div>
-                                                    </div>
-                                                </td>
-                                                <!---->
-                                                <th class="actions-column">
-                                                    <div class="dropdown-list" bis_skin_checked="1">
-                                                        <div aria-haspopup="true" bis_skin_checked="1"><button
-                                                                aria-label="Open Dropdown"
-                                                                class="rotating-dots-button"><svg width="12"
-                                                                    viewBox="0 0 24 24"
-                                                                    class="rotating-dots fill-current">
-                                                                    <circle cx="3" cy="12" r="3">
-                                                                    </circle>
-                                                                    <circle cx="12" cy="12" r="3">
-                                                                    </circle>
-                                                                    <circle cx="21" cy="12" r="3">
-                                                                    </circle>
-                                                                </svg></button></div>
-                                                        <div class="v-portal" style="display: none;"
-                                                            bis_skin_checked="1"></div>
-                                                    </div>
-                                                </th>
-                                            </tr>
-                                            <tr class="sortable-row outline-none" tabindex="0">
-                                                <!---->
-                                                <th class="checkbox-column"><input type="checkbox"
-                                                        id="checkbox-assets::photo-1454779132693-e5cd0a216ed3.jpg"
-                                                        value="assets::photo-1454779132693-e5cd0a216ed3.jpg"></th>
-                                                <td class="">
-                                                    <div class="flex items-center w-fit-content group" id="open-modal"
-                                                        bis_skin_checked="1">
-                                                        <div class="w-8 h-8 rtl:ml-2 ltr:mr-2 cursor-pointer"
-                                                            bis_skin_checked="1"><img
-                                                                src="https://demo.statamic.com/cp/thumbnails/YXNzZXRzOjpwaG90by0xNDU0Nzc5MTMyNjkzLWU1Y2QwYTIxNmVkMy5qcGc=/small"
-                                                                loading="lazy"
-                                                                class="asset-thumbnail max-h-8 max-w-full mx-auto rounded w-8 h-8 object-cover">
-                                                        </div><label
-                                                            for="checkbox-assets::photo-1454779132693-e5cd0a216ed3.jpg"
-                                                            class="cursor-pointer select-none group-hover:text-blue normal-nums">
-                                                            photo-1454779132693-e5cd0a216ed3.jpg </label>
-                                                    </div>
-                                                </td>
-                                                <td class="">
-                                                    <div bis_skin_checked="1">
-                                                        <div handle="size" values="[object Object]" class=""
-                                                            bis_skin_checked="1">5 MB</div>
-                                                    </div>
-                                                </td>
-                                                <td class="">
-                                                    <div bis_skin_checked="1">
-                                                        <div handle="last_modified" values="[object Object]" class=""
-                                                            bis_skin_checked="1">1
-                                                            year ago</div>
-                                                    </div>
-                                                </td>
-                                                <!---->
-                                                <th class="actions-column">
-                                                    <div class="dropdown-list" bis_skin_checked="1">
-                                                        <div aria-haspopup="true" bis_skin_checked="1"><button
-                                                                aria-label="Open Dropdown"
-                                                                class="rotating-dots-button"><svg width="12"
-                                                                    viewBox="0 0 24 24"
-                                                                    class="rotating-dots fill-current">
-                                                                    <circle cx="3" cy="12" r="3">
-                                                                    </circle>
-                                                                    <circle cx="12" cy="12" r="3">
-                                                                    </circle>
-                                                                    <circle cx="21" cy="12" r="3">
-                                                                    </circle>
-                                                                </svg></button></div>
-                                                        <div class="v-portal" style="display: none;"
-                                                            bis_skin_checked="1"></div>
-                                                    </div>
-                                                </th>
-                                            </tr>
-                                            <tr class="sortable-row outline-none" tabindex="0">
-                                                <!---->
-                                                <th class="checkbox-column"><input type="checkbox"
-                                                        id="checkbox-assets::photo-1542718610-a1d656d1884c.jpg"
-                                                        value="assets::photo-1542718610-a1d656d1884c.jpg"></th>
-                                                <td class="">
-                                                    <div class="flex items-center w-fit-content group" id="open-modal"
-                                                        bis_skin_checked="1">
-                                                        <div class="w-8 h-8 rtl:ml-2 ltr:mr-2 cursor-pointer"
-                                                            bis_skin_checked="1"><img
-                                                                src="./Assets ‹ Assets ‹ Statamic_files/small(7)"
-                                                                loading="lazy"
-                                                                class="asset-thumbnail max-h-8 max-w-full mx-auto rounded w-8 h-8 object-cover">
-                                                        </div><label
-                                                            for="checkbox-assets::photo-1542718610-a1d656d1884c.jpg"
-                                                            class="cursor-pointer select-none group-hover:text-blue normal-nums">
-                                                            photo-1542718610-a1d656d1884c.jpg </label>
-                                                    </div>
-                                                </td>
-                                                <td class="">
-                                                    <div bis_skin_checked="1">
-                                                        <div handle="size" values="[object Object]" class=""
-                                                            bis_skin_checked="1">11 MB
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="">
-                                                    <div bis_skin_checked="1">
-                                                        <div handle="last_modified" values="[object Object]" class=""
-                                                            bis_skin_checked="1">1
-                                                            year ago</div>
-                                                    </div>
-                                                </td>
-                                                <!---->
-                                                <th class="actions-column">
-                                                    <div class="dropdown-list" bis_skin_checked="1">
-                                                        <div aria-haspopup="true" bis_skin_checked="1"><button
-                                                                aria-label="Open Dropdown"
-                                                                class="rotating-dots-button"><svg width="12"
-                                                                    viewBox="0 0 24 24"
-                                                                    class="rotating-dots fill-current">
-                                                                    <circle cx="3" cy="12" r="3">
-                                                                    </circle>
-                                                                    <circle cx="12" cy="12" r="3">
-                                                                    </circle>
-                                                                    <circle cx="21" cy="12" r="3">
-                                                                    </circle>
-                                                                </svg></button></div>
-                                                        <div class="v-portal" style="display: none;"
-                                                            bis_skin_checked="1"></div>
-                                                    </div>
-                                                </th>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <!---->
-                                <!---->
-                            </div>
-                            <div class="w-full flex mt-6" bis_skin_checked="1">
-                                <div class="flex flex-1 items-center" bis_skin_checked="1">
-                                    <!---->
-                                </div>
-                                <!---->
-                                <div class="flex flex-1" bis_skin_checked="1">
-                                    <div class="flex-1" bis_skin_checked="1"></div>
-                                    <div class="select-input-container rtl:mr-6 ltr:ml-6" bis_skin_checked="1"><select
-                                            name="perPage" class="select-input">
-                                            <option value="" disabled="disabled">Per Page</option>
-                                            <option value="10">10</option>
-                                            <option value="25">25</option>
-                                            <option value="50">50</option>
-                                            <option value="100">100</option>
-                                            <option value="500">500</option>
-                                        </select>
-                                        <div class="select-input-toggle" bis_skin_checked="1"><svg
-                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                                <path
-                                                    d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z">
-                                                </path>
-                                            </svg></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!---->
-            <!---->
         </div>
     </div>
+    <div class="min-h-screen" bis_skin_checked="1">
+        <div bis_skin_checked="1">
+            <div class="" bis_skin_checked="1"><input type="file" multiple="multiple" class="hidden">
+                <div class="min-h-screen" bis_skin_checked="1">
+                    <div class="drag-notification" style="display: none;" bis_skin_checked="1"><svg
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-12 w-12 m-4">
+                            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="1.5"
+                                d="M.752 2.251a1.5 1.5 0 0 1 1.5-1.5m0 22.5a1.5 1.5 0 0 1-1.5-1.5m22.5 0a1.5 1.5 0 0 1-1.5 1.5m0-22.5a1.5 1.5 0 0 1 1.5 1.5m0 15.75v-1.5m0-3.75v-1.5m0-3.75v-1.5m-22.5 12v-1.5m0-3.75v-1.5m0-3.75v-1.5m5.25-5.25h1.5m3.75 0h1.5m3.75 0h1.5m-12 22.5h1.5m3.75 0h1.5m3.75 0h1.5m-6-5.25v-12m4.5 4.5-4.5-4.5-4.5 4.5">
+                            </path>
+                        </svg><span>Drop File to Upload</span></div>
+                    <!---->
+                    <div class="mode-table" bis_skin_checked="1">
+                        <div class="card overflow-hidden p-0" bis_skin_checked="1">
+                            <div class="relative w-full" bis_skin_checked="1">
+                                <div class="flex items-center justify-between p-2 text-sm" bis_skin_checked="1">
+                                    <input type="text" placeholder="Search..." autofocus="autofocus"
+                                        class="input-text flex-1 bg-white text-sm focus:border-blue-300 outline-0 h-8"
+                                        data-listener-added_d1ab792c="true"><button
+                                        class="btn btn-sm rtl:mr-3 ltr:ml-3"><svg xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 24 24" class="h-4 w-4 rtl:ml-2 ltr:mr-2">
+                                            <path fill="none" stroke="currentColor" stroke-linecap="round"
+                                                stroke-linejoin="round" stroke-width="1.5"
+                                                d="M8.25 18.75H2.447M20.25 8.25v-3a1.5 1.5 0 0 0-1.5-1.5H8.25v-1.5a1.5 1.5 0 0 0-1.5-1.5h-4.5a1.5 1.5 0 0 0-1.5 1.5v14.8a1.7 1.7 0 0 0 3.336.438l2.351-8.154A1.5 1.5 0 0 1 7.879 8.25H21.75a1.5 1.5 0 0 1 1.45 1.886">
+                                            </path>
+                                            <circle cx="17.25" cy="17.25" r="6" fill="none" stroke="currentColor"
+                                                stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
+                                            </circle>
+                                            <path fill="none" stroke="currentColor" stroke-linecap="round"
+                                                stroke-linejoin="round" stroke-width="1.5" d="M17.25 14.25v6m-3-3h6">
+                                            </path>
+                                        </svg><span>Create Folder</span></button><button
+                                        class="btn btn-sm rtl:mr-3 ltr:ml-3"><svg xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 24 24" class="h-4 w-4 rtl:ml-2 ltr:mr-2 text-current">
+                                            <path fill="none" stroke="currentColor" stroke-linecap="round"
+                                                stroke-linejoin="round" stroke-width="1.5"
+                                                d="M.752 2.251a1.5 1.5 0 0 1 1.5-1.5m0 22.5a1.5 1.5 0 0 1-1.5-1.5m22.5 0a1.5 1.5 0 0 1-1.5 1.5m0-22.5a1.5 1.5 0 0 1 1.5 1.5m0 15.75v-1.5m0-3.75v-1.5m0-3.75v-1.5m-22.5 12v-1.5m0-3.75v-1.5m0-3.75v-1.5m5.25-5.25h1.5m3.75 0h1.5m3.75 0h1.5m-12 22.5h1.5m3.75 0h1.5m3.75 0h1.5m-6-5.25v-12m4.5 4.5-4.5-4.5-4.5 4.5">
+                                            </path>
+                                        </svg><span>Upload</span></button>
+                                    <div class="btn-group rtl:mr-3 ltr:ml-3" bis_skin_checked="1"><button
+                                            class="btn btn-sm"><svg xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 24 24" class="h-4 w-4">
+                                                <g fill="none" stroke="currentColor" stroke-linecap="round"
+                                                    stroke-linejoin="round" stroke-width="1.5">
+                                                    <rect width="9.75" height="9.75" x=".75" y="13.5" rx="1" ry="1">
+                                                    </rect>
+                                                    <path d="M.75 19.5h9.75"></path>
+                                                    <rect width="9.75" height="9.75" x=".75" y=".75" rx="1" ry="1">
+                                                    </rect>
+                                                    <path d="M.75 6.75h9.75"></path>
+                                                    <rect width="9.75" height="9.75" x="13.5" y=".75" rx="1" ry="1">
+                                                    </rect>
+                                                    <path d="M13.5 6.75h9.75"></path>
+                                                    <rect width="9.75" height="9.75" x="13.5" y="13.5" rx="1" ry="1">
+                                                    </rect>
+                                                    <path d="M13.5 19.5h9.75"></path>
+                                                </g>
+                                            </svg></button><button class="btn btn-sm active"><svg
+                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-4 w-4">
+                                                <path fill="none" stroke="currentColor" stroke-linecap="round"
+                                                    stroke-linejoin="round" stroke-width="1.5"
+                                                    d="M8.25 3.748h15m-15 9h15m-15 9h15"></path>
+                                                <rect width="4.5" height="4.5" x=".75" y=".748" fill="none"
+                                                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                    stroke-width="1.5" rx=".75" ry=".75">
+                                                </rect>
+                                                <rect width="4.5" height="4.5" x=".75" y="9.748" fill="none"
+                                                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                    stroke-width="1.5" rx=".75" ry=".75">
+                                                </rect>
+                                                <rect width="4.5" height="4.5" x=".75" y="18.748" fill="none"
+                                                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                    stroke-width="1.5" rx=".75" ry=".75">
+                                                </rect>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="px-4 py-2 flex flex-wrap text-sm bg-gray-200 border-t border-b shadow-inner"
+                                    bis_skin_checked="1"><a class="group flex items-center">
+                                        <!----><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                            class="rtl:ml-2 ltr:mr-2 h-5 w-5 text-blue-400 group-hover:text-blue-600">
+                                            <path fill="currentColor"
+                                                d="M24 6a1.5 1.5 0 0 0-1.5-1.5H11.74a.5.5 0 0 1-.45-.28l-.95-1.89A1.5 1.5 0 0 0 9 1.5H1.5A1.5 1.5 0 0 0 0 3v18a1.5 1.5 0 0 0 1.5 1.5h21A1.5 1.5 0 0 0 24 21Zm-7.52 7.28a.35.35 0 0 1-.32.22h-.91a.25.25 0 0 0-.25.25V17a.5.5 0 0 1-.5.5H9a.5.5 0 0 1-.5-.5v-3.25a.25.25 0 0 0-.25-.25h-.91a.35.35 0 0 1-.34-.22.33.33 0 0 1 .1-.37l4.41-3.83a.33.33 0 0 1 .44 0l4.41 3.83a.33.33 0 0 1 .12.37Z">
+                                            </path>
+                                        </svg>
+                                        <!---->
+                                    </a></div>
+                                <!---->
+                            </div>
+                            <!---->
+                            <div class="overflow-x-auto overflow-y-hidden" bis_skin_checked="1">
+                                <table data-size="sm" tabindex="0" class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th class="checkbox-column"><label for="checkerOfAllBoxes"
+                                                    class="flex items-center justify-center relative cursor-pointer"><input
+                                                        type="checkbox" id="checkerOfAllBoxes"
+                                                        class="relative top-0"></label></th>
+                                            <th class="group current-column sortable-column"><span>File</span><svg
+                                                    height="8" width="8" viewBox="0 0 10 6.5"
+                                                    class="rtl:mr-1 ltr:ml-1 opacity-0 group-hover:opacity-100 asc pointer-events-none">
+                                                    <path d="M9.9,1.4L5,6.4L0,1.4L1.4,0L5,3.5L8.5,0L9.9,1.4z"
+                                                        fill="currentColor">
+                                                    </path>
+                                                </svg></th>
+                                            <th class="group sortable-column"><span>Size</span><svg height="8" width="8"
+                                                    viewBox="0 0 10 6.5"
+                                                    class="rtl:mr-1 ltr:ml-1 opacity-0 group-hover:opacity-100 asc">
+                                                    <path d="M9.9,1.4L5,6.4L0,1.4L1.4,0L5,3.5L8.5,0L9.9,1.4z"
+                                                        fill="currentColor">
+                                                    </path>
+                                                </svg></th>
+                                            <th class="group sortable-column"><span>Last Modified</span><svg height="8"
+                                                    width="8" viewBox="0 0 10 6.5"
+                                                    class="rtl:mr-1 ltr:ml-1 opacity-0 group-hover:opacity-100 asc">
+                                                    <path d="M9.9,1.4L5,6.4L0,1.4L1.4,0L5,3.5L8.5,0L9.9,1.4z"
+                                                        fill="currentColor">
+                                                    </path>
+                                                </svg></th>
+                                            <!---->
+                                            <th class="actions-column"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody tabindex="0">
+                                        <tr class="sortable-row outline-none" tabindex="0">
+                                            <!---->
+                                            <th class="checkbox-column"><input type="checkbox"
+                                                    id="checkbox-assets::alec-favale-mzjobxoxbt0-unsplash.jpg"
+                                                    value="assets::alec-favale-mzjobxoxbt0-unsplash.jpg"></th>
+                                            <td class="">
+                                                <div class="flex items-center w-fit-content group" id="open-modal"
+                                                    bis_skin_checked="1">
+                                                    <div class="w-8 h-8 rtl:ml-2 ltr:mr-2 cursor-pointer"
+                                                        bis_skin_checked="1"><img src="{{ asset('/imgs/new.jpg') }}"
+                                                            loading="lazy"
+                                                            class="asset-thumbnail max-h-8 max-w-full mx-auto rounded w-8 h-8 object-cover">
+                                                    </div>
+                                                    <label for="checkbox-assets::alec-favale-mzjobxoxbt0-unsplash.jpg"
+                                                        class="cursor-pointer select-none group-hover:text-blue normal-nums">
+                                                        alec-favale-mzjobxoxbt0-unsplash.jpg
+                                                    </label>
+                                                </div>
+                                            </td>
+                                            <td class="">
+                                                <div bis_skin_checked="1">
+                                                    <div handle="size" values="[object Object]" class=""
+                                                        bis_skin_checked="1">2 MB</div>
+                                                </div>
+                                            </td>
+                                            <td class="">
+                                                <div bis_skin_checked="1">
+                                                    <div handle="last_modified" values="[object Object]" class=""
+                                                        bis_skin_checked="1">1
+                                                        year ago</div>
+                                                </div>
+                                            </td>
+                                            <!---->
+                                            <th class="actions-column">
+                                                <div class="dropdown-list" bis_skin_checked="1">
+                                                    <div aria-haspopup="true" bis_skin_checked="1"><button
+                                                            aria-label="Open Dropdown" class="rotating-dots-button"><svg
+                                                                width="12" viewBox="0 0 24 24"
+                                                                class="rotating-dots fill-current">
+                                                                <circle cx="3" cy="12" r="3">
+                                                                </circle>
+                                                                <circle cx="12" cy="12" r="3">
+                                                                </circle>
+                                                                <circle cx="21" cy="12" r="3">
+                                                                </circle>
+                                                            </svg></button></div>
+                                                    <div class="v-portal" style="display: none;" bis_skin_checked="1">
+                                                    </div>
+                                                </div>
+                                            </th>
+                                        </tr>
+                                        <tr class="sortable-row outline-none" tabindex="0">
+                                            <!---->
+                                            <th class="checkbox-column"><input type="checkbox"
+                                                    id="checkbox-assets::bill-jelen-nvwyn8gamck-unsplash.jpg"
+                                                    value="assets::bill-jelen-nvwyn8gamck-unsplash.jpg"></th>
+                                            <td class="">
+                                                <div class="flex items-center w-fit-content group" id="open-modal"
+                                                    bis_skin_checked="1">
+                                                    <div class="w-8 h-8 rtl:ml-2 ltr:mr-2 cursor-pointer"
+                                                        bis_skin_checked="1"><img src="{{ asset('/imgs/new.jpg') }}"
+                                                            loading="lazy"
+                                                            class="asset-thumbnail max-h-8 max-w-full mx-auto rounded w-8 h-8 object-cover">
+                                                    </div><label
+                                                        for="checkbox-assets::bill-jelen-nvwyn8gamck-unsplash.jpg"
+                                                        class="cursor-pointer select-none group-hover:text-blue normal-nums">
+                                                        bill-jelen-nvwyn8gamck-unsplash.jpg </label>
+                                                </div>
+                                            </td>
+                                            <td class="">
+                                                <div bis_skin_checked="1">
+                                                    <div handle="size" values="[object Object]" class=""
+                                                        bis_skin_checked="1">2 MB</div>
+                                                </div>
+                                            </td>
+                                            <td class="">
+                                                <div bis_skin_checked="1">
+                                                    <div handle="last_modified" values="[object Object]" class=""
+                                                        bis_skin_checked="1">1
+                                                        year ago</div>
+                                                </div>
+                                            </td>
+                                            <!---->
+                                            <th class="actions-column">
+                                                <div class="dropdown-list" bis_skin_checked="1">
+                                                    <div aria-haspopup="true" bis_skin_checked="1"><button
+                                                            aria-label="Open Dropdown" class="rotating-dots-button"><svg
+                                                                width="12" viewBox="0 0 24 24"
+                                                                class="rotating-dots fill-current">
+                                                                <circle cx="3" cy="12" r="3">
+                                                                </circle>
+                                                                <circle cx="12" cy="12" r="3">
+                                                                </circle>
+                                                                <circle cx="21" cy="12" r="3">
+                                                                </circle>
+                                                            </svg></button></div>
+                                                    <div class="v-portal" style="display: none;" bis_skin_checked="1">
+                                                    </div>
+                                                </div>
+                                            </th>
+                                        </tr>
+                                        <tr class="sortable-row outline-none" tabindex="0">
+                                            <!---->
+                                            <th class="checkbox-column"><input type="checkbox"
+                                                    id="checkbox-assets::boat.jpg" value="assets::boat.jpg"></th>
+                                            <td class="">
+                                                <div class="flex items-center w-fit-content group" id="open-modal"
+                                                    bis_skin_checked="1">
+                                                    <div class="w-8 h-8 rtl:ml-2 ltr:mr-2 cursor-pointer"
+                                                        bis_skin_checked="1"><img src="{{ asset('/imgs/new.jpg') }}"
+                                                            loading="lazy"
+                                                            class="asset-thumbnail max-h-8 max-w-full mx-auto rounded w-8 h-8 object-cover">
+                                                    </div><label for="checkbox-assets::boat.jpg"
+                                                        class="cursor-pointer select-none group-hover:text-blue normal-nums">
+                                                        boat.jpg
+                                                    </label>
+                                                </div>
+                                            </td>
+                                            <td class="">
+                                                <div bis_skin_checked="1">
+                                                    <div handle="size" values="[object Object]" class=""
+                                                        bis_skin_checked="1">318 KB
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="">
+                                                <div bis_skin_checked="1">
+                                                    <div handle="last_modified" values="[object Object]" class=""
+                                                        bis_skin_checked="1">1
+                                                        year ago</div>
+                                                </div>
+                                            </td>
+                                            <!---->
+                                            <th class="actions-column">
+                                                <div class="dropdown-list" bis_skin_checked="1">
+                                                    <div aria-haspopup="true" bis_skin_checked="1"><button
+                                                            aria-label="Open Dropdown" class="rotating-dots-button"><svg
+                                                                width="12" viewBox="0 0 24 24"
+                                                                class="rotating-dots fill-current">
+                                                                <circle cx="3" cy="12" r="3">
+                                                                </circle>
+                                                                <circle cx="12" cy="12" r="3">
+                                                                </circle>
+                                                                <circle cx="21" cy="12" r="3">
+                                                                </circle>
+                                                            </svg></button></div>
+                                                    <div class="v-portal" style="display: none;" bis_skin_checked="1">
+                                                    </div>
+                                                </div>
+                                            </th>
+                                        </tr>
+                                        <tr class="sortable-row outline-none" tabindex="0">
+                                            <!---->
+                                            <th class="checkbox-column"><input type="checkbox"
+                                                    id="checkbox-assets::burning-tracks.jpg"
+                                                    value="assets::burning-tracks.jpg"></th>
+                                            <td class="">
+                                                <div class="flex items-center w-fit-content group" id="open-modal"
+                                                    bis_skin_checked="1">
+                                                    <div class="w-8 h-8 rtl:ml-2 ltr:mr-2 cursor-pointer"
+                                                        bis_skin_checked="1"><img src="{{ asset('/imgs/new.jpg') }}"
+                                                            loading="lazy"
+                                                            class="asset-thumbnail max-h-8 max-w-full mx-auto rounded w-8 h-8 object-cover">
+                                                    </div><label for="checkbox-assets::burning-tracks.jpg"
+                                                        class="cursor-pointer select-none group-hover:text-blue normal-nums">
+                                                        burning-tracks.jpg </label>
+                                                </div>
+                                            </td>
+                                            <td class="">
+                                                <div bis_skin_checked="1">
+                                                    <div handle="size" values="[object Object]" class=""
+                                                        bis_skin_checked="1">362 KB
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="">
+                                                <div bis_skin_checked="1">
+                                                    <div handle="last_modified" values="[object Object]" class=""
+                                                        bis_skin_checked="1">1
+                                                        year ago</div>
+                                                </div>
+                                            </td>
+                                            <!---->
+                                            <th class="actions-column">
+                                                <div class="dropdown-list" bis_skin_checked="1">
+                                                    <div aria-haspopup="true" bis_skin_checked="1"><button
+                                                            aria-label="Open Dropdown" class="rotating-dots-button"><svg
+                                                                width="12" viewBox="0 0 24 24"
+                                                                class="rotating-dots fill-current">
+                                                                <circle cx="3" cy="12" r="3">
+                                                                </circle>
+                                                                <circle cx="12" cy="12" r="3">
+                                                                </circle>
+                                                                <circle cx="21" cy="12" r="3">
+                                                                </circle>
+                                                            </svg></button></div>
+                                                    <div class="v-portal" style="display: none;" bis_skin_checked="1">
+                                                    </div>
+                                                </div>
+                                            </th>
+                                        </tr>
+                                        <tr class="sortable-row outline-none" tabindex="0">
+                                            <!---->
+                                            <th class="checkbox-column"><input type="checkbox"
+                                                    id="checkbox-assets::cleanshot-2022-09-13-at-15.49.18@2x.png"
+                                                    value="assets::cleanshot-2022-09-13-at-15.49.18@2x.png"></th>
+                                            <td class="">
+                                                <div class="flex items-center w-fit-content group" id="open-modal"
+                                                    bis_skin_checked="1">
+                                                    <div class="w-8 h-8 rtl:ml-2 ltr:mr-2 cursor-pointer"
+                                                        bis_skin_checked="1"><img src="{{ asset('/imgs/new.jpg') }}"
+                                                            loading="lazy"
+                                                            class="asset-thumbnail max-h-8 max-w-full mx-auto rounded w-8 h-8 object-cover">
+                                                    </div><label
+                                                        for="checkbox-assets::cleanshot-2022-09-13-at-15.49.18@2x.png"
+                                                        class="cursor-pointer select-none group-hover:text-blue normal-nums">
+                                                        cleanshot-2022-09-13-at-15.49.18@2x.png </label>
+                                                </div>
+                                            </td>
+                                            <td class="">
+                                                <div bis_skin_checked="1">
+                                                    <div handle="size" values="[object Object]" class=""
+                                                        bis_skin_checked="1">2 MB</div>
+                                                </div>
+                                            </td>
+                                            <td class="">
+                                                <div bis_skin_checked="1">
+                                                    <div handle="last_modified" values="[object Object]" class=""
+                                                        bis_skin_checked="1">1
+                                                        year ago</div>
+                                                </div>
+                                            </td>
+                                            <!---->
+                                            <th class="actions-column">
+                                                <div class="dropdown-list" bis_skin_checked="1">
+                                                    <div aria-haspopup="true" bis_skin_checked="1"><button
+                                                            aria-label="Open Dropdown" class="rotating-dots-button"><svg
+                                                                width="12" viewBox="0 0 24 24"
+                                                                class="rotating-dots fill-current">
+                                                                <circle cx="3" cy="12" r="3">
+                                                                </circle>
+                                                                <circle cx="12" cy="12" r="3">
+                                                                </circle>
+                                                                <circle cx="21" cy="12" r="3">
+                                                                </circle>
+                                                            </svg></button></div>
+                                                    <div class="v-portal" style="display: none;" bis_skin_checked="1">
+                                                    </div>
+                                                </div>
+                                            </th>
+                                        </tr>
+                                        <tr class="sortable-row outline-none" tabindex="0">
+                                            <!---->
+                                            <th class="checkbox-column"><input type="checkbox"
+                                                    id="checkbox-assets::david.jpg" value="assets::david.jpg">
+                                            </th>
+                                            <td class="">
+                                                <div class="flex items-center w-fit-content group" id="open-modal"
+                                                    bis_skin_checked="1">
+                                                    <div class="w-8 h-8 rtl:ml-2 ltr:mr-2 cursor-pointer"
+                                                        bis_skin_checked="1"><img src="{{ asset('/imgs/new.jpg') }}"
+                                                            loading="lazy"
+                                                            class="asset-thumbnail max-h-8 max-w-full mx-auto rounded w-8 h-8 object-cover">
+                                                    </div><label for="checkbox-assets::david.jpg"
+                                                        class="cursor-pointer select-none group-hover:text-blue normal-nums">
+                                                        david.jpg
+                                                    </label>
+                                                </div>
+                                            </td>
+                                            <td class="">
+                                                <div bis_skin_checked="1">
+                                                    <div handle="size" values="[object Object]" class=""
+                                                        bis_skin_checked="1">41 KB
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="">
+                                                <div bis_skin_checked="1">
+                                                    <div handle="last_modified" values="[object Object]" class=""
+                                                        bis_skin_checked="1">1
+                                                        year ago</div>
+                                                </div>
+                                            </td>
+                                            <!---->
+                                            <th class="actions-column">
+                                                <div class="dropdown-list" bis_skin_checked="1">
+                                                    <div aria-haspopup="true" bis_skin_checked="1"><button
+                                                            aria-label="Open Dropdown" class="rotating-dots-button"><svg
+                                                                width="12" viewBox="0 0 24 24"
+                                                                class="rotating-dots fill-current">
+                                                                <circle cx="3" cy="12" r="3">
+                                                                </circle>
+                                                                <circle cx="12" cy="12" r="3">
+                                                                </circle>
+                                                                <circle cx="21" cy="12" r="3">
+                                                                </circle>
+                                                            </svg></button></div>
+                                                    <div class="v-portal" style="display: none;" bis_skin_checked="1">
+                                                    </div>
+                                                </div>
+                                            </th>
+                                        </tr>
+                                        <tr class="sortable-row outline-none" tabindex="0">
+                                            <!---->
+                                            <th class="checkbox-column"><input type="checkbox"
+                                                    id="checkbox-assets::hasnain-sikora-41nsemab1ps-unsplash.jpg"
+                                                    value="assets::hasnain-sikora-41nsemab1ps-unsplash.jpg"></th>
+                                            <td class="">
+                                                <div class="flex items-center w-fit-content group" id="open-modal"
+                                                    bis_skin_checked="1">
+                                                    <div class="w-8 h-8 rtl:ml-2 ltr:mr-2 cursor-pointer"
+                                                        bis_skin_checked="1"><img src="{{ asset('/imgs/new.jpg') }}"
+                                                            loading="lazy"
+                                                            class="asset-thumbnail max-h-8 max-w-full mx-auto rounded w-8 h-8 object-cover">
+                                                    </div><label
+                                                        for="checkbox-assets::hasnain-sikora-41nsemab1ps-unsplash.jpg"
+                                                        class="cursor-pointer select-none group-hover:text-blue normal-nums">
+                                                        hasnain-sikora-41nsemab1ps-unsplash.jpg </label>
+                                                </div>
+                                            </td>
+                                            <td class="">
+                                                <div bis_skin_checked="1">
+                                                    <div handle="size" values="[object Object]" class=""
+                                                        bis_skin_checked="1">1 MB</div>
+                                                </div>
+                                            </td>
+                                            <td class="">
+                                                <div bis_skin_checked="1">
+                                                    <div handle="last_modified" values="[object Object]" class=""
+                                                        bis_skin_checked="1">1
+                                                        year ago</div>
+                                                </div>
+                                            </td>
+                                            <!---->
+                                            <th class="actions-column">
+                                                <div class="dropdown-list" bis_skin_checked="1">
+                                                    <div aria-haspopup="true" bis_skin_checked="1"><button
+                                                            aria-label="Open Dropdown" class="rotating-dots-button"><svg
+                                                                width="12" viewBox="0 0 24 24"
+                                                                class="rotating-dots fill-current">
+                                                                <circle cx="3" cy="12" r="3">
+                                                                </circle>
+                                                                <circle cx="12" cy="12" r="3">
+                                                                </circle>
+                                                                <circle cx="21" cy="12" r="3">
+                                                                </circle>
+                                                            </svg></button></div>
+                                                    <div class="v-portal" style="display: none;" bis_skin_checked="1">
+                                                    </div>
+                                                </div>
+                                            </th>
+                                        </tr>
+                                        <tr class="sortable-row outline-none" tabindex="0">
+                                            <!---->
+                                            <th class="checkbox-column"><input type="checkbox"
+                                                    id="checkbox-assets::jack-pimped-md.jpg"
+                                                    value="assets::jack-pimped-md.jpg"></th>
+                                            <td class="">
+                                                <div class="flex items-center w-fit-content group" id="open-modal"
+                                                    bis_skin_checked="1">
+                                                    <div class="w-8 h-8 rtl:ml-2 ltr:mr-2 cursor-pointer"
+                                                        bis_skin_checked="1"><img src="{{ asset('/imgs/new.jpg') }}"
+                                                            loading="lazy"
+                                                            class="asset-thumbnail max-h-8 max-w-full mx-auto rounded w-8 h-8 object-cover">
+                                                    </div><label for="checkbox-assets::jack-pimped-md.jpg"
+                                                        class="cursor-pointer select-none group-hover:text-blue normal-nums">
+                                                        jack-pimped-md.jpg </label>
+                                                </div>
+                                            </td>
+                                            <td class="">
+                                                <div bis_skin_checked="1">
+                                                    <div handle="size" values="[object Object]" class=""
+                                                        bis_skin_checked="1">310 KB
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="">
+                                                <div bis_skin_checked="1">
+                                                    <div handle="last_modified" values="[object Object]" class=""
+                                                        bis_skin_checked="1">1
+                                                        year ago</div>
+                                                </div>
+                                            </td>
+                                            <!---->
+                                            <th class="actions-column">
+                                                <div class="dropdown-list" bis_skin_checked="1">
+                                                    <div aria-haspopup="true" bis_skin_checked="1"><button
+                                                            aria-label="Open Dropdown" class="rotating-dots-button"><svg
+                                                                width="12" viewBox="0 0 24 24"
+                                                                class="rotating-dots fill-current">
+                                                                <circle cx="3" cy="12" r="3">
+                                                                </circle>
+                                                                <circle cx="12" cy="12" r="3">
+                                                                </circle>
+                                                                <circle cx="21" cy="12" r="3">
+                                                                </circle>
+                                                            </svg></button></div>
+                                                    <div class="v-portal" style="display: none;" bis_skin_checked="1">
+                                                    </div>
+                                                </div>
+                                            </th>
+                                        </tr>
+                                        <tr class="sortable-row outline-none" tabindex="0">
+                                            <!---->
+                                            <th class="checkbox-column"><input type="checkbox"
+                                                    id="checkbox-assets::jason-leung-pslig2e_gaw-unsplash.jpg"
+                                                    value="assets::jason-leung-pslig2e_gaw-unsplash.jpg"></th>
+                                            <td class="">
+                                                <div class="flex items-center w-fit-content group" id="open-modal"
+                                                    bis_skin_checked="1">
+                                                    <div class="w-8 h-8 rtl:ml-2 ltr:mr-2 cursor-pointer"
+                                                        bis_skin_checked="1"><img src="{{ asset('/imgs/new.jpg') }}"
+                                                            loading="lazy"
+                                                            class="asset-thumbnail max-h-8 max-w-full mx-auto rounded w-8 h-8 object-cover">
+                                                    </div><label
+                                                        for="checkbox-assets::jason-leung-pslig2e_gaw-unsplash.jpg"
+                                                        class="cursor-pointer select-none group-hover:text-blue normal-nums">
+                                                        jason-leung-pslig2e_gaw-unsplash.jpg </label>
+                                                </div>
+                                            </td>
+                                            <td class="">
+                                                <div bis_skin_checked="1">
+                                                    <div handle="size" values="[object Object]" class=""
+                                                        bis_skin_checked="1">2 MB</div>
+                                                </div>
+                                            </td>
+                                            <td class="">
+                                                <div bis_skin_checked="1">
+                                                    <div handle="last_modified" values="[object Object]" class=""
+                                                        bis_skin_checked="1">1
+                                                        year ago</div>
+                                                </div>
+                                            </td>
+                                            <!---->
+                                            <th class="actions-column">
+                                                <div class="dropdown-list" bis_skin_checked="1">
+                                                    <div aria-haspopup="true" bis_skin_checked="1"><button
+                                                            aria-label="Open Dropdown" class="rotating-dots-button"><svg
+                                                                width="12" viewBox="0 0 24 24"
+                                                                class="rotating-dots fill-current">
+                                                                <circle cx="3" cy="12" r="3">
+                                                                </circle>
+                                                                <circle cx="12" cy="12" r="3">
+                                                                </circle>
+                                                                <circle cx="21" cy="12" r="3">
+                                                                </circle>
+                                                            </svg></button></div>
+                                                    <div class="v-portal" style="display: none;" bis_skin_checked="1">
+                                                    </div>
+                                                </div>
+                                            </th>
+                                        </tr>
+                                        <tr class="sortable-row outline-none" tabindex="0">
+                                            <!---->
+                                            <th class="checkbox-column"><input type="checkbox"
+                                                    id="checkbox-assets::joel-muniz-y6ct3a-rj68-unsplash.jpg"
+                                                    value="assets::joel-muniz-y6ct3a-rj68-unsplash.jpg"></th>
+                                            <td class="">
+                                                <div class="flex items-center w-fit-content group" id="open-modal"
+                                                    bis_skin_checked="1">
+                                                    <div class="w-8 h-8 rtl:ml-2 ltr:mr-2 cursor-pointer"
+                                                        bis_skin_checked="1"><img src="{{ asset('/imgs/new.jpg') }}"
+                                                            loading="lazy"
+                                                            class="asset-thumbnail max-h-8 max-w-full mx-auto rounded w-8 h-8 object-cover">
+                                                    </div><label
+                                                        for="checkbox-assets::joel-muniz-y6ct3a-rj68-unsplash.jpg"
+                                                        class="cursor-pointer select-none group-hover:text-blue normal-nums">
+                                                        joel-muniz-y6ct3a-rj68-unsplash.jpg </label>
+                                                </div>
+                                            </td>
+                                            <td class="">
+                                                <div bis_skin_checked="1">
+                                                    <div handle="size" values="[object Object]" class=""
+                                                        bis_skin_checked="1">2 MB</div>
+                                                </div>
+                                            </td>
+                                            <td class="">
+                                                <div bis_skin_checked="1">
+                                                    <div handle="last_modified" values="[object Object]" class=""
+                                                        bis_skin_checked="1">1
+                                                        year ago</div>
+                                                </div>
+                                            </td>
+                                            <!---->
+                                            <th class="actions-column">
+                                                <div class="dropdown-list" bis_skin_checked="1">
+                                                    <div aria-haspopup="true" bis_skin_checked="1"><button
+                                                            aria-label="Open Dropdown" class="rotating-dots-button"><svg
+                                                                width="12" viewBox="0 0 24 24"
+                                                                class="rotating-dots fill-current">
+                                                                <circle cx="3" cy="12" r="3">
+                                                                </circle>
+                                                                <circle cx="12" cy="12" r="3">
+                                                                </circle>
+                                                                <circle cx="21" cy="12" r="3">
+                                                                </circle>
+                                                            </svg></button></div>
+                                                    <div class="v-portal" style="display: none;" bis_skin_checked="1">
+                                                    </div>
+                                                </div>
+                                            </th>
+                                        </tr>
+                                        <tr class="sortable-row outline-none" tabindex="0">
+                                            <!---->
+                                            <th class="checkbox-column"><input type="checkbox"
+                                                    id="checkbox-assets::kira.png" value="assets::kira.png"></th>
+                                            <td class="">
+                                                <div class="flex items-center w-fit-content group" id="open-modal"
+                                                    bis_skin_checked="1">
+                                                    <div class="w-8 h-8 rtl:ml-2 ltr:mr-2 cursor-pointer"
+                                                        bis_skin_checked="1"><img src="{{ asset('/imgs/new.jpg') }}"
+                                                            loading="lazy"
+                                                            class="asset-thumbnail max-h-8 max-w-full mx-auto rounded w-8 h-8 object-cover">
+                                                    </div><label for="checkbox-assets::kira.png"
+                                                        class="cursor-pointer select-none group-hover:text-blue normal-nums">
+                                                        kira.png
+                                                    </label>
+                                                </div>
+                                            </td>
+                                            <td class="">
+                                                <div bis_skin_checked="1">
+                                                    <div handle="size" values="[object Object]" class=""
+                                                        bis_skin_checked="1">1 MB</div>
+                                                </div>
+                                            </td>
+                                            <td class="">
+                                                <div bis_skin_checked="1">
+                                                    <div handle="last_modified" values="[object Object]" class=""
+                                                        bis_skin_checked="1">1
+                                                        year ago</div>
+                                                </div>
+                                            </td>
+                                            <!---->
+                                            <th class="actions-column">
+                                                <div class="dropdown-list" bis_skin_checked="1">
+                                                    <div aria-haspopup="true" bis_skin_checked="1"><button
+                                                            aria-label="Open Dropdown" class="rotating-dots-button"><svg
+                                                                width="12" viewBox="0 0 24 24"
+                                                                class="rotating-dots fill-current">
+                                                                <circle cx="3" cy="12" r="3">
+                                                                </circle>
+                                                                <circle cx="12" cy="12" r="3">
+                                                                </circle>
+                                                                <circle cx="21" cy="12" r="3">
+                                                                </circle>
+                                                            </svg></button></div>
+                                                    <div class="v-portal" style="display: none;" bis_skin_checked="1">
+                                                    </div>
+                                                </div>
+                                            </th>
+                                        </tr>
+                                        <tr class="sortable-row outline-none" tabindex="0">
+                                            <!---->
+                                            <th class="checkbox-column"><input type="checkbox"
+                                                    id="checkbox-assets::photo-1454779132693-e5cd0a216ed3.jpg"
+                                                    value="assets::photo-1454779132693-e5cd0a216ed3.jpg"></th>
+                                            <td class="">
+                                                <div class="flex items-center w-fit-content group" id="open-modal"
+                                                    bis_skin_checked="1">
+                                                    <div class="w-8 h-8 rtl:ml-2 ltr:mr-2 cursor-pointer"
+                                                        bis_skin_checked="1"><img src="{{ asset('/imgs/new.jpg') }}"
+                                                            loading="lazy"
+                                                            class="asset-thumbnail max-h-8 max-w-full mx-auto rounded w-8 h-8 object-cover">
+                                                    </div><label
+                                                        for="checkbox-assets::photo-1454779132693-e5cd0a216ed3.jpg"
+                                                        class="cursor-pointer select-none group-hover:text-blue normal-nums">
+                                                        photo-1454779132693-e5cd0a216ed3.jpg </label>
+                                                </div>
+                                            </td>
+                                            <td class="">
+                                                <div bis_skin_checked="1">
+                                                    <div handle="size" values="[object Object]" class=""
+                                                        bis_skin_checked="1">5 MB</div>
+                                                </div>
+                                            </td>
+                                            <td class="">
+                                                <div bis_skin_checked="1">
+                                                    <div handle="last_modified" values="[object Object]" class=""
+                                                        bis_skin_checked="1">1
+                                                        year ago</div>
+                                                </div>
+                                            </td>
+                                            <!---->
+                                            <th class="actions-column">
+                                                <div class="dropdown-list" bis_skin_checked="1">
+                                                    <div aria-haspopup="true" bis_skin_checked="1"><button
+                                                            aria-label="Open Dropdown" class="rotating-dots-button"><svg
+                                                                width="12" viewBox="0 0 24 24"
+                                                                class="rotating-dots fill-current">
+                                                                <circle cx="3" cy="12" r="3">
+                                                                </circle>
+                                                                <circle cx="12" cy="12" r="3">
+                                                                </circle>
+                                                                <circle cx="21" cy="12" r="3">
+                                                                </circle>
+                                                            </svg></button></div>
+                                                    <div class="v-portal" style="display: none;" bis_skin_checked="1">
+                                                    </div>
+                                                </div>
+                                            </th>
+                                        </tr>
+                                        <tr class="sortable-row outline-none" tabindex="0">
+                                            <!---->
+                                            <th class="checkbox-column"><input type="checkbox"
+                                                    id="checkbox-assets::photo-1542718610-a1d656d1884c.jpg"
+                                                    value="assets::photo-1542718610-a1d656d1884c.jpg"></th>
+                                            <td class="">
+                                                <div class="flex items-center w-fit-content group" id="open-modal"
+                                                    bis_skin_checked="1">
+                                                    <div class="w-8 h-8 rtl:ml-2 ltr:mr-2 cursor-pointer"
+                                                        bis_skin_checked="1"><img src="{{ asset('/imgs/new.jpg') }}"
+                                                            loading="lazy"
+                                                            class="asset-thumbnail max-h-8 max-w-full mx-auto rounded w-8 h-8 object-cover">
+                                                    </div><label
+                                                        for="checkbox-assets::photo-1542718610-a1d656d1884c.jpg"
+                                                        class="cursor-pointer select-none group-hover:text-blue normal-nums">
+                                                        photo-1542718610-a1d656d1884c.jpg </label>
+                                                </div>
+                                            </td>
+                                            <td class="">
+                                                <div bis_skin_checked="1">
+                                                    <div handle="size" values="[object Object]" class=""
+                                                        bis_skin_checked="1">11 MB
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="">
+                                                <div bis_skin_checked="1">
+                                                    <div handle="last_modified" values="[object Object]" class=""
+                                                        bis_skin_checked="1">1
+                                                        year ago</div>
+                                                </div>
+                                            </td>
+                                            <!---->
+                                            <th class="actions-column">
+                                                <div class="dropdown-list" bis_skin_checked="1">
+                                                    <div aria-haspopup="true" bis_skin_checked="1"><button
+                                                            aria-label="Open Dropdown" class="rotating-dots-button"><svg
+                                                                width="12" viewBox="0 0 24 24"
+                                                                class="rotating-dots fill-current">
+                                                                <circle cx="3" cy="12" r="3">
+                                                                </circle>
+                                                                <circle cx="12" cy="12" r="3">
+                                                                </circle>
+                                                                <circle cx="21" cy="12" r="3">
+                                                                </circle>
+                                                            </svg></button></div>
+                                                    <div class="v-portal" style="display: none;" bis_skin_checked="1">
+                                                    </div>
+                                                </div>
+                                            </th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!---->
+                            <!---->
+                        </div>
+                        <div class="w-full flex mt-6" bis_skin_checked="1">
+                            <div class="flex flex-1 items-center" bis_skin_checked="1">
+                                <!---->
+                            </div>
+                            <!---->
+                            <div class="flex flex-1" bis_skin_checked="1">
+                                <div class="flex-1" bis_skin_checked="1"></div>
+                                <div class="select-input-container rtl:mr-6 ltr:ml-6" bis_skin_checked="1"><select
+                                        name="perPage" class="select-input">
+                                        <option value="" disabled="disabled">Per Page</option>
+                                        <option value="10">10</option>
+                                        <option value="25">25</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                        <option value="500">500</option>
+                                    </select>
+                                    <div class="select-input-toggle" bis_skin_checked="1"><svg
+                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                            <path
+                                                d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z">
+                                            </path>
+                                        </svg></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!---->
+        <!---->
+    </div>
+</div>
 </div>
 <script type="module" src="{{ asset('js/asset-index-js.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/jquery.min.js') }}"></script>
+<script type="text/javascript">
+    (function($) {
+
+        var defaults = {
+            reCalcOnWindowResize: true,
+            throttleDuration: 17 //ms - set to 0 to disable throttling
+        };
+
+        //Setup a container instance
+        var setupContainer = function($el) {
+            var imageSrc = $el.find('img').attr('src');
+            $el.data('imageSrc', imageSrc);
+
+            resolveImageSize(imageSrc, function(err, dim) {
+                $el.data({
+                    imageW: dim.width,
+                    imageH: dim.height
+                });
+                adjustFocus($el);
+            });
+        };
+
+        //Get the width and the height of an image
+        //by creating a new temporary image
+        var resolveImageSize = function(src, cb) {
+            //Create a new image and set a
+            //handler which listens to the first
+            //call of the 'load' event.
+            $('<img />').one('load', function() {
+                //'this' references to the new
+                //created image
+                cb(null, {
+                    width: this.width,
+                    height: this.height
+                });
+            }).attr('src', src);
+        };
+
+        //Create a throttled version of a function
+        var throttle = function(fn, ms) {
+            var isRunning = false;
+            return function() {
+                var args = Array.prototype.slice.call(arguments, 0);
+                if (isRunning) return false;
+                isRunning = true;
+                setTimeout(function() {
+                    isRunning = false;
+                    fn.apply(null, args);
+                }, ms);
+            };
+        };
+
+        //Calculate the new left/top values of an image
+        var calcShift = function(conToImageRatio, containerSize, imageSize, focusSize, toMinus) {
+            var containerCenter = Math.floor(containerSize / 2); //Container center in px
+            var focusFactor = (focusSize + 1) / 2; //Focus point of resize image in px
+            var scaledImage = Math.floor(imageSize /
+                conToImageRatio); //Can't use width() as images may be display:none
+            var focus = Math.floor(focusFactor * scaledImage);
+            if (toMinus) focus = scaledImage - focus;
+            var focusOffset = focus - containerCenter; //Calculate difference between focus point and center
+            var remainder = scaledImage - focus; //Reduce offset if necessary so image remains filled
+            var containerRemainder = containerSize - containerCenter;
+            if (remainder < containerRemainder) focusOffset -= containerRemainder - remainder;
+            if (focusOffset < 0) focusOffset = 0;
+
+            return (focusOffset * -100 / containerSize) + '%';
+        };
+
+        //Re-adjust the focus
+        var adjustFocus = function($el) {
+            var imageW = $el.data('imageW');
+            var imageH = $el.data('imageH');
+            var imageSrc = $el.data('imageSrc');
+
+            if (!imageW && !imageH && !imageSrc) {
+                return setupContainer($el); //Setup the container first
+            }
+
+            var containerW = $el.width();
+            var containerH = $el.height();
+            var focusX = parseFloat($el.data('focusX'));
+            var focusY = parseFloat($el.data('focusY'));
+            var $image = $el.find('img').first();
+
+            //Amount position will be shifted
+            var hShift = 0;
+            var vShift = 0;
+
+            if (!(containerW > 0 && containerH > 0 && imageW > 0 && imageH > 0)) {
+                return false; //Need dimensions to proceed
+            }
+
+            //Which is over by more?
+            var wR = imageW / containerW;
+            var hR = imageH / containerH;
+
+            //Reset max-width and -height
+            $image.css({
+                'max-width': '',
+                'max-height': ''
+            });
+
+            //Minimize image while still filling space
+            if (imageW > containerW && imageH > containerH) {
+                $image.css((wR > hR) ? 'max-height' : 'max-width', '100%');
+            }
+
+            if (wR > hR) {
+                hShift = calcShift(hR, containerW, imageW, focusX);
+            } else if (wR < hR) {
+                vShift = calcShift(wR, containerH, imageH, focusY, true);
+            }
+
+            $image.css({
+                top: vShift,
+                left: hShift
+            });
+        };
+
+        var $window = $(window);
+
+        var focusPoint = function($el, settings) {
+            var thrAdjustFocus = settings.throttleDuration ?
+                throttle(function() {
+                    adjustFocus($el);
+                }, settings.throttleDuration) :
+                function() {
+                    adjustFocus($el);
+                }; //Only throttle when desired
+            var isListening = false;
+
+            adjustFocus($el); //Focus image in container
+
+            //Expose a public API
+            return {
+
+                adjustFocus: function() {
+                    return adjustFocus($el);
+                },
+
+                windowOn: function() {
+                    if (isListening) return;
+                    //Recalculate each time the window is resized
+                    $window.on('resize', thrAdjustFocus);
+                    return isListening = true;
+                },
+
+                windowOff: function() {
+                    if (!isListening) return;
+                    //Stop listening to the resize event
+                    $window.off('resize', thrAdjustFocus);
+                    isListening = false;
+                    return true;
+                }
+
+            };
+        };
+
+        $.fn.focusPoint = function(optionsOrMethod) {
+            //Shortcut to functions - if string passed assume method name and execute
+            if (typeof optionsOrMethod === 'string') {
+                return this.each(function() {
+                    var $el = $(this);
+                    $el.data('focusPoint')[optionsOrMethod]();
+                });
+            }
+            //Otherwise assume options being passed and setup
+            var settings = $.extend({}, defaults, optionsOrMethod);
+            return this.each(function() {
+                var $el = $(this);
+                var fp = focusPoint($el, settings);
+                //Stop the resize event of any previous attached
+                //focusPoint instances
+                if ($el.data('focusPoint')) $el.data('focusPoint').windowOff();
+                $el.data('focusPoint', fp);
+                if (settings.reCalcOnWindowResize) fp.windowOn();
+            });
+
+        };
+
+        $.fn.adjustFocus = function() {
+            //Deprecated v1.2
+            return this.each(function() {
+                adjustFocus($(this));
+            });
+        };
+
+    })(jQuery);
+
+    // Gets focus point coordinates from an image - adapt to suit your needs.
+
+    (function($) {
+        $(document).ready(function() {
+
+            var defaultImage;
+            var $dataAttrInput;
+            var $cssAttrInput;
+            var $focusPointContainers;
+            var $focusPointImages;
+            var $helperToolImage;
+
+            //This stores focusPoint's data-attribute values
+            var focusPointAttr = {
+                x: 0,
+                y: 0,
+                w: 0,
+                h: 0
+            };
+
+            //Initialize Helper Tool
+            (function() {
+
+                //Initialize Variables
+                defaultImage = "{{ asset('imgs/new.jpg') }}";
+                $dataAttrInput = $('.helper-tool-data-attr');
+                $cssAttrInput = $('.helper-tool-css3-val');
+                $helperToolImage = $('img.helper-tool-img, img.target-overlay');
+
+                //Create Grid Elements
+                for (var i = 1; i < 10; i++) {
+                    $('#Frames').append('<div id="Frame' + i + '" class="focuspoint"><img/></div>');
+                }
+                //Store focus point containers
+                $focusPointContainers = $('.focuspoint');
+                $focusPointImages = $('.focuspoint img');
+
+                //Set the default source image
+                setImage(defaultImage);
+
+            })();
+
+            /*-----------------------------------------*/
+
+            // function setImage(<URL>)
+            // Set a new image to use in the demo, requires URI to an image
+
+            /*-----------------------------------------*/
+
+            function setImage(imgURL) {
+                //Get the dimensions of the image by referencing an image stored in memory
+                $("<img/>")
+                    .attr("src", imgURL)
+                    .load(function() {
+                        focusPointAttr.w = this.width;
+                        focusPointAttr.h = this.height;
+
+                        //Set src on the thumbnail used in the GUI
+                        $helperToolImage.attr('src', imgURL);
+
+                        //Set src on all .focuspoint images
+                        $focusPointImages.attr('src', imgURL);
+
+                        //Set up initial properties of .focuspoint containers
+
+                        /*-----------------------------------------*/
+                        // Note ---
+                        // Setting these up with attr doesn't really make a difference
+                        // added to demo only so changes are made visually in the dom 
+                        // for users inspecting it. Because of how FocusPoint uses .data()
+                        // only the .data() assignments that follow are necessary.
+                        /*-----------------------------------------*/
+                        $focusPointContainers.attr({
+                            'data-focus-x': focusPointAttr.x,
+                            'data-focus-y': focusPointAttr.y,
+                            'data-image-w': focusPointAttr.w,
+                            'data-image-h': focusPointAttr.h
+                        });
+
+                        /*-----------------------------------------*/
+                        // These assignments using .data() are what counts.
+                        /*-----------------------------------------*/
+                        $focusPointContainers.data('focusX', focusPointAttr.x);
+                        $focusPointContainers.data('focusY', focusPointAttr.y);
+                        $focusPointContainers.data('imageW', focusPointAttr.w);
+                        $focusPointContainers.data('imageH', focusPointAttr.h);
+
+                        //Run FocusPoint for the first time.
+                        $('.focuspoint').focusPoint();
+
+                        //Update the data attributes shown to the user
+                        printDataAttr();
+
+                    });
+            }
+
+            /*-----------------------------------------*/
+
+            // Update the data attributes shown to the user
+
+            /*-----------------------------------------*/
+
+            function printDataAttr() {
+                $dataAttrInput.val('data-focus-x="' + focusPointAttr.x.toFixed(2) + '" data-focus-y="' +
+                    focusPointAttr.y.toFixed(2) + '" data-image-w="' + focusPointAttr.w +
+                    '" data-image-h="' + focusPointAttr.h + '"');
+            }
+
+            /*-----------------------------------------*/
+
+            // Bind to helper image click event
+            // Adjust focus on Click / provides focuspoint and CSS3 properties
+
+            /*-----------------------------------------*/
+
+            $helperToolImage.click(function(e) {
+
+                var imageW = $(this).width();
+                var imageH = $(this).height();
+
+                //Calculate FocusPoint coordinates
+                var offsetX = e.pageX - $(this).offset().left;
+                var offsetY = e.pageY - $(this).offset().top;
+                var focusX = (offsetX / imageW - .5) * 2;
+                var focusY = (offsetY / imageH - .5) * -2;
+                focusPointAttr.x = focusX;
+                focusPointAttr.y = focusY;
+
+                //Write values to input
+                printDataAttr();
+
+                //Update focus point
+                updateFocusPoint();
+
+                //Calculate CSS Percentages
+                var percentageX = (offsetX / imageW) * 100;
+                var percentageY = (offsetY / imageH) * 100;
+                var backgroundPosition = percentageX.toFixed(0) + '% ' + percentageY.toFixed(0) + '%';
+                var backgroundPositionCSS = 'background-position: ' + backgroundPosition + ';';
+                $cssAttrInput.val(backgroundPositionCSS);
+
+                //Leave a sweet target reticle at the focus point.
+                $('.reticle').css({
+                    'top': percentageY + '%',
+                    'left': percentageX + '%'
+                });
+            });
+
+            /*-----------------------------------------*/
+
+            // Change image on paste/blur
+            // When you paste an image into the specified input, it will be used for the demo
+
+            /*-----------------------------------------*/
+
+            $('input.helper-tool-set-src').on('paste blur', function(e) {
+                var element = this;
+                setTimeout(function() {
+                    var text = $(element).val();
+                    setImage(text);
+                }, 100);
+            });
+
+            /*-----------------------------------------*/
+
+            /* Update Helper */
+            // This function is used to update the focuspoint 
+
+            /*-----------------------------------------*/
+
+            function updateFocusPoint() {
+                /*-----------------------------------------*/
+                // See note in setImage() function regarding these attribute assignments.
+                //TLDR - You don't need them for this to work.
+                /*-----------------------------------------*/
+                $focusPointContainers.attr({
+                    'data-focus-x': focusPointAttr.x,
+                    'data-focus-y': focusPointAttr.y
+                });
+                /*-----------------------------------------*/
+                // These you DO need :)
+                /*-----------------------------------------*/
+                $focusPointContainers.data('focusX', focusPointAttr.x);
+                $focusPointContainers.data('focusY', focusPointAttr.y);
+                $focusPointContainers.adjustFocus();
+            };
+        });
+    }(jQuery));
+</script>
 @endsection

@@ -100,3 +100,5 @@ function handleFiles(files) {
         fileInfo.classList.remove('hidden');
     }
 }
+
+// focal point on image js
