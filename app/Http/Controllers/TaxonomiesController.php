@@ -3,13 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-use App\Models\{
-    Taxonomies,
-    Collections,
-    Collection_taxonomy
-};
-use Illuminate\Support\Facades\Validator;
+use App\Models\{Taxonomies, Collections, Collection_taxonomy};
 
 class TaxonomiesController extends Controller
 {
@@ -45,19 +39,17 @@ class TaxonomiesController extends Controller
             'title' => 'required|string|max:255',
             'handle' => 'required|string|max:255',
         ];
-        $validator = Validator::make($request->all(), $rules);
 
-        if ($validator->fails()) : return redirect()->back()->withErrors($validator)->withInput();
-        endif;
+        $validatedData = $request->validate($rules);
 
-        $data=[            
-            'collections' => [null] ,
+        $data = [
+            'collections' => [null],
         ];
         $jsonData =  json_encode($data);
         $taxonomy = new Taxonomies();
         $taxonomy = [
-            'title' => $request->input('title'),
-            'handle' => $request->input('handle'),
+            'title' => $validatedData['title'],
+            'handle' => $validatedData['handle'],
             'settings' => $jsonData
         ];
         Taxonomies::insert($taxonomy);

@@ -2,13 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{
-    User,
-    Role
-};
-use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use App\Models\{User, Role};
 
 class UsersController extends Controller
 {
@@ -18,7 +13,7 @@ class UsersController extends Controller
     public function index()
     {
         $usersInfo = user::with('roles')->get();
-        $currentTime = Carbon::now();
+        $currentTime = getCurrentTime();
 
         return view('users.index', compact('usersInfo', 'currentTime'));
     }

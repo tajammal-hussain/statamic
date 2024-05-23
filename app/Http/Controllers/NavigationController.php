@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Navigations;
-use App\Models\Collections;
+use App\Models\{Navigations, Collections};
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class NavigationController extends Controller
 {

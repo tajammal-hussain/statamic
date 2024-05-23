@@ -2,20 +2,6 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{
-    AuthController,
-    DashboardController,
-    CollectionController,
-    EntriesController,
-    NavigationController,
-    TaxonomiesController,
-    TermsController,
-    AssetsController,
-    GlobalsController,
-    FieldsetsController,
-    FormsController,
-    UsersController,
-};
 
 // Breeze authentication routes
 Route::middleware(['auth', 'verified'])->group(function () {

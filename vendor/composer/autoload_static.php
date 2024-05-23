@@ -205,6 +205,7 @@ class ComposerStaticInit95e77f1b16aed544863359dece2acb86
         ),
         'A' => 
         array (
+            'App\\Models\\' => 11,
             'App\\' => 4,
         ),
     );
@@ -613,6 +614,10 @@ class ComposerStaticInit95e77f1b16aed544863359dece2acb86
         array (
             0 => __DIR__ . '/..' . '/brick/math/src',
         ),
+        'App\\Models\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/app/Models',
+        ),
         'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app',
@@ -624,23 +629,28 @@ class ComposerStaticInit95e77f1b16aed544863359dece2acb86
         'App\\Http\\Controllers\\AssetsController' => __DIR__ . '/../..' . '/app/Http/Controllers/AssetsController.php',
         'App\\Http\\Controllers\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/AuthController.php',
         'App\\Http\\Controllers\\Auth\\VerifyEmailController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/VerifyEmailController.php',
-        'App\\Http\\Controllers\\CollectionsController' => __DIR__ . '/../..' . '/app/Http/Controllers/CollectionsController.php',
+        'App\\Http\\Controllers\\CollectionController' => __DIR__ . '/../..' . '/app/Http/Controllers/CollectionController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\DashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/DashboardController.php',
+        'App\\Http\\Controllers\\EntriesController' => __DIR__ . '/../..' . '/app/Http/Controllers/EntriesController.php',
         'App\\Http\\Controllers\\FieldsetsController' => __DIR__ . '/../..' . '/app/Http/Controllers/FieldsetsController.php',
         'App\\Http\\Controllers\\FormsController' => __DIR__ . '/../..' . '/app/Http/Controllers/FormsController.php',
         'App\\Http\\Controllers\\GlobalsController' => __DIR__ . '/../..' . '/app/Http/Controllers/GlobalsController.php',
         'App\\Http\\Controllers\\NavigationController' => __DIR__ . '/../..' . '/app/Http/Controllers/NavigationController.php',
         'App\\Http\\Controllers\\TaxonomiesController' => __DIR__ . '/../..' . '/app/Http/Controllers/TaxonomiesController.php',
+        'App\\Http\\Controllers\\TermsController' => __DIR__ . '/../..' . '/app/Http/Controllers/TermsController.php',
         'App\\Http\\Controllers\\UsersController' => __DIR__ . '/../..' . '/app/Http/Controllers/UsersController.php',
         'App\\Livewire\\Actions\\Logout' => __DIR__ . '/../..' . '/app/Livewire/Actions/Logout.php',
         'App\\Livewire\\Forms\\LoginForm' => __DIR__ . '/../..' . '/app/Livewire/Forms/LoginForm.php',
+        'App\\Models\\Collection_taxonomy' => __DIR__ . '/../..' . '/app/Models/Collection_taxonomy.php',
         'App\\Models\\Collections' => __DIR__ . '/../..' . '/app/Models/Collections.php',
         'App\\Models\\Entries' => __DIR__ . '/../..' . '/app/Models/Entries.php',
+        'App\\Models\\Fieldsets' => __DIR__ . '/../..' . '/app/Models/Fieldsets.php',
         'App\\Models\\FormSubmission' => __DIR__ . '/../..' . '/app/Models/FormSubmission.php',
         'App\\Models\\Forms' => __DIR__ . '/../..' . '/app/Models/Forms.php',
         'App\\Models\\Globals' => __DIR__ . '/../..' . '/app/Models/Globals.php',
         'App\\Models\\Navigations' => __DIR__ . '/../..' . '/app/Models/Navigations.php',
+        'App\\Models\\Role' => __DIR__ . '/../..' . '/app/Models/Role.php',
         'App\\Models\\SidebarContent' => __DIR__ . '/../..' . '/app/Models/SidebarContent.php',
         'App\\Models\\Taxonomies' => __DIR__ . '/../..' . '/app/Models/Taxonomies.php',
         'App\\Models\\TaxonomyTerms' => __DIR__ . '/../..' . '/app/Models/TaxonomyTerms.php',
@@ -654,6 +664,8 @@ class ComposerStaticInit95e77f1b16aed544863359dece2acb86
         'App\\View\\Components\\dashboardLogo' => __DIR__ . '/../..' . '/app/View/Components/dashboardLogo.php',
         'App\\View\\Components\\dashboardSearchbar' => __DIR__ . '/../..' . '/app/View/Components/dashboardSearchbar.php',
         'App\\View\\Components\\dashboardUtilityNavigation' => __DIR__ . '/../..' . '/app/View/Components/dashboardUtilityNavigation.php',
+        'App\\View\\Components\\fieldset-Offcanvas' => __DIR__ . '/../..' . '/app/View/Components/fieldset-Offcanvas.php',
+        'App\\View\\Components\\navigation-Offcanvas' => __DIR__ . '/../..' . '/app/View/Components/navigation-Offcanvas.php',
         'App\\View\\Components\\tableHead' => __DIR__ . '/../..' . '/app/View/Components/tableHead.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Brick\\Math\\BigDecimal' => __DIR__ . '/..' . '/brick/math/src/BigDecimal.php',
@@ -782,6 +794,8 @@ class ComposerStaticInit95e77f1b16aed544863359dece2acb86
         'Database\\Seeders\\RoleSeeder' => __DIR__ . '/../..' . '/database/seeders/RoleSeeder.php',
         'Database\\Seeders\\SidebarSeeder' => __DIR__ . '/../..' . '/database/seeders/SidebarSeeder.php',
         'Database\\Seeders\\SuperadminSeeder' => __DIR__ . '/../..' . '/database/seeders/SuperadminSeeder.php',
+        'Database\\Seeders\\TaxonomySeeder' => __DIR__ . '/../..' . '/database/seeders/TaxonomySeeder.php',
+        'Database\\Seeders\\TaxonomyTermsSeeder' => __DIR__ . '/../..' . '/database/seeders/TaxonomyTermsSeeder.php',
         'Database\\Seeders\\UsersSeeder' => __DIR__ . '/../..' . '/database/seeders/UsersSeeder.php',
         'DateError' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateError.php',
         'DateException' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateException.php',

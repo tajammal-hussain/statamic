@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Globals;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class GlobalsController extends Controller
 {
@@ -46,11 +45,7 @@ class GlobalsController extends Controller
             'title' => 'required|string|max:255',
             'handle' => 'required|string|max:255',
         ];
-        $validator = Validator::make($request->all(), $rules);
-
-        if ($validator->fails()) :
-            return redirect()->back()->withErrors($validator)->withInput();
-        endif;
+        $validatedData = $request->validate($rules);
 
         $entryData = ['tagline' => null];
         $jsonData = json_encode($entryData);
@@ -58,8 +53,8 @@ class GlobalsController extends Controller
         // Save data to the database
         $globals = [
             'settings' => $jsonData,
-            'title' => $request->input('title'),
-            'handle' => $request->input('handle'),
+            'title' => $validatedData['title'],
+            'handle' => $validatedData['handle'],
         ];
         Globals::insert($globals);
 

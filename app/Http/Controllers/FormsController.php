@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Forms;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class FormsController extends Controller
 {

@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\TaxonomyTerms;
-use App\Models\Collections;
-use App\Models\Taxonomies;
-
+use App\Models\{TaxonomyTerms, Collections, Taxonomies};
 use Illuminate\Http\Request;
 
 class TermsController extends Controller
