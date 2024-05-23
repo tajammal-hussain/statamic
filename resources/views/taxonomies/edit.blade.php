@@ -1,3 +1,8 @@
+@php
+    $settings = json_decode($taxonomy->settings, true);
+    $selectedcollection = explode(',', $settings['collections'][0]);
+    $savedcollectionJson = json_encode($selectedcollection);
+@endphp
 @extends('layouts.main')
 
 @section('title', 'Edit Taxonomy')
@@ -134,7 +139,7 @@
                                                         @endforeach
                                                     </select>
 
-                                                    <div x-data="dropdown()" x-init="loadOptions()" class="w-full">
+                                                    <div x-data="dropdown({{$savedcollectionJson}})" x-init="loadOptions()" class="w-full">
                                                         <form>
                                                             <input name="collections" type="hidden"
                                                                 x-bind:value="selectedValues()">
@@ -439,59 +444,61 @@
         <script type="module" src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
 
         <script>
-            function dropdown() {
-                return {
-                    options: [],
-                    selected: [],
-                    show: false,
-                    open() {
-                        this.show = true
-                    },
-                    close() {
-                        this.show = false
-                    },
-                    isOpen() {
-                        return this.show === true
-                    },
-                    select(index, event) {
-
-                        if (!this.options[index].selected) {
-
-                            this.options[index].selected = true;
-                            this.options[index].element = event.target;
-                            this.selected.push(index);
-
-                        } else {
-                            this.selected.splice(this.selected.lastIndexOf(index), 1);
-                            this.options[index].selected = false
-                        }
-                    },
-                    remove(index, option) {
-                        this.options[option].selected = false;
-                        this.selected.splice(index, 1);
-
-
-                    },
-                    loadOptions() {
-                        const options = document.getElementById('select').options;
-                        for (let i = 0; i < options.length; i++) {
-                            this.options.push({
-                                value: options[i].value,
-                                text: options[i].innerText,
-                                selected: options[i].getAttribute('selected') != null ? options[i].getAttribute(
-                                    'selected') : false
-                            });
-                        }
-
-
-                    },
-                    selectedValues() {
-                        return this.selected.map((option) => {
-                            return this.options[option].value;
-                        })
-                    }
-                }
+            function dropdown(defaultValues = []) {
+    return {
+        options: [],
+        selected: [],
+        show: false,
+        open() {
+            this.show = true;
+        },
+        close() {
+            this.show = false;
+        },
+        isOpen() {
+            return this.show === true;
+        },
+        select(index, event) {
+            if (!this.options[index].selected) {
+                this.options[index].selected = true;
+                this.options[index].element = event.target;
+                this.selected.push(index);
+            } else {
+                this.selected.splice(this.selected.lastIndexOf(index), 1);
+                this.options[index].selected = false;
             }
+        },
+        remove(index, option) {
+            this.options[option].selected = false;
+            this.selected.splice(index, 1);
+        },
+        loadOptions() {
+            const options = document.getElementById('select').options;
+            for (let i = 0; i < options.length; i++) {
+                this.options.push({
+                    value: options[i].value,
+                    text: options[i].innerText,
+                    selected: options[i].getAttribute('selected') != null
+                });
+            }
+
+            // Handle default values
+            const defaultValuesArray = defaultValues;
+            defaultValuesArray.forEach((value) => {
+                const optionIndex = this.options.findIndex(option => option.value === value.trim());
+                if (optionIndex !== -1) {
+                    this.options[optionIndex].selected = true;
+                    this.selected.push(optionIndex);
+                }
+            });
+        },
+        selectedValues() {
+            return this.selected.map((option) => {
+                return this.options[option].value;
+            });
+        }
+    };
+}
         </script>
 
     @endsection
