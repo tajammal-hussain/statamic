@@ -16,7 +16,8 @@ class TaxonomySeeder extends Seeder
         Taxonomies::create([
             'handle' => 'testinf-taxonomies',
             'title' => 'Tessting taxonomies',
-            'settings' => '{"title":"testinf taxonomies","content":"this is for testing tzxonomies","updated_by":1,"updated_at":1715082553,"blueprint":"taxonomy_checking"}',
+            // 'settings' => '{"title":"testinf taxonomies","content":"this is for testing tzxonomies","updated_by":1,"updated_at":1715082553,"blueprint":"taxonomy_checking"}',
+            'settings' => '{"collections":["null"]}',
         ]);
     }
 }
