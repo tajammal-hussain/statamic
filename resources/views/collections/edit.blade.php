@@ -14,8 +14,8 @@
     $orderStatus = isset($settings['orderable']) ? $settings['orderable'] : false;
 
     // Decode the saved taxonomies from the settings column
-    $savedTaxonomies = $settings['taxonomies'] ?? [];
-    $savedTaxonomiesJson = json_encode($savedTaxonomies);
+    $selectedTaxonomies = explode(',', $settings['taxonomies']);
+    $savedTaxonomiesJson = json_encode($selectedTaxonomies);
     
 
 @endphp
