@@ -7,7 +7,7 @@
         <div>
             <header class="mb-6">
                 <div class="breadcrumb flex">
-                    <a href="http://127.0.0.1:8000/cp/globals"
+                    <a href="{{route('globals.index')}}"
                         class="flex-initial flex p-2 -m-2 items-center text-xs text-gray-700 hover:text-gray-900">
                         <svg viewBox="0 0 24 24" class="align-middle h-6 w-4 rotate-180">
                             <path fill="currentColor" fill-rule="evenodd"

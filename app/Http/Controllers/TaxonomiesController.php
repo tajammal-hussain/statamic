@@ -55,7 +55,14 @@ class TaxonomiesController extends Controller
         Taxonomies::insert($taxonomy);
 
         // Redirect back with success message
-        return redirect()->back()->with('success', 'Collection created successfully.');
+        return redirect()->route('taxonomies.show',  $validatedData['handle']);
+    }
+
+
+    public function show(string $handle)
+    {
+        $taxonomy = Taxonomies::where(['handle' => $handle])->firstOrFail();
+        return view('taxonomies.config', compact('taxonomy'));
     }
 
     /**

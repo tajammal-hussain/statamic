@@ -49,7 +49,7 @@ class CollectionController extends Controller
             'entry_link' => 0,
             'sort_dir' => "Ascending",
             'orderable' => 0,
-            'taxnomies' => null
+            'taxonomies' => null
         ];
 
         $jsonData = json_encode($data);
@@ -63,7 +63,14 @@ class CollectionController extends Controller
         Collections::insert($collection);
 
         // Redirect back with success message
-        return redirect()->back()->with('success', 'Collection created successfully.');
+        return redirect()->route('collections.show',  $validatedData['handle']);
+    }
+
+
+    public function show(string $handle)
+    {
+        $collection = Collections::where(['handle' => $handle])->firstOrFail();
+        return view('collections.config', compact('collection'));
     }
 
     /**

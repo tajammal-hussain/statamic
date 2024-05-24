@@ -33,24 +33,38 @@ class NavigationController extends Controller
      */
     public function store(Request $request)
     {
+
         $rules = [
             'title' => 'required|string|max:255',
             'handle' => 'required|string|max:255',
         ];
-
+        
         $validatedData = $request->validate($rules);
+        
+        $data = [
+            'collections' => [null],
+            "max_depth"=>null
+        ];
 
+        $jsonData = json_encode($data);
         $navigation = new Navigations();
         $navigation = [
             'title' => $validatedData['title'],
             'handle' => $validatedData['handle'],
+            'settings'=>$jsonData
         ];
         Navigations::insert($navigation);
 
         // Redirect back with success message
-        return redirect()->back()->with('success', 'Collection created successfully.');
+        return redirect()->route('navigations.show',  $validatedData['handle']);
     }
 
+
+    public function show(string $handle)
+    {
+        $navigation = Navigations::where(['handle' => $handle])->firstOrFail();
+        return view('navigations.config', compact('navigation'));
+    }
     /**
      * Show the form for editing the specified resource.
      */
