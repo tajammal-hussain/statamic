@@ -42,7 +42,7 @@
                     <div class="mb-4">
                         <label for="name" class="font-bold text-base mb-1">{{ 'Handle' }}</label>
                         <input type="text" tabindex="2" class="input-text" value="{{ old('handle') }}"
-                            placeholder="Enter handle" id="handle" name="handle">
+                            placeholder="Enter handle" id="handle" name="handle" readonly>
                         <div class="text-2xs text-gray-600 mt-2 flex items-center">
                             {{ "Used to reference this taxonomy on the frontend. It's non-trivial to change later." }}
                         </div>

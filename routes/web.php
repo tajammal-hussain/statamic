@@ -3,6 +3,21 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\{
+    AuthController,
+    DashboardController,
+    CollectionController,
+    EntriesController,
+    NavigationController,
+    TaxonomiesController,
+    TermsController,
+    AssetsController,
+    GlobalsController,
+    FieldsetsController,
+    FormsController,
+    UsersController,
+};
+
 // Breeze authentication routes
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -30,7 +45,7 @@ Route::controller(AuthController::class)->prefix('auth')->as('auth.')->group(fun
 
 Route::middleware('auth')->group(function () {
     // Collections--Entries Routes
-    Route::resource('collections', CollectionController::class)->except('show');
+    Route::resource('collections', CollectionController::class);
     Route::prefix('collections')->group(function () {
         Route::get('/{collection}/entries', EntriesController::class)->name('entries.index');
         Route::get('/{collection}/create', [EntriesController::class, 'create'])->name('entries.create');
@@ -41,10 +56,10 @@ Route::middleware('auth')->group(function () {
     });
 
     // Navigations Routes
-    Route::resource('navigations', NavigationController::class)->except('show');
+    Route::resource('navigations', NavigationController::class);
 
     // Taxonomies--Terms Routes
-    Route::resource('taxonomies', TaxonomiesController::class)->except('show');
+    Route::resource('taxonomies', TaxonomiesController::class);
     Route::prefix('taxonomies')->group(function () {
         Route::get('/{taxonomy}/terms', TermsController::class)->name('terms.index');
         Route::get('/{taxonomy}/create', [TermsController::class, 'create'])->name('terms.create');
