@@ -76,7 +76,7 @@
                                                 <div class="flex items-center">
                                                     <div class="input-group"><!----><input id="field_title" name="title"
                                                             type="text" autofocus="autofocus" class="input-text"
-                                                            value="{{ $globals->handle }}"><!----></div><!---->
+                                                            value="{{ $globals->title }}"><!----></div><!---->
                                                 </div><!----><!---->
                                             </div>
                                         </div>

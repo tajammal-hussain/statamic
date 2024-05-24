@@ -1,3 +1,9 @@
+@php
+    $settings = json_decode($navigation->settings, true);
+    $selectedcollection = explode(',', $settings['collections'][0]);
+    $savedcollectionJson = json_encode($selectedcollection);
+@endphp
+
 @extends('layouts.main')
 
 @section('title', 'Edit Navigation')
@@ -145,7 +151,7 @@
                                                         @endforeach
                                                     </select>
 
-                                                    <div x-data="dropdown()" x-init="loadOptions()" class="w-full">
+                                                    <div x-data="dropdown({{$savedcollectionJson}})" x-init="loadOptions()" class="w-full">
                                                         <form>
                                                             <input name="collections" type="hidden"
                                                                 x-bind:value="selectedValues()" value="">
@@ -310,7 +316,7 @@
     <script type="module" src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
 
     <script>
-        function dropdown() {
+        function dropdown(defaultValues = []) {
             return {
                 options: [],
                 selected: [],
@@ -354,6 +360,17 @@
                         });
                     }
 
+                     // Handle default values
+                const defaultValuesArray = defaultValues;
+                defaultValuesArray.forEach((value) => {
+                const optionIndex = this.options.findIndex(option => option.value === value.trim());
+                if (optionIndex !== -1) {
+                    this.options[optionIndex].selected = true;
+                    this.selected.push(optionIndex);
+                }
+
+
+                });
 
                 },
                 selectedValues() {
