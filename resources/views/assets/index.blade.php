@@ -34,31 +34,9 @@
     max-width: none;
 }
 
-/* !TYPOGRAPHY */
-/*-----------------------------------------*/
-
-a {
-    color: #2697ff;
-    text-decoration: none;
-}
-
-a:hover,
-a:focus,
-a:active {
-    color: #0074de;
-}
-
 /* !INFO */
 /*-----------------------------------------*/
-#Info {
-    position: absolute;
-    left: 2%;
-    top: 2%;
-    width: 20%;
-    box-shadow: 0px 0px 13px rgba(0, 0, 0, 0.6);
-    background: #fff;
-    border: 1px solid #fff;
-}
+
 
 #Info p {
     font-size: 12px;
@@ -340,16 +318,16 @@ a:active {
                                         </button>
                                     </div>
                                     <div>
-                                        <div class="modal hidden absolute z-2" id="modal-1">
+                                        <div class="modal hidden absolute z-2 w-full h-full" id="modal-1">
                                             <div class="modal-overlays" id="modal-overlays"></div>
                                             <div aria-expanded="true" role="dialog" aria-modal="true"
-                                                class="vm--modal -top-32 -left-2">
-                                                <div class="card" style="width: 118.5rem; height: 58rem;">
+                                                class="vm--modal left-0 w-full h-full" style="top: -7.5rem;">
+                                                <div class="card w-full h-full">
 
                                                     <div id="Frames">
                                                     </div>
 
-                                                    <div id="Info">
+                                                    <div id="Info" class="absolute w-1/5 left-4 top-4 rounded bg-white border shadow-md">
                                                         <div class="helper-tool">
                                                             <h1>Click the image to set the FocusPoint.</h1>
                                                             <div class="helper-tool-target">
@@ -366,7 +344,7 @@ a:active {
                                                                     placeholder='data-focus-x="0" data-focus-y="0" '>
                                                             </p>
                                                             <p>
-                                                                <label for="css3-val">CSS3 Background Position:</label>
+                                                                <label for="css3-val">Background Position:</label>
                                                                 <input class='helper-tool-css3-val' id="css3-val"
                                                                     name="css3-val" type='text'
                                                                     placeholder='background-position:'>
